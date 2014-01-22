@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C957995C189072A000B4CB37 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.c */; };
 		C957995E189072A000B4CB37 /* MinecraftServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C957995D189072A000B4CB37 /* MinecraftServer.1 */; };
+		C95799661890752C00B4CB37 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		C9579958189072A000B4CB37 /* MinecraftServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MinecraftServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C957995B189072A000B4CB37 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		C957995D189072A000B4CB37 /* MinecraftServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = MinecraftServer.1; sourceTree = "<group>"; };
+		C95799641890750200B4CB37 /* ObjFW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjFW; path = MinecraftServer/ObjFW; sourceTree = "<group>"; };
+		C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = MinecraftServer/libobjfw.7.0.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C95799661890752C00B4CB37 /* libobjfw.7.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				C957995A189072A000B4CB37 /* MinecraftServer */,
+				C95799671890753900B4CB37 /* ObjFW */,
 				C9579959189072A000B4CB37 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +69,15 @@
 				C957995D189072A000B4CB37 /* MinecraftServer.1 */,
 			);
 			path = MinecraftServer;
+			sourceTree = "<group>";
+		};
+		C95799671890753900B4CB37 /* ObjFW */ = {
+			isa = PBXGroup;
+			children = (
+				C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */,
+				C95799641890750200B4CB37 /* ObjFW */,
+			);
+			name = ObjFW;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +209,10 @@
 		C9579962189072A000B4CB37 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/MinecraftServer",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -202,6 +220,10 @@
 		C9579963189072A000B4CB37 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/MinecraftServer",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
