@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C957995C189072A000B4CB37 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.c */; };
-		C957995E189072A000B4CB37 /* MinecraftServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C957995D189072A000B4CB37 /* MinecraftServer.1 */; };
+		C957995C189072A000B4CB37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.m */; };
 		C95799661890752C00B4CB37 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */; };
+		C957996A1890795000B4CB37 /* MinecraftServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C95799691890795000B4CB37 /* MinecraftServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -19,7 +19,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				C957995E189072A000B4CB37 /* MinecraftServer.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -27,10 +26,11 @@
 
 /* Begin PBXFileReference section */
 		C9579958189072A000B4CB37 /* MinecraftServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MinecraftServer; sourceTree = BUILT_PRODUCTS_DIR; };
-		C957995B189072A000B4CB37 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		C957995D189072A000B4CB37 /* MinecraftServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = MinecraftServer.1; sourceTree = "<group>"; };
+		C957995B189072A000B4CB37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C95799641890750200B4CB37 /* ObjFW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjFW; path = MinecraftServer/ObjFW; sourceTree = "<group>"; };
 		C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = MinecraftServer/libobjfw.7.0.dylib; sourceTree = "<group>"; };
+		C95799681890795000B4CB37 /* MinecraftServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinecraftServer.h; sourceTree = "<group>"; };
+		C95799691890795000B4CB37 /* MinecraftServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinecraftServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +65,10 @@
 		C957995A189072A000B4CB37 /* MinecraftServer */ = {
 			isa = PBXGroup;
 			children = (
-				C957995B189072A000B4CB37 /* main.c */,
-				C957995D189072A000B4CB37 /* MinecraftServer.1 */,
+				C957995B189072A000B4CB37 /* main.m */,
+				C95799681890795000B4CB37 /* MinecraftServer.h */,
+				C95799691890795000B4CB37 /* MinecraftServer.m */,
+				C957996B18907B9200B4CB37 /* TCPNetwork */,
 			);
 			path = MinecraftServer;
 			sourceTree = "<group>";
@@ -78,6 +80,13 @@
 				C95799641890750200B4CB37 /* ObjFW */,
 			);
 			name = ObjFW;
+			sourceTree = "<group>";
+		};
+		C957996B18907B9200B4CB37 /* TCPNetwork */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TCPNetwork;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C957995C189072A000B4CB37 /* main.c in Sources */,
+				C957996A1890795000B4CB37 /* MinecraftServer.m in Sources */,
+				C957995C189072A000B4CB37 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
