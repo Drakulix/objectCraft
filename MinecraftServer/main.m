@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Victor Brekenfeld. All rights reserved.
 //
 
-#import "ObjFW/ObjFW.h"
+#import <ObjFW/ObjFW.h>
 #import "MinecraftServer.h"
 
 int main(int argc, char * argv[])
@@ -15,4 +15,3 @@ int main(int argc, char * argv[])
     return of_application_main(&argc, &argv, [MinecraftServer class]);
     [pool drain];
 }
-
