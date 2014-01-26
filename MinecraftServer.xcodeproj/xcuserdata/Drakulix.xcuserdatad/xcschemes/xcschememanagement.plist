@@ -4,15 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MinecraftServer.xcscheme</key>
+		<key>MinecraftServer - Mac - autotools.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>C9579957189072A000B4CB37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C999E4F618927FA100E91B51</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -6,60 +6,37 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		C957995C189072A000B4CB37 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.m */; };
-		C95799661890752C00B4CB37 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */; };
-		C957996A1890795000B4CB37 /* MinecraftServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C95799691890795000B4CB37 /* MinecraftServer.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C9579956189072A000B4CB37 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		C9579958189072A000B4CB37 /* MinecraftServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MinecraftServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C91864811895878A00E78048 /* build-mac.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build-mac.sh"; sourceTree = "<group>"; };
+		C91864821895878A00E78048 /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
+		C91864831895878A00E78048 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		C957995B189072A000B4CB37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C95799641890750200B4CB37 /* ObjFW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjFW; path = MinecraftServer/ObjFW; sourceTree = "<group>"; };
-		C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = MinecraftServer/libobjfw.7.0.dylib; sourceTree = "<group>"; };
 		C95799681890795000B4CB37 /* MinecraftServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinecraftServer.h; sourceTree = "<group>"; };
 		C95799691890795000B4CB37 /* MinecraftServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinecraftServer.m; sourceTree = "<group>"; };
+		C9B86854189141420049B299 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		C9B868551891423B0049B299 /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
+		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
+		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
+		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFrameworksBuildPhase section */
-		C9579955189072A000B4CB37 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C95799661890752C00B4CB37 /* libobjfw.7.0.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
+		C91864801895876100E78048 /* Build Files */ = {
+			isa = PBXGroup;
+			children = (
+				C91864811895878A00E78048 /* build-mac.sh */,
+				C91864821895878A00E78048 /* configure.ac */,
+				C91864831895878A00E78048 /* Makefile.am */,
+			);
+			name = "Build Files";
+			sourceTree = "<group>";
+		};
 		C957994F189072A000B4CB37 = {
 			isa = PBXGroup;
 			children = (
 				C957995A189072A000B4CB37 /* MinecraftServer */,
-				C95799671890753900B4CB37 /* ObjFW */,
-				C9579959189072A000B4CB37 /* Products */,
+				C91864801895876100E78048 /* Build Files */,
 			);
-			sourceTree = "<group>";
-		};
-		C9579959189072A000B4CB37 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C9579958189072A000B4CB37 /* MinecraftServer */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		C957995A189072A000B4CB37 /* MinecraftServer */ = {
@@ -69,17 +46,13 @@
 				C95799681890795000B4CB37 /* MinecraftServer.h */,
 				C95799691890795000B4CB37 /* MinecraftServer.m */,
 				C957996B18907B9200B4CB37 /* TCPNetwork */,
+				C9B86854189141420049B299 /* log.h */,
+				C9B868551891423B0049B299 /* ConfigManager.h */,
+				C9B868561891423B0049B299 /* ConfigManager.m */,
+				C9B8685B1891D98C0049B299 /* RandomGenerator.h */,
+				C9B8685C1891D98C0049B299 /* RandomGenerator.m */,
 			);
 			path = MinecraftServer;
-			sourceTree = "<group>";
-		};
-		C95799671890753900B4CB37 /* ObjFW */ = {
-			isa = PBXGroup;
-			children = (
-				C95799651890752C00B4CB37 /* libobjfw.7.0.dylib */,
-				C95799641890750200B4CB37 /* ObjFW */,
-			);
-			name = ObjFW;
 			sourceTree = "<group>";
 		};
 		C957996B18907B9200B4CB37 /* TCPNetwork */ = {
@@ -91,25 +64,22 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXNativeTarget section */
-		C9579957189072A000B4CB37 /* MinecraftServer */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C9579961189072A000B4CB37 /* Build configuration list for PBXNativeTarget "MinecraftServer" */;
+/* Begin PBXLegacyTarget section */
+		C999E4F618927FA100E91B51 /* MinecraftServer - Mac - autotools */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "";
+			buildConfigurationList = C999E4F918927FA100E91B51 /* Build configuration list for PBXLegacyTarget "MinecraftServer - Mac - autotools" */;
 			buildPhases = (
-				C9579954189072A000B4CB37 /* Sources */,
-				C9579955189072A000B4CB37 /* Frameworks */,
-				C9579956189072A000B4CB37 /* CopyFiles */,
 			);
-			buildRules = (
-			);
+			buildToolPath = "$(PROJECT_DIR)/build-mac.sh";
+			buildWorkingDirectory = "";
 			dependencies = (
 			);
-			name = MinecraftServer;
-			productName = MinecraftServer;
-			productReference = C9579958189072A000B4CB37 /* MinecraftServer */;
-			productType = "com.apple.product-type.tool";
+			name = "MinecraftServer - Mac - autotools";
+			passBuildSettingsInEnvironment = 1;
+			productName = "MinecraftServer - Mac - autotools";
 		};
-/* End PBXNativeTarget section */
+/* End PBXLegacyTarget section */
 
 /* Begin PBXProject section */
 		C9579950189072A000B4CB37 /* Project object */ = {
@@ -126,26 +96,14 @@
 				en,
 			);
 			mainGroup = C957994F189072A000B4CB37;
-			productRefGroup = C9579959189072A000B4CB37 /* Products */;
+			productRefGroup = C957994F189072A000B4CB37;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C9579957189072A000B4CB37 /* MinecraftServer */,
+				C999E4F618927FA100E91B51 /* MinecraftServer - Mac - autotools */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		C9579954189072A000B4CB37 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C957996A1890795000B4CB37 /* MinecraftServer.m in Sources */,
-				C957995C189072A000B4CB37 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		C957995F189072A000B4CB37 /* Debug */ = {
@@ -216,24 +174,28 @@
 			};
 			name = Release;
 		};
-		C9579962189072A000B4CB37 /* Debug */ = {
+		C999E4F718927FA100E91B51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
 					"$(inherited)",
-					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/MinecraftServer",
 				);
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		C9579963189072A000B4CB37 /* Release */ = {
+		C999E4F818927FA100E91B51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/MinecraftServer",
-				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -250,13 +212,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C9579961189072A000B4CB37 /* Build configuration list for PBXNativeTarget "MinecraftServer" */ = {
+		C999E4F918927FA100E91B51 /* Build configuration list for PBXLegacyTarget "MinecraftServer - Mac - autotools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C9579962189072A000B4CB37 /* Debug */,
-				C9579963189072A000B4CB37 /* Release */,
+				C999E4F718927FA100E91B51 /* Debug */,
+				C999E4F818927FA100E91B51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
