@@ -7,11 +7,21 @@
 		<key>MinecraftServer - Mac - autotools.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>MinecraftServer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>C918648A1895C53200E78048</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C9579957189072A000B4CB37</key>
 		<dict>
 			<key>primary</key>

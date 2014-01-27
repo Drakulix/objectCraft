@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C999E4F618927FA100E91B51"
-               BuildableName = "MinecraftServer - Mac - autotools"
-               BlueprintName = "MinecraftServer - Mac - autotools"
+               BlueprintIdentifier = "C918648A1895C53200E78048"
+               BuildableName = "MinecraftServer"
+               BlueprintName = "MinecraftServer"
                ReferencedContainer = "container:MinecraftServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,20 +29,34 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C918648A1895C53200E78048"
+            BuildableName = "MinecraftServer"
+            BlueprintName = "MinecraftServer"
+            ReferencedContainer = "container:MinecraftServer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/Drakulix/Documents/XCode Projects/MinecraftServer/build-mac"
+      useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <PathRunnable
-         FilePath = "/Users/Drakulix/Documents/XCode Projects/MinecraftServer/build-mac/objectCraft">
-      </PathRunnable>
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C918648A1895C53200E78048"
+            BuildableName = "MinecraftServer"
+            BlueprintName = "MinecraftServer"
+            ReferencedContainer = "container:MinecraftServer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -52,6 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C918648A1895C53200E78048"
+            BuildableName = "MinecraftServer"
+            BlueprintName = "MinecraftServer"
+            ReferencedContainer = "container:MinecraftServer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
