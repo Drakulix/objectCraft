@@ -149,7 +149,7 @@ static ConfigManager *sharedInstance;
 - (int8_t)spawnDimension {
     return [[settings objectForKey:@"defaultSpawnDimension"] int8Value];
 }
-- (NSDictionary *)dimensions {
+- (OFDictionary *)dimensions {
     return [settings objectForKey:@"dimensions"];
 }
 
