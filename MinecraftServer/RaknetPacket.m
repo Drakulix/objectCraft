@@ -8,6 +8,7 @@
 
 #import "RaknetPacket.h"
 #import <objc/runtime.h>
+#import <string.h>
 
 @implementation RaknetPacket
 static OFMutableDictionary *packetList;
@@ -47,7 +48,7 @@ static OFMutableDictionary *packetList;
         @try {
             [RaknetPacket addPacketClass:self forId:[self packetId]];
         }
-        @catch (NSException *exception) {}
+        @catch (OFException *exception) {}
         
     }
 }
@@ -58,7 +59,7 @@ static OFMutableDictionary *packetList;
 
 + (RaknetPacket *)packetWithId:(uint8_t)pId data:(OFDataArray *)data {
     //NSLogVerbose(@"Packet Class: %@", [packetList objectForKey:[NSString stringWithFormat:@"%02x", pId]]);
-    return (RaknetPacket *)[[objc_getClass([packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]]) alloc] initWithData:data];
+    return (RaknetPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
@@ -66,20 +67,19 @@ static OFMutableDictionary *packetList;
 }
 
 + (uint8_t)packetId {
-  @throw [OFException exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketID must be overriden and called via subclass" userInfo:nil];
+    @throw [OFException exception];// [OFException exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketID must be overriden and called via subclass" userInfo:nil];
 }
 
 - (OFDataArray *)packetData {
-  @throw [OFException exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketData must be overriden and called via subclass" userInfo:nil];
+    @throw [OFException exception];//exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketData must be overriden and called via subclass" userInfo:nil];
 }
 
 
 - (OFDataArray *)rawPacketData {
     OFDataArray *packetData = [self packetData];
-    
-    [rawPacketData appendByte:[[self class] packetId]];
-    
-    return rawPacketData;
+    uint8_t packetId = [[self class] packetId];
+    [packetData insertItem:&packetId atIndex:0];
+    return packetData;
 }
 
 
@@ -99,7 +99,7 @@ static OFMutableDictionary *packetList;
         objc_property_t property = propList[i];
         
         const char *propName = property_getName(property);
-        OFString *propNameString =[NSString stringWithCString:propName encoding:NSASCIIStringEncoding];
+        OFString *propNameString = [OFString stringWithCString:propName encoding:OF_STRING_ENCODING_ASCII];//stringWithCString:propName encoding:NSASCIIStringEncoding];
         
         if(propName)
         {
@@ -123,7 +123,7 @@ static OFMutableDictionary *packetList;
     
     // Now see if we need to map any superclasses as well.
     Class superClass = class_getSuperclass( classType );
-    if ( superClass != nil && ! [superClass isEqual:[NSObject class]] )
+    if ( superClass != nil && ! [superClass isEqual:[OFObject class]] )
     {
         OFString *superString = [self autoDescribe:instance classType:superClass];
         [propPrint appendString:superString];
