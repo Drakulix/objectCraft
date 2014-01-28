@@ -6,19 +6,146 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C918649A1895C5AF00E78048 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */; };
+		C918649B1895C97F00E78048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.m */; };
+		C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C95799691890795000B4CB37 /* MinecraftServer.m */; };
+		C918649D1895C97F00E78048 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B868561891423B0049B299 /* ConfigManager.m */; };
+		C918649E1895C97F00E78048 /* RandomGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B8685C1891D98C0049B299 /* RandomGenerator.m */; };
+		C918649F1895C97F00E78048 /* WorldManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C91864861895B89300E78048 /* WorldManager.m */; };
+		C92CD1BC18967E5B00E009B3 /* World.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1BB18967E5B00E009B3 /* World.m */; };
+		C92CD1BF18967E6700E009B3 /* WorldGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1BE18967E6700E009B3 /* WorldGenerator.m */; };
+		C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C1189689ED00E009B3 /* NetherGenerator.m */; };
+		C92CD1C5189689FB00E009B3 /* OverworldGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */; };
+		C92CD1C818968A0400E009B3 /* EndGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C718968A0400E009B3 /* EndGenerator.m */; };
+		C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556381897E60100D67C15 /* UDPRecieveThread.m */; };
+		C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C965563C1897EB0800D67C15 /* RaknetHandler.m */; };
+		C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */; };
+		C96556451897ECDE00D67C15 /* longlongbyteorder.c in Sources */ = {isa = PBXBuildFile; fileRef = C96556431897ECDE00D67C15 /* longlongbyteorder.c */; };
+		C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556471897EF3200D67C15 /* RaknetPacket.m */; };
+		C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556491897EF3200D67C15 /* RaknetConnectedPing.m */; };
+		C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C965564B1897EF3200D67C15 /* RaknetUnconnectedPing.m */; };
+		C96556631897EF3200D67C15 /* RaknetAdvertise.m in Sources */ = {isa = PBXBuildFile; fileRef = C965564D1897EF3200D67C15 /* RaknetAdvertise.m */; };
+		C96556641897EF3200D67C15 /* RaknetConnectionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C965564F1897EF3200D67C15 /* RaknetConnectionRequest.m */; };
+		C96556651897EF3200D67C15 /* RaknetConnectionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556511897EF3200D67C15 /* RaknetConnectionResponse.m */; };
+		C96556661897EF3200D67C15 /* RaknetIncompatibleProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556531897EF3200D67C15 /* RaknetIncompatibleProtocol.m */; };
+		C96556671897EF3200D67C15 /* RaknetConnectionRequest2.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556551897EF3200D67C15 /* RaknetConnectionRequest2.m */; };
+		C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556571897EF3200D67C15 /* RaknetConnectionResponse2.m */; };
+		C96556691897EF3200D67C15 /* RaknetCustomPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556591897EF3200D67C15 /* RaknetCustomPacket.m */; };
+		C965566A1897EF3200D67C15 /* RaknetACK.m in Sources */ = {isa = PBXBuildFile; fileRef = C965565B1897EF3200D67C15 /* RaknetACK.m */; };
+		C965566B1897EF3200D67C15 /* RaknetNACK.m in Sources */ = {isa = PBXBuildFile; fileRef = C965565D1897EF3200D67C15 /* RaknetNACK.m */; };
+		C965566C1897EF3200D67C15 /* RaknetMinecraftPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C965565F1897EF3200D67C15 /* RaknetMinecraftPacket.m */; };
+		C96556771897F38100D67C15 /* OFDataArray+StringReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556711897F38100D67C15 /* OFDataArray+StringReader.m */; };
+		C96556781897F38100D67C15 /* OFDataArray+FloatReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556731897F38100D67C15 /* OFDataArray+FloatReader.m */; };
+		C96556791897F38100D67C15 /* OFDataArray+RaknetMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556751897F38100D67C15 /* OFDataArray+RaknetMagic.m */; };
+		C96556801897F5AF00D67C15 /* OFDataArray+StringWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567B1897F5AF00D67C15 /* OFDataArray+StringWriter.m */; };
+		C96556811897F5AF00D67C15 /* OFDataArray+IntWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567D1897F5AF00D67C15 /* OFDataArray+IntWriter.m */; };
+		C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */; };
+		C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */; };
+		C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C91864891895C53200E78048 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C91864811895878A00E78048 /* build-mac.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build-mac.sh"; sourceTree = "<group>"; };
 		C91864821895878A00E78048 /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
 		C91864831895878A00E78048 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		C91864851895B89300E78048 /* WorldManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldManager.h; sourceTree = "<group>"; };
+		C91864861895B89300E78048 /* WorldManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldManager.m; sourceTree = "<group>"; };
+		C918648B1895C53200E78048 /* MinecraftServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MinecraftServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = "build-mac/libobjfw.7.0.dylib"; sourceTree = "<group>"; };
+		C92CD1BA18967E5B00E009B3 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
+		C92CD1BB18967E5B00E009B3 /* World.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = World.m; sourceTree = "<group>"; };
+		C92CD1BD18967E6700E009B3 /* WorldGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldGenerator.h; sourceTree = "<group>"; };
+		C92CD1BE18967E6700E009B3 /* WorldGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldGenerator.m; sourceTree = "<group>"; };
+		C92CD1C0189689ED00E009B3 /* NetherGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetherGenerator.h; sourceTree = "<group>"; };
+		C92CD1C1189689ED00E009B3 /* NetherGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetherGenerator.m; sourceTree = "<group>"; };
+		C92CD1C3189689FB00E009B3 /* OverworldGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverworldGenerator.h; sourceTree = "<group>"; };
+		C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverworldGenerator.m; sourceTree = "<group>"; };
+		C92CD1C618968A0400E009B3 /* EndGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndGenerator.h; sourceTree = "<group>"; };
+		C92CD1C718968A0400E009B3 /* EndGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGenerator.m; sourceTree = "<group>"; };
 		C957995B189072A000B4CB37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C95799681890795000B4CB37 /* MinecraftServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinecraftServer.h; sourceTree = "<group>"; };
 		C95799691890795000B4CB37 /* MinecraftServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinecraftServer.m; sourceTree = "<group>"; };
+		C96556371897E60100D67C15 /* UDPRecieveThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPRecieveThread.h; sourceTree = "<group>"; };
+		C96556381897E60100D67C15 /* UDPRecieveThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPRecieveThread.m; sourceTree = "<group>"; };
+		C965563B1897EB0800D67C15 /* RaknetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetHandler.h; sourceTree = "<group>"; };
+		C965563C1897EB0800D67C15 /* RaknetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetHandler.m; sourceTree = "<group>"; };
+		C965563F1897EC9000D67C15 /* OFDataArray+IntReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+IntReader.h"; sourceTree = "<group>"; };
+		C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+IntReader.m"; sourceTree = "<group>"; };
+		C96556421897ECDE00D67C15 /* longlongbyteorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = longlongbyteorder.h; sourceTree = "<group>"; };
+		C96556431897ECDE00D67C15 /* longlongbyteorder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = longlongbyteorder.c; sourceTree = "<group>"; };
+		C96556441897ECDE00D67C15 /* int24_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int24_t.h; sourceTree = "<group>"; };
+		C96556461897EF3200D67C15 /* RaknetPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetPacket.h; sourceTree = "<group>"; };
+		C96556471897EF3200D67C15 /* RaknetPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetPacket.m; sourceTree = "<group>"; };
+		C96556481897EF3200D67C15 /* RaknetConnectedPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetConnectedPing.h; sourceTree = "<group>"; };
+		C96556491897EF3200D67C15 /* RaknetConnectedPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetConnectedPing.m; sourceTree = "<group>"; };
+		C965564A1897EF3200D67C15 /* RaknetUnconnectedPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetUnconnectedPing.h; sourceTree = "<group>"; };
+		C965564B1897EF3200D67C15 /* RaknetUnconnectedPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetUnconnectedPing.m; sourceTree = "<group>"; };
+		C965564C1897EF3200D67C15 /* RaknetAdvertise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetAdvertise.h; sourceTree = "<group>"; };
+		C965564D1897EF3200D67C15 /* RaknetAdvertise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetAdvertise.m; sourceTree = "<group>"; };
+		C965564E1897EF3200D67C15 /* RaknetConnectionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetConnectionRequest.h; sourceTree = "<group>"; };
+		C965564F1897EF3200D67C15 /* RaknetConnectionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetConnectionRequest.m; sourceTree = "<group>"; };
+		C96556501897EF3200D67C15 /* RaknetConnectionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetConnectionResponse.h; sourceTree = "<group>"; };
+		C96556511897EF3200D67C15 /* RaknetConnectionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetConnectionResponse.m; sourceTree = "<group>"; };
+		C96556521897EF3200D67C15 /* RaknetIncompatibleProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetIncompatibleProtocol.h; sourceTree = "<group>"; };
+		C96556531897EF3200D67C15 /* RaknetIncompatibleProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetIncompatibleProtocol.m; sourceTree = "<group>"; };
+		C96556541897EF3200D67C15 /* RaknetConnectionRequest2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetConnectionRequest2.h; sourceTree = "<group>"; };
+		C96556551897EF3200D67C15 /* RaknetConnectionRequest2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetConnectionRequest2.m; sourceTree = "<group>"; };
+		C96556561897EF3200D67C15 /* RaknetConnectionResponse2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetConnectionResponse2.h; sourceTree = "<group>"; };
+		C96556571897EF3200D67C15 /* RaknetConnectionResponse2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetConnectionResponse2.m; sourceTree = "<group>"; };
+		C96556581897EF3200D67C15 /* RaknetCustomPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetCustomPacket.h; sourceTree = "<group>"; };
+		C96556591897EF3200D67C15 /* RaknetCustomPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetCustomPacket.m; sourceTree = "<group>"; };
+		C965565A1897EF3200D67C15 /* RaknetACK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetACK.h; sourceTree = "<group>"; };
+		C965565B1897EF3200D67C15 /* RaknetACK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetACK.m; sourceTree = "<group>"; };
+		C965565C1897EF3200D67C15 /* RaknetNACK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetNACK.h; sourceTree = "<group>"; };
+		C965565D1897EF3200D67C15 /* RaknetNACK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetNACK.m; sourceTree = "<group>"; };
+		C965565E1897EF3200D67C15 /* RaknetMinecraftPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetMinecraftPacket.h; sourceTree = "<group>"; };
+		C965565F1897EF3200D67C15 /* RaknetMinecraftPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetMinecraftPacket.m; sourceTree = "<group>"; };
+		C96556701897F38100D67C15 /* OFDataArray+StringReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+StringReader.h"; sourceTree = "<group>"; };
+		C96556711897F38100D67C15 /* OFDataArray+StringReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+StringReader.m"; sourceTree = "<group>"; };
+		C96556721897F38100D67C15 /* OFDataArray+FloatReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+FloatReader.h"; sourceTree = "<group>"; };
+		C96556731897F38100D67C15 /* OFDataArray+FloatReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+FloatReader.m"; sourceTree = "<group>"; };
+		C96556741897F38100D67C15 /* OFDataArray+RaknetMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+RaknetMagic.h"; sourceTree = "<group>"; };
+		C96556751897F38100D67C15 /* OFDataArray+RaknetMagic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+RaknetMagic.m"; sourceTree = "<group>"; };
+		C965567A1897F5AF00D67C15 /* OFDataArray+StringWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+StringWriter.h"; sourceTree = "<group>"; };
+		C965567B1897F5AF00D67C15 /* OFDataArray+StringWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+StringWriter.m"; sourceTree = "<group>"; };
+		C965567C1897F5AF00D67C15 /* OFDataArray+IntWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+IntWriter.h"; sourceTree = "<group>"; };
+		C965567D1897F5AF00D67C15 /* OFDataArray+IntWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+IntWriter.m"; sourceTree = "<group>"; };
+		C965567E1897F5AF00D67C15 /* OFDataArray+FloatWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+FloatWriter.h"; sourceTree = "<group>"; };
+		C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+FloatWriter.m"; sourceTree = "<group>"; };
+		C977BF881898647900FD9B38 /* OFDataArray+VarIntReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+VarIntReader.h"; sourceTree = "<group>"; };
+		C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+VarIntReader.m"; sourceTree = "<group>"; };
+		C977BF8B1898654400FD9B38 /* OFDataArray+VarIntWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+VarIntWriter.h"; sourceTree = "<group>"; };
+		C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+VarIntWriter.m"; sourceTree = "<group>"; };
 		C9B86854189141420049B299 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		C9B868551891423B0049B299 /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C91864881895C53200E78048 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C918649A1895C5AF00E78048 /* libobjfw.7.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		C91864801895876100E78048 /* Build Files */ = {
@@ -31,11 +158,49 @@
 			name = "Build Files";
 			sourceTree = "<group>";
 		};
+		C91864841895B7C100E78048 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9B86854189141420049B299 /* log.h */,
+				C965563E1897EC6400D67C15 /* DataExtensions */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C918648C1895C53200E78048 /* XCode Related Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				C918648B1895C53200E78048 /* MinecraftServer */,
+				C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */,
+			);
+			name = "XCode Related Stuff";
+			sourceTree = "<group>";
+		};
+		C92CD1B918967E5100E009B3 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				C91864851895B89300E78048 /* WorldManager.h */,
+				C91864861895B89300E78048 /* WorldManager.m */,
+				C92CD1BA18967E5B00E009B3 /* World.h */,
+				C92CD1BB18967E5B00E009B3 /* World.m */,
+				C92CD1BD18967E6700E009B3 /* WorldGenerator.h */,
+				C92CD1BE18967E6700E009B3 /* WorldGenerator.m */,
+				C92CD1C0189689ED00E009B3 /* NetherGenerator.h */,
+				C92CD1C1189689ED00E009B3 /* NetherGenerator.m */,
+				C92CD1C3189689FB00E009B3 /* OverworldGenerator.h */,
+				C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */,
+				C92CD1C618968A0400E009B3 /* EndGenerator.h */,
+				C92CD1C718968A0400E009B3 /* EndGenerator.m */,
+			);
+			name = World;
+			sourceTree = "<group>";
+		};
 		C957994F189072A000B4CB37 = {
 			isa = PBXGroup;
 			children = (
 				C957995A189072A000B4CB37 /* MinecraftServer */,
 				C91864801895876100E78048 /* Build Files */,
+				C918648C1895C53200E78048 /* XCode Related Stuff */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,12 +210,14 @@
 				C957995B189072A000B4CB37 /* main.m */,
 				C95799681890795000B4CB37 /* MinecraftServer.h */,
 				C95799691890795000B4CB37 /* MinecraftServer.m */,
-				C957996B18907B9200B4CB37 /* TCPNetwork */,
-				C9B86854189141420049B299 /* log.h */,
 				C9B868551891423B0049B299 /* ConfigManager.h */,
 				C9B868561891423B0049B299 /* ConfigManager.m */,
 				C9B8685B1891D98C0049B299 /* RandomGenerator.h */,
 				C9B8685C1891D98C0049B299 /* RandomGenerator.m */,
+				C92CD1B918967E5100E009B3 /* World */,
+				C957996B18907B9200B4CB37 /* TCPNetwork */,
+				C965563A1897E60700D67C15 /* UDPNetwork */,
+				C91864841895B7C100E78048 /* Supporting Files */,
 			);
 			path = MinecraftServer;
 			sourceTree = "<group>";
@@ -60,6 +227,95 @@
 			children = (
 			);
 			name = TCPNetwork;
+			sourceTree = "<group>";
+		};
+		C965563A1897E60700D67C15 /* UDPNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				C96556371897E60100D67C15 /* UDPRecieveThread.h */,
+				C96556381897E60100D67C15 /* UDPRecieveThread.m */,
+				C965563B1897EB0800D67C15 /* RaknetHandler.h */,
+				C965563C1897EB0800D67C15 /* RaknetHandler.m */,
+				C965566D1897EF3600D67C15 /* RaknetPacket */,
+			);
+			name = UDPNetwork;
+			sourceTree = "<group>";
+		};
+		C965563E1897EC6400D67C15 /* DataExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				C977BF8E1898661D00FD9B38 /* DataReader */,
+				C977BF8F1898663200FD9B38 /* DataWriter */,
+				C96556741897F38100D67C15 /* OFDataArray+RaknetMagic.h */,
+				C96556751897F38100D67C15 /* OFDataArray+RaknetMagic.m */,
+				C96556421897ECDE00D67C15 /* longlongbyteorder.h */,
+				C96556431897ECDE00D67C15 /* longlongbyteorder.c */,
+				C96556441897ECDE00D67C15 /* int24_t.h */,
+			);
+			name = DataExtensions;
+			sourceTree = "<group>";
+		};
+		C965566D1897EF3600D67C15 /* RaknetPacket */ = {
+			isa = PBXGroup;
+			children = (
+				C96556461897EF3200D67C15 /* RaknetPacket.h */,
+				C96556471897EF3200D67C15 /* RaknetPacket.m */,
+				C96556481897EF3200D67C15 /* RaknetConnectedPing.h */,
+				C96556491897EF3200D67C15 /* RaknetConnectedPing.m */,
+				C965564A1897EF3200D67C15 /* RaknetUnconnectedPing.h */,
+				C965564B1897EF3200D67C15 /* RaknetUnconnectedPing.m */,
+				C965564C1897EF3200D67C15 /* RaknetAdvertise.h */,
+				C965564D1897EF3200D67C15 /* RaknetAdvertise.m */,
+				C965564E1897EF3200D67C15 /* RaknetConnectionRequest.h */,
+				C965564F1897EF3200D67C15 /* RaknetConnectionRequest.m */,
+				C96556501897EF3200D67C15 /* RaknetConnectionResponse.h */,
+				C96556511897EF3200D67C15 /* RaknetConnectionResponse.m */,
+				C96556521897EF3200D67C15 /* RaknetIncompatibleProtocol.h */,
+				C96556531897EF3200D67C15 /* RaknetIncompatibleProtocol.m */,
+				C96556541897EF3200D67C15 /* RaknetConnectionRequest2.h */,
+				C96556551897EF3200D67C15 /* RaknetConnectionRequest2.m */,
+				C96556561897EF3200D67C15 /* RaknetConnectionResponse2.h */,
+				C96556571897EF3200D67C15 /* RaknetConnectionResponse2.m */,
+				C96556581897EF3200D67C15 /* RaknetCustomPacket.h */,
+				C96556591897EF3200D67C15 /* RaknetCustomPacket.m */,
+				C965565A1897EF3200D67C15 /* RaknetACK.h */,
+				C965565B1897EF3200D67C15 /* RaknetACK.m */,
+				C965565C1897EF3200D67C15 /* RaknetNACK.h */,
+				C965565D1897EF3200D67C15 /* RaknetNACK.m */,
+				C965565E1897EF3200D67C15 /* RaknetMinecraftPacket.h */,
+				C965565F1897EF3200D67C15 /* RaknetMinecraftPacket.m */,
+			);
+			name = RaknetPacket;
+			sourceTree = "<group>";
+		};
+		C977BF8E1898661D00FD9B38 /* DataReader */ = {
+			isa = PBXGroup;
+			children = (
+				C977BF881898647900FD9B38 /* OFDataArray+VarIntReader.h */,
+				C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */,
+				C965563F1897EC9000D67C15 /* OFDataArray+IntReader.h */,
+				C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */,
+				C96556701897F38100D67C15 /* OFDataArray+StringReader.h */,
+				C96556711897F38100D67C15 /* OFDataArray+StringReader.m */,
+				C96556721897F38100D67C15 /* OFDataArray+FloatReader.h */,
+				C96556731897F38100D67C15 /* OFDataArray+FloatReader.m */,
+			);
+			name = DataReader;
+			sourceTree = "<group>";
+		};
+		C977BF8F1898663200FD9B38 /* DataWriter */ = {
+			isa = PBXGroup;
+			children = (
+				C977BF8B1898654400FD9B38 /* OFDataArray+VarIntWriter.h */,
+				C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */,
+				C965567A1897F5AF00D67C15 /* OFDataArray+StringWriter.h */,
+				C965567B1897F5AF00D67C15 /* OFDataArray+StringWriter.m */,
+				C965567C1897F5AF00D67C15 /* OFDataArray+IntWriter.h */,
+				C965567D1897F5AF00D67C15 /* OFDataArray+IntWriter.m */,
+				C965567E1897F5AF00D67C15 /* OFDataArray+FloatWriter.h */,
+				C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */,
+			);
+			name = DataWriter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,6 +337,26 @@
 		};
 /* End PBXLegacyTarget section */
 
+/* Begin PBXNativeTarget section */
+		C918648A1895C53200E78048 /* MinecraftServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C91864961895C53200E78048 /* Build configuration list for PBXNativeTarget "MinecraftServer" */;
+			buildPhases = (
+				C91864871895C53200E78048 /* Sources */,
+				C91864881895C53200E78048 /* Frameworks */,
+				C91864891895C53200E78048 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MinecraftServer;
+			productName = MinecraftServer;
+			productReference = C918648B1895C53200E78048 /* MinecraftServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
 /* Begin PBXProject section */
 		C9579950189072A000B4CB37 /* Project object */ = {
 			isa = PBXProject;
@@ -101,11 +377,97 @@
 			projectRoot = "";
 			targets = (
 				C999E4F618927FA100E91B51 /* MinecraftServer - Mac - autotools */,
+				C918648A1895C53200E78048 /* MinecraftServer */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXSourcesBuildPhase section */
+		C91864871895C53200E78048 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C92CD1BF18967E6700E009B3 /* WorldGenerator.m in Sources */,
+				C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */,
+				C96556451897ECDE00D67C15 /* longlongbyteorder.c in Sources */,
+				C92CD1BC18967E5B00E009B3 /* World.m in Sources */,
+				C96556641897EF3200D67C15 /* RaknetConnectionRequest.m in Sources */,
+				C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */,
+				C965566B1897EF3200D67C15 /* RaknetNACK.m in Sources */,
+				C96556771897F38100D67C15 /* OFDataArray+StringReader.m in Sources */,
+				C96556671897EF3200D67C15 /* RaknetConnectionRequest2.m in Sources */,
+				C965566A1897EF3200D67C15 /* RaknetACK.m in Sources */,
+				C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.m in Sources */,
+				C918649B1895C97F00E78048 /* main.m in Sources */,
+				C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */,
+				C965566C1897EF3200D67C15 /* RaknetMinecraftPacket.m in Sources */,
+				C96556811897F5AF00D67C15 /* OFDataArray+IntWriter.m in Sources */,
+				C96556801897F5AF00D67C15 /* OFDataArray+StringWriter.m in Sources */,
+				C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */,
+				C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */,
+				C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */,
+				C96556651897EF3200D67C15 /* RaknetConnectionResponse.m in Sources */,
+				C92CD1C818968A0400E009B3 /* EndGenerator.m in Sources */,
+				C918649D1895C97F00E78048 /* ConfigManager.m in Sources */,
+				C92CD1C5189689FB00E009B3 /* OverworldGenerator.m in Sources */,
+				C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */,
+				C96556691897EF3200D67C15 /* RaknetCustomPacket.m in Sources */,
+				C96556631897EF3200D67C15 /* RaknetAdvertise.m in Sources */,
+				C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */,
+				C96556781897F38100D67C15 /* OFDataArray+FloatReader.m in Sources */,
+				C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */,
+				C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */,
+				C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */,
+				C918649E1895C97F00E78048 /* RandomGenerator.m in Sources */,
+				C918649F1895C97F00E78048 /* WorldManager.m in Sources */,
+				C96556661897EF3200D67C15 /* RaknetIncompatibleProtocol.m in Sources */,
+				C96556791897F38100D67C15 /* OFDataArray+RaknetMagic.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
+		C91864971895C53200E78048 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/build-mac",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/build-mac",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C91864981895C53200E78048 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/build-mac",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/build-mac",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C957995F189072A000B4CB37 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -203,6 +565,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C91864961895C53200E78048 /* Build configuration list for PBXNativeTarget "MinecraftServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C91864971895C53200E78048 /* Debug */,
+				C91864981895C53200E78048 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C9579953189072A000B4CB37 /* Build configuration list for PBXProject "MinecraftServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
