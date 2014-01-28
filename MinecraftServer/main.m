@@ -1,5 +1,5 @@
 //
-//  main.c
+//  main.m
 //  MinecraftServer
 //
 //  Created by Victor Brekenfeld on 22.01.14.
