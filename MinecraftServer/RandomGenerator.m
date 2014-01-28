@@ -7,29 +7,39 @@
 //
 
 #import "RandomGenerator.h"
-#include <stdlib.h>
+#import <sys/time.h>
+const uint64_t customRandMax = 32767;
 
 @implementation RandomGenerator
 static RandomGenerator *randomGenerator;
 
 - (instancetype)init {
-    if (randomGenerator)
-        return randomGenerator;
-    return [super init];
+    self = [super init];
+    if (self) {
+        struct timeval t1;
+        gettimeofday(&t1, NULL);
+        next = t1.tv_usec * t1.tv_sec;
+    }
+    return self;
 }
 
-+ (RandomGenerator *)randomGenerator {
++ (RandomGenerator *)globalGenerator {
     if (!randomGenerator)
         randomGenerator = [[self alloc] init];
     return randomGenerator;
 }
 
-- (void)setSeed:(uint32_t)seed {
-    srand(seed);
+- (void)setSeed:(uint64_t)seed {
+    next = seed;
+}
+
+- (uint64_t)currentSeed {
+    return next;
 }
 
 - (uint8_t)nextRandomUnsignedInt8 {
-    return rand();
+    next = next * 1103515245 + 12345;
+    return (uint8_t)(next/65536) % (customRandMax+1);
 }
 
 - (int8_t)nextRandomInt8 {
