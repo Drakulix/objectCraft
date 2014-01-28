@@ -30,27 +30,46 @@ static MinecraftServer *sharedInstance;
 
 - (void)applicationDidFinishLaunching {
     
+    worldManager = [WorldManager defaultManager];
+    
     activeTCPConnections = [[OFMutableArray alloc] init];
     
     @try {
         tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[[ConfigManager sharedInstance] tcpIPv4Port]];
+        [tcpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[[ConfigManager defaultManager] tcpIPv4Port]];
         [tcpServerSocketIPv4 listen];
         [tcpServerSocketIPv4 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
     }
     @catch (OFException *exception) {
-        LogError(@"Exception on creating IPv4 socket: %@", exception);
+        LogError(@"Exception on creating TCP IPv4 socket: %@", exception);
         [OFApplication terminateWithStatus:EXIT_FAILURE];
     }
     
     @try {
         tcpServerSocketIPv6 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv6 bindToHost:@"::" port:[[ConfigManager sharedInstance] tcpIPv6Port]];
+        [tcpServerSocketIPv6 bindToHost:@"::" port:[[ConfigManager defaultManager] tcpIPv6Port]];
         [tcpServerSocketIPv6 listen];
         [tcpServerSocketIPv6 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
     }
     @catch (OFException *exception) {
-        LogError(@"Exception on creating IPv6 socket: %@", exception);
+        LogError(@"Exception on creating TCP IPv6 socket: %@", exception);
+        [OFApplication terminateWithStatus:EXIT_FAILURE];
+    }
+    
+    @try {
+        udpServerSocketIPv4 = [[OFUDPSocket alloc] init];
+        [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[[ConfigManager defaultManager] udpIPv4Port]];
+    }
+    @catch (OFException *exception) {
+        LogError(@"Exception on creating UDP IPv4 socket: %@", exception);
+        [OFApplication terminateWithStatus:EXIT_FAILURE];
+    }
+    @try {
+        udpServerSocketIPv6 = [[OFUDPSocket alloc] init];
+        [udpServerSocketIPv6 bindToHost:@"::" port:[[ConfigManager defaultManager] udpIPv4Port]];
+    }
+    @catch (OFException *exception) {
+        LogError(@"Exception on creating UDP IPv6 socket: %@", exception);
         [OFApplication terminateWithStatus:EXIT_FAILURE];
     }
     

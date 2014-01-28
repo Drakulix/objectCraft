@@ -8,13 +8,12 @@
 
 #import "ConfigManager.h"
 #import "RandomGenerator.h"
-#include <sys/time.h>
 
 @implementation ConfigManager
 
 static ConfigManager *sharedInstance;
 
-+ (ConfigManager *)sharedInstance {
++ (ConfigManager *)defaultManager {
     if (!sharedInstance)
         return [[self alloc] init];
     return sharedInstance;
@@ -36,8 +35,10 @@ static ConfigManager *sharedInstance;
                 @"tcpLanBroadcastEnabled", [OFNumber numberWithBool:YES],
                 @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
                 @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
-                @"udpEnabled", [OFNumber numberWithBool:YES],
-                @"udpPort", [OFNumber numberWithInt16:19132],
+                @"udpIPv4Enabled", [OFNumber numberWithBool:YES],
+                @"udpIPv4Port", [OFNumber numberWithInt16:19132],
+                @"udpIPv6Enabled", [OFNumber numberWithBool:YES],
+                @"udpIPv6Port", [OFNumber numberWithInt16:19132],
                 @"udpLanBroadcastEnabled", [OFNumber numberWithBool:YES],
                 @"serverName", @"ObjectCraft Server",
                 @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:YES],
@@ -55,7 +56,7 @@ static ConfigManager *sharedInstance;
                                        [OFNumber numberWithInt32:0],
                                        nil],
                 @"maxPlayers", [OFNumber numberWithInt32:64],
-                @"seed", [OFNumber numberWithInt32:[[RandomGenerator randomGenerator] nextRandomInt32]],
+                @"seed", [OFNumber numberWithInt32:[[RandomGenerator globalGenerator] nextRandomInt32]],
                 @"udpServerId", [OFNumber numberWithInt64:0],
              nil];
             [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
@@ -85,11 +86,21 @@ static ConfigManager *sharedInstance;
     return [[settings objectForKey:@"tcpLanBroadcastEnabled"] boolValue];
 }
 
-- (BOOL)udpEnabled {
-    return [[settings objectForKey:@"udpEnabled"] boolValue];
+
+- (BOOL)udpIPv4Enabled {
+    return [[settings objectForKey:@"udpIPv4Enabled"] boolValue];
 }
-- (int16_t)udpPort {
-    return [[settings objectForKey:@"udpPort"] int16Value];
+
+- (int16_t)udpIPv4Port {
+    return [[settings objectForKey:@"udpIPv4Port"] int16Value];
+}
+
+- (BOOL)udpIPv6Enabled {
+    return [[settings objectForKey:@"udpIPv6Enabled"] boolValue];
+}
+
+- (int16_t)udpIPv6Port {
+    return [[settings objectForKey:@"udpIPv6Port"] int16Value];
 }
 
 - (BOOL)udpLanWorldBroadcastEnabled {

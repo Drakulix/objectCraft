@@ -7,6 +7,7 @@
 //
 
 #import <ObjFW/ObjFW.h>
+@class WorldManager;
 
 @interface MinecraftServer : OFObject<OFApplicationDelegate> {
     BOOL running;
@@ -15,7 +16,11 @@
     OFTCPSocket *tcpServerSocketIPv6;
     OFMutableArray *activeTCPConnections;
     
-    //OFDictionary *worlds; //improve: add world manager class
+    OFUDPSocket *udpServerSocketIPv4;
+    OFUDPSocket *udpServerSocketIPv6;
+    OFMutableArray *activeUDPConnections;
+    
+    WorldManager *worldManager;
 }
 
 @end

@@ -11,7 +11,7 @@
 @interface ConfigManager : OFObject {
     OFDictionary *settings;
 }
-+ (ConfigManager *)sharedInstance;
++ (ConfigManager *)defaultManager;
 
 //Technical Server Settings
 - (BOOL)tcpIPv4Enabled;
@@ -22,8 +22,11 @@
 
 - (BOOL)tcpLanWorldBroadcastEnabled;
 
-- (BOOL)udpEnabled;
-- (int16_t)udpPort;
+- (BOOL)udpIPv4Enabled;
+- (int16_t)udpIPv4Port;
+
+- (BOOL)udpIPv6Enabled;
+- (int16_t)udpIPv6Port;
 
 - (BOOL)udpLanWorldBroadcastEnabled;
 
@@ -44,7 +47,7 @@
 
 //World Settings
 - (int8_t)spawnDimension;
-- (NSDictionary *)dimensions;
+- (OFDictionary *)dimensions;
 
 
 //Global World Settings
