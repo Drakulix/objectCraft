@@ -10,6 +10,7 @@
 
 #import "MinecraftServer.h"
 #import "ConfigManager.h"
+#import "WorldManager.h"
 
 static MinecraftServer *sharedInstance;
 
