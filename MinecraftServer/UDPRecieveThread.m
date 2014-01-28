@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         socket = _socket;
-        running = TRUE;
+        running = YES;
         raknetHandler = [[RaknetHandler alloc] init];
     }
     return self;
@@ -42,7 +42,7 @@
 }
 
 - (void)shutdown {
-    running = FALSE;
+    running = NO;
 }
 
 @end

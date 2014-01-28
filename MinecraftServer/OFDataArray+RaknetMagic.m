@@ -17,12 +17,12 @@ const int64_t magic2 = 0xfdfdfdfd12345678;
 
 - (BOOL)checkMagic {
     if ([self readLong] != magic1) {
-        return FALSE;
+        return NO;
     }
     if ([self readLong] != magic2) {
-        return FALSE;
+        return NO;
     }
-    return TRUE;
+    return YES;
 }
 
 - (void)appendMagic {

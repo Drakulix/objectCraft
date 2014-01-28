@@ -83,7 +83,7 @@ static MinecraftServer *sharedInstance;
         return false;
     }
     
-    return true;
+    return YES;
 }
 
 - (void)applicationWillTerminate {

@@ -54,7 +54,7 @@
     self = [super init];
     if (self) {
         
-        self.isReliable = FALSE;
+        self.isReliable = NO;
         
         self.dataLength = ((uint16_t)[data length]);
         self.packet = data;
@@ -66,7 +66,7 @@
     self = [super init];
     if (self) {
         
-        self.isReliable = TRUE;
+        self.isReliable = YES;
         count = _count;
         
         self.dataLength = ((uint16_t)[data length]);
@@ -79,10 +79,10 @@
     self = [super init];
     if (self) {
         
-        self.isReliable = TRUE;
+        self.isReliable = YES;
         count = _count;
         
-        self.isSplit = TRUE;
+        self.isSplit = YES;
         self.splitCount = splitCount;
         self.splitId = splitId;
         self.splitIndex = splitIndex;
