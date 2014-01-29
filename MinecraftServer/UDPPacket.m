@@ -10,15 +10,12 @@
 #import <objc/runtime.h>
 
 @implementation UDPPacket
-static NSMutableDictionary *packetList;
+static OFMutableDictionary *packetList;
 
 + (void)setup {
     if (self == [UDPPacket class]) {
         
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            packetList = [[NSMutableDictionary alloc] init];
-        });
+        packetList = [[NSMutableDictionary alloc] init];
         
         int numClasses;
         Class * classes = NULL;
@@ -51,72 +48,68 @@ static NSMutableDictionary *packetList;
         @try {
             [UDPPacket addPacketClass:self forId:[self packetId]];
         }
-        @catch (NSException *exception) {}
+        @catch (OFException *exception) {}
         
     }
 }
 
 + (void)addPacketClass:(Class)class forId:(uint8_t)pId {
-    [packetList setObject:NSStringFromClass(class) forKey:[NSString stringWithFormat:@"%02x", pId]];
+    [packetList setObject:[class description] forKey:[OFString stringWithFormat:@"%02x", pId]];
 }
 
-+ (NSDictionary *)packetList {
++ (OFDictionary *)packetList {
     return packetList;
 }
 
 + (UDPPacket *)packetWithId:(uint8_t)pId data:(NSData *)data {
-    return (UDPPacket *)[[NSClassFromString([packetList objectForKey:[NSString stringWithFormat:@"%02x", pId]]) alloc] initWithData:data];
+    return (UDPPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     return [super init];
 }
 
 + (uint8_t)packetId {
-    @throw [NSException exceptionWithName:@"Raw UDPPacket call" reason:[NSString stringWithFormat:@"PacketID must be overriden and called via subclass %@", [self class]] userInfo:nil];
+    @throw [OFException exception]; //WithName:@"Raw UDPPacket call" reason:[NSString stringWithFormat:@"PacketID must be overriden and called via subclass %@", [self class]] userInfo:nil];
 }
 
-- (NSData *)packetData {
-    @throw [NSException exceptionWithName:@"Raw UDPPacket call" reason:[NSString stringWithFormat:@"PacketData must be overriden and called via subclass %@", [self class]] userInfo:nil];
+- (OFDataArray *)packetData {
+    @throw [OFException exception]; //WithName:@"Raw UDPPacket call" reason:[NSString stringWithFormat:@"PacketData must be overriden and called via subclass %@", [self class]] userInfo:nil];
 }
 
 
-- (NSData *)rawPacketData {
-    NSMutableData *rawPacketData = [[NSMutableData alloc] init];
-    NSData *packetData = [self packetData];
-    
-    [rawPacketData appendByte:[[self class] packetId]];
-    [rawPacketData appendData:packetData];
-    
-    return rawPacketData;
+- (OFDataArray *)rawPacketData {
+    OFDataArray *packetData = [self packetData];
+    [packetData insertItem:[[self class] packetId] atIndex:0];
+    return packetData;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@:\n %@", [super description], [UDPPacket autoDescribe:self classType:[self class]]];
+- (OFString *)description {
+    return [OFString stringWithFormat:@"%@:\n %@", [super description], [UDPPacket autoDescribe:self classType:[self class]]];
 }
 
 // Finds all properties of an object, and prints each one out as part of a string describing the class.
-+ (NSString *) autoDescribe:(id)instance classType:(Class)classType
++ (OFString *) autoDescribe:(id)instance classType:(Class)classType
 {
     unsigned int count;
     objc_property_t *propList = class_copyPropertyList(classType, &count);
-    NSMutableString *propPrint = [NSMutableString string];
+    OFMutableString *propPrint = [OFMutableString string];
     
     for ( int i = 0; i < count; i++ )
     {
         objc_property_t property = propList[i];
         
         const char *propName = property_getName(property);
-        NSString *propNameString =[NSString stringWithCString:propName encoding:NSASCIIStringEncoding];
+        OFString *propNameString = [OFString stringWithCString:propName encoding:OF_STRING_ENCODING_ASCII];
         
         if(propName)
         {
             @try {
                 id value = [instance valueForKey:propNameString];
-                [propPrint appendString:[NSString stringWithFormat:@"\t%@=%@;\n", propNameString, value]];
+                [propPrint appendString:[OFString stringWithFormat:@"\t%@=%@;\n", propNameString, value]];
             }
             @catch (NSException *exception) {
-                [propPrint appendString:[NSString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
+                [propPrint appendString:[OFString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
             }
         }
     }
@@ -125,9 +118,9 @@ static NSMutableDictionary *packetList;
     
     // Now see if we need to map any superclasses as well.
     Class superClass = class_getSuperclass( classType );
-    if ( superClass != nil && ! [superClass isEqual:[NSObject class]] )
+    if ( superClass != nil && ! [superClass isEqual:[OFObject class]] )
     {
-        NSString *superString = [self autoDescribe:instance classType:superClass];
+        OFString *superString = [self autoDescribe:instance classType:superClass];
         [propPrint appendString:superString];
     }
     

@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 Victor Brekenfeld. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ObjFW/ObjFW.h>
 
-@interface UDPPacket : NSObject
+@interface UDPPacket : OFObject
 
 + (void)setup;
 + (void)addPacketClass:(Class)class forId:(uint8_t)pId;
-+ (NSDictionary *)packetList;
++ (OFDictionary *)packetList;
 
-+ (UDPPacket *)packetWithId:(uint8_t)pID data:(NSData *)data;
++ (UDPPacket *)packetWithId:(uint8_t)pID data:(OFDataArray *)data;
 + (uint8_t)packetId;
 
-- (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithData:(OFDataArray *)data;
 
-- (NSData *)packetData;
-- (NSData *)rawPacketData;
+- (OFDataArray *)packetData;
+- (OFDataArray *)rawPacketData;
 
 @end

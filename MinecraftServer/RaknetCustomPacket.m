@@ -84,4 +84,20 @@
     packetNumber = _packetNumber;
 }
 
+- (void)dispatchNewTransmissionVia:(UDPClientConnection *)_handler {
+    handler = _handler;
+    timer = [OFTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(resend) repeats:NO];
+}
+
+- (void)resend {
+    [timer invalidate];
+    timer = nil;
+    
+    if (![handler wasPacketAckd:packetNumber.i]) {
+        NSLogDebug(@"Packet lost: %@", packet);
+        [handler sendRaknetPacket:packet];
+    }
+}
+
+
 @end

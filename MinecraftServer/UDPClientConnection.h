@@ -14,10 +14,11 @@
 @class Player;
 
 @interface UDPClientConnection : OFObject {
-    OFDataArray *peer;
+    of_udp_socket_address_t peer;
     RaknetHandler *raknetHandler;
     uint64_t mtuSize;
     
+    OFTimer *pingTimer;
     uint24_t customPacketId;
     uint24_t pePacketCount;
     uint16_t splitId;
@@ -28,16 +29,16 @@
     long clientId;
     Player *player;
     
-    OFMutableArray *loadedChunks;
+    OFMutableSet *loadedChunks;
 }
-
-@property (readonly) OFMutableDictionary *queuedPackets;
 
 - (instancetype)initWithPeer:(of_udp_socket_address_t)peer raknetHandler:(RaknetHandler *)raknetHandler andMtuSize:(uint64_t)mtu;
 
 - (void)recievedMinecraftPacket:(RaknetMinecraftPacket *)data;
 - (void)ackdCustomPacket:(uint32_t)customPacketId;
 - (void)nackdCustomPacket:(uint32_t)customPacketId;
+- (BOOL)wasPacketAckd:(uint32_t)customPacketId;
+
 - (uint24_t)nextCustomPacketId;
 - (void)sendRaknetPacket:(RaknetCustomPacket *)packet;
 

@@ -15,10 +15,10 @@
     uint24_t additionalPacketNumber;
 }
 
-@property int16_t unknown;
-@property BOOL hasAdditionalPacketNumber;
-@property uint32_t packetNumber;
-@property uint32_t additionalPacketNumber;
+@property (nonatomic) int16_t unknown;
+@property (nonatomic) BOOL hasAdditionalPacketNumber;
+@property (nonatomic) uint32_t packetNumber;
+@property (nonatomic) uint32_t additionalPacketNumber;
 
 - (instancetype)initWithPacketNumber:(uint32_t)packetNumber;
 

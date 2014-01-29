@@ -14,11 +14,18 @@
 
 @interface RaknetCustomPacket : RaknetPacket {
     uint24_t packetNumber;
+    
+    //dispatch stuff
+    OFTimer *timer;
+    UDPClientConnection *handler;
 }
 
-@property uint32_t packetNumber;
-@property (retain) OFMutableArray *packets;
+@property (nonatomic) uint32_t packetNumber;
+@property (nonatomic, retain) OFMutableArray *packets;
 
+
+- (void)dispatchNewTransmissionVia:(UDPClientConnection *)handler;
+- (void)resend;
 - (void)setPacketNumber24:(uint24_t)packetNumber;
 
 @end

@@ -11,7 +11,7 @@
 
 @interface RaknetConnectionRequest : RaknetPacket
 
-@property int8_t protocolVersion;
-@property uint64_t mtuSize;
+@property (nonatomic) int8_t protocolVersion;
+@property (nonatomic) uint64_t mtuSize;
 
 @end

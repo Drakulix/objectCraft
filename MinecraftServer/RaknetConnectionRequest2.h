@@ -11,10 +11,10 @@
 
 @interface RaknetConnectionRequest2 : RaknetPacket
 
-@property int8_t clientSecurity;
-@property int32_t cookie;
-@property int16_t serverUDPPort;
-@property uint8_t mtuSize;
-@property int64_t clientId;
+@property (nonatomic) int8_t clientSecurity;
+@property (nonatomic) int32_t cookie;
+@property (nonatomic) int16_t serverUDPPort;
+@property (nonatomic) uint8_t mtuSize;
+@property (nonatomic) int64_t clientId;
 
 @end

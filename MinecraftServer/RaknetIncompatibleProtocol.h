@@ -11,7 +11,7 @@
 
 @interface RaknetIncompatibleProtocol : RaknetPacket
 
-@property int8_t protocolVersion;
-@property int64_t serverId;
+@property (nonatomic) int8_t protocolVersion;
+@property (nonatomic) int64_t serverId;
 
 @end

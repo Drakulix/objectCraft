@@ -11,6 +11,6 @@
 
 @interface RaknetConnectedPing : RaknetPacket
 
-@property int64_t pingId;
+@property (nonatomic) int64_t pingId;
 
 @end

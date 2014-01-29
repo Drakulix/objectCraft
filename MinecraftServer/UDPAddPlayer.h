@@ -7,24 +7,24 @@
 //
 
 #import "UDPPacket.h"
-#import "Player.h"
+@class Player
 
 @interface UDPAddPlayer : UDPPacket
 
-@property uint64_t clientID;
-@property NSString *username;
-@property int32_t entityId;
+@property (nonatomic) uint64_t clientID;
+@property (nonatomic, retain) OFString *username;
+@property (nonatomic) int32_t entityId;
 
-@property float X;
-@property float Y;
-@property float Z;
-@property float Yaw;
-@property float Pitch;
+@property (nonatomic) float X;
+@property (nonatomic) float Y;
+@property (nonatomic) float Z;
+@property (nonatomic) float Yaw;
+@property (nonatomic) float Pitch;
 
-@property int16_t unknown;
-@property int16_t unknown2;
+@property (nonatomic) int16_t unknown;
+@property (nonatomic) int16_t unknown2;
 
-@property NSMutableData *metadata;
+@property OFDataArray *metadata;
 
 - (id)initWithPlayer:(Player *)player;
 

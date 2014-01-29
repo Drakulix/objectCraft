@@ -17,21 +17,21 @@
     uint24_t orderId;
 }
 
-@property uint16_t dataLength;
+@property (nonatomic) uint16_t dataLength;
 
-@property BOOL isReliable;
-@property uint32_t count;
+@property (nonatomic) BOOL isReliable;
+@property (nonatomic) uint32_t count;
 
-@property BOOL isOrdered;
-@property uint32_t orderId;
-@property uint8_t orderChannel;
+@property (nonatomic) BOOL isOrdered;
+@property (nonatomic) uint32_t orderId;
+@property (nonatomic) uint8_t orderChannel;
 
-@property BOOL isSplit;
-@property int32_t splitCount;
-@property int16_t splitId;
-@property int32_t splitIndex;
+@property (nonatomic) BOOL isSplit;
+@property (nonatomic) int32_t splitCount;
+@property (nonatomic) int16_t splitId;
+@property (nonatomic) int32_t splitIndex;
 
-@property (retain) OFDataArray *packet;
+@property (nonatomic, retain) OFDataArray *packet;
 
 + (RaknetMinecraftPacket *)readPacketFromData:(OFDataArray *)data;
 

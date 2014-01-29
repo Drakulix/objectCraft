@@ -11,9 +11,9 @@
 
 @interface RaknetAdvertise : RaknetPacket
 
-@property int64_t pingId;
-@property int64_t serverId;
-@property (retain) OFString *identifier;
+@property (nonatomic) int64_t pingId;
+@property (nonatomic) int64_t serverId;
+@property (nonatomic, retain) OFString *identifier;
 
 - (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(OFString *)string;
 

@@ -11,10 +11,10 @@
 
 @interface RaknetConnectionResponse2 : RaknetPacket
 
-@property int64_t serverId;
-@property int16_t mtuSize;
-@property int16_t clientUDPPort;
-@property int8_t serverSecurity;
+@property (nonatomic) int64_t serverId;
+@property (nonatomic) int16_t mtuSize;
+@property (nonatomic) int16_t clientUDPPort;
+@property (nonatomic) int8_t serverSecurity;
 
 - (instancetype)initWithMtuSize:(int16_t)mtuSize andClientPort:(int16_t)port;
 
