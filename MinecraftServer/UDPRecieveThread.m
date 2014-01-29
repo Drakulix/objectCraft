@@ -34,6 +34,8 @@
         OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
         [data addItems:buffer count:length];
         
+        //TO-DO check for (custom!) disconnect packet (means we shutdown the hole server) - if yes, call shutdown / escape from while loop
+        
         [raknetHandler didRecieveData:data fromPeer:peer];
     }
     
