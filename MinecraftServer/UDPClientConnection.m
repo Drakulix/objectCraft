@@ -45,7 +45,7 @@
         pePacketCount.i = 0;
         customPacketId.i = 0;
         splitId = 0;
-        NSLogInfo(@"Pocket Edition Connection Established");
+        LogInfo(@"Pocket Edition Connection Established");
     }
     return self;
 }
@@ -58,9 +58,9 @@
     
     
     if (!packet)
-        NSLogInfo(@"Got unknown Packet: 0x%02x", packetId);
+        LogInfo(@"Got unknown Packet: 0x%02x", packetId);
     
-    NSLogDebug(@"Got MCPE Packet: 0x%02x, %@", packetId, packet);
+    LogDebug(@"Got MCPE Packet: 0x%02x, %@", packetId, packet);
     
     
     
@@ -98,7 +98,7 @@
         
         if (!player) {
             
-            NSLogInfo(@"'%@' connected!", ((UDPLogin *)packet).username);
+            LogInfo(@"'%@' connected!", ((UDPLogin *)packet).username);
             player = [[Player alloc] initSpawnPlayerWithUsername:((UDPLogin *)packet).username];
             player.clientId = clientId;
         
@@ -112,7 +112,7 @@
     } else if ([packet isKindOfClass:[UDPReadyPacket class]]) {
         
         
-        NSLogDebug(@"Ready Packet Status: %d", ((UDPReadyPacket *)packet).status);
+        LogDebug(@"Ready Packet Status: %d", ((UDPReadyPacket *)packet).status);
         
         if (((UDPReadyPacket *)packet).status == 1) {
             //nothing to do chunk request packet will follow
