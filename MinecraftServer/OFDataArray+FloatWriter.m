@@ -11,13 +11,13 @@
 @implementation OFDataArray (FloatWriter)
 
 - (void)appendFloat:(float)floatVal {
-    int32_t floatByte = htonl((*((int32_t *)&floatVal)));
-    [self addItems:&floatByte count:sizeof(int32_t)];
+    float floatSwap = OF_BSWAP_FLOAT_IF_LE(floatVal);
+    [self addItems:&floatSwap count:sizeof(float)];
 }
 
 - (void)appendDouble:(double)doubleVal {
-    int64_t doubleByte = htonll((*((int64_t *)&doubleVal)));
-    [self addItems:&doubleByte count:sizeof(int64_t)];
+    double doubleSwap = OF_BSWAP_DOUBLE_IF_LE(doubleVal);
+    [self addItems:&doubleSwap count:sizeof(double)];
 }
 
 @end

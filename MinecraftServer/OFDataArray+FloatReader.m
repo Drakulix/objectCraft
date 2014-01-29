@@ -13,15 +13,23 @@
 @implementation OFDataArray (FloatReader)
 
 - (float)readFloat {
-    int32_t floatBits = *(int32_t*)[self readInt];
+    float floatVal = OF_BSWAP_FLOAT_IF_LE(*(float *)[self firstItem]);
+    [self removeItemsInRange:of_range(0, sizeof(float))];
+    return floatVal;
+    
+    /*int32_t floatBits = *(int32_t*)[self readInt];
     floatBits = ntohl(floatBits);
     float floatVal = *((float *)&floatBits);
-    return floatVal;
+    return floatVal;*/
 }
 
 - (double)readDouble {
-    int64_t intVal = ntohll(*(int64_t *)[self readLong]);
-    return *(double *)(&intVal);
+    double doubleVal = OF_BSWAP_DOUBLE_IF_LE(*(double *)[self firstItem]);
+    [self removeItemsInRange:of_range(0, sizeof(double))];
+    return doubleVal;
+    
+    /*int64_t intVal = ntohll(*(int64_t *)[self readLong]);
+    return *(double *)(&intVal);*/
 }
 
 @end

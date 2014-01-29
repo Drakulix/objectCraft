@@ -11,7 +11,7 @@
 @implementation OFDataArray (IntReader)
 
 - (int32_t)readInt {
-    int32_t integer = ntohl(*(int32_t *)[self firstItem]);
+    int32_t integer = OF_BSWAP32_IF_LE(*(int32_t *)[self firstItem]);
     [self removeItemsInRange:of_range(0, sizeof(int32_t))];
     return integer;
 }
@@ -65,7 +65,7 @@
 }
 
 - (int16_t)readShort {
-    int16_t shortInt = ntohs(*(int16_t *)[self firstItem]);
+    int16_t shortInt = OF_BSWAP16_IF_LE(*(int16_t *)[self firstItem]);
     [self removeItemsInRange:of_range(0, sizeof(int16_t))];
     return shortInt;
 }
@@ -89,11 +89,9 @@
 }
 
 - (int64_t)readLong {
-    int64_t longInt = ntohll(*(int64_t *)[self firstItem]);
+    int64_t longInt = OF_BSWAP64_IF_LE(*(int64_t *)[self firstItem]);
     [self removeItemsInRange:of_range(0, sizeof(int64_t))];
     return longInt;
-    
 }
-
 
 @end

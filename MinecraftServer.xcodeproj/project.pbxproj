@@ -21,7 +21,6 @@
 		C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556381897E60100D67C15 /* UDPRecieveThread.m */; };
 		C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C965563C1897EB0800D67C15 /* RaknetHandler.m */; };
 		C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */; };
-		C96556451897ECDE00D67C15 /* longlongbyteorder.c in Sources */ = {isa = PBXBuildFile; fileRef = C96556431897ECDE00D67C15 /* longlongbyteorder.c */; };
 		C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556471897EF3200D67C15 /* RaknetPacket.m */; };
 		C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556491897EF3200D67C15 /* RaknetConnectedPing.m */; };
 		C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C965564B1897EF3200D67C15 /* RaknetUnconnectedPing.m */; };
@@ -42,7 +41,28 @@
 		C96556811897F5AF00D67C15 /* OFDataArray+IntWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567D1897F5AF00D67C15 /* OFDataArray+IntWriter.m */; };
 		C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */; };
 		C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */; };
-		C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */; };
+		C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.mm */; };
+		C9B1000718991C5500AB8DB8 /* UDPClientConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFDE18991C5500AB8DB8 /* UDPClientConnection.m */; };
+		C9B1000818991C5500AB8DB8 /* UDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE018991C5500AB8DB8 /* UDPPacket.m */; };
+		C9B1000918991C5500AB8DB8 /* UDPClientConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE218991C5500AB8DB8 /* UDPClientConnect.m */; };
+		C9B1000A18991C5500AB8DB8 /* UDPServerHandshake.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE418991C5500AB8DB8 /* UDPServerHandshake.m */; };
+		C9B1000B18991C5500AB8DB8 /* UDPClientHandshake.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE618991C5500AB8DB8 /* UDPClientHandshake.m */; };
+		C9B1000C18991C5500AB8DB8 /* UDPLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE818991C5500AB8DB8 /* UDPLogin.m */; };
+		C9B1000D18991C5500AB8DB8 /* UDPLoginStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFEA18991C5500AB8DB8 /* UDPLoginStatus.m */; };
+		C9B1000E18991C5500AB8DB8 /* UDPPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFEC18991C5500AB8DB8 /* UDPPing.m */; };
+		C9B1000F18991C5500AB8DB8 /* UDPPong.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFEE18991C5500AB8DB8 /* UDPPong.m */; };
+		C9B1001018991C5500AB8DB8 /* UDPStartGame.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFF018991C5500AB8DB8 /* UDPStartGame.m */; };
+		C9B1001118991C5500AB8DB8 /* UDPSpawnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFF218991C5500AB8DB8 /* UDPSpawnPosition.m */; };
+		C9B1001218991C5500AB8DB8 /* UDPSetTime.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFF418991C5500AB8DB8 /* UDPSetTime.m */; };
+		C9B1001318991C5500AB8DB8 /* UDPDisconnect.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFF618991C5500AB8DB8 /* UDPDisconnect.m */; };
+		C9B1001418991C5500AB8DB8 /* UDPChunkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFF818991C5500AB8DB8 /* UDPChunkRequest.m */; };
+		C9B1001518991C5500AB8DB8 /* UDPChunkData.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFFA18991C5500AB8DB8 /* UDPChunkData.m */; };
+		C9B1001618991C5500AB8DB8 /* UDPReadyPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFFC18991C5500AB8DB8 /* UDPReadyPacket.m */; };
+		C9B1001718991C5500AB8DB8 /* UDPSetHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFFE18991C5500AB8DB8 /* UDPSetHealth.m */; };
+		C9B1001818991C5500AB8DB8 /* UDPAddPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000018991C5500AB8DB8 /* UDPAddPlayer.m */; };
+		C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */; };
+		C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */; };
+		C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,8 +104,6 @@
 		C965563C1897EB0800D67C15 /* RaknetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetHandler.m; sourceTree = "<group>"; };
 		C965563F1897EC9000D67C15 /* OFDataArray+IntReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+IntReader.h"; sourceTree = "<group>"; };
 		C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+IntReader.m"; sourceTree = "<group>"; };
-		C96556421897ECDE00D67C15 /* longlongbyteorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = longlongbyteorder.h; sourceTree = "<group>"; };
-		C96556431897ECDE00D67C15 /* longlongbyteorder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = longlongbyteorder.c; sourceTree = "<group>"; };
 		C96556441897ECDE00D67C15 /* int24_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = int24_t.h; sourceTree = "<group>"; };
 		C96556461897EF3200D67C15 /* RaknetPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetPacket.h; sourceTree = "<group>"; };
 		C96556471897EF3200D67C15 /* RaknetPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetPacket.m; sourceTree = "<group>"; };
@@ -128,7 +146,49 @@
 		C977BF881898647900FD9B38 /* OFDataArray+VarIntReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+VarIntReader.h"; sourceTree = "<group>"; };
 		C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+VarIntReader.m"; sourceTree = "<group>"; };
 		C977BF8B1898654400FD9B38 /* OFDataArray+VarIntWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+VarIntWriter.h"; sourceTree = "<group>"; };
-		C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+VarIntWriter.m"; sourceTree = "<group>"; };
+		C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "OFDataArray+VarIntWriter.mm"; sourceTree = "<group>"; };
+		C9B1000018991C5500AB8DB8 /* UDPAddPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPAddPlayer.m; sourceTree = "<group>"; };
+		C9B1000118991C5500AB8DB8 /* UDPMoveEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPMoveEntity.h; sourceTree = "<group>"; };
+		C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPMoveEntity.m; sourceTree = "<group>"; };
+		C9B1000318991C5500AB8DB8 /* UDPMoveEntity_PosRot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPMoveEntity_PosRot.h; sourceTree = "<group>"; };
+		C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPMoveEntity_PosRot.m; sourceTree = "<group>"; };
+		C9B1000518991C5500AB8DB8 /* UDPMovePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPMovePlayer.h; sourceTree = "<group>"; };
+		C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPMovePlayer.m; sourceTree = "<group>"; };
+		C9B1FFDD18991C5500AB8DB8 /* UDPClientConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPClientConnection.h; sourceTree = "<group>"; };
+		C9B1FFDE18991C5500AB8DB8 /* UDPClientConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPClientConnection.m; sourceTree = "<group>"; };
+		C9B1FFDF18991C5500AB8DB8 /* UDPPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPPacket.h; sourceTree = "<group>"; };
+		C9B1FFE018991C5500AB8DB8 /* UDPPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPPacket.m; sourceTree = "<group>"; };
+		C9B1FFE118991C5500AB8DB8 /* UDPClientConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPClientConnect.h; sourceTree = "<group>"; };
+		C9B1FFE218991C5500AB8DB8 /* UDPClientConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPClientConnect.m; sourceTree = "<group>"; };
+		C9B1FFE318991C5500AB8DB8 /* UDPServerHandshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPServerHandshake.h; sourceTree = "<group>"; };
+		C9B1FFE418991C5500AB8DB8 /* UDPServerHandshake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPServerHandshake.m; sourceTree = "<group>"; };
+		C9B1FFE518991C5500AB8DB8 /* UDPClientHandshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPClientHandshake.h; sourceTree = "<group>"; };
+		C9B1FFE618991C5500AB8DB8 /* UDPClientHandshake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPClientHandshake.m; sourceTree = "<group>"; };
+		C9B1FFE718991C5500AB8DB8 /* UDPLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPLogin.h; sourceTree = "<group>"; };
+		C9B1FFE818991C5500AB8DB8 /* UDPLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPLogin.m; sourceTree = "<group>"; };
+		C9B1FFE918991C5500AB8DB8 /* UDPLoginStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPLoginStatus.h; sourceTree = "<group>"; };
+		C9B1FFEA18991C5500AB8DB8 /* UDPLoginStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPLoginStatus.m; sourceTree = "<group>"; };
+		C9B1FFEB18991C5500AB8DB8 /* UDPPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPPing.h; sourceTree = "<group>"; };
+		C9B1FFEC18991C5500AB8DB8 /* UDPPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPPing.m; sourceTree = "<group>"; };
+		C9B1FFED18991C5500AB8DB8 /* UDPPong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPPong.h; sourceTree = "<group>"; };
+		C9B1FFEE18991C5500AB8DB8 /* UDPPong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPPong.m; sourceTree = "<group>"; };
+		C9B1FFEF18991C5500AB8DB8 /* UDPStartGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPStartGame.h; sourceTree = "<group>"; };
+		C9B1FFF018991C5500AB8DB8 /* UDPStartGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPStartGame.m; sourceTree = "<group>"; };
+		C9B1FFF118991C5500AB8DB8 /* UDPSpawnPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPSpawnPosition.h; sourceTree = "<group>"; };
+		C9B1FFF218991C5500AB8DB8 /* UDPSpawnPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPSpawnPosition.m; sourceTree = "<group>"; };
+		C9B1FFF318991C5500AB8DB8 /* UDPSetTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPSetTime.h; sourceTree = "<group>"; };
+		C9B1FFF418991C5500AB8DB8 /* UDPSetTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPSetTime.m; sourceTree = "<group>"; };
+		C9B1FFF518991C5500AB8DB8 /* UDPDisconnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPDisconnect.h; sourceTree = "<group>"; };
+		C9B1FFF618991C5500AB8DB8 /* UDPDisconnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPDisconnect.m; sourceTree = "<group>"; };
+		C9B1FFF718991C5500AB8DB8 /* UDPChunkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPChunkRequest.h; sourceTree = "<group>"; };
+		C9B1FFF818991C5500AB8DB8 /* UDPChunkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPChunkRequest.m; sourceTree = "<group>"; };
+		C9B1FFF918991C5500AB8DB8 /* UDPChunkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPChunkData.h; sourceTree = "<group>"; };
+		C9B1FFFA18991C5500AB8DB8 /* UDPChunkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPChunkData.m; sourceTree = "<group>"; };
+		C9B1FFFB18991C5500AB8DB8 /* UDPReadyPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPReadyPacket.h; sourceTree = "<group>"; };
+		C9B1FFFC18991C5500AB8DB8 /* UDPReadyPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPReadyPacket.m; sourceTree = "<group>"; };
+		C9B1FFFD18991C5500AB8DB8 /* UDPSetHealth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPSetHealth.h; sourceTree = "<group>"; };
+		C9B1FFFE18991C5500AB8DB8 /* UDPSetHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPSetHealth.m; sourceTree = "<group>"; };
+		C9B1FFFF18991C5500AB8DB8 /* UDPAddPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPAddPlayer.h; sourceTree = "<group>"; };
 		C9B86854189141420049B299 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		C9B868551891423B0049B299 /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigManager.h; sourceTree = "<group>"; };
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
@@ -237,6 +297,9 @@
 				C965563B1897EB0800D67C15 /* RaknetHandler.h */,
 				C965563C1897EB0800D67C15 /* RaknetHandler.m */,
 				C965566D1897EF3600D67C15 /* RaknetPacket */,
+				C9B1FFDD18991C5500AB8DB8 /* UDPClientConnection.h */,
+				C9B1FFDE18991C5500AB8DB8 /* UDPClientConnection.m */,
+				C9B1001C18991C5B00AB8DB8 /* UDPPacket */,
 			);
 			name = UDPNetwork;
 			sourceTree = "<group>";
@@ -248,8 +311,6 @@
 				C977BF8F1898663200FD9B38 /* DataWriter */,
 				C96556741897F38100D67C15 /* OFDataArray+RaknetMagic.h */,
 				C96556751897F38100D67C15 /* OFDataArray+RaknetMagic.m */,
-				C96556421897ECDE00D67C15 /* longlongbyteorder.h */,
-				C96556431897ECDE00D67C15 /* longlongbyteorder.c */,
 				C96556441897ECDE00D67C15 /* int24_t.h */,
 			);
 			name = DataExtensions;
@@ -307,7 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				C977BF8B1898654400FD9B38 /* OFDataArray+VarIntWriter.h */,
-				C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.m */,
+				C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.mm */,
 				C965567A1897F5AF00D67C15 /* OFDataArray+StringWriter.h */,
 				C965567B1897F5AF00D67C15 /* OFDataArray+StringWriter.m */,
 				C965567C1897F5AF00D67C15 /* OFDataArray+IntWriter.h */,
@@ -316,6 +377,53 @@
 				C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */,
 			);
 			name = DataWriter;
+			sourceTree = "<group>";
+		};
+		C9B1001C18991C5B00AB8DB8 /* UDPPacket */ = {
+			isa = PBXGroup;
+			children = (
+				C9B1FFDF18991C5500AB8DB8 /* UDPPacket.h */,
+				C9B1FFE018991C5500AB8DB8 /* UDPPacket.m */,
+				C9B1FFE118991C5500AB8DB8 /* UDPClientConnect.h */,
+				C9B1FFE218991C5500AB8DB8 /* UDPClientConnect.m */,
+				C9B1FFE318991C5500AB8DB8 /* UDPServerHandshake.h */,
+				C9B1FFE418991C5500AB8DB8 /* UDPServerHandshake.m */,
+				C9B1FFE518991C5500AB8DB8 /* UDPClientHandshake.h */,
+				C9B1FFE618991C5500AB8DB8 /* UDPClientHandshake.m */,
+				C9B1FFE718991C5500AB8DB8 /* UDPLogin.h */,
+				C9B1FFE818991C5500AB8DB8 /* UDPLogin.m */,
+				C9B1FFE918991C5500AB8DB8 /* UDPLoginStatus.h */,
+				C9B1FFEA18991C5500AB8DB8 /* UDPLoginStatus.m */,
+				C9B1FFEB18991C5500AB8DB8 /* UDPPing.h */,
+				C9B1FFEC18991C5500AB8DB8 /* UDPPing.m */,
+				C9B1FFED18991C5500AB8DB8 /* UDPPong.h */,
+				C9B1FFEE18991C5500AB8DB8 /* UDPPong.m */,
+				C9B1FFEF18991C5500AB8DB8 /* UDPStartGame.h */,
+				C9B1FFF018991C5500AB8DB8 /* UDPStartGame.m */,
+				C9B1FFF118991C5500AB8DB8 /* UDPSpawnPosition.h */,
+				C9B1FFF218991C5500AB8DB8 /* UDPSpawnPosition.m */,
+				C9B1FFF318991C5500AB8DB8 /* UDPSetTime.h */,
+				C9B1FFF418991C5500AB8DB8 /* UDPSetTime.m */,
+				C9B1FFF518991C5500AB8DB8 /* UDPDisconnect.h */,
+				C9B1FFF618991C5500AB8DB8 /* UDPDisconnect.m */,
+				C9B1FFF718991C5500AB8DB8 /* UDPChunkRequest.h */,
+				C9B1FFF818991C5500AB8DB8 /* UDPChunkRequest.m */,
+				C9B1FFF918991C5500AB8DB8 /* UDPChunkData.h */,
+				C9B1FFFA18991C5500AB8DB8 /* UDPChunkData.m */,
+				C9B1FFFB18991C5500AB8DB8 /* UDPReadyPacket.h */,
+				C9B1FFFC18991C5500AB8DB8 /* UDPReadyPacket.m */,
+				C9B1FFFD18991C5500AB8DB8 /* UDPSetHealth.h */,
+				C9B1FFFE18991C5500AB8DB8 /* UDPSetHealth.m */,
+				C9B1FFFF18991C5500AB8DB8 /* UDPAddPlayer.h */,
+				C9B1000018991C5500AB8DB8 /* UDPAddPlayer.m */,
+				C9B1000118991C5500AB8DB8 /* UDPMoveEntity.h */,
+				C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */,
+				C9B1000318991C5500AB8DB8 /* UDPMoveEntity_PosRot.h */,
+				C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */,
+				C9B1000518991C5500AB8DB8 /* UDPMovePlayer.h */,
+				C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */,
+			);
+			name = UDPPacket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,38 +496,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				C92CD1BF18967E6700E009B3 /* WorldGenerator.m in Sources */,
+				C9B1000D18991C5500AB8DB8 /* UDPLoginStatus.m in Sources */,
 				C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */,
-				C96556451897ECDE00D67C15 /* longlongbyteorder.c in Sources */,
 				C92CD1BC18967E5B00E009B3 /* World.m in Sources */,
 				C96556641897EF3200D67C15 /* RaknetConnectionRequest.m in Sources */,
 				C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */,
 				C965566B1897EF3200D67C15 /* RaknetNACK.m in Sources */,
+				C9B1001718991C5500AB8DB8 /* UDPSetHealth.m in Sources */,
 				C96556771897F38100D67C15 /* OFDataArray+StringReader.m in Sources */,
 				C96556671897EF3200D67C15 /* RaknetConnectionRequest2.m in Sources */,
+				C9B1001118991C5500AB8DB8 /* UDPSpawnPosition.m in Sources */,
 				C965566A1897EF3200D67C15 /* RaknetACK.m in Sources */,
-				C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.m in Sources */,
+				C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.mm in Sources */,
 				C918649B1895C97F00E78048 /* main.m in Sources */,
+				C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */,
 				C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */,
+				C9B1000C18991C5500AB8DB8 /* UDPLogin.m in Sources */,
 				C965566C1897EF3200D67C15 /* RaknetMinecraftPacket.m in Sources */,
+				C9B1000B18991C5500AB8DB8 /* UDPClientHandshake.m in Sources */,
+				C9B1000A18991C5500AB8DB8 /* UDPServerHandshake.m in Sources */,
 				C96556811897F5AF00D67C15 /* OFDataArray+IntWriter.m in Sources */,
 				C96556801897F5AF00D67C15 /* OFDataArray+StringWriter.m in Sources */,
 				C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */,
 				C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */,
 				C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */,
 				C96556651897EF3200D67C15 /* RaknetConnectionResponse.m in Sources */,
+				C9B1000718991C5500AB8DB8 /* UDPClientConnection.m in Sources */,
+				C9B1000918991C5500AB8DB8 /* UDPClientConnect.m in Sources */,
 				C92CD1C818968A0400E009B3 /* EndGenerator.m in Sources */,
 				C918649D1895C97F00E78048 /* ConfigManager.m in Sources */,
+				C9B1001318991C5500AB8DB8 /* UDPDisconnect.m in Sources */,
 				C92CD1C5189689FB00E009B3 /* OverworldGenerator.m in Sources */,
+				C9B1000F18991C5500AB8DB8 /* UDPPong.m in Sources */,
 				C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */,
+				C9B1001218991C5500AB8DB8 /* UDPSetTime.m in Sources */,
 				C96556691897EF3200D67C15 /* RaknetCustomPacket.m in Sources */,
 				C96556631897EF3200D67C15 /* RaknetAdvertise.m in Sources */,
+				C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */,
+				C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */,
+				C9B1001818991C5500AB8DB8 /* UDPAddPlayer.m in Sources */,
 				C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */,
+				C9B1001418991C5500AB8DB8 /* UDPChunkRequest.m in Sources */,
 				C96556781897F38100D67C15 /* OFDataArray+FloatReader.m in Sources */,
 				C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */,
 				C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */,
+				C9B1001518991C5500AB8DB8 /* UDPChunkData.m in Sources */,
+				C9B1001018991C5500AB8DB8 /* UDPStartGame.m in Sources */,
 				C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */,
 				C918649E1895C97F00E78048 /* RandomGenerator.m in Sources */,
+				C9B1000818991C5500AB8DB8 /* UDPPacket.m in Sources */,
 				C918649F1895C97F00E78048 /* WorldManager.m in Sources */,
+				C9B1000E18991C5500AB8DB8 /* UDPPing.m in Sources */,
+				C9B1001618991C5500AB8DB8 /* UDPReadyPacket.m in Sources */,
 				C96556661897EF3200D67C15 /* RaknetIncompatibleProtocol.m in Sources */,
 				C96556791897F38100D67C15 /* OFDataArray+RaknetMagic.m in Sources */,
 			);

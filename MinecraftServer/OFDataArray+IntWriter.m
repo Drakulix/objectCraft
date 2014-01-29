@@ -11,12 +11,12 @@
 @implementation OFDataArray (IntWriter)
 
 - (void)appendLong:(int64_t)intVal {
-    int64_t nInt = htonll(intVal);
+    int64_t nInt = OF_BSWAP64_IF_LE(intVal);
     [self addItems:&nInt count:sizeof(int64_t)];
 }
 
 - (void)appendInt:(int32_t)integer {
-    int32_t nInt = htonl(integer);
+    int32_t nInt = OF_BSWAP32_IF_LE(integer);
     [self addItems:&nInt count:sizeof(int32_t)];
 }
 
@@ -57,7 +57,7 @@
 }
 
 - (void)appendShort:(int16_t)shortInt {
-    int16_t nInt = htons(shortInt);
+    int16_t nInt = OF_BSWAP16_IF_LE(shortInt);
     [self addItems:&nInt count:sizeof(int16_t)];
 }
 

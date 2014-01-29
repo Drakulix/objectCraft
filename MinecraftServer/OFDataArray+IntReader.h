@@ -8,7 +8,6 @@
 
 #import <ObjFW/ObjFW.h>
 #import "int24_t.h"
-#import "longlongbyteorder.h"
 
 @interface OFDataArray (IntReader)
 

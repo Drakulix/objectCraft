@@ -8,6 +8,8 @@
 
 #import "OFDataArray+StringWriter.h"
 #import "OFDataArray+IntWriter.h"
+#import "OFDataArray+VarIntWriter.h"
+#import <string.h>
 
 @implementation OFDataArray (StringWriter)
 

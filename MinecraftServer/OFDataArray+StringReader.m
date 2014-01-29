@@ -8,16 +8,20 @@
 
 #import "OFDataArray+StringReader.h"
 #import "OFDataArray+IntReader.h"
+#import "OFDataArray+VarIntReader.h"
 
 @implementation OFDataArray (StringReader)
 
 - (OFString *)readStringTcp {
     uint64_t varLength = [self readVarInt];
-    NSMutableData *rawString = [[self subdataWithRange:NSMakeRange(0, varLength)] mutableCopy];
-    [rawString appendBytes:"\0" length:sizeof("\0")];
-    const void *bytes = [rawString  bytes];
-    NSString *string = [NSString stringWithUTF8String:bytes];
-    [self replaceBytesInRange:NSMakeRange(0, varLength) withBytes:NULL length:0];
+    
+    OFDataArray *rawString = [[OFDataArray alloc] initWithItemSize:1 capacity:varLength];
+    [rawString addItems:[self firstItem] count:varLength];
+    [rawString addItem:"\0"];
+    const void *bytes = [rawString firstItem];
+    OFString *string = [OFString stringWithUTF8String:bytes];
+    
+    [self removeItemsInRange:of_range(0, varLength)];
     return string;
 }
 
@@ -26,8 +30,8 @@
     OFString *string = @"";
     if (stringLength > 0) {
         const char* rawAsciiString = [self firstItem];
-        string = [NSString stringWithCString:rawAsciiString encoding:NSASCIIStringEncoding];
-        [self removeItemsInRange:of_range(0, stringLength)]
+        string = [OFString stringWithCString:rawAsciiString encoding:OF_STRING_ENCODING_ASCII];
+        [self removeItemsInRange:of_range(0, stringLength)];
     }
     return string;
 }
