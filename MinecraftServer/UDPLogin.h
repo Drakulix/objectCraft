@@ -10,10 +10,10 @@
 
 @interface UDPLogin : UDPPacket
 
-@property NSString *username;
-@property int32_t protocol1;
-@property int32_t protocol2;
-@property int32_t clientId;
-@property NSString *realmsData;
+@property (nonatomic) OFString *username;
+@property (nonatomic) int32_t protocol1;
+@property (nonatomic) int32_t protocol2;
+@property (nonatomic) int32_t clientId;
+@property (nonatomic) OFString *realmsData;
 
 @end

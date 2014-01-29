@@ -10,7 +10,7 @@
 
 @interface UDPLoginStatus : UDPPacket
 
-@property int32_t status;
+@property (nonatomic) int32_t status;
 
 - (instancetype)initWithStatus:(int32_t)status;
 

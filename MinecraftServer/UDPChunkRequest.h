@@ -10,8 +10,8 @@
 
 @interface UDPChunkRequest : UDPPacket
 
-@property int32_t X;
-@property int32_t Z;
+@property (nonatomic) int32_t X;
+@property (nonatomic) int32_t Z;
 
 - (instancetype)initForX:(int32_t)x Z:(int32_t)z;
 

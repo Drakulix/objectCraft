@@ -10,7 +10,7 @@
 
 @interface UDPReadyPacket : UDPPacket
 
-@property int8_t status;
+@property (nonatomic) int8_t status;
 
 - (instancetype)initWithStatus:(int8_t)status;
 

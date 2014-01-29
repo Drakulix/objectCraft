@@ -10,17 +10,17 @@
 
 @interface UDPClientHandshake : UDPPacket
 
-@property int32_t cookie;
-@property int8_t security;
+@property (nonatomic) int32_t cookie;
+@property (nonatomic) int8_t security;
 
-@property uint16_t port;
+@property (nonatomic) uint16_t port;
 
-@property NSData *dataArray0;
-@property NSData *dataArray;
+@property (nonatomic) OFDataArray *dataArray0;
+@property (nonatomic) OFDataArray *dataArray;
 
-@property int16_t timeStamp;
+@property (nonatomic) int16_t timeStamp;
 
-@property int64_t session;
-@property int64_t session2;
+@property (nonatomic) int64_t session;
+@property (nonatomic) int64_t session2;
 
 @end

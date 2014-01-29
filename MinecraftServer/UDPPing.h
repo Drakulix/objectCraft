@@ -10,6 +10,6 @@
 
 @interface UDPPing : UDPPacket
 
-@property int64_t clientTime;
+@property (nonatomic) int64_t clientTime;
 
 @end

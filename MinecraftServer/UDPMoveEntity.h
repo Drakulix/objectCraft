@@ -7,17 +7,17 @@
 //
 
 #import "UDPPacket.h"
-#import "MovingEntity.h"
+@class MovingEntity;
 
 @interface UDPMoveEntity : UDPPacket
 
-@property int32_t entityId;
+@property (nonatomic) int32_t entityId;
 
-@property float X;
-@property float Y;
-@property float Z;
-@property float Yaw;
-@property float Pitch;
+@property (nonatomic) float X;
+@property (nonatomic) float Y;
+@property (nonatomic) float Z;
+@property (nonatomic) float Yaw;
+@property (nonatomic) float Pitch;
 
 - (id)initWithEntity:(MovingEntity *)entity;
 

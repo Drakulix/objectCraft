@@ -10,8 +10,8 @@
 
 @interface UDPPong : UDPPacket
 
-@property uint64_t clientTime;
-@property uint64_t serverTime;
+@property (nonatomic) uint64_t clientTime;
+@property (nonatomic) uint64_t serverTime;
 
 - (instancetype)initWithClientTime:(int64_t)clientTime;
 

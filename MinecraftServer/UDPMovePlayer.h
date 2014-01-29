@@ -7,11 +7,11 @@
 //
 
 #import "UDPMoveEntity.h"
-#import "Player.h"
+@class Player;
 
 @interface UDPMovePlayer : UDPMoveEntity
 
-@property float unknown;
+@property (nonatomic) float unknown;
 
 - (id)initWithPlayer:(Player *)player;
 

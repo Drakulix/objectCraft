@@ -7,17 +7,17 @@
 //
 
 #import "UDPPacket.h"
-#import "Player.h"
+@class Player;
 
 @interface UDPStartGame : UDPPacket
 
-@property int32_t seed;
-@property int32_t generator;
-@property int32_t gamemode;
-@property int32_t entityId;
-@property float X;
-@property float Y;
-@property float Z;
+@property (nonatomic) int32_t seed;
+@property (nonatomic) int32_t generator;
+@property (nonatomic) int32_t gamemode;
+@property (nonatomic) int32_t entityId;
+@property (nonatomic) float X;
+@property (nonatomic) float Y;
+@property (nonatomic) float Z;
 
 - (instancetype)initWithPlayer:(Player *)player;
 

@@ -7,11 +7,11 @@
 //
 
 #import "UDPPacket.h"
-#import "ChunkColumn.h"
+@class ChunkColumn;
 
 @interface UDPChunkData : UDPPacket
 
-@property ChunkColumn *column;
+@property (nonatomic) ChunkColumn *column;
 
 - (instancetype)initForChunkColumn:(ChunkColumn *)column;
 

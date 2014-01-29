@@ -10,12 +10,12 @@
 
 @interface UDPServerHandshake : UDPPacket
 
-@property int32_t cookie;
-@property int8_t security;
+@property (nonatomic) int32_t cookie;
+@property (nonatomic) int8_t security;
 
-@property uint16_t port;
+@property (nonatomic) uint16_t port;
 
-@property NSData *dataArray;
+@property (nonatomic) OFDataArray *dataArray;
 @property int16_t timeStamp;
 
 @property int64_t session;

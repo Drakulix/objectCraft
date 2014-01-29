@@ -10,7 +10,7 @@
 
 @interface UDPSetHealth : UDPPacket
 
-@property int8_t health;
+@property (nonatomic) int8_t health;
 
 - (instancetype)initWithHealth:(int8_t)health;
 

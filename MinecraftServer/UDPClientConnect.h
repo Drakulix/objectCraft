@@ -10,8 +10,8 @@
 
 @interface UDPClientConnect : UDPPacket
 
-@property int64_t clientId;
-@property int64_t sessionId;
-@property int8_t unknown;
+@property (nonatomic) int64_t clientId;
+@property (nonatomic) int64_t sessionId;
+@property (nonatomic) int8_t unknown;
 
 @end

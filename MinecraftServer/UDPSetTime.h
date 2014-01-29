@@ -10,7 +10,7 @@
 
 @interface UDPSetTime : UDPPacket
 
-@property int32_t time;
+@property (nonatomic) int32_t time;
 
 - (instancetype)initWithDaytime:(int32_t)time;
 

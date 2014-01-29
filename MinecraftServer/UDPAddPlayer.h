@@ -7,7 +7,7 @@
 //
 
 #import "UDPPacket.h"
-@class Player
+@class Player;
 
 @interface UDPAddPlayer : UDPPacket
 
@@ -24,7 +24,7 @@
 @property (nonatomic) int16_t unknown;
 @property (nonatomic) int16_t unknown2;
 
-@property OFDataArray *metadata;
+@property (nonatomic, retain) OFDataArray *metadata;
 
 - (id)initWithPlayer:(Player *)player;
 

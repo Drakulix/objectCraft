@@ -7,13 +7,13 @@
 //
 
 #import "UDPPacket.h"
-#import "Player.h"
+@class Player;
 
 @interface UDPSpawnPosition : UDPPacket
 
-@property int32_t X;
-@property uint8_t Y;
-@property int32_t Z;
+@property (nonatomic) int32_t X;
+@property (nonatomic) uint8_t Y;
+@property (nonatomic) int32_t Z;
 
 - (instancetype)initWithPlayer:(Player *)player;
 
