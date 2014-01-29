@@ -10,10 +10,13 @@
 #import "RaknetHandler.h"
 #import <objc/runtime.h>
 
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+
 @implementation RaknetMinecraftPacket
 @dynamic count, orderId;
 
-+ (RaknetMinecraftPacket *)readPacketFromData:(NSMutableData *)data {
++ (RaknetMinecraftPacket *)readPacketFromData:(OFDataArray *)data {
     RaknetMinecraftPacket *minecraftPacket = [[RaknetMinecraftPacket alloc] init];
     
     uint8_t encapsulationId = [data readByte];
@@ -45,37 +48,38 @@
         //minecraftPacket.dataLength -= 10;
     }
     
-    minecraftPacket.packet = [data subdataWithRange:NSMakeRange(0, minecraftPacket.dataLength)];
-    [data replaceBytesInRange:NSMakeRange(0, minecraftPacket.dataLength) withBytes:NULL length:0];
+    minecraftPacket.packet = [[OFDataArray alloc] initWithItemSize:1 capacity:minecraftPacket.dataLength];
+    [minecraftPacket.packet addItems:[data firstItem] count:minecraftPacket.dataLength];
+    [data removeItemsInRange:of_range(0, minecraftPacket.dataLength)];
     return minecraftPacket;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
         
         self.isReliable = NO;
         
-        self.dataLength = ((uint16_t)[data length]);
+        self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
     }
     return self;
 }
 
-- (instancetype)initReliableWithData:(NSData *)data count:(uint24_t)_count {
+- (instancetype)initReliableWithData:(OFDataArray *)data count:(uint24_t)_count {
     self = [super init];
     if (self) {
         
         self.isReliable = YES;
         count = _count;
         
-        self.dataLength = ((uint16_t)[data length]);
+        self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
     }
     return self;
 }
 
-- (instancetype)initSplitPacketWithData:(NSData *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
+- (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
     self = [super init];
     if (self) {
         
@@ -87,14 +91,14 @@
         self.splitId = splitId;
         self.splitIndex = splitIndex;
         
-        self.dataLength = ((uint16_t)[data length]);
+        self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
     }
     return self;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     //TO-DO add real bit writing, but we just use reliable and split packets for now anyway
     
@@ -112,36 +116,36 @@
         [packetData appendShort:self.splitId];
         [packetData appendInt:self.splitIndex];
     }
-    [packetData appendData:self.packet];
+    [packetData addItems:[self.packet firstItem] count:[self.packet count]];
     
     return packetData;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@: %@", [super description], [RaknetMinecraftPacket autoDescribe:self classType:[self class]]];
+- (OFString *)description {
+    return [OFString stringWithFormat:@"%@: %@", [super description], [RaknetMinecraftPacket autoDescribe:self classType:[self class]]];
 }
 
 // Finds all properties of an object, and prints each one out as part of a string describing the class.
-+ (NSString *) autoDescribe:(id)instance classType:(Class)classType
++ (OFString *) autoDescribe:(id)instance classType:(Class)classType
 {
     unsigned int count;
     objc_property_t *propList = class_copyPropertyList(classType, &count);
-    NSMutableString *propPrint = [NSMutableString string];
+    OFMutableString *propPrint = [OFMutableString string];
     
     for ( int i = 0; i < count; i++ )
     {
         objc_property_t property = propList[i];
         
         const char *propName = property_getName(property);
-        NSString *propNameString =[NSString stringWithCString:propName encoding:NSASCIIStringEncoding];
+        OFString *propNameString =[OFString stringWithCString:propName encoding:OF_STRING_ENCODING_ASCII];
         
-        if(propName && ![propNameString isEqualToString:@"packet"])
+        if(propName && ![propNameString isEqual:@"packet"])
         {
             @try {
                 id value = [instance valueForKey:propNameString];
                 [propPrint appendString:[NSString stringWithFormat:@"\t%@=%@;\n", propNameString, value]];
             }
-            @catch (NSException *exception) {
+            @catch (OFException *exception) {
                 [propPrint appendString:[NSString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
             }
         }
@@ -151,7 +155,7 @@
     
     // Now see if we need to map any superclasses as well.
     Class superClass = class_getSuperclass( classType );
-    if ( superClass != nil && ! [superClass isEqual:[NSObject class]] )
+    if ( superClass != nil && ! [superClass isEqual:[OFObject class]] )
     {
         NSString *superString = [self autoDescribe:instance classType:superClass];
         [propPrint appendString:superString];

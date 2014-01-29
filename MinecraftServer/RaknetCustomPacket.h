@@ -17,9 +17,8 @@
 }
 
 @property uint32_t packetNumber;
-@property OFMutableArray *packets;
+@property (retain) OFMutableArray *packets;
 
-- (void)dispatchNewTransmissionVia:(UDPClientConnection *)handler;
 - (void)setPacketNumber24:(uint24_t)packetNumber;
 
 @end

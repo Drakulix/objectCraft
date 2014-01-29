@@ -8,6 +8,9 @@
 
 #import "RaknetIncompatibleProtocol.h"
 #import "ConfigManager.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetIncompatibleProtocol
 
@@ -15,20 +18,19 @@
     self = [super init];
     if (self) {
         self.protocolVersion = 5;
-        self.serverId = [ConfigManager sharedInstance].udpServerId;
+        self.serverId = [ConfigManager defaultManager].udpServerId;
     }
     return self;
 }
 
-- (id)initWithData:(NSData *)data {
+- (id)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.protocolVersion = [packetData readByte];
-        if (![packetData checkMagic]) {
+        self.protocolVersion = [data readByte];
+        if (![data checkMagic]) {
             return nil;
         }
-        self.serverId = [packetData readLong];
+        self.serverId = [data readLong];
     }
     return self;
 }
@@ -37,8 +39,8 @@
     return 0x1a;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendByte:self.protocolVersion];
     [packetData appendMagic];

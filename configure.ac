@@ -2,7 +2,7 @@ AC_INIT([ObjectCraft], [0.0.1], [drakulix@portingteam.com], [objectCraft], [http
 AM_INIT_AUTOMAKE([no-define])
 AC_LANG([Objective C])
 AC_PROG_OBJC
-AC_PROG_OBJCPP
+AC_PROG_OBJCXX
 AC_CONFIG_FILES([Makefile])
 # Get OBJFW library and include locations
 AC_ARG_WITH([objfw-include-path],

@@ -8,29 +8,33 @@
 
 #import "RaknetAdvertise.h"
 #import "ConfigManager.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+StringReader.h"
+#import "OFDataArray+StringWriter.h"
+#import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetAdvertise
 
-- (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(NSString *)string {
+- (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(OFString *)string {
     self = [super init];
     if (self) {
         self.pingId = pingId;
-        self.serverId = [ConfigManager sharedInstance].udpServerId;
+        self.serverId = [ConfigManager defaultManager].udpServerId;
         self.identifier = string;
     }
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.pingId = [packetData readLong];
-        self.serverId = [packetData readLong];
-        if(![packetData checkMagic]) {
+        self.pingId = [data readLong];
+        self.serverId = [data readLong];
+        if(![data checkMagic]) {
             return nil;
         }
-        self.identifier = [packetData readStringUdp];
+        self.identifier = [data readStringUdp];
     }
     return self;
 }
@@ -39,8 +43,8 @@
     return 0x1C;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendLong:self.pingId];
     [packetData appendLong:self.serverId];
@@ -49,6 +53,5 @@
     
     return packetData;
 }
-
 
 @end

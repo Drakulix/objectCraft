@@ -37,13 +37,13 @@
 #endif
 
 #ifdef LOG_LEVEL_DEBUG
-#define LogDebug(...) NSLog(__VA_ARGS__)
+#define LogDebug(...) Log(__VA_ARGS__)
 #else
 #define LogDebug(...) NOOP
 #endif
 
 #ifdef LOG_LEVEL_VERBOSE
-#define LogVerbose(...) NSLog(__VA_ARGS__)
+#define LogVerbose(...) Log(__VA_ARGS__)
 #else
 #define LogVerbose(...) NOOP
 #endif

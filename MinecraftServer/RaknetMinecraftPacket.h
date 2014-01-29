@@ -31,7 +31,7 @@
 @property int16_t splitId;
 @property int32_t splitIndex;
 
-@property OFDataArray *packet;
+@property (retain) OFDataArray *packet;
 
 + (RaknetMinecraftPacket *)readPacketFromData:(OFDataArray *)data;
 

@@ -7,18 +7,20 @@
 //
 
 #import "RaknetConnectionRequest.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectionRequest
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        if (![packetData checkMagic]) {
+        if (![data checkMagic]) {
             return nil;
         }
-        self.protocolVersion = [packetData readByte];
-        self.mtuSize = [packetData length];
+        self.protocolVersion = [data readByte];
+        self.mtuSize = [data count];
     }
     return self;
 }
@@ -27,8 +29,8 @@
     return 0x05;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendMagic];
     [packetData appendByte:self.protocolVersion];
     for (int i = 0; i<self.mtuSize; i++) {

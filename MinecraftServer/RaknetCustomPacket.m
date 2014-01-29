@@ -8,6 +8,8 @@
 
 #import "RaknetCustomPacket.h"
 #import "UDPClientConnection.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.m"
 
 @implementation RaknetCustomPacket
 @dynamic packetNumber;
@@ -35,21 +37,20 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.packets = [[NSMutableArray alloc] init];
+        self.packets = [[OFMutableArray alloc] init];
     }
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        self.packets = [[NSMutableArray alloc] init];
-        NSMutableData *packetData = [data mutableCopy];
+        self.packets = [[OFMutableArray alloc] init];
         
-        packetNumber = [packetData readReverseUInt24];
+        packetNumber = [data readReverseUInt24];
         
-        while ([packetData length] > 0) {
-            [self.packets addObject:[RaknetMinecraftPacket readPacketFromData:packetData]];
+        while ([data count] > 0) {
+            [self.packets addObject:[RaknetMinecraftPacket readPacketFromData:data]];
         }
     }
     return self;
@@ -59,28 +60,13 @@
     return 0x80;
 }
 
-- (void)dispatchNewTransmissionVia:(UDPClientConnection *)handler {
-    __block UDPClientConnection *blockHandler = handler;
-    __block RaknetCustomPacket *packet = self;
-    double delayInSeconds = 3.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        @synchronized (blockHandler.queuedPackets) {
-            if (![blockHandler.queuedPackets objectForKey:@(packetNumber.i)]) {
-                NSLogDebug(@"Packet lost: %@", packet);
-                [blockHandler sendRaknetPacket:packet];
-                [self dispatchNewTransmissionVia:handler];
-            }
-        }
-    });
-}
-
-- (NSData *)packetData {
-    NSMutableData *data = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *data = [[OFDataArray alloc] init];
     [data appendReverseUInt24:packetNumber];
     
     for (RaknetMinecraftPacket *packet in self.packets) {
-        [data appendData:[packet packetData]];
+        OFDataArray *data = [packet packetData];
+        [data addItems:[data firstItem] count:[data count]];
     }
     
     return data;

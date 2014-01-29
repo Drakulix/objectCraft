@@ -13,7 +13,7 @@
 
 @property int64_t pingId;
 @property int64_t serverId;
-@property OFString *identifier;
+@property (retain) OFString *identifier;
 
 - (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(OFString *)string;
 

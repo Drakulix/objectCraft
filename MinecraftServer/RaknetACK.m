@@ -7,6 +7,8 @@
 //
 
 #import "RaknetACK.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation RaknetACK
 @dynamic packetNumber, additionalPacketNumber;
@@ -16,20 +18,19 @@
     if (self) {
         self.unknown = 1;
         packetNumber.i = _packetNumber;
-        self.hasAdditionalPacketNumber = FALSE;
+        self.hasAdditionalPacketNumber = NO;
     }
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.unknown = [packetData readShort];
-        self.hasAdditionalPacketNumber = [packetData readBoolUdp];
-        packetNumber = [packetData readUInt24];
+        self.unknown = [data readShort];
+        self.hasAdditionalPacketNumber = [data readBoolUdp];
+        packetNumber = [data readUInt24];
         if (self.hasAdditionalPacketNumber) {
-            additionalPacketNumber = [packetData readUInt24];
+            additionalPacketNumber = [data readUInt24];
         }
     }
     return self;
@@ -39,8 +40,8 @@
     return 0xc0;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendShort:self.unknown];
     [packetData appendBoolUdp:self.hasAdditionalPacketNumber];

@@ -17,3 +17,5 @@ typedef union {
     int32_t i;
     uint8_t bytes[4];
 } int24_t;
+
+#define INT24_MAX 8388607

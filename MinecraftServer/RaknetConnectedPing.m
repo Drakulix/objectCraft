@@ -7,15 +7,17 @@
 //
 
 #import "RaknetConnectedPing.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectedPing
 
-- (instancetype)initWithData:(NSData *)data; {
+- (instancetype)initWithData:(OFDataArray *)data; {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.pingId = [packetData readLong];
-        if (![packetData checkMagic]) {
+        self.pingId = [data readLong];
+        if (![data checkMagic]) {
             return nil;
         }
     }
@@ -26,8 +28,8 @@
     return 0x01;
 }
 
-- (NSData *)packetData {
-    NSMutableData *data = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *data = [[OFDataArray alloc] init];
     [data appendLong:self.pingId];
     [data appendMagic];
     return data;

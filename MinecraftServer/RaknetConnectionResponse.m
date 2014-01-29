@@ -8,29 +8,31 @@
 
 #import "RaknetConnectionResponse.h"
 #import "ConfigManager.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectionResponse
 
 - (instancetype)initWithMtuSize:(int16_t)mtuSize {
     self = [super init];
     if (self) {
-        self.serverId = [ConfigManager sharedInstance].udpServerId;
+        self.serverId = [ConfigManager defaultManager].udpServerId;
         self.serverSecurity = 0;
         self.mtuSize = mtuSize;
     }
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        if (![packetData checkMagic]) {
+        if (![data checkMagic]) {
             return nil;
         }
-        self.serverId = [packetData readLong];
-        self.serverSecurity = [packetData readByte];
-        self.mtuSize = [packetData readShort];
+        self.serverId = [data readLong];
+        self.serverSecurity = [data readByte];
+        self.mtuSize = [data readShort];
     }
     return self;
 }
@@ -39,8 +41,8 @@
     return 0x06;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendMagic];
     [packetData appendLong:self.serverId];
