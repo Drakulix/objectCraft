@@ -27,7 +27,7 @@ static WorldManager *sharedInstance;
     self = [super init];
     if (self) {
         dimensions = [[OFMutableDictionary alloc] init];
-        OFDictionary *configuration = [[ConfigManager defaultManager] dimensions];
+        OFDictionary *configuration = [ConfigManager defaultManager].dimensions;
         OFArray *keys = [configuration allKeys];
         for (int i = 0; i < [keys count]; i++) {
             World *world = [[World alloc] initWithGenerator:[configuration objectForKey:[keys objectAtIndex:i]] forDimension:(int8_t)[[keys objectAtIndex:i] int8Value]];

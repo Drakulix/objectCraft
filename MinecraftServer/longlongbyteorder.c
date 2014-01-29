@@ -10,15 +10,17 @@
 #include <arpa/inet.h>
 
 int64_t htonll(int64_t vv) {
-if (O32_HOST_ORDER == O32_BIG_ENDIAN)
+#ifdef OF_BIG_ENDIAN
     return vv;
-else
+#else
     return (((uint64_t)htonl(vv)) << 32) + htonl(vv >> 32);
+#endif
 }
 
 int64_t ntohll(int64_t vv) {
-if (O32_HOST_ORDER == O32_BIG_ENDIAN)
+#ifdef OF_BIG_ENDIAN
     return vv;
-else
+#else
     return (((uint64_t)ntohl(vv)) << 32) + ntohl(vv >> 32);
+#endif
 }

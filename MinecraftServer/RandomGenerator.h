@@ -8,14 +8,10 @@
 
 #import <ObjFW/ObjFW.h>
 
-@interface RandomGenerator : OFObject {
-    @private
-    uint64_t next;
-}
+@interface RandomGenerator : OFObject
 
 + (RandomGenerator *)globalGenerator;
-- (void)setSeed:(uint64_t)seed;
-- (uint64_t)currentSeed;
+@property (nonatomic) uint64_t seed;
 
 - (int8_t)nextRandomInt8;
 - (uint8_t)nextRandomUnsignedInt8;

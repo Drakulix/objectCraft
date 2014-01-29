@@ -19,19 +19,19 @@
     if (self) {
         dimension = _dimension;
         
-        //TO-DO World based seeds (optional)
+        //TO-DO World based seeds (optional, use global seed if not set)
         
         if ([OFFile fileExistsAtPath:[OFString stringWithFormat:@"worlds/%d/world.conf", dimension]]) {
             OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", dimension] mode:@"rb"];
-            if ([seedFile readBigEndianInt64] != [[ConfigManager defaultManager] seed]) {
-                LogWarn(@"Global Seed has changed! World might get ugly chunk borders! Old world seed: %d, new seed: %d", [seedFile readBigEndianInt64], [[ConfigManager defaultManager] seed]);
+            if ([seedFile readBigEndianInt64] != [ConfigManager defaultManager].seed ) {
+                LogWarn(@"Global Seed has changed! World might get ugly chunk borders! Old world seed: %d, new seed: %d", [seedFile readBigEndianInt64], [ConfigManager defaultManager].seed);
                 generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[[ConfigManager defaultManager] seed]];
             } else {
                 generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[seedFile readBigEndianInt64]];
             }
             [seedFile close];
         } else {
-            generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[[ConfigManager defaultManager] seed]];
+            generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[ConfigManager defaultManager].seed];
         }
         
         //To-do load default spawn chunks
@@ -41,7 +41,7 @@
 
 - (void)saveWorld {
     OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", dimension] mode:@"wb"];
-    [seedFile writeBigEndianInt64:[[ConfigManager defaultManager] seed]];
+    [seedFile writeBigEndianInt64:[ConfigManager defaultManager].seed];
     [seedFile writeBigEndianInt64:[generator generatorState]];
     [seedFile close];
     

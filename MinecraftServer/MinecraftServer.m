@@ -37,7 +37,7 @@ static MinecraftServer *sharedInstance;
     
     @try {
         tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[[ConfigManager defaultManager] tcpIPv4Port]];
+        [tcpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpIPv4Port];
         [tcpServerSocketIPv4 listen];
         [tcpServerSocketIPv4 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
     }
@@ -48,7 +48,7 @@ static MinecraftServer *sharedInstance;
     
     @try {
         tcpServerSocketIPv6 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv6 bindToHost:@"::" port:[[ConfigManager defaultManager] tcpIPv6Port]];
+        [tcpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].tcpIPv6Port];
         [tcpServerSocketIPv6 listen];
         [tcpServerSocketIPv6 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
     }
@@ -59,7 +59,7 @@ static MinecraftServer *sharedInstance;
     
     @try {
         udpServerSocketIPv4 = [[OFUDPSocket alloc] init];
-        [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[[ConfigManager defaultManager] udpIPv4Port]];
+        [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating UDP IPv4 socket: %@", exception);
@@ -67,7 +67,7 @@ static MinecraftServer *sharedInstance;
     }
     @try {
         udpServerSocketIPv6 = [[OFUDPSocket alloc] init];
-        [udpServerSocketIPv6 bindToHost:@"::" port:[[ConfigManager defaultManager] udpIPv4Port]];
+        [udpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].udpIPv4Port];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating UDP IPv6 socket: %@", exception);

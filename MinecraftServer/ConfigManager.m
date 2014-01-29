@@ -8,8 +8,15 @@
 
 #import "ConfigManager.h"
 #import "RandomGenerator.h"
+#import "WorldGenerator.h"
 
 @implementation ConfigManager
+@dynamic tcpIPv4Enabled, tcpIPv4Port, tcpIPv6Enabled, tcpIPv6Port, tcpLanWorldBroadcastEnabled;
+@dynamic udpIPv4Enabled, udpIPv4Port, udpIPv6Enabled, udpIPv6Port, udpLanWorldBroadcastEnabled;
+@dynamic serverBrowserMessage, loginWelcomeMessageEnabled, loginWelcomeMessage;
+@dynamic defaultGamemode, isHardcore;
+@dynamic spawnDimension, dimensions;
+@dynamic seed, maxPlayers, defaultSpawnPoint;
 
 static ConfigManager *sharedInstance;
 
@@ -23,24 +30,24 @@ static ConfigManager *sharedInstance;
     self = [super init];
     if (self) {
         @try {
-            settings = [[OFString stringWithContentsOfFile:@"config.json"] JSONValue];
+            settings = [[[OFString stringWithContentsOfFile:@"config.json"] JSONValue] mutableCopy];
         }
         @catch (OFException *exception) {
             settings = nil;
         }
         if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
-            settings = [[OFDictionary alloc] initWithKeysAndObjects:
+            settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
                 @"tcpIPv4Enabled", [OFNumber numberWithBool:YES],
                 @"tcpIPv6Enabled", [OFNumber numberWithBool:YES],
-                @"tcpLanBroadcastEnabled", [OFNumber numberWithBool:YES],
+                @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
                 @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
                 @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
                 @"udpIPv4Enabled", [OFNumber numberWithBool:YES],
                 @"udpIPv4Port", [OFNumber numberWithInt16:19132],
                 @"udpIPv6Enabled", [OFNumber numberWithBool:YES],
                 @"udpIPv6Port", [OFNumber numberWithInt16:19132],
-                @"udpLanBroadcastEnabled", [OFNumber numberWithBool:YES],
-                @"serverName", @"ObjectCraft Server",
+                @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
+                @"serverBrowserMessage", @"ObjectCraft Server",
                 @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:YES],
                 @"loginWelcomeMessage", @"Welcome to our ObjectCraft Server! Have fun ;)",
                 @"defaultGamemode", @"SURVIVAL",
@@ -71,40 +78,81 @@ static ConfigManager *sharedInstance;
 - (BOOL)tcpIPv4Enabled {
     return [[settings objectForKey:@"tcpIPv4Enabled"] boolValue];
 }
+- (void)setTcpIPv4Enabled:(BOOL)tcpIPv4Enabled {
+    [settings setObject:[OFNumber numberWithBool:tcpIPv4Enabled] forKey:@"tcpIPv4Enabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (int16_t)tcpIPv4Port {
     return [[settings objectForKey:@"tcpIPv4Port"] int16Value];
+}
+- (void)setTcpIPv4Port:(int16_t)tcpIPv4Port {
+    [settings setObject:[OFNumber numberWithInt16:tcpIPv4Port] forKey:@"tcpIPv4Port"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 - (BOOL)tcpIPv6Enabled {
     return [[settings objectForKey:@"tcpIPv6Enabled"] boolValue];
 }
+- (void)setTcpIPv6Enabled:(BOOL)tcpIPv6Enabled {
+    [settings setObject:[OFNumber numberWithBool:tcpIPv6Enabled] forKey:@"tcpIPv6Enabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (int16_t)tcpIPv6Port {
     return [[settings objectForKey:@"tcpIPv6Port"] int16Value];
+}
+- (void)setTcpIPv6Port:(int16_t)tcpIPv6Port {
+    [settings setObject:[OFNumber numberWithInt16:tcpIPv6Port] forKey:@"tcpIPv6Port"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 - (BOOL)tcpLanWorldBroadcastEnabled {
     return [[settings objectForKey:@"tcpLanBroadcastEnabled"] boolValue];
 }
-
+- (void)setTcpLanWorldBroadcastEnabled:(BOOL)tcpLanWorldBroadcastEnabled {
+    [settings setObject:[OFNumber numberWithBool:tcpLanWorldBroadcastEnabled] forKey:@"tcpLanWorldBroadcastEnabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 - (BOOL)udpIPv4Enabled {
     return [[settings objectForKey:@"udpIPv4Enabled"] boolValue];
+}
+- (void)setUdpIPv4Enabled:(BOOL)udpIPv4Enabled {
+    [settings setObject:[OFNumber numberWithBool:udpIPv4Enabled] forKey:@"udpIPv4Enabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 - (int16_t)udpIPv4Port {
     return [[settings objectForKey:@"udpIPv4Port"] int16Value];
 }
+- (void)setUdpIPv4Port:(int16_t)udpIPv4Port {
+    [settings setObject:[OFNumber numberWithInt16:udpIPv4Port] forKey:@"udpIPv4Port"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 - (BOOL)udpIPv6Enabled {
     return [[settings objectForKey:@"udpIPv6Enabled"] boolValue];
+}
+- (void)setUdpIPv6Enabled:(BOOL)udpIPv6Enabled {
+    [settings setObject:[OFNumber numberWithBool:udpIPv6Enabled] forKey:@"udpIPv6Enabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 - (int16_t)udpIPv6Port {
     return [[settings objectForKey:@"udpIPv6Port"] int16Value];
 }
+- (void)setUdpIPv6Port:(int16_t)udpIPv6Port {
+    [settings setObject:[OFNumber numberWithInt16:udpIPv6Port] forKey:@"udpIPv6Port"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 - (BOOL)udpLanWorldBroadcastEnabled {
     return [[settings objectForKey:@"udpLanBroadcastEnabled"] boolValue];
+}
+- (void)setUdpLanWorldBroadcastEnabled:(BOOL)udpLanWorldBroadcastEnabled {
+    [settings setObject:[OFNumber numberWithBool:udpLanWorldBroadcastEnabled] forKey:@"udpLanWorldBroadcastEnabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 - (int64_t)udpServerId  //unique Id for every Minecraft PE install,
@@ -112,19 +160,35 @@ static ConfigManager *sharedInstance;
 {
     return [[settings objectForKey:@"udpServerId"] int64Value];
 }
-
+- (void)setUdpServerId:(int64_t)udpServerId {
+    [settings setObject:[OFNumber numberWithInt64:udpServerId] forKey:@"udpServerId"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 //Game Related Server Settings
 - (OFString *)serverBrowserMessage {
-    return [settings objectForKey:@"serverName"];
+    return [settings objectForKey:@"serverBrowserMessage"];
 }
+- (void)setServerBrowserMessage:(OFString *)serverBrowserMessage {
+    [settings setObject:serverBrowserMessage forKey:@"serverBrowserMessage"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (BOOL)loginWelcomeMessageEnabled {
     return [[settings objectForKey:@"loginWelcomeMessageEnabled"] boolValue];
 }
+- (void)setLoginWelcomeMessageEnabled:(BOOL)loginWelcomeMessageEnabled {
+    [settings setObject:[OFNumber numberWithBool:loginWelcomeMessageEnabled] forKey:@"loginWelcomeMessageEnabled"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (OFString *)loginWelcomeMessage {
     return [settings objectForKey:@"loginWelcomeMessage"];
 }
-
+- (void)setLoginWelcomeMessage:(OFString *)loginWelcomeMessage {
+    [settings setObject:loginWelcomeMessage forKey:@"loginWelcomeMessage"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 //Game Mode
 - (uint8_t)defaultGamemode {
@@ -140,17 +204,57 @@ static ConfigManager *sharedInstance;
     }
     return 0;
 }
+- (void)setDefaultGamemode:(uint8_t)defaultGamemode {
+    switch (defaultGamemode) {
+        case 0:
+            [settings setObject:@"SURVIVAL" forKey:@"defaultGamemode"];
+            break;
+            
+        case 1:
+            [settings setObject:@"CREATIVE" forKey:@"defaultGamemode"];
+            break;
+            
+        case 2:
+            [settings setObject:@"ADVENTURE" forKey:@"defaultGamemode"];
+            break;
+    }
+}
+
 - (BOOL)isHardcore {
     return [[settings objectForKey:@"isHardcore"] boolValue];
 }
-
+- (void)setIsHardcore:(BOOL)isHardcore {
+    [settings setObject:[OFNumber numberWithBool:isHardcore] forKey:@"isHardcore"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
 
 //World Settings
 - (int8_t)spawnDimension {
     return [[settings objectForKey:@"defaultSpawnDimension"] int8Value];
 }
+- (void)setSpawnDimension:(int8_t)spawnDimension {
+    [settings setObject:[OFNumber numberWithInt8:spawnDimension] forKey:@"spawnDimension"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (OFDictionary *)dimensions {
     return [settings objectForKey:@"dimensions"];
+}
+- (void)setDimensions:(OFDictionary *)dimensions {
+    [settings setObject:dimensions forKey:@"dimensions"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+- (void)addDimension:(int8_t)dimensionNum withGenerator:(WorldGenerator *)generator {
+    OFMutableDictionary *dict = [[settings objectForKey:@"dimensions"] mutableCopy];
+    [dict setObject:[[generator class] description] forKey:[OFNumber numberWithInt8:dimensionNum]];
+    [settings setObject:dict forKey:@"dimensions"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+- (void)removeDimension:(int8_t)dimensionNum {
+    OFMutableDictionary *dict = [[settings objectForKey:@"dimensions"] mutableCopy];
+    [dict removeObjectForKey:[OFNumber numberWithInt8:dimensionNum]];
+    [settings setObject:dict forKey:@"dimensions"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 
@@ -158,11 +262,25 @@ static ConfigManager *sharedInstance;
 - (int32_t)seed {
     return [[settings objectForKey:@"seed"] int32Value];
 }
+- (void)setSeed:(int32_t)seed {
+    [settings setObject:[OFNumber numberWithInt32:seed] forKey:@"seed"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (int32_t)maxPlayers {
     return [[settings objectForKey:@"maxPlayers"] int32Value];
 }
+- (void)setMaxPlayers:(int32_t)maxPlayers {
+    [settings setObject:[OFNumber numberWithInt32:maxPlayers] forKey:@"maxPlayers"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
 - (of_point_t)defaultSpawnPoint {
     return of_point([[[settings objectForKey:@"defaultSpawnPoint"] objectAtIndex:0] int32Value], [[[settings objectForKey:@"defaultSpawnPoint"] objectAtIndex:1] int32Value]);
+}
+- (void)setDefaultSpawnPoint:(of_point_t)defaultSpawnPoint {
+    [settings setObject:[OFArray arrayWithObjects:[OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.x)], [OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.y)], nil] forKey:@"defaultSpawnPoint"];
+    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
 }
 
 @end

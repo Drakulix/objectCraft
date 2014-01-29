@@ -7,6 +7,7 @@
 //
 
 #import "WorldGenerator.h"
+#import "RandomGenerator.h"
 
 @implementation WorldGenerator
 
@@ -14,13 +15,13 @@
     self = [super init];
     if (self) {
         random = [[RandomGenerator alloc] init];
-        [random setSeed:seed];
+        random.seed = seed;
     }
     return self;
 }
 
 - (uint64_t)generatorState {
-    return [random currentSeed];
+    return random.seed;
 }
 
 @end

@@ -7,52 +7,61 @@
 //
 
 #import <ObjFW/ObjFW.h>
+@class WorldGenerator;
 
 @interface ConfigManager : OFObject {
-    OFDictionary *settings;
+    OFMutableDictionary *settings;
 }
 + (ConfigManager *)defaultManager;
 
+
+
 //Technical Server Settings
-- (BOOL)tcpIPv4Enabled;
-- (int16_t)tcpIPv4Port;
+//TCP
+@property (nonatomic) BOOL tcpIPv4Enabled;
+@property (nonatomic) int16_t tcpIPv4Port;
 
-- (BOOL)tcpIPv6Enabled;
-- (int16_t)tcpIPv6Port;
+@property (nonatomic) BOOL tcpIPv6Enabled;
+@property (nonatomic) int16_t tcpIPv6Port;
 
-- (BOOL)tcpLanWorldBroadcastEnabled;
+@property (nonatomic) BOOL tcpLanWorldBroadcastEnabled;
 
-- (BOOL)udpIPv4Enabled;
-- (int16_t)udpIPv4Port;
+//UDP
+@property (nonatomic) BOOL udpIPv4Enabled;
+@property (nonatomic) int16_t udpIPv4Port;
 
-- (BOOL)udpIPv6Enabled;
-- (int16_t)udpIPv6Port;
+@property (nonatomic) BOOL udpIPv6Enabled;
+@property (nonatomic) int16_t udpIPv6Port;
 
-- (BOOL)udpLanWorldBroadcastEnabled;
+@property (nonatomic) BOOL udpLanWorldBroadcastEnabled;
 
-- (int64_t)udpServerId; //unique Id for every Minecraft PE install,
-                        //never use your own, you will probably not be able to connect
+@property (nonatomic) int64_t udpServerId; //unique Id for every Minecraft PE install,
+                               //never use your own, you will probably not be able to connect
+
 
 
 //Game Related Server Settings
-- (OFString *)serverBrowserMessage;
-- (BOOL)loginWelcomeMessageEnabled;
-- (OFString *)loginWelcomeMessage;
+@property (nonatomic, retain) OFString *serverBrowserMessage;
+
+@property (nonatomic) BOOL loginWelcomeMessageEnabled;
+@property (nonatomic, retain) OFString *loginWelcomeMessage;
+
 
 
 //Game Mode
-- (uint8_t)defaultGamemode;
-- (BOOL)isHardcore;
+@property (nonatomic) uint8_t defaultGamemode;
+@property (nonatomic) BOOL isHardcore;
 
 
 //World Settings
-- (int8_t)spawnDimension;
-- (OFDictionary *)dimensions;
-
+@property (nonatomic) int8_t spawnDimension;
+@property (nonatomic, retain) OFDictionary *dimensions;
+- (void)addDimension:(int8_t)dimensionNum withGenerator:(WorldGenerator *)generator;
+- (void)removeDimension:(int8_t)dimensionNum;
 
 //Global World Settings
-- (int32_t)seed;
-- (int32_t)maxPlayers;
-- (of_point_t)defaultSpawnPoint;
+@property (nonatomic) int32_t seed;
+@property (nonatomic) int32_t maxPlayers;
+@property (nonatomic) of_point_t defaultSpawnPoint;
 
 @end
