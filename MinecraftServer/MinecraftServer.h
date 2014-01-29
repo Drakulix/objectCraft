@@ -8,6 +8,7 @@
 
 #import <ObjFW/ObjFW.h>
 @class WorldManager;
+@class UDPRecieveThread;
 
 @interface MinecraftServer : OFObject<OFApplicationDelegate> {
     BOOL running;
@@ -17,7 +18,9 @@
     OFMutableArray *activeTCPConnections;
     
     OFUDPSocket *udpServerSocketIPv4;
+    UDPRecieveThread *udpServerSocketIPv4Thread;
     OFUDPSocket *udpServerSocketIPv6;
+    UDPRecieveThread *udpServerSocketIPv6Thread;
     OFMutableArray *activeUDPConnections;
     
     WorldManager *worldManager;

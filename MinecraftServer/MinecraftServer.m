@@ -11,6 +11,7 @@
 #import "MinecraftServer.h"
 #import "ConfigManager.h"
 #import "WorldManager.h"
+#import "UDPRecieveThread.h"
 
 static MinecraftServer *sharedInstance;
 
@@ -60,6 +61,8 @@ static MinecraftServer *sharedInstance;
     @try {
         udpServerSocketIPv4 = [[OFUDPSocket alloc] init];
         [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
+        udpServerSocketIPv4Thread = [[UDPRecieveThread alloc] initWithUDPSocket:udpServerSocketIPv4];
+        [udpServerSocketIPv4Thread start];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating UDP IPv4 socket: %@", exception);
@@ -68,6 +71,8 @@ static MinecraftServer *sharedInstance;
     @try {
         udpServerSocketIPv6 = [[OFUDPSocket alloc] init];
         [udpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].udpIPv4Port];
+        udpServerSocketIPv6Thread = [[UDPRecieveThread alloc] initWithUDPSocket:udpServerSocketIPv6];
+        [udpServerSocketIPv6Thread start];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating UDP IPv6 socket: %@", exception);
