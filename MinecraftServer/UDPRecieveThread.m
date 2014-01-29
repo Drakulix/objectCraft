@@ -18,7 +18,7 @@
     if (self) {
         socket = _socket;
         running = YES;
-        raknetHandler = [[RaknetHandler alloc] init];
+        raknetHandler = [[RaknetHandler alloc] initWithSocket:socket];
     }
     return self;
 }

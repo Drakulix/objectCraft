@@ -8,8 +8,13 @@
 
 #import <ObjFW/ObjFW.h>
 
-@interface RaknetHandler : OFObject
+@interface RaknetHandler : OFObject {
+    @private
+    OFUDPSocket *socket;
+    OFMapTable *openConnections;
+}
 
+- (instancetype)initWithSocket:(OFUDPSocket *)socket;
 - (void)didRecieveData:(OFDataArray *)data fromPeer:(of_udp_socket_address_t)address;
 
 @end
