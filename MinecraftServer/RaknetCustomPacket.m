@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Victor Brekenfeld. All rights reserved.
 //
 
+#import "log.h"
 #import "RaknetCustomPacket.h"
 #import "UDPClientConnection.h"
 #import "OFDataArray+IntReader.h"
@@ -94,8 +95,8 @@
     timer = nil;
     
     if (![handler wasPacketAckd:packetNumber.i]) {
-        NSLogDebug(@"Packet lost: %@", packet);
-        [handler sendRaknetPacket:packet];
+        LogDebug(@"Packet lost: %@", self);
+        [handler sendRaknetPacket:self];
     }
 }
 

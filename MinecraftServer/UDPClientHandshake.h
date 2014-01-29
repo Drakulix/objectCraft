@@ -15,8 +15,8 @@
 
 @property (nonatomic) uint16_t port;
 
-@property (nonatomic) OFDataArray *dataArray0;
-@property (nonatomic) OFDataArray *dataArray;
+@property (nonatomic, retain) OFDataArray *dataArray0;
+@property (nonatomic, retain) OFDataArray *dataArray;
 
 @property (nonatomic) int16_t timeStamp;
 

@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 Victor Brekenfeld. All rights reserved.
 //
 
+#define MIN(a,b) (((a)<(b))?(a):(b))
 #import "log.h"
 #import "MinecraftServer.h"
 #import "UDPClientConnection.h"
+
+#import "OFDataArray+IntReader.h"
 
 #import "RaknetHandler.h"
 #import "RaknetMinecraftPacket.h"
@@ -137,7 +140,7 @@
 
 - (void)ackdCustomPacket:(uint32_t)_customPacketId {
     
-    LogVerbose(@"Ackd: %@", [self.queuedPackets objectForKey:[OFNumber numberWithUInt32:customPacketId]]]);
+    LogVerbose(@"Ackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
     @synchronized (queuedCustomPackets) {
         [queuedCustomPackets removeObjectForKey:[OFNumber numberWithUInt32:_customPacketId]];
     }
@@ -147,20 +150,18 @@
 
 - (void)nackdCustomPacket:(uint32_t)_customPacketId {
 
-    LogVerbose(@"Nackd: %@", [self.queuedPackets objectForKey:[OFNumber numberWithUInt32:customPacketId]]]);
+    LogVerbose(@"Nackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
     @synchronized (queuedCustomPackets) {
-        [[queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:customPacketId]]] resend];
+        [[queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] resend];
     }
     
 }
 
 
-- (BOOL)wasPacketAckd:(uint32_t)customPacketId {
-
+- (BOOL)wasPacketAckd:(uint32_t)_customPacketId {
     @synchronized(queuedCustomPackets) {
-        return [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:customPacketId]] == nil;
+        return [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] == nil;
     }
-    
 }
 
 
@@ -191,8 +192,9 @@
             if (byteCount + [mcPacket.packet count] < mtuSize)
                 [packets addObject:mcPacket];
         }
-        [queuedMinecraftPackets removeObjectsInArray:packets];
-            
+        for (RaknetMinecraftPacket *mcPacket in packets) {
+            [queuedMinecraftPackets removeObject:mcPacket];
+        }
         [self sendMinecraftPackets:packets];
         [queuedMinecraftPackets removeAllObjects];
     }
@@ -213,9 +215,9 @@
     
     OFDataArray *data = [packet rawPacketData];
     size_t parts = ([data count]/(mtuSize-24)+1); //24 = minecraft and custom packet header
-    for (int i=0; i<parts; i++) {
-        OFDataArray *subData = [[OFDataArray alloc] initWithCapacity:MIN(mtuSize-24, [data count]-i*(mtuSize-24)))];
-        [subData addItems:[data itemAtIndex:i*(mtuSize-24)] count:MIN(mtuSize-24, [data count]-i*(mtuSize-24)))];
+    for (int i=0; i < parts; i++) {
+        OFDataArray *subData = [[OFDataArray alloc] initWithCapacity:MIN(mtuSize-24, [data count]-i*(mtuSize-24))];
+        [subData addItems:[data itemAtIndex:i*(mtuSize-24)] count:MIN(mtuSize-24, [data count]-i*(mtuSize-24))];
         
         RaknetMinecraftPacket *mcPacket = [[RaknetMinecraftPacket alloc] initSplitPacketWithData:subData count:pePacketCount splitCount:(int32_t)parts splitId:splitId splitIndex:i];
         pePacketCount.i++;

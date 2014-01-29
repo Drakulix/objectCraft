@@ -11,7 +11,7 @@
 
 @interface UDPChunkData : UDPPacket
 
-@property (nonatomic) ChunkColumn *column;
+@property (nonatomic, retain) ChunkColumn *column;
 
 - (instancetype)initForChunkColumn:(ChunkColumn *)column;
 

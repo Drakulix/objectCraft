@@ -15,7 +15,7 @@
 
 @property (nonatomic) uint16_t port;
 
-@property (nonatomic) OFDataArray *dataArray;
+@property (nonatomic, retain) OFDataArray *dataArray;
 @property int16_t timeStamp;
 
 @property int64_t session;
