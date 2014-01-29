@@ -10,7 +10,7 @@
 
 @implementation UDPDisconnect
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     return [super init];
 }
 
@@ -18,8 +18,8 @@
     return 0x15;
 }
 
-- (NSData *)packetData {
-    return [NSData data];
+- (OFDataArray *)packetData {
+    return [[OFDataArray alloc] initWithCapacity:0];
 }
 
 @end

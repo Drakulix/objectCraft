@@ -7,6 +7,10 @@
 //
 
 #import "UDPAddPlayer.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+FloatReader.h"
+#import "OFDataArray+FloatWriter.h"
 
 @implementation UDPAddPlayer
 
@@ -23,7 +27,7 @@
         self.Pitch = player.Pitch;
         self.unknown = 0;
         self.unknown2 = 0;
-        self.metadata = [[NSMutableData alloc] init];
+        self.metadata = [[OFDataArray alloc] init];
         [self.metadata appendByte:0x00];
     }
     return self;

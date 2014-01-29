@@ -7,6 +7,8 @@
 //
 
 #import "UDPChunkRequest.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPChunkRequest
 
@@ -19,12 +21,11 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.X = [packetData readInt];
-        self.Z = [packetData readInt];
+        self.X = [data readInt];
+        self.Z = [data readInt];
     }
     return self;
 }
@@ -33,8 +34,8 @@
     return 0x9e;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendInt:self.X];
     [packetData appendInt:self.Z];

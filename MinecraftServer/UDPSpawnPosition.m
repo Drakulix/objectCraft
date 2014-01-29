@@ -7,6 +7,8 @@
 //
 
 #import "UDPSpawnPosition.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPSpawnPosition
 
@@ -20,13 +22,12 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.X = [packetData readInt];
-        self.Z = [packetData readInt];
-        self.Y = [packetData readByte];
+        self.X = [data readInt];
+        self.Z = [data readInt];
+        self.Y = [data readByte];
     }
     return self;
 }
@@ -35,8 +36,8 @@
     return 0xab;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendInt:self.X];
     [packetData appendInt:self.Z];

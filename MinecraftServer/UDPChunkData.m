@@ -8,6 +8,7 @@
 
 #import "UDPChunkData.h"
 #import "Chunk.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPChunkData
 
@@ -19,7 +20,7 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
         //NSMutableData *packetData = [data mutableCopy];
@@ -32,8 +33,8 @@
     return 0x9f;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[NSMutableData alloc] init];
     
     [packetData appendInt:self.column.X];
     [packetData appendInt:self.column.Z];
@@ -57,31 +58,6 @@
             }
         }
     }
-    
-    /*for (int yColumn = 0; yColumn < 8; yColumn++) {
-     
-        [packetData appendByte:0xff]; //send all right now
-        
-        Chunk *chunk = [self.column.chunks objectAtIndex:yColumn];
-        
-        for (int y = 0; y<16; y++) {
-            for (int z = 0; z<16; z++) {
-                
-                //block ids
-                for (int x = 0; x<16; x++) {
-                    [packetData appendByte:[[chunk blockAtX:x Y:y Z:z] udpBlockId]];
-                }
-                //metadata
-                for (int x = 0; x<16; x+=2) {
-                    Nibbler nibb;
-                    nibb.nibbles.first = [[chunk blockAtX:x Y:y Z:z] udpMetadata];
-                    nibb.nibbles.second = [[chunk blockAtX:x+1 Y:y Z:z] udpMetadata];
-                    [packetData appendNibbler:nibb];
-                }
-                
-            }
-        }
-    }*/
     
     return packetData;
 }

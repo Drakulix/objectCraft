@@ -17,7 +17,7 @@
 - (instancetype)initWithData:(NSData *)data {
     self = [super initWithData:data];
     if (self) {
-        self.unknown = [[[data subdataWithRange:NSMakeRange([data length]-sizeof(float), sizeof(float))] mutableCopy] readFloat];
+        //self.unknown = [[[data subdataWithRange:NSMakeRange([data length]-sizeof(float), sizeof(float))] mutableCopy] readFloat];
     }
     return self;
 }
@@ -27,9 +27,10 @@
 }
 
 - (NSData *)packetData {
-    NSMutableData *packetData = [[super packetData] mutableCopy];
-    [packetData appendFloat:self.unknown];
-    return packetData;
+    //NSMutableData *packetData = [[super packetData] mutableCopy];
+    //[packetData appendFloat:self.unknown];
+    //return packetData;
+    return nil;
 }
 
 @end

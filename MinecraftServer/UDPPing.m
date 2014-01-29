@@ -9,6 +9,8 @@
 #import "UDPPing.h"
 #import <time.h>
 #include <sys/time.h>
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPPing
 
@@ -28,11 +30,10 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.clientTime = [packetData readLong];
+        self.clientTime = [data readLong];
     }
     return self;
 }
@@ -41,8 +42,8 @@
     return 0x00;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendLong:self.clientTime];
     

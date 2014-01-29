@@ -7,6 +7,8 @@
 //
 
 #import "UDPReadyPacket.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPReadyPacket
 
@@ -18,11 +20,10 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.status = [packetData readByte];
+        self.status = [data readByte];
     }
     return self;
 }
@@ -31,8 +32,8 @@
     return 0x84;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendByte:self.status];
     return packetData;
 }

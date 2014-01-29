@@ -7,6 +7,10 @@
 //
 
 #import "UDPMoveEntity.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+FloatReader.h"
+#import "OFDataArray+FloatWriter.h"
 
 @implementation UDPMoveEntity
 

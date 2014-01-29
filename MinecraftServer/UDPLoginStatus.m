@@ -7,6 +7,8 @@
 //
 
 #import "UDPLoginStatus.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPLoginStatus
 
@@ -18,11 +20,10 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.status = [packetData readInt];
+        self.status = [data readInt];
     }
     return self;
 }
@@ -31,8 +32,8 @@
     return 0x83;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendInt:self.status];
     return packetData;
 }

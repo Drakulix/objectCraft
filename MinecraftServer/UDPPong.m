@@ -9,6 +9,8 @@
 #import "UDPPong.h"
 #import <time.h>
 #include <sys/time.h>
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPPong
 
@@ -30,12 +32,11 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.clientTime = [packetData readLong];
-        self.serverTime = [packetData readLong];
+        self.clientTime = [data readLong];
+        self.serverTime = [data readLong];
     }
     return self;
 }
@@ -44,8 +45,8 @@
     return 0x03;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendLong:self.clientTime];
     [packetData appendLong:self.serverTime];
     return packetData;

@@ -7,16 +7,17 @@
 //
 
 #import "UDPClientConnect.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPClientConnect
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.clientId = [packetData readLong];
-        self.sessionId = [packetData readLong];
-        self.unknown = [packetData readByte];
+        self.clientId = [data readLong];
+        self.sessionId = [data readLong];
+        self.unknown = [data readByte];
     }
     return self;
 }
@@ -25,8 +26,8 @@
     return 0x09;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendLong:self.clientId];
     [packetData appendLong:self.sessionId];
     [packetData appendByte:self.unknown];

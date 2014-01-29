@@ -7,6 +7,8 @@
 //
 
 #import "UDPSetHealth.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPSetHealth
 
@@ -18,11 +20,10 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.health = [packetData readByte];
+        self.health = [data readByte];
     }
     return self;
 }
@@ -31,8 +32,8 @@
     return 0xaa;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendByte:self.health];
     return packetData;
 }

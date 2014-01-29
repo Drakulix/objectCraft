@@ -7,6 +7,8 @@
 //
 
 #import "UDPSetTime.h"
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
 
 @implementation UDPSetTime
 
@@ -18,11 +20,10 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.time = [packetData readInt];
+        self.time = [data readInt];
     }
     return self;
 }
@@ -31,8 +32,8 @@
     return 0x86;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendInt:self.time];
     

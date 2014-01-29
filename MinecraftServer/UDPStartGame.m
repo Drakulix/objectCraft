@@ -9,6 +9,11 @@
 #import "UDPStartGame.h"
 #import "ConfigManager.h"
 
+#import "OFDataArray+IntReader.h"
+#import "OFDataArray+IntWriter.h"
+#import "OFDataArray+FloatReader.h"
+#import "OFDataArray+FloatWriter.h"
+
 @implementation UDPStartGame
 
 - (instancetype)initWithPlayer:(Player *)player {
@@ -25,17 +30,16 @@
     return self;
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.seed = [packetData readInt];
-        self.generator = [packetData readInt];
-        self.gamemode = [packetData readInt];
-        self.entityId = [packetData readInt];
-        self.X = [packetData readFloat];
-        self.Y = [packetData readFloat];
-        self.Z = [packetData readFloat];
+        self.seed = [data readInt];
+        self.generator = [data readInt];
+        self.gamemode = [data readInt];
+        self.entityId = [data readInt];
+        self.X = [data readFloat];
+        self.Y = [data readFloat];
+        self.Z = [data readFloat];
     }
     return self;
 }
@@ -45,7 +49,7 @@
 }
 
 - (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendInt:self.seed];
     [packetData appendInt:self.generator];
@@ -58,6 +62,5 @@
     
     return packetData;
 }
-
 
 @end
