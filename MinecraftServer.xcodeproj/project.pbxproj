@@ -203,7 +203,7 @@
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
-		C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = ../../../../../usr/local/lib/libobjfw.7.0.dylib; sourceTree = "<group>"; };
+		C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = /usr/local/lib/libobjfw.7.0.dylib; sourceTree = "<absolute>"; };
 		C9E9D007189BABA20043F279 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		C9E9D008189BB2360043F279 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		C9EFB5FD189A70E900078CB1 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
@@ -265,6 +265,7 @@
 		C918648C1895C53200E78048 /* XCode Related Stuff */ = {
 			isa = PBXGroup;
 			children = (
+				C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */,
 				C918648B1895C53200E78048 /* MinecraftServer */,
 			);
 			name = "XCode Related Stuff";
@@ -288,7 +289,6 @@
 		C957994F189072A000B4CB37 = {
 			isa = PBXGroup;
 			children = (
-				C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */,
 				C957995A189072A000B4CB37 /* MinecraftServer */,
 				C91864801895876100E78048 /* Build Files */,
 				C918648C1895C53200E78048 /* XCode Related Stuff */,
@@ -520,11 +520,11 @@
 /* Begin PBXLegacyTarget section */
 		C999E4F618927FA100E91B51 /* MinecraftServer - Mac - autotools */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "--enabled-debug";
+			buildArgumentsString = "--enabled-debug --with-objfw-lib-path=/usr/local/lib --with-objfw-include-path=/usr/local/include";
 			buildConfigurationList = C999E4F918927FA100E91B51 /* Build configuration list for PBXLegacyTarget "MinecraftServer - Mac - autotools" */;
 			buildPhases = (
 			);
-			buildToolPath = "$(PROJECT_DIR)/build-mac.sh";
+			buildToolPath = "$(PROJECT_DIR)/build.sh";
 			buildWorkingDirectory = "";
 			dependencies = (
 			);

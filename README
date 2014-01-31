@@ -8,7 +8,7 @@ It is not useable in the current state for **ANY** end-user.
 The goal is to provide a full featured Minecraft Server written in Objective-C that conforms to both the Minecraft-PC Network Protocol and the Minecraft-PE (Pocket Edition) Protocol. Differences like non existing blocks, or different dimensions will get simulated for the other system as good as possible or substituted with other existing features (like sending different existing blockIds for non-existent blocks of the other protocol). No features shall be unaccessible from one client type. They might be just more complicated to use.
 
 ###Dependencies
-The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that compatible with most POSIX-compatible systems. It requires a Objective-C-2.0-compatible compiler otherwise every supported system by ObjFW should work just fine, please report if you are having building issues (see tutorial below).
+The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems. ObjectCraft requires a Objective-C-2.0-compatible compiler otherwise every supported system by ObjFW should work just fine, please report if you are having issues building this project on any platform (see tutorial below).
 Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are not allowed as they are a non-standard C-language extension and currently only supported by clang compilers. The new Literals introduced with clang are also not allowed in code.
 
 ###Building
@@ -24,9 +24,9 @@ make
 make install
 ```
 
-You may install it to another path by providing the --prefix parameter to the configure script and provide the library and include paths for objfw later when compiling the server, see below.
+You may install it to another path by providing the --prefix parameter to the configure script and provide the library and include paths for objfw later when compiling the server (see below).
 
-Support for compiling against a statically linked ObjFW library will follow later
+Support for compiling against a statically linked ObjFW library will follow later.
 
 ####Compiling ObjectCraft
 If you check out the latest release via git (currently the only way until something usable can be build), you need to have autotools installed.
@@ -38,18 +38,18 @@ Compiling then should work via:
 make
 ```
 
+Which should result in an 'objectCraft' executable.
+
 If you installed ObjFW to non-standard paths (paths not in your $PATH variable) you can give them manually to the configure script with these flags:
 --with-objfw-lib-path=
 --with-objfw-include-path=
 
-An example for mac users, that other install third-party stuff to /usr/local/:
+An example for mac users, that often install third-party stuff to /usr/local/:
 ```
 ./autogen.sh
 ./configure --with-objfw-lib-path=/usr/local/lib --with-objfw-include-path=/usr/local/include
 make
 ```
-
-Which should result in an 'objectCraft' executable.
 
 #####Compiling on Windows
 Compiling for Windows is possible via MingW, but not as straight forward.
@@ -62,3 +62,9 @@ export OBJC=gcc-dw2
 ./configure
 make
 ```
+
+####XCode Support
+Lets face it, most Objective-C developers are mac users, including me. Thats why this project contains a useable Xcode Project file, that allows building through the Xcode build system as well as with autotools from the IDE. When building with autotools, currently all build are done with --enable-debug flag. To get a performant build, please build manually, like described above.
+
+If you make changes to the Xcode Project that involve adding or removing source code files, please do not forget to update the Makefile.am and run autogen.sh (Xcode does not do that for you). In general when committing to this repository always make sure the gnu build system still works.
+The Xcode Project is optional, as not every developer might use Xcode. I will try to fix it asap, if a foreign patch is added to the repo. But don’t rely on its functionally neither break it, if not necessary and do not change the default build flags when commit to this repo, but only locally.

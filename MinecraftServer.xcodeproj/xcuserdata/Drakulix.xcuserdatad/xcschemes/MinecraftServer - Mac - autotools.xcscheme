@@ -35,13 +35,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/Drakulix/Documents/XCode Projects/MinecraftServer/build-mac"
+      customWorkingDirectory = "$(PROJECT_DIR)"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <PathRunnable
-         FilePath = "/Users/Drakulix/Documents/XCode Projects/MinecraftServer/build-mac/objectCraft">
+         FilePath = "$(PROJECT_DIR)/objectCraft">
       </PathRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
