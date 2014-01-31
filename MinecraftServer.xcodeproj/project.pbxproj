@@ -63,6 +63,17 @@
 		C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */; };
 		C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */; };
 		C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */; };
+		C9EFB607189A70E900078CB1 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB5FE189A70E900078CB1 /* Entity.m */; };
+		C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB600189A70E900078CB1 /* MovingEntity.m */; };
+		C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB602189A70E900078CB1 /* LivingEntity.m */; };
+		C9EFB60A189A70E900078CB1 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB604189A70E900078CB1 /* Player.m */; };
+		C9EFB60B189A70E900078CB1 /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB606189A70E900078CB1 /* EntityManager.m */; };
+		C9EFB60F189A74A500078CB1 /* ChunkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB60E189A74A500078CB1 /* ChunkManager.m */; };
+		C9EFB614189A74C500078CB1 /* Chunk.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB611189A74C500078CB1 /* Chunk.m */; };
+		C9EFB615189A74C500078CB1 /* ChunkColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB613189A74C500078CB1 /* ChunkColumn.m */; };
+		C9EFB61E189A8EC200078CB1 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB619189A8EC200078CB1 /* Block.m */; };
+		C9EFB61F189A8EC200078CB1 /* AirBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB61B189A8EC200078CB1 /* AirBlock.m */; };
+		C9EFB620189A8EC200078CB1 /* DirtBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB61D189A8EC200078CB1 /* DirtBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -194,6 +205,28 @@
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
+		C9EFB5FD189A70E900078CB1 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		C9EFB5FE189A70E900078CB1 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		C9EFB5FF189A70E900078CB1 /* MovingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingEntity.h; sourceTree = "<group>"; };
+		C9EFB600189A70E900078CB1 /* MovingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingEntity.m; sourceTree = "<group>"; };
+		C9EFB601189A70E900078CB1 /* LivingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingEntity.h; sourceTree = "<group>"; };
+		C9EFB602189A70E900078CB1 /* LivingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingEntity.m; sourceTree = "<group>"; };
+		C9EFB603189A70E900078CB1 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		C9EFB604189A70E900078CB1 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		C9EFB605189A70E900078CB1 /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
+		C9EFB606189A70E900078CB1 /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
+		C9EFB60D189A74A500078CB1 /* ChunkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChunkManager.h; sourceTree = "<group>"; };
+		C9EFB60E189A74A500078CB1 /* ChunkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChunkManager.m; sourceTree = "<group>"; };
+		C9EFB610189A74C500078CB1 /* Chunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chunk.h; sourceTree = "<group>"; };
+		C9EFB611189A74C500078CB1 /* Chunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chunk.m; sourceTree = "<group>"; };
+		C9EFB612189A74C500078CB1 /* ChunkColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChunkColumn.h; sourceTree = "<group>"; };
+		C9EFB613189A74C500078CB1 /* ChunkColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChunkColumn.m; sourceTree = "<group>"; };
+		C9EFB618189A8EC200078CB1 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		C9EFB619189A8EC200078CB1 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
+		C9EFB61A189A8EC200078CB1 /* AirBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirBlock.h; sourceTree = "<group>"; };
+		C9EFB61B189A8EC200078CB1 /* AirBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirBlock.m; sourceTree = "<group>"; };
+		C9EFB61C189A8EC200078CB1 /* DirtBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirtBlock.h; sourceTree = "<group>"; };
+		C9EFB61D189A8EC200078CB1 /* DirtBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirtBlock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,18 +272,14 @@
 		C92CD1B918967E5100E009B3 /* World */ = {
 			isa = PBXGroup;
 			children = (
+				C9EFB617189A8EB400078CB1 /* Block */,
+				C9EFB5FC189A70D000078CB1 /* Entity */,
 				C91864851895B89300E78048 /* WorldManager.h */,
 				C91864861895B89300E78048 /* WorldManager.m */,
 				C92CD1BA18967E5B00E009B3 /* World.h */,
 				C92CD1BB18967E5B00E009B3 /* World.m */,
-				C92CD1BD18967E6700E009B3 /* WorldGenerator.h */,
-				C92CD1BE18967E6700E009B3 /* WorldGenerator.m */,
-				C92CD1C0189689ED00E009B3 /* NetherGenerator.h */,
-				C92CD1C1189689ED00E009B3 /* NetherGenerator.m */,
-				C92CD1C3189689FB00E009B3 /* OverworldGenerator.h */,
-				C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */,
-				C92CD1C618968A0400E009B3 /* EndGenerator.h */,
-				C92CD1C718968A0400E009B3 /* EndGenerator.m */,
+				C9EFB60C189A749600078CB1 /* Chunk */,
+				C9EFB616189A74CB00078CB1 /* Generator */,
 			);
 			name = World;
 			sourceTree = "<group>";
@@ -426,6 +455,64 @@
 			name = UDPPacket;
 			sourceTree = "<group>";
 		};
+		C9EFB5FC189A70D000078CB1 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C9EFB5FD189A70E900078CB1 /* Entity.h */,
+				C9EFB5FE189A70E900078CB1 /* Entity.m */,
+				C9EFB5FF189A70E900078CB1 /* MovingEntity.h */,
+				C9EFB600189A70E900078CB1 /* MovingEntity.m */,
+				C9EFB601189A70E900078CB1 /* LivingEntity.h */,
+				C9EFB602189A70E900078CB1 /* LivingEntity.m */,
+				C9EFB603189A70E900078CB1 /* Player.h */,
+				C9EFB604189A70E900078CB1 /* Player.m */,
+				C9EFB605189A70E900078CB1 /* EntityManager.h */,
+				C9EFB606189A70E900078CB1 /* EntityManager.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		C9EFB60C189A749600078CB1 /* Chunk */ = {
+			isa = PBXGroup;
+			children = (
+				C9EFB60D189A74A500078CB1 /* ChunkManager.h */,
+				C9EFB60E189A74A500078CB1 /* ChunkManager.m */,
+				C9EFB610189A74C500078CB1 /* Chunk.h */,
+				C9EFB611189A74C500078CB1 /* Chunk.m */,
+				C9EFB612189A74C500078CB1 /* ChunkColumn.h */,
+				C9EFB613189A74C500078CB1 /* ChunkColumn.m */,
+			);
+			name = Chunk;
+			sourceTree = "<group>";
+		};
+		C9EFB616189A74CB00078CB1 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				C92CD1BD18967E6700E009B3 /* WorldGenerator.h */,
+				C92CD1BE18967E6700E009B3 /* WorldGenerator.m */,
+				C92CD1C0189689ED00E009B3 /* NetherGenerator.h */,
+				C92CD1C1189689ED00E009B3 /* NetherGenerator.m */,
+				C92CD1C3189689FB00E009B3 /* OverworldGenerator.h */,
+				C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */,
+				C92CD1C618968A0400E009B3 /* EndGenerator.h */,
+				C92CD1C718968A0400E009B3 /* EndGenerator.m */,
+			);
+			name = Generator;
+			sourceTree = "<group>";
+		};
+		C9EFB617189A8EB400078CB1 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				C9EFB618189A8EC200078CB1 /* Block.h */,
+				C9EFB619189A8EC200078CB1 /* Block.m */,
+				C9EFB61A189A8EC200078CB1 /* AirBlock.h */,
+				C9EFB61B189A8EC200078CB1 /* AirBlock.m */,
+				C9EFB61C189A8EC200078CB1 /* DirtBlock.h */,
+				C9EFB61D189A8EC200078CB1 /* DirtBlock.m */,
+			);
+			name = Block;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
@@ -495,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9EFB607189A70E900078CB1 /* Entity.m in Sources */,
 				C92CD1BF18967E6700E009B3 /* WorldGenerator.m in Sources */,
 				C9B1000D18991C5500AB8DB8 /* UDPLoginStatus.m in Sources */,
 				C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */,
@@ -506,8 +594,11 @@
 				C96556771897F38100D67C15 /* OFDataArray+StringReader.m in Sources */,
 				C96556671897EF3200D67C15 /* RaknetConnectionRequest2.m in Sources */,
 				C9B1001118991C5500AB8DB8 /* UDPSpawnPosition.m in Sources */,
+				C9EFB60F189A74A500078CB1 /* ChunkManager.m in Sources */,
+				C9EFB61E189A8EC200078CB1 /* Block.m in Sources */,
 				C965566A1897EF3200D67C15 /* RaknetACK.m in Sources */,
 				C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.mm in Sources */,
+				C9EFB61F189A8EC200078CB1 /* AirBlock.m in Sources */,
 				C918649B1895C97F00E78048 /* main.m in Sources */,
 				C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */,
 				C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */,
@@ -531,20 +622,27 @@
 				C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */,
 				C9B1001218991C5500AB8DB8 /* UDPSetTime.m in Sources */,
 				C96556691897EF3200D67C15 /* RaknetCustomPacket.m in Sources */,
+				C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */,
 				C96556631897EF3200D67C15 /* RaknetAdvertise.m in Sources */,
 				C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */,
 				C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */,
 				C9B1001818991C5500AB8DB8 /* UDPAddPlayer.m in Sources */,
+				C9EFB614189A74C500078CB1 /* Chunk.m in Sources */,
 				C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */,
+				C9EFB60A189A70E900078CB1 /* Player.m in Sources */,
 				C9B1001418991C5500AB8DB8 /* UDPChunkRequest.m in Sources */,
+				C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */,
+				C9EFB620189A8EC200078CB1 /* DirtBlock.m in Sources */,
 				C96556781897F38100D67C15 /* OFDataArray+FloatReader.m in Sources */,
 				C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */,
+				C9EFB615189A74C500078CB1 /* ChunkColumn.m in Sources */,
 				C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */,
 				C9B1001518991C5500AB8DB8 /* UDPChunkData.m in Sources */,
 				C9B1001018991C5500AB8DB8 /* UDPStartGame.m in Sources */,
 				C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */,
 				C918649E1895C97F00E78048 /* RandomGenerator.m in Sources */,
 				C9B1000818991C5500AB8DB8 /* UDPPacket.m in Sources */,
+				C9EFB60B189A70E900078CB1 /* EntityManager.m in Sources */,
 				C918649F1895C97F00E78048 /* WorldManager.m in Sources */,
 				C9B1000E18991C5500AB8DB8 /* UDPPing.m in Sources */,
 				C9B1001618991C5500AB8DB8 /* UDPReadyPacket.m in Sources */,
