@@ -13,7 +13,7 @@ AC_ARG_WITH([objfw-include-path],
   [AS_HELP_STRING([--with-objfw-include-path],
     [location of the OBJFW headers, defaults to /usr/include/objfw])],
   [OBJFW_CFLAGS="-I$withval"],
-  [OBJFW_CFLAGS='-I/usr/local/include'])
+  [OBJFW_CFLAGS=''])
 AC_SUBST([OBJFW_CFLAGS])
 AC_ARG_WITH([objfw-lib-path],
   [AS_HELP_STRING([--with-objfw-lib-path], [location of the ObjFW libraries])],

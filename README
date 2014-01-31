@@ -1,0 +1,64 @@
+#ObjectCraft Minecraft Server
+
+###Status
+The Project is in it’s very early stages, I mainly added it to my public github repositories to let other people work on this project with me.
+It is not useable in the current state for **ANY** end-user.
+
+###Goal
+The goal is to provide a full featured Minecraft Server written in Objective-C that conforms to both the Minecraft-PC Network Protocol and the Minecraft-PE (Pocket Edition) Protocol. Differences like non existing blocks, or different dimensions will get simulated for the other system as good as possible or substituted with other existing features (like sending different existing blockIds for non-existent blocks of the other protocol). No features shall be unaccessible from one client type. They might be just more complicated to use.
+
+###Dependencies
+The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that compatible with most POSIX-compatible systems. It requires a Objective-C-2.0-compatible compiler otherwise every supported system by ObjFW should work just fine, please report if you are having building issues (see tutorial below).
+Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are not allowed as they are a non-standard C-language extension and currently only supported by clang compilers. The new Literals introduced with clang are also not allowed in code.
+
+###Building
+
+####Install ObjFW
+You need to have an install of the ObjFW library. Currently the most recent version (0.7.1) does not include all features needed by this project (especially the OFUDPSocket), so you need to check out the lastest tarball from the git repository.
+
+For building from git you need autotools installed, then do:
+```
+./autogen.sh
+./configure
+make
+make install
+```
+
+You may install it to another path by providing the --prefix parameter to the configure script and provide the library and include paths for objfw later when compiling the server, see below.
+
+Support for compiling against a statically linked ObjFW library will follow later
+
+####Compiling ObjectCraft
+If you check out the latest release via git (currently the only way until something usable can be build), you need to have autotools installed.
+
+Compiling then should work via:
+```
+./autogen.sh
+./configure
+make
+```
+
+If you installed ObjFW to non-standard paths (paths not in your $PATH variable) you can give them manually to the configure script with these flags:
+--with-objfw-lib-path=
+--with-objfw-include-path=
+
+An example for mac users, that other install third-party stuff to /usr/local/:
+```
+./autogen.sh
+./configure --with-objfw-lib-path=/usr/local/lib --with-objfw-include-path=/usr/local/include
+make
+```
+
+Which should result in an 'objectCraft' executable.
+
+#####Compiling on Windows
+Compiling for Windows is possible via MingW, but not as straight forward.
+You should check out the ObjFW README-WINDOWS file, which describes how to set up a ObjFW-compatible build environment with MingW. Builds are currently limited to 32-Bit, as ObjFW uses dwarf2-exceptions.
+
+When you did set up your environment correctly and builded and installed ObjFW correctly, building should work in the MingW MSYS Shell via:
+```
+export OBJC=gcc-dw2
+./autogen.sh
+./configure
+make
+```
