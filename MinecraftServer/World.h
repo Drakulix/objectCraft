@@ -8,11 +8,19 @@
 
 #import <ObjFW/ObjFW.h>
 @class WorldGenerator;
+@class EntityManager;
+@class ChunkManager;
 
 @interface World : OFObject {
     WorldGenerator *generator;
-    int8_t dimension;
+    OFTimer *timer;
 }
+
+@property (atomic) uint64_t ageInTicks;
+@property (nonatomic, readonly) int8_t dimension;
+@property (nonatomic, readonly) int8_t tcpDimension;
+@property (nonatomic, retain) EntityManager *entityManager;
+@property (nonatomic, retain) ChunkManager *chunkManager;
 
 - (instancetype)initWithGenerator:(OFString *)generator forDimension:(int8_t)dimension;
 - (void)saveWorld;
