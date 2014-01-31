@@ -112,11 +112,38 @@ static OFMutableDictionary *packetList;
         if(propName)
         {
             @try {
-                id value = [instance valueForKey:propNameString];
-                [propPrint appendString:[OFString stringWithFormat:@"\t%@=%@;\n", propNameString, value]];
+                SEL sel = sel_registerName(propName);
+                
+                const char *attr = property_getAttributes(property);
+                switch (attr[1]) {
+                    case '@':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'i':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'c':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'l':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 's':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'f':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'd':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    default:
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
+                        break;
+                }
             }
-            @catch (NSException *exception) {
-                [propPrint appendString:[OFString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
+            @catch (OFException *exception) {
+                [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
             }
         }
     }
