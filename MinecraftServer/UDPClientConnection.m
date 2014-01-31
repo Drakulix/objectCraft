@@ -8,8 +8,9 @@
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #import "log.h"
-#import "MinecraftServer.h"
+#import "WorldManager.h"
 #import "UDPClientConnection.h"
+#import "Player.h"
 
 #import "OFDataArray+IntReader.h"
 
@@ -35,6 +36,17 @@
 #import "UDPAddPlayer.h"
 #import "UDPMoveEntity_PosRot.h"
 
+#define binarypattern "%d%d%d%d%d%d%d%d"
+#define binary(byte)  \
+(byte & 0x80 ? 1 : 0), \
+(byte & 0x40 ? 1 : 0), \
+(byte & 0x20 ? 1 : 0), \
+(byte & 0x10 ? 1 : 0), \
+(byte & 0x08 ? 1 : 0), \
+(byte & 0x04 ? 1 : 0), \
+(byte & 0x02 ? 1 : 0), \
+(byte & 0x01 ? 1 : 0)
+
 @implementation UDPClientConnection
 
 - (instancetype)initWithPeer:(of_udp_socket_address_t)_peer raknetHandler:(RaknetHandler *)_raknetHandler andMtuSize:(uint64_t)mtu {
@@ -59,12 +71,11 @@
     uint8_t packetId = [packetData readByte];
     UDPPacket *packet = [UDPPacket packetWithId:packetId data:packetData];
     
-    
     if (!packet)
         LogInfo(@"Got unknown Packet: 0x%02x", packetId);
+    //To-Do if all packets are implemented, packet should only be nil, if parsing failed. Send NACK in that case
     
     LogDebug(@"Got MCPE Packet: 0x%02x, %@", packetId, packet);
-    
     
     
     if ([packet isKindOfClass:[UDPPing class]]) {
@@ -76,9 +87,8 @@
     } else if ([packet isKindOfClass:[UDPClientConnect class]]) {
         
         
-        of_udp_socket_address_t address;
         uint16_t port = 0;
-        [OFUDPSocket hostForAddress:&address port:&port];
+        [OFUDPSocket hostForAddress:&peer port:&port];
         [self sendPacket:[[UDPServerHandshake alloc] initWithPort:port sessionId:((UDPClientConnect *)packet).sessionId serverSessionId:0x0000000004440ba9]]; //hardcoded session2? we should test that
         clientId = ((UDPClientConnect *)packet).clientId;
         
@@ -140,8 +150,8 @@
 
 - (void)ackdCustomPacket:(uint32_t)_customPacketId {
     
-    LogVerbose(@"Ackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
     @synchronized (queuedCustomPackets) {
+        LogVerbose(@"Ackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
         [queuedCustomPackets removeObjectForKey:[OFNumber numberWithUInt32:_customPacketId]];
     }
     
@@ -150,8 +160,8 @@
 
 - (void)nackdCustomPacket:(uint32_t)_customPacketId {
 
-    LogVerbose(@"Nackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
     @synchronized (queuedCustomPackets) {
+        LogVerbose(@"Nackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
         [[queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] resend];
     }
     
@@ -196,7 +206,7 @@
             [queuedMinecraftPackets removeObject:mcPacket];
         }
         [self sendMinecraftPackets:packets];
-        [queuedMinecraftPackets removeAllObjects];
+        
     }
     
 }
