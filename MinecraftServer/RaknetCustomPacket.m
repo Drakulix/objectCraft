@@ -50,9 +50,15 @@
         
         packetNumber = [data readReverseUInt24];
         
-        while ([data count] > 0) {
-            [self.packets addObject:[RaknetMinecraftPacket readPacketFromData:data]];
+        @try {
+            while ([data count] > 0) {
+                [self.packets addObject:[RaknetMinecraftPacket readPacketFromData:data]];
+            }
         }
+        @catch (OFException *exception) {
+            return nil;
+        }
+        
     }
     return self;
 }
@@ -66,8 +72,8 @@
     [data appendReverseUInt24:packetNumber];
     
     for (RaknetMinecraftPacket *packet in self.packets) {
-        OFDataArray *data = [packet packetData];
-        [data addItems:[data firstItem] count:[data count]];
+        OFDataArray *packetData = [packet packetData];
+        [data addItems:[packetData firstItem] count:[packetData count]];
     }
     
     return data;

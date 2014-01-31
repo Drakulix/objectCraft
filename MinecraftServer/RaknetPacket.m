@@ -58,8 +58,12 @@ static OFMutableDictionary *packetList;
 }
 
 + (RaknetPacket *)packetWithId:(uint8_t)pId data:(OFDataArray *)data {
-    //NSLogVerbose(@"Packet Class: %@", [packetList objectForKey:[NSString stringWithFormat:@"%02x", pId]]);
-    return (RaknetPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+    @try {
+        return (RaknetPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+    }
+    @catch (OFException *exception) {
+        return nil;
+    }
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
@@ -104,17 +108,38 @@ static OFMutableDictionary *packetList;
         if(propName)
         {
             @try {
-                id value = [instance valueForKey:propNameString];
-                [propPrint appendString:[OFString stringWithFormat:@"\t%@=%@\n", propNameString, value]];
+                SEL sel = sel_registerName(propName);
+                
+                const char *attr = property_getAttributes(property);
+                switch (attr[1]) {
+                    case '@':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'i':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'c':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'l':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 's':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'f':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    case 'd':
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        break;
+                    default:
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
+                        break;
+                }
             }
             @catch (OFException *exception) {
-                @try {
-                    id value = [instance valueForKey:propNameString];
-                    [propPrint appendString:[OFString stringWithFormat:@"\t%@=%@;\n", propNameString, value]];
-                }
-                @catch (OFException *exception) {
-                    [propPrint appendString:[OFString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
-                }
+                [propPrint appendString:[OFString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
             }
         }
     }

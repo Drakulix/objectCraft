@@ -8,6 +8,7 @@
 
 #import "UDPPacket.h"
 #import <objc/runtime.h>
+#import <string.h>
 
 @implementation UDPPacket
 static OFMutableDictionary *packetList;
@@ -15,7 +16,7 @@ static OFMutableDictionary *packetList;
 + (void)setup {
     if (self == [UDPPacket class]) {
         
-        packetList = [[NSMutableDictionary alloc] init];
+        packetList = [[OFMutableDictionary alloc] init];
         
         int numClasses;
         Class * classes = NULL;
@@ -61,8 +62,13 @@ static OFMutableDictionary *packetList;
     return packetList;
 }
 
-+ (UDPPacket *)packetWithId:(uint8_t)pId data:(NSData *)data {
-    return (UDPPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
++ (UDPPacket *)packetWithId:(uint8_t)pId data:(OFDataArray *)data {
+    @try {
+        return (UDPPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+    }
+    @catch (OFException *exception) {
+        return nil;
+    }
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
@@ -80,7 +86,8 @@ static OFMutableDictionary *packetList;
 
 - (OFDataArray *)rawPacketData {
     OFDataArray *packetData = [self packetData];
-    [packetData insertItem:[[self class] packetId] atIndex:0];
+    uint8_t packetId = [[self class] packetId];
+    [packetData insertItem:&packetId atIndex:0];
     return packetData;
 }
 
