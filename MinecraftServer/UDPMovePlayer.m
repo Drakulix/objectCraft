@@ -7,6 +7,7 @@
 //
 
 #import "UDPMovePlayer.h"
+#import "Player.h"
 
 @implementation UDPMovePlayer
 
@@ -14,7 +15,7 @@
     return [super initWithEntity:player];
 }
 
-- (instancetype)initWithData:(NSData *)data {
+- (instancetype)initWithData:(OFDataArray *)data {
     self = [super initWithData:data];
     if (self) {
         //self.unknown = [[[data subdataWithRange:NSMakeRange([data length]-sizeof(float), sizeof(float))] mutableCopy] readFloat];
@@ -26,7 +27,7 @@
     return 0x95;
 }
 
-- (NSData *)packetData {
+- (OFDataArray *)packetData {
     //NSMutableData *packetData = [[super packetData] mutableCopy];
     //[packetData appendFloat:self.unknown];
     //return packetData;

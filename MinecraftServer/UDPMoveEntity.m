@@ -7,6 +7,7 @@
 //
 
 #import "UDPMoveEntity.h"
+#import "MovingEntity.h"
 #import "OFDataArray+IntReader.h"
 #import "OFDataArray+IntWriter.h"
 #import "OFDataArray+FloatReader.h"
@@ -27,17 +28,16 @@
     return self;
 }
 
-- (id)initWithData:(NSData *)data {
+- (id)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        NSMutableData *packetData = [data mutableCopy];
-        self.entityId = [packetData readInt];
+        self.entityId = [data readInt];
         
-        self.X = [packetData readFloat];
-        self.Y = [packetData readFloat];
-        self.Z = [packetData readFloat];
-        self.Yaw = [packetData readFloat];
-        self.Pitch = [packetData readFloat];
+        self.X = [data readFloat];
+        self.Y = [data readFloat];
+        self.Z = [data readFloat];
+        self.Yaw = [data readFloat];
+        self.Pitch = [data readFloat];
     }
     return self;
 }
@@ -46,8 +46,8 @@
     return 0x90;
 }
 
-- (NSData *)packetData {
-    NSMutableData *packetData = [[NSMutableData alloc] init];
+- (OFDataArray *)packetData {
+    OFDataArray *packetData = [[OFDataArray alloc] init];
     [packetData appendInt:self.entityId];
     [packetData appendFloat:self.X];
     [packetData appendFloat:self.Y];

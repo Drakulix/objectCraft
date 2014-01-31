@@ -17,12 +17,11 @@
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        OFDataArray *packetData = [data mutableCopy];
-        self.username = [packetData readStringUdp];
-        self.protocol1 = [packetData readInt];
-        self.protocol2 = [packetData readInt];
-        self.clientId = [packetData readInt];
-        self.realmsData = [packetData readStringUdp];
+        self.username = [data readStringUdp];
+        self.protocol1 = [data readInt];
+        self.protocol2 = [data readInt];
+        self.clientId = [data readInt];
+        self.realmsData = [data readStringUdp];
     }
     return self;
 }

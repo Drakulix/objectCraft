@@ -9,6 +9,7 @@
 #import "UDPSpawnPosition.h"
 #import "OFDataArray+IntReader.h"
 #import "OFDataArray+IntWriter.h"
+#import "Player.h"
 
 @implementation UDPSpawnPosition
 

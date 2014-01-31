@@ -44,8 +44,8 @@
         
         OFDataArray *dataArrayTmp = [[OFDataArray alloc] initWithCapacity:sizeof(int8_t)*3+sizeof(int32_t)];
         for (int i = 0; i<10; i++) {
-            [OFDataArray appendUInt24:[data readUInt24]];
-            [OFDataArray appendInt:[data readInt]];
+            [dataArrayTmp appendUInt24:[data readUInt24]];
+            [dataArrayTmp appendInt:[data readInt]];
         }
         self.dataArray = dataArrayTmp;
         

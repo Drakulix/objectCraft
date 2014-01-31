@@ -8,6 +8,7 @@
 
 #import "UDPStartGame.h"
 #import "ConfigManager.h"
+#import "Player.h"
 
 #import "OFDataArray+IntReader.h"
 #import "OFDataArray+IntWriter.h"
@@ -48,7 +49,7 @@
     return 0x87;
 }
 
-- (NSData *)packetData {
+- (OFDataArray *)packetData {
     OFDataArray *packetData = [[OFDataArray alloc] init];
     
     [packetData appendInt:self.seed];
