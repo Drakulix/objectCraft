@@ -37,6 +37,10 @@ static WorldManager *sharedInstance;
     return self;
 }
 
+- (World *)worldForDimension:(int8_t)dimension {
+    return [dimensions objectForKey:[OFNumber numberWithInt8:dimension]];
+}
+
 - (void)dealloc {
     OFArray *keys = [dimensions allKeys];
     for (int i = 0; i < [dimensions count]; i++) {

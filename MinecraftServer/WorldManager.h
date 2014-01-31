@@ -7,11 +7,13 @@
 //
 
 #import <ObjFW/ObjFW.h>
+@class World;
 
 @interface WorldManager : OFObject {
     OFMutableDictionary *dimensions;
 }
 
 + (WorldManager *)defaultManager;
+- (World *)worldForDimension:(int8_t)dimension;
 
 @end
