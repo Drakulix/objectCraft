@@ -80,7 +80,7 @@ static void udp_release(void *value)
     if ([packet isKindOfClass:[RaknetConnectedPing class]]) { //includes UnconnectedPing
         
         
-        [self sendRaknetPacket:[[RaknetAdvertise alloc] initWithPingId:((RaknetConnectedPing *)packet).pingId withIndetifier:[OFString stringWithFormat:@"MCCPP;MINECON;%@", [ConfigManager defaultManager].serverBrowserMessage]] To:address];
+        [self sendRaknetPacket:[[RaknetAdvertise alloc] initWithPingId:((RaknetConnectedPing *)packet).pingId withIndetifier:[OFString stringWithFormat:(OFConstantString *)@"MCCPP;MINECON;%@", [ConfigManager defaultManager].serverBrowserMessage]] To:address];
         
         
     } else if ([packet isKindOfClass:[RaknetConnectionRequest class]]) {

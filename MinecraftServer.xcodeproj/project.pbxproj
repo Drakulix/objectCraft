@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C918649A1895C5AF00E78048 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */; };
 		C918649B1895C97F00E78048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.m */; };
 		C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C95799691890795000B4CB37 /* MinecraftServer.m */; };
 		C918649D1895C97F00E78048 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B868561891423B0049B299 /* ConfigManager.m */; };
@@ -63,6 +62,7 @@
 		C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */; };
 		C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */; };
 		C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */; };
+		C9E9D006189BA91A0043F279 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */; };
 		C9EFB607189A70E900078CB1 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB5FE189A70E900078CB1 /* Entity.m */; };
 		C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB600189A70E900078CB1 /* MovingEntity.m */; };
 		C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB602189A70E900078CB1 /* LivingEntity.m */; };
@@ -95,7 +95,6 @@
 		C91864851895B89300E78048 /* WorldManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldManager.h; sourceTree = "<group>"; };
 		C91864861895B89300E78048 /* WorldManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldManager.m; sourceTree = "<group>"; };
 		C918648B1895C53200E78048 /* MinecraftServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MinecraftServer; sourceTree = BUILT_PRODUCTS_DIR; };
-		C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = "build-mac/libobjfw.7.0.dylib"; sourceTree = "<group>"; };
 		C92CD1BA18967E5B00E009B3 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
 		C92CD1BB18967E5B00E009B3 /* World.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = World.m; sourceTree = "<group>"; };
 		C92CD1BD18967E6700E009B3 /* WorldGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldGenerator.h; sourceTree = "<group>"; };
@@ -205,6 +204,8 @@
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
+		C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = ../../../../../usr/local/lib/libobjfw.7.0.dylib; sourceTree = "<group>"; };
+		C9E9D007189BABA20043F279 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		C9EFB5FD189A70E900078CB1 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		C9EFB5FE189A70E900078CB1 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		C9EFB5FF189A70E900078CB1 /* MovingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingEntity.h; sourceTree = "<group>"; };
@@ -234,7 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C918649A1895C5AF00E78048 /* libobjfw.7.0.dylib in Frameworks */,
+				C9E9D006189BA91A0043F279 /* libobjfw.7.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +245,7 @@
 		C91864801895876100E78048 /* Build Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9E9D007189BABA20043F279 /* autogen.sh */,
 				C91864811895878A00E78048 /* build-mac.sh */,
 				C91864821895878A00E78048 /* configure.ac */,
 				C91864831895878A00E78048 /* Makefile.am */,
@@ -264,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				C918648B1895C53200E78048 /* MinecraftServer */,
-				C91864991895C5AF00E78048 /* libobjfw.7.0.dylib */,
 			);
 			name = "XCode Related Stuff";
 			sourceTree = "<group>";
@@ -287,6 +288,7 @@
 		C957994F189072A000B4CB37 = {
 			isa = PBXGroup;
 			children = (
+				C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */,
 				C957995A189072A000B4CB37 /* MinecraftServer */,
 				C91864801895876100E78048 /* Build Files */,
 				C918648C1895C53200E78048 /* XCode Related Stuff */,
@@ -657,6 +659,7 @@
 		C91864971895C53200E78048 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -665,12 +668,12 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/usr/local/include,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/build-mac",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/build-mac",
+					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -679,16 +682,17 @@
 		C91864981895C53200E78048 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					/usr/local/include,
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/build-mac",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/Drakulix/Documents/XCode\\ Projects/MinecraftServer/build-mac",
+					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

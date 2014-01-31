@@ -7,7 +7,9 @@
 //
 
 #import "Entity.h"
-#import "MinecraftServer.h"
+#import "WorldManager.h"
+#import "World.h"
+#import "EntityManager.h"
 
 @implementation Entity
 
@@ -22,7 +24,7 @@
 }
 
 - (void)despawn {
-    [[[MinecraftServer sharedInstance] worldForDimension:self.dimension] despawnEntityWithId:self.entityId];
+    [[[WorldManager defaultManager] worldForDimension:self.dimension].entityManager removeEntityById:self.entityId];
 }
 
 @end

@@ -26,7 +26,7 @@
 - (id)main {
     void *buffer = malloc(MAX_PACKET_SIZE);
     of_udp_socket_address_t peer;
-    int length;
+    size_t length;
     
     while (running) {
         length = [socket receiveIntoBuffer:buffer length:MAX_PACKET_SIZE sender:&peer];

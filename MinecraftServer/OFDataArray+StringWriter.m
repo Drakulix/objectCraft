@@ -23,7 +23,7 @@
 
 - (void)appendStringUdp:(OFString *)string {
     const char *stringData = [string lossyCStringWithEncoding:OF_STRING_ENCODING_ASCII];
-    int len = [string cStringLengthWithEncoding:OF_STRING_ENCODING_ASCII];
+    size_t len = [string cStringLengthWithEncoding:OF_STRING_ENCODING_ASCII];
     [self appendShort:len];
     [self addItems:stringData count:len];
 }

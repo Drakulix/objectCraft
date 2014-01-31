@@ -1,9 +1,13 @@
-AC_INIT([ObjectCraft], [0.0.1], [drakulix@portingteam.com], [objectCraft], [http://github.com/drakulix])
+AC_INIT([ObjectCraft], [0.0.1], [drakulix@portingteam.com], [objectCraft], [http://github.com/drakulix/objectCraft])
 AM_INIT_AUTOMAKE([no-define])
 AC_LANG([Objective C])
 AC_PROG_OBJC
 AC_PROG_OBJCXX
 AC_CONFIG_FILES([Makefile])
+AC_CONFIG_HEADERS([config.h])
+
+# TO-DO add --enable-static flag to compile standalone against libobjfw.a file
+
 # Get OBJFW library and include locations
 AC_ARG_WITH([objfw-include-path],
   [AS_HELP_STRING([--with-objfw-include-path],
@@ -27,6 +31,18 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([])],
     [AC_MSG_RESULT([no])]
 )
 CFLAGS="$my_save_cflags"
+
+AC_ARG_ENABLE(debug,
+AS_HELP_STRING([--enable-debug],
+               [enable debugging, default: no]),
+[case "${enableval}" in
+             yes) debug=true ;;
+             no)  debug=false ;;
+             *)   AC_MSG_ERROR([bad value ${enableval} for --enable-debug]) ;;
+esac],
+[debug=false])
+
+AM_CONDITIONAL(DEBUG, test x"$debug" = x"true")
 
 AC_SUBST([OBJC_CFLAGS])
 AC_OUTPUT

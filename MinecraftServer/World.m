@@ -27,8 +27,8 @@
         
         //TO-DO World based seeds (optional, use global seed if not set)
         
-        if ([OFFile fileExistsAtPath:[OFString stringWithFormat:@"worlds/%d/world.conf", self.dimension]]) {
-            OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", self.dimension] mode:@"rb"];
+        if ([OFFile fileExistsAtPath:[OFString stringWithFormat:(OFConstantString *)@"worlds/%d/world.conf", self.dimension]]) {
+            OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:(OFConstantString *)@"worlds/%d/world.conf", self.dimension] mode:@"rb"];
             if ([seedFile readBigEndianInt64] != [ConfigManager defaultManager].seed ) {
                 LogWarn(@"Global Seed has changed! World might get ugly chunk borders! Old world seed: %d, new seed: %d", [seedFile readBigEndianInt64], [ConfigManager defaultManager].seed);
                 generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[[ConfigManager defaultManager] seed]];
@@ -62,7 +62,7 @@
 }
 
 - (void)saveWorld {
-    OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", dimension] mode:@"wb"];
+    OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:(OFConstantString *)@"worlds/%d/world.conf", dimension] mode:@"wb"];
     [seedFile writeBigEndianInt64:[ConfigManager defaultManager].seed];
     [seedFile writeBigEndianInt64:[generator generatorState]];
     [seedFile close];
