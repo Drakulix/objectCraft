@@ -139,8 +139,21 @@
         
     } else if ([packet isKindOfClass:[UDPChunkRequest class]]) {
         
+        //TO-DO ChunkData packets are complex and splitted packets, so they are pretty unreliable
+        // If the initial sending fails our server still assumes, the chunk has not changed -> chunk error on devices
+        //Possible fixes: 1. update LastAgeRequest in Player on ACK Packet for all chunk-data split packets (difficult)
+        //                2. Lazy fix, potentially update ageInTicks on all chunk on every tick depending on a random value -> all chunks will get resend/update over time
         
-        [self sendPacket:[[UDPChunkData alloc] initForChunkColumn:[[[MinecraftServer sharedInstance] worldForDimension:player.dimension] chunkColumnForPositionX:((UDPChunkRequest *)packet).X Z:((UDPChunkRequest *)packet).Z]]];
+        LogInfo(@"Chunk Request for: %d - %d", ((UDPChunkRequest *)packet).X, ((UDPChunkRequest *)packet).Z);
+        uint8_t bitMask = 0x00;
+        for (int y = 0; y < 8; y++) {
+            if ([player isChunkDirtyAtX:((UDPChunkRequest *)packet).X AtY:y AtZ:((UDPChunkRequest *)packet).Z]) {
+                bitMask |= 1 << y;
+            }
+        }
+        LogInfo(@"bitmask: "binarypattern, binary(bitMask));
+        ChunkColumn *column = [player loadChunkColumnAtX:((UDPChunkRequest *)packet).X AtZ:((UDPChunkRequest *)packet).Z];
+        [self sendPacket:[[UDPChunkData alloc] initForChunkColumn:column andBitMask:bitMask]];
         
     }
     

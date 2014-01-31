@@ -12,7 +12,8 @@
 @interface UDPChunkData : UDPPacket
 
 @property (nonatomic, retain) ChunkColumn *column;
+@property (nonatomic) uint8_t bitMask;
 
-- (instancetype)initForChunkColumn:(ChunkColumn *)column;
+- (instancetype)initForChunkColumn:(ChunkColumn *)column andBitMask:(uint8_t)bitmask;
 
 @end
