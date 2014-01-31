@@ -13,6 +13,9 @@
 #import "WorldManager.h"
 #import "UDPRecieveThread.h"
 
+#import "RaknetPacket.h"
+#import "UDPPacket.h"
+
 static MinecraftServer *sharedInstance;
 
 @implementation MinecraftServer
@@ -35,6 +38,9 @@ static MinecraftServer *sharedInstance;
     worldManager = [WorldManager defaultManager];
     
     activeTCPConnections = [[OFMutableArray alloc] init];
+    
+    [RaknetPacket setup];
+    [UDPPacket setup];
     
     @try {
         tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];
