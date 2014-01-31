@@ -9,5 +9,14 @@
 #import "EndGenerator.h"
 
 @implementation EndGenerator
+@synthesize tcpDimension;
+
+- (instancetype)initWithSeed:(uint64_t)seed {
+    self = [super initWithSeed:seed];
+    if (self) {
+        tcpDimension = 1;
+    }
+    return self;
+}
 
 @end
