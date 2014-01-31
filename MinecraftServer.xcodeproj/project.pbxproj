@@ -89,7 +89,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C91864811895878A00E78048 /* build-mac.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build-mac.sh"; sourceTree = "<group>"; };
 		C91864821895878A00E78048 /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
 		C91864831895878A00E78048 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		C91864851895B89300E78048 /* WorldManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldManager.h; sourceTree = "<group>"; };
@@ -206,6 +205,7 @@
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
 		C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = ../../../../../usr/local/lib/libobjfw.7.0.dylib; sourceTree = "<group>"; };
 		C9E9D007189BABA20043F279 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
+		C9E9D008189BB2360043F279 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		C9EFB5FD189A70E900078CB1 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		C9EFB5FE189A70E900078CB1 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		C9EFB5FF189A70E900078CB1 /* MovingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingEntity.h; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				C9E9D007189BABA20043F279 /* autogen.sh */,
-				C91864811895878A00E78048 /* build-mac.sh */,
+				C9E9D008189BB2360043F279 /* build.sh */,
 				C91864821895878A00E78048 /* configure.ac */,
 				C91864831895878A00E78048 /* Makefile.am */,
 			);
@@ -520,7 +520,7 @@
 /* Begin PBXLegacyTarget section */
 		C999E4F618927FA100E91B51 /* MinecraftServer - Mac - autotools */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "";
+			buildArgumentsString = "--enabled-debug";
 			buildConfigurationList = C999E4F918927FA100E91B51 /* Build configuration list for PBXLegacyTarget "MinecraftServer - Mac - autotools" */;
 			buildPhases = (
 			);
