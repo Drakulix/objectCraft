@@ -22,16 +22,29 @@
 #import "RaknetCustomPacket.h"
 #import "RaknetACK.h"
 #import "RaknetNACK.h"
+#import <string.h>
 
 
 @implementation RaknetHandler
 
-bool udp_socket_address_equal(void *add1, void *add2) {
+static bool udp_socket_address_equal(void *add1, void *add2) {
     return of_udp_socket_address_equal(add1, add2);
 }
 
-uint32_t udp_socket_address_hash(void *add) {
+static uint32_t udp_socket_address_hash(void *add) {
     return of_udp_socket_address_hash(add);
+}
+
+static void* udp_retain(void *value)
+{
+    void *buffer = malloc(sizeof(of_udp_socket_address_t));
+    memcpy(buffer, value, sizeof(of_udp_socket_address_t));
+    return buffer;
+}
+
+static void udp_release(void *value)
+{
+    free(value);
 }
 
 - (instancetype)initWithSocket:(OFUDPSocket *)_socket {
@@ -40,6 +53,8 @@ uint32_t udp_socket_address_hash(void *add) {
         of_map_table_functions_t udp_socket_func;
         udp_socket_func.equal = udp_socket_address_equal;
         udp_socket_func.hash = udp_socket_address_hash;
+        udp_socket_func.retain = udp_retain;
+        udp_socket_func.release = udp_release;
         
         of_map_table_functions_t udp_connection_func;
         udp_connection_func.retain = connection_retain;
@@ -55,10 +70,12 @@ uint32_t udp_socket_address_hash(void *add) {
 
 - (void)didRecieveData:(OFDataArray *)data fromPeer:(of_udp_socket_address_t)address {
     uint8_t packetId = [data readByte];
+    LogVerbose(@"Got Raknet Packet: 0x%02x, %@", packetId, data);
     RaknetPacket *packet = [RaknetPacket packetWithId:packetId data:data];
+    if (!packet)
+        return;
     
-    LogDebug(@"Got Raknet Packet: 0x%02x, %@", packetId, packet);
-    LogVerbose(@"%@", data);
+    LogDebug(@"Parsed Raknet Packet: 0x%02x, %@", packetId, packet);
     
     if ([packet isKindOfClass:[RaknetConnectedPing class]]) { //includes UnconnectedPing
         
@@ -88,7 +105,6 @@ uint32_t udp_socket_address_hash(void *add) {
     } else if ([packet isKindOfClass:[RaknetConnectionRequest2 class]]) {
         
         
-        of_udp_socket_address_t address;
         uint16_t port = 0;
         [OFUDPSocket hostForAddress:&address port:&port];
         
