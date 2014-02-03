@@ -45,6 +45,13 @@ int encode_signed_varint(uint8_t *const buffer, int64_t value)
 
 @implementation OFDataArray (VarIntWriter)
 
+- (void)prependVarInt:(uint64_t)integer {
+    uint8_t *const buffer = (uint8_t *const)malloc(10);
+    int length = encode_unsigned_varint(buffer, integer);
+    [self insertItems:buffer atIndex:0 count:length];
+    free(buffer);
+}
+
 - (void)appendVarInt:(uint64_t)integer {
     uint8_t *const buffer = (uint8_t *const)malloc(10);
     int length = encode_unsigned_varint(buffer, integer);

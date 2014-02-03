@@ -10,6 +10,7 @@
 
 @interface OFDataArray (VarIntWriter)
 
+- (void)prependVarInt:(uint64_t)integer;
 - (void)appendVarInt:(uint64_t)integer;
 - (void)appendSignedVarInt:(int64_t)integer;
 
