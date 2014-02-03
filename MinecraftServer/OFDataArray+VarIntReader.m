@@ -48,3 +48,58 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 }
 
 @end
+
+@implementation OFTCPSocket (VarIntReader)
+
+- (void)asyncReadVarIntForTarget:(id)target selector:(SEL)selector {
+    [[AsyncVarIntReader alloc] initWithSocket:self signed:NO forTarget:target andSelector:selector];
+}
+
+- (void)asyncReadSignedVarIntForTarget:(id)target selector:(SEL)selector {
+    [[AsyncVarIntReader alloc] initWithSocket:self signed:YES forTarget:target andSelector:selector];
+}
+
+@end
+
+@implementation AsyncVarIntReader
+
+- (instancetype)initWithSocket:(OFTCPSocket *)tcpSocket signed:(BOOL)_sign forTarget:(id)_target andSelector:(SEL)_selector {
+    self = [super init];
+    if (self) {
+        sign = _sign;
+        target = _target;
+        selector = _selector;
+        varData = [[OFDataArray alloc] initWithItemSize:sizeof(int8_t)];
+        socket = tcpSocket;
+        [tcpSocket asyncReadIntoBuffer:&buffer exactLength:sizeof(int8_t) target:self selector:@selector(readFrom:buffer:ofSize:error:)];
+    }
+    return self;
+}
+
+- (BOOL)readFrom:(OFStream *)stream buffer:(void *)buffer ofSize:(size_t)size error:(OFException *)exception {
+    
+    if (exception) {
+        bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
+        func(target, selector, socket, 0, exception);
+    }
+    
+    [varData addItem:buffer];
+    if (((*(uint8_t *)buffer) & 0x80) != 0) {
+        return YES;
+    } else {
+        if (sign) {
+            int64_t varInt = decode_signed_varint([varData firstItem], NULL);
+            bool (*func)(id, SEL, OFStream *, int64_t, OFException*) = (bool(*)(id, SEL, OFStream*, int64_t, OFException*)) [target methodForSelector:selector];
+            func(target, selector, socket, varInt, nil);
+        }
+        if (!sign) {
+            uint64_t varInt = decode_unsigned_varint([varData firstItem], NULL));
+            bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
+            func(target, selector, socket, varInt, nil);
+        }
+        [self autorelease];
+        return NO;
+    }
+}
+
+@end
