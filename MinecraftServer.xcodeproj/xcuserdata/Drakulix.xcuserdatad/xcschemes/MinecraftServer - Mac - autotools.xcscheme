@@ -41,7 +41,7 @@
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <PathRunnable
-         FilePath = "$(PROJECT_DIR)/objectCraft">
+         FilePath = "/Users/Drakulix/Documents/XCode Projects/MinecraftServer/objectCraft">
       </PathRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
