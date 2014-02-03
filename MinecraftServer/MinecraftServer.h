@@ -8,7 +8,8 @@
 
 #import <ObjFW/ObjFW.h>
 @class WorldManager;
-@class UDPRecieveThread;
+@class RaknetHandler;
+#define UDP_MAX_PACKET_SIZE 1504 //MAX MTU is 1447. 1504 bytes should never be too small
 
 @interface MinecraftServer : OFObject<OFApplicationDelegate> {
     BOOL running;
@@ -18,10 +19,11 @@
     OFMutableArray *activeTCPConnections;
     
     OFUDPSocket *udpServerSocketIPv4;
-    UDPRecieveThread *udpServerSocketIPv4Thread;
+    void *udpServerSocketIPv4Buffer;
     OFUDPSocket *udpServerSocketIPv6;
-    UDPRecieveThread *udpServerSocketIPv6Thread;
+    void *udpServerSocketIPv6Buffer;
     OFMutableArray *activeUDPConnections;
+    RaknetHandler  *raknetHandler;
     
     WorldManager *worldManager;
 }

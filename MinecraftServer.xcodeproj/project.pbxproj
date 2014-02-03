@@ -17,7 +17,6 @@
 		C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C1189689ED00E009B3 /* NetherGenerator.m */; };
 		C92CD1C5189689FB00E009B3 /* OverworldGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */; };
 		C92CD1C818968A0400E009B3 /* EndGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = C92CD1C718968A0400E009B3 /* EndGenerator.m */; };
-		C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556381897E60100D67C15 /* UDPRecieveThread.m */; };
 		C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C965563C1897EB0800D67C15 /* RaknetHandler.m */; };
 		C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556401897EC9000D67C15 /* OFDataArray+IntReader.m */; };
 		C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C96556471897EF3200D67C15 /* RaknetPacket.m */; };
@@ -107,8 +106,6 @@
 		C957995B189072A000B4CB37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C95799681890795000B4CB37 /* MinecraftServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinecraftServer.h; sourceTree = "<group>"; };
 		C95799691890795000B4CB37 /* MinecraftServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinecraftServer.m; sourceTree = "<group>"; };
-		C96556371897E60100D67C15 /* UDPRecieveThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPRecieveThread.h; sourceTree = "<group>"; };
-		C96556381897E60100D67C15 /* UDPRecieveThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPRecieveThread.m; sourceTree = "<group>"; };
 		C965563B1897EB0800D67C15 /* RaknetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaknetHandler.h; sourceTree = "<group>"; };
 		C965563C1897EB0800D67C15 /* RaknetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaknetHandler.m; sourceTree = "<group>"; };
 		C965563F1897EC9000D67C15 /* OFDataArray+IntReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+IntReader.h"; sourceTree = "<group>"; };
@@ -323,8 +320,6 @@
 		C965563A1897E60700D67C15 /* UDPNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				C96556371897E60100D67C15 /* UDPRecieveThread.h */,
-				C96556381897E60100D67C15 /* UDPRecieveThread.m */,
 				C965563B1897EB0800D67C15 /* RaknetHandler.h */,
 				C965563C1897EB0800D67C15 /* RaknetHandler.m */,
 				C965566D1897EF3600D67C15 /* RaknetPacket */,
@@ -612,7 +607,6 @@
 				C96556801897F5AF00D67C15 /* OFDataArray+StringWriter.m in Sources */,
 				C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */,
 				C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */,
-				C96556391897E60100D67C15 /* UDPRecieveThread.m in Sources */,
 				C96556651897EF3200D67C15 /* RaknetConnectionResponse.m in Sources */,
 				C9B1000718991C5500AB8DB8 /* UDPClientConnection.m in Sources */,
 				C9B1000918991C5500AB8DB8 /* UDPClientConnect.m in Sources */,
