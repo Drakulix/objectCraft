@@ -12,7 +12,6 @@
 
 + (void)setup;
 + (void)addPacketClass:(Class)class forId:(uint8_t)pId;
-+ (OFDictionary *)packetList;
 
 + (UDPPacket *)packetWithId:(uint8_t)pID data:(OFDataArray *)data;
 + (uint8_t)packetId;
