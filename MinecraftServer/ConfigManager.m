@@ -16,7 +16,7 @@
 @dynamic serverBrowserMessage, loginWelcomeMessageEnabled, loginWelcomeMessage;
 @dynamic defaultGamemode, isHardcore;
 @dynamic spawnDimension, dimensions;
-@dynamic seed, maxPlayers, defaultSpawnPoint;
+@dynamic seed, maxPlayers, defaultSpawnPoint, difficulty;
 
 static ConfigManager *sharedInstance;
 
@@ -64,6 +64,7 @@ static ConfigManager *sharedInstance;
                                        nil],
                 @"maxPlayers", [OFNumber numberWithInt32:64],
                 @"seed", [OFNumber numberWithInt32:[[RandomGenerator globalGenerator] nextRandomInt32]],
+                @"difficulty", @"NORMAL",
                 @"udpServerId", [OFNumber numberWithInt64:0],
              nil];
             [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
@@ -281,6 +282,42 @@ static ConfigManager *sharedInstance;
 - (void)setDefaultSpawnPoint:(of_point_t)defaultSpawnPoint {
     [settings setObject:[OFArray arrayWithObjects:[OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.x)], [OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.y)], nil] forKey:@"defaultSpawnPoint"];
     [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+}
+
+- (uint8_t)difficulty {
+    OFString *string = [settings objectForKey:@"difficulty"];
+    if ([string isEqual:@"PEACEFUL"]) {
+        return 0;
+    }
+    if ([string isEqual:@"EASY"]) {
+        return 1;
+    }
+    if ([string isEqual:@"NORMAL"]) {
+        return 2;
+    }
+    if ([string isEqual:@"HARD"]) {
+        return 2;
+    }
+    return 2;
+}
+- (void)setDifficulty:(uint8_t)difficulty {
+    switch (difficulty) {
+        case 0:
+            [settings setObject:@"PEACEFUL" forKey:@"difficulty"];
+            break;
+            
+        case 1:
+            [settings setObject:@"EASY" forKey:@"difficulty"];
+            break;
+            
+        case 2:
+            [settings setObject:@"NORMAL" forKey:@"difficulty"];
+            break;
+            
+        case 3:
+            [settings setObject:@"HARD" forKey:@"difficulty"];
+            break;
+    }
 }
 
 @end

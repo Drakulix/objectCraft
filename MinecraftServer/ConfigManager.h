@@ -63,5 +63,6 @@
 @property (nonatomic) int32_t seed;
 @property (nonatomic) int32_t maxPlayers;
 @property (nonatomic) of_point_t defaultSpawnPoint;
+@property (nonatomic) uint8_t difficulty;
 
 @end
