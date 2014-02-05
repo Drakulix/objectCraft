@@ -106,7 +106,7 @@ static void udp_release(void *value)
         
         
         uint16_t port = 0;
-        [OFUDPSocket hostForAddress:&address port:&port];
+        [OFUDPSocket getHost:NULL andPort:&port forAddress:&address];
         
         [self sendRaknetPacket:[[RaknetConnectionResponse2 alloc] initWithMtuSize:((RaknetConnectionRequest2 *)packet).mtuSize andClientPort:port] To:address];
         

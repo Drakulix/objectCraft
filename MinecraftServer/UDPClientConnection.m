@@ -88,7 +88,7 @@
         
         
         uint16_t port = 0;
-        [OFUDPSocket hostForAddress:&peer port:&port];
+        [OFUDPSocket getHost:NULL andPort:&port forAddress:&peer];
         [self sendPacket:[[UDPServerHandshake alloc] initWithPort:port sessionId:((UDPClientConnect *)packet).sessionId serverSessionId:0x0000000004440ba9]]; //hardcoded session2? we should test that
         clientId = ((UDPClientConnect *)packet).clientId;
         
