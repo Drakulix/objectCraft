@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C900180B189FBAA000EBD8DA /* TCPClientConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C900180A189FBAA000EBD8DA /* TCPClientConnection.m */; };
+		C900180E189FD22200EBD8DA /* TCPPacketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C900180D189FD22200EBD8DA /* TCPPacketHandler.m */; };
+		C9001812189FF2E900EBD8DA /* TCPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C9001811189FF2E900EBD8DA /* TCPPacket.m */; };
+		C900181B18A0337A00EBD8DA /* TCPHandshakeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C900181418A0337A00EBD8DA /* TCPHandshakeHandler.m */; };
+		C900181C18A0337A00EBD8DA /* TCPLoginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C900181618A0337A00EBD8DA /* TCPLoginHandler.m */; };
+		C900181D18A0337A00EBD8DA /* TCPPlayDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C900181818A0337A00EBD8DA /* TCPPlayDelegate.m */; };
+		C900181E18A0337A00EBD8DA /* TCPStatusHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C900181A18A0337A00EBD8DA /* TCPStatusHandler.m */; };
+		C900184118A0469B00EBD8DA /* TCPHandshake.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182018A0469B00EBD8DA /* TCPHandshake.m */; };
+		C900184218A0469B00EBD8DA /* TCPLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182218A0469B00EBD8DA /* TCPLoginStart.m */; };
+		C900184318A0469B00EBD8DA /* TCPLoginSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182418A0469B00EBD8DA /* TCPLoginSuccess.m */; };
+		C900184418A0469B00EBD8DA /* TCPJoinGame.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182618A0469B00EBD8DA /* TCPJoinGame.m */; };
+		C900184518A0469B00EBD8DA /* TCPCustomPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182818A0469B00EBD8DA /* TCPCustomPayload.m */; };
+		C900184618A0469B00EBD8DA /* TCPSpawnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182A18A0469B00EBD8DA /* TCPSpawnPosition.m */; };
+		C900184718A0469B00EBD8DA /* TCPPlayerAbilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182C18A0469B00EBD8DA /* TCPPlayerAbilities.m */; };
+		C900184818A0469B00EBD8DA /* TCPInitMapChunks.m in Sources */ = {isa = PBXBuildFile; fileRef = C900182E18A0469B00EBD8DA /* TCPInitMapChunks.m */; };
+		C900184918A0469B00EBD8DA /* TCPPlayerPositionClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183018A0469B00EBD8DA /* TCPPlayerPositionClient.m */; };
+		C900184A18A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183218A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.m */; };
+		C900184B18A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183418A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m */; };
+		C900184C18A0469B00EBD8DA /* TCPTimeUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183618A0469B00EBD8DA /* TCPTimeUpdate.m */; };
+		C900184D18A0469B00EBD8DA /* TCPPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183818A0469B00EBD8DA /* TCPPing.m */; };
+		C900184E18A0469B00EBD8DA /* TCPStatusRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183A18A0469B00EBD8DA /* TCPStatusRequest.m */; };
+		C900184F18A0469B00EBD8DA /* TCPStatusResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183C18A0469B00EBD8DA /* TCPStatusResponse.m */; };
+		C900185018A0469B00EBD8DA /* TCPStatusPing.m in Sources */ = {isa = PBXBuildFile; fileRef = C900183E18A0469B00EBD8DA /* TCPStatusPing.m */; };
+		C900185118A0469B00EBD8DA /* TCPStatusPong.m in Sources */ = {isa = PBXBuildFile; fileRef = C900184018A0469B00EBD8DA /* TCPStatusPong.m */; };
+		C900185418A04B7D00EBD8DA /* TCPServerPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C900185318A04B7D00EBD8DA /* TCPServerPacket.m */; };
+		C900185718A04BA600EBD8DA /* TCPClientPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C900185618A04BA600EBD8DA /* TCPClientPacket.m */; };
+		C900185A18A05E0000EBD8DA /* OFDataArray+ZLib.m in Sources */ = {isa = PBXBuildFile; fileRef = C900185918A05E0000EBD8DA /* OFDataArray+ZLib.m */; };
 		C918649B1895C97F00E78048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C957995B189072A000B4CB37 /* main.m */; };
 		C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C95799691890795000B4CB37 /* MinecraftServer.m */; };
 		C918649D1895C97F00E78048 /* ConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B868561891423B0049B299 /* ConfigManager.m */; };
@@ -40,6 +67,9 @@
 		C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C965567F1897F5AF00D67C15 /* OFDataArray+FloatWriter.m */; };
 		C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */; };
 		C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.mm */; };
+		C9AA13B618A12368000D383A /* OFString+DataUsingEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AA13B518A12368000D383A /* OFString+DataUsingEncoding.m */; };
+		C9AA13B818A12494000D383A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AA13B718A12494000D383A /* libz.dylib */; };
+		C9AA13BB18A12DB7000D383A /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */; };
 		C9B1000718991C5500AB8DB8 /* UDPClientConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFDE18991C5500AB8DB8 /* UDPClientConnection.m */; };
 		C9B1000818991C5500AB8DB8 /* UDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE018991C5500AB8DB8 /* UDPPacket.m */; };
 		C9B1000918991C5500AB8DB8 /* UDPClientConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1FFE218991C5500AB8DB8 /* UDPClientConnect.m */; };
@@ -61,7 +91,6 @@
 		C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */; };
 		C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */; };
 		C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */; };
-		C9E9D006189BA91A0043F279 /* libobjfw.7.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */; };
 		C9EFB607189A70E900078CB1 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB5FE189A70E900078CB1 /* Entity.m */; };
 		C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB600189A70E900078CB1 /* MovingEntity.m */; };
 		C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB602189A70E900078CB1 /* LivingEntity.m */; };
@@ -88,6 +117,60 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C9001809189FBAA000EBD8DA /* TCPClientConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClientConnection.h; sourceTree = "<group>"; };
+		C900180A189FBAA000EBD8DA /* TCPClientConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPClientConnection.m; sourceTree = "<group>"; };
+		C900180C189FD22200EBD8DA /* TCPPacketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPacketHandler.h; sourceTree = "<group>"; };
+		C900180D189FD22200EBD8DA /* TCPPacketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPacketHandler.m; sourceTree = "<group>"; };
+		C9001810189FF2E900EBD8DA /* TCPPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPacket.h; sourceTree = "<group>"; };
+		C9001811189FF2E900EBD8DA /* TCPPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPacket.m; sourceTree = "<group>"; };
+		C900181318A0337A00EBD8DA /* TCPHandshakeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPHandshakeHandler.h; sourceTree = "<group>"; };
+		C900181418A0337A00EBD8DA /* TCPHandshakeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPHandshakeHandler.m; sourceTree = "<group>"; };
+		C900181518A0337A00EBD8DA /* TCPLoginHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPLoginHandler.h; sourceTree = "<group>"; };
+		C900181618A0337A00EBD8DA /* TCPLoginHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPLoginHandler.m; sourceTree = "<group>"; };
+		C900181718A0337A00EBD8DA /* TCPPlayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPlayDelegate.h; sourceTree = "<group>"; };
+		C900181818A0337A00EBD8DA /* TCPPlayDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPlayDelegate.m; sourceTree = "<group>"; };
+		C900181918A0337A00EBD8DA /* TCPStatusHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStatusHandler.h; sourceTree = "<group>"; };
+		C900181A18A0337A00EBD8DA /* TCPStatusHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStatusHandler.m; sourceTree = "<group>"; };
+		C900181F18A0469B00EBD8DA /* TCPHandshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPHandshake.h; sourceTree = "<group>"; };
+		C900182018A0469B00EBD8DA /* TCPHandshake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPHandshake.m; sourceTree = "<group>"; };
+		C900182118A0469B00EBD8DA /* TCPLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPLoginStart.h; sourceTree = "<group>"; };
+		C900182218A0469B00EBD8DA /* TCPLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPLoginStart.m; sourceTree = "<group>"; };
+		C900182318A0469B00EBD8DA /* TCPLoginSuccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPLoginSuccess.h; sourceTree = "<group>"; };
+		C900182418A0469B00EBD8DA /* TCPLoginSuccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPLoginSuccess.m; sourceTree = "<group>"; };
+		C900182518A0469B00EBD8DA /* TCPJoinGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPJoinGame.h; sourceTree = "<group>"; };
+		C900182618A0469B00EBD8DA /* TCPJoinGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPJoinGame.m; sourceTree = "<group>"; };
+		C900182718A0469B00EBD8DA /* TCPCustomPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCustomPayload.h; sourceTree = "<group>"; };
+		C900182818A0469B00EBD8DA /* TCPCustomPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPCustomPayload.m; sourceTree = "<group>"; };
+		C900182918A0469B00EBD8DA /* TCPSpawnPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSpawnPosition.h; sourceTree = "<group>"; };
+		C900182A18A0469B00EBD8DA /* TCPSpawnPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSpawnPosition.m; sourceTree = "<group>"; };
+		C900182B18A0469B00EBD8DA /* TCPPlayerAbilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPlayerAbilities.h; sourceTree = "<group>"; };
+		C900182C18A0469B00EBD8DA /* TCPPlayerAbilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPlayerAbilities.m; sourceTree = "<group>"; };
+		C900182D18A0469B00EBD8DA /* TCPInitMapChunks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPInitMapChunks.h; sourceTree = "<group>"; };
+		C900182E18A0469B00EBD8DA /* TCPInitMapChunks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPInitMapChunks.m; sourceTree = "<group>"; };
+		C900182F18A0469B00EBD8DA /* TCPPlayerPositionClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPlayerPositionClient.h; sourceTree = "<group>"; };
+		C900183018A0469B00EBD8DA /* TCPPlayerPositionClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPlayerPositionClient.m; sourceTree = "<group>"; };
+		C900183118A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPlayerPositionAndLookClient.h; sourceTree = "<group>"; };
+		C900183218A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPlayerPositionAndLookClient.m; sourceTree = "<group>"; };
+		C900183318A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPlayerPositionAndLookServer.h; sourceTree = "<group>"; };
+		C900183418A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPlayerPositionAndLookServer.m; sourceTree = "<group>"; };
+		C900183518A0469B00EBD8DA /* TCPTimeUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPTimeUpdate.h; sourceTree = "<group>"; };
+		C900183618A0469B00EBD8DA /* TCPTimeUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPTimeUpdate.m; sourceTree = "<group>"; };
+		C900183718A0469B00EBD8DA /* TCPPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPPing.h; sourceTree = "<group>"; };
+		C900183818A0469B00EBD8DA /* TCPPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPPing.m; sourceTree = "<group>"; };
+		C900183918A0469B00EBD8DA /* TCPStatusRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStatusRequest.h; sourceTree = "<group>"; };
+		C900183A18A0469B00EBD8DA /* TCPStatusRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStatusRequest.m; sourceTree = "<group>"; };
+		C900183B18A0469B00EBD8DA /* TCPStatusResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStatusResponse.h; sourceTree = "<group>"; };
+		C900183C18A0469B00EBD8DA /* TCPStatusResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStatusResponse.m; sourceTree = "<group>"; };
+		C900183D18A0469B00EBD8DA /* TCPStatusPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStatusPing.h; sourceTree = "<group>"; };
+		C900183E18A0469B00EBD8DA /* TCPStatusPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStatusPing.m; sourceTree = "<group>"; };
+		C900183F18A0469B00EBD8DA /* TCPStatusPong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStatusPong.h; sourceTree = "<group>"; };
+		C900184018A0469B00EBD8DA /* TCPStatusPong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStatusPong.m; sourceTree = "<group>"; };
+		C900185218A04B7D00EBD8DA /* TCPServerPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPServerPacket.h; sourceTree = "<group>"; };
+		C900185318A04B7D00EBD8DA /* TCPServerPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServerPacket.m; sourceTree = "<group>"; };
+		C900185518A04BA600EBD8DA /* TCPClientPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPClientPacket.h; sourceTree = "<group>"; };
+		C900185618A04BA600EBD8DA /* TCPClientPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPClientPacket.m; sourceTree = "<group>"; };
+		C900185818A05E0000EBD8DA /* OFDataArray+ZLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+ZLib.h"; sourceTree = "<group>"; };
+		C900185918A05E0000EBD8DA /* OFDataArray+ZLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+ZLib.m"; sourceTree = "<group>"; };
 		C91864821895878A00E78048 /* configure.ac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
 		C91864831895878A00E78048 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		C91864851895B89300E78048 /* WorldManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldManager.h; sourceTree = "<group>"; };
@@ -153,6 +236,9 @@
 		C977BF891898647900FD9B38 /* OFDataArray+VarIntReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFDataArray+VarIntReader.m"; sourceTree = "<group>"; };
 		C977BF8B1898654400FD9B38 /* OFDataArray+VarIntWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFDataArray+VarIntWriter.h"; sourceTree = "<group>"; };
 		C977BF8C1898654400FD9B38 /* OFDataArray+VarIntWriter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "OFDataArray+VarIntWriter.mm"; sourceTree = "<group>"; };
+		C9AA13B418A12368000D383A /* OFString+DataUsingEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OFString+DataUsingEncoding.h"; sourceTree = "<group>"; };
+		C9AA13B518A12368000D383A /* OFString+DataUsingEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OFString+DataUsingEncoding.m"; sourceTree = "<group>"; };
+		C9AA13B718A12494000D383A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C9B1000018991C5500AB8DB8 /* UDPAddPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPAddPlayer.m; sourceTree = "<group>"; };
 		C9B1000118991C5500AB8DB8 /* UDPMoveEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPMoveEntity.h; sourceTree = "<group>"; };
 		C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPMoveEntity.m; sourceTree = "<group>"; };
@@ -232,13 +318,61 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9E9D006189BA91A0043F279 /* libobjfw.7.0.dylib in Frameworks */,
+				C9AA13B818A12494000D383A /* libz.dylib in Frameworks */,
+				C9AA13BB18A12DB7000D383A /* libobjfw.7.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C900180F189FF2A300EBD8DA /* TCPPacket */ = {
+			isa = PBXGroup;
+			children = (
+				C9001810189FF2E900EBD8DA /* TCPPacket.h */,
+				C9001811189FF2E900EBD8DA /* TCPPacket.m */,
+				C900185518A04BA600EBD8DA /* TCPClientPacket.h */,
+				C900185618A04BA600EBD8DA /* TCPClientPacket.m */,
+				C900185218A04B7D00EBD8DA /* TCPServerPacket.h */,
+				C900185318A04B7D00EBD8DA /* TCPServerPacket.m */,
+				C900181F18A0469B00EBD8DA /* TCPHandshake.h */,
+				C900182018A0469B00EBD8DA /* TCPHandshake.m */,
+				C900182118A0469B00EBD8DA /* TCPLoginStart.h */,
+				C900182218A0469B00EBD8DA /* TCPLoginStart.m */,
+				C900182318A0469B00EBD8DA /* TCPLoginSuccess.h */,
+				C900182418A0469B00EBD8DA /* TCPLoginSuccess.m */,
+				C900182518A0469B00EBD8DA /* TCPJoinGame.h */,
+				C900182618A0469B00EBD8DA /* TCPJoinGame.m */,
+				C900182718A0469B00EBD8DA /* TCPCustomPayload.h */,
+				C900182818A0469B00EBD8DA /* TCPCustomPayload.m */,
+				C900182918A0469B00EBD8DA /* TCPSpawnPosition.h */,
+				C900182A18A0469B00EBD8DA /* TCPSpawnPosition.m */,
+				C900182B18A0469B00EBD8DA /* TCPPlayerAbilities.h */,
+				C900182C18A0469B00EBD8DA /* TCPPlayerAbilities.m */,
+				C900182D18A0469B00EBD8DA /* TCPInitMapChunks.h */,
+				C900182E18A0469B00EBD8DA /* TCPInitMapChunks.m */,
+				C900182F18A0469B00EBD8DA /* TCPPlayerPositionClient.h */,
+				C900183018A0469B00EBD8DA /* TCPPlayerPositionClient.m */,
+				C900183118A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.h */,
+				C900183218A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.m */,
+				C900183318A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.h */,
+				C900183418A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m */,
+				C900183518A0469B00EBD8DA /* TCPTimeUpdate.h */,
+				C900183618A0469B00EBD8DA /* TCPTimeUpdate.m */,
+				C900183718A0469B00EBD8DA /* TCPPing.h */,
+				C900183818A0469B00EBD8DA /* TCPPing.m */,
+				C900183918A0469B00EBD8DA /* TCPStatusRequest.h */,
+				C900183A18A0469B00EBD8DA /* TCPStatusRequest.m */,
+				C900183B18A0469B00EBD8DA /* TCPStatusResponse.h */,
+				C900183C18A0469B00EBD8DA /* TCPStatusResponse.m */,
+				C900183D18A0469B00EBD8DA /* TCPStatusPing.h */,
+				C900183E18A0469B00EBD8DA /* TCPStatusPing.m */,
+				C900183F18A0469B00EBD8DA /* TCPStatusPong.h */,
+				C900184018A0469B00EBD8DA /* TCPStatusPong.m */,
+			);
+			name = TCPPacket;
+			sourceTree = "<group>";
+		};
 		C91864801895876100E78048 /* Build Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +420,7 @@
 		C957994F189072A000B4CB37 = {
 			isa = PBXGroup;
 			children = (
+				C9AA13B718A12494000D383A /* libz.dylib */,
 				C957995A189072A000B4CB37 /* MinecraftServer */,
 				C91864801895876100E78048 /* Build Files */,
 				C918648C1895C53200E78048 /* XCode Related Stuff */,
@@ -313,6 +448,19 @@
 		C957996B18907B9200B4CB37 /* TCPNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				C9001809189FBAA000EBD8DA /* TCPClientConnection.h */,
+				C900180A189FBAA000EBD8DA /* TCPClientConnection.m */,
+				C900180C189FD22200EBD8DA /* TCPPacketHandler.h */,
+				C900180D189FD22200EBD8DA /* TCPPacketHandler.m */,
+				C900181318A0337A00EBD8DA /* TCPHandshakeHandler.h */,
+				C900181418A0337A00EBD8DA /* TCPHandshakeHandler.m */,
+				C900181918A0337A00EBD8DA /* TCPStatusHandler.h */,
+				C900181A18A0337A00EBD8DA /* TCPStatusHandler.m */,
+				C900181518A0337A00EBD8DA /* TCPLoginHandler.h */,
+				C900181618A0337A00EBD8DA /* TCPLoginHandler.m */,
+				C900181718A0337A00EBD8DA /* TCPPlayDelegate.h */,
+				C900181818A0337A00EBD8DA /* TCPPlayDelegate.m */,
+				C900180F189FF2A300EBD8DA /* TCPPacket */,
 			);
 			name = TCPNetwork;
 			sourceTree = "<group>";
@@ -333,6 +481,10 @@
 		C965563E1897EC6400D67C15 /* DataExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				C9AA13B418A12368000D383A /* OFString+DataUsingEncoding.h */,
+				C9AA13B518A12368000D383A /* OFString+DataUsingEncoding.m */,
+				C900185818A05E0000EBD8DA /* OFDataArray+ZLib.h */,
+				C900185918A05E0000EBD8DA /* OFDataArray+ZLib.m */,
 				C977BF8E1898661D00FD9B38 /* DataReader */,
 				C977BF8F1898663200FD9B38 /* DataWriter */,
 				C96556741897F38100D67C15 /* OFDataArray+RaknetMagic.h */,
@@ -580,10 +732,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9EFB607189A70E900078CB1 /* Entity.m in Sources */,
+				C900184E18A0469B00EBD8DA /* TCPStatusRequest.m in Sources */,
 				C92CD1BF18967E6700E009B3 /* WorldGenerator.m in Sources */,
+				C900185018A0469B00EBD8DA /* TCPStatusPing.m in Sources */,
+				C900185418A04B7D00EBD8DA /* TCPServerPacket.m in Sources */,
 				C9B1000D18991C5500AB8DB8 /* UDPLoginStatus.m in Sources */,
+				C900184C18A0469B00EBD8DA /* TCPTimeUpdate.m in Sources */,
 				C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */,
 				C92CD1BC18967E5B00E009B3 /* World.m in Sources */,
+				C900184B18A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m in Sources */,
 				C96556641897EF3200D67C15 /* RaknetConnectionRequest.m in Sources */,
 				C977BF8A1898647900FD9B38 /* OFDataArray+VarIntReader.m in Sources */,
 				C965566B1897EF3200D67C15 /* RaknetNACK.m in Sources */,
@@ -591,39 +748,55 @@
 				C96556771897F38100D67C15 /* OFDataArray+StringReader.m in Sources */,
 				C96556671897EF3200D67C15 /* RaknetConnectionRequest2.m in Sources */,
 				C9B1001118991C5500AB8DB8 /* UDPSpawnPosition.m in Sources */,
+				C900184718A0469B00EBD8DA /* TCPPlayerAbilities.m in Sources */,
+				C900184518A0469B00EBD8DA /* TCPCustomPayload.m in Sources */,
+				C900185A18A05E0000EBD8DA /* OFDataArray+ZLib.m in Sources */,
 				C9EFB60F189A74A500078CB1 /* ChunkManager.m in Sources */,
 				C9EFB61E189A8EC200078CB1 /* Block.m in Sources */,
 				C965566A1897EF3200D67C15 /* RaknetACK.m in Sources */,
 				C977BF8D1898654400FD9B38 /* OFDataArray+VarIntWriter.mm in Sources */,
+				C900184818A0469B00EBD8DA /* TCPInitMapChunks.m in Sources */,
 				C9EFB61F189A8EC200078CB1 /* AirBlock.m in Sources */,
 				C918649B1895C97F00E78048 /* main.m in Sources */,
 				C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */,
 				C918649C1895C97F00E78048 /* MinecraftServer.m in Sources */,
 				C9B1000C18991C5500AB8DB8 /* UDPLogin.m in Sources */,
+				C900184318A0469B00EBD8DA /* TCPLoginSuccess.m in Sources */,
 				C965566C1897EF3200D67C15 /* RaknetMinecraftPacket.m in Sources */,
 				C9B1000B18991C5500AB8DB8 /* UDPClientHandshake.m in Sources */,
 				C9B1000A18991C5500AB8DB8 /* UDPServerHandshake.m in Sources */,
 				C96556811897F5AF00D67C15 /* OFDataArray+IntWriter.m in Sources */,
 				C96556801897F5AF00D67C15 /* OFDataArray+StringWriter.m in Sources */,
+				C900185118A0469B00EBD8DA /* TCPStatusPong.m in Sources */,
 				C96556611897EF3200D67C15 /* RaknetConnectedPing.m in Sources */,
 				C96556821897F5AF00D67C15 /* OFDataArray+FloatWriter.m in Sources */,
+				C900185718A04BA600EBD8DA /* TCPClientPacket.m in Sources */,
 				C96556651897EF3200D67C15 /* RaknetConnectionResponse.m in Sources */,
 				C9B1000718991C5500AB8DB8 /* UDPClientConnection.m in Sources */,
+				C900181B18A0337A00EBD8DA /* TCPHandshakeHandler.m in Sources */,
 				C9B1000918991C5500AB8DB8 /* UDPClientConnect.m in Sources */,
+				C900184F18A0469B00EBD8DA /* TCPStatusResponse.m in Sources */,
 				C92CD1C818968A0400E009B3 /* EndGenerator.m in Sources */,
 				C918649D1895C97F00E78048 /* ConfigManager.m in Sources */,
 				C9B1001318991C5500AB8DB8 /* UDPDisconnect.m in Sources */,
 				C92CD1C5189689FB00E009B3 /* OverworldGenerator.m in Sources */,
 				C9B1000F18991C5500AB8DB8 /* UDPPong.m in Sources */,
 				C96556411897EC9000D67C15 /* OFDataArray+IntReader.m in Sources */,
+				C900181E18A0337A00EBD8DA /* TCPStatusHandler.m in Sources */,
 				C9B1001218991C5500AB8DB8 /* UDPSetTime.m in Sources */,
 				C96556691897EF3200D67C15 /* RaknetCustomPacket.m in Sources */,
 				C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */,
 				C96556631897EF3200D67C15 /* RaknetAdvertise.m in Sources */,
+				C900184118A0469B00EBD8DA /* TCPHandshake.m in Sources */,
+				C900184A18A0469B00EBD8DA /* TCPPlayerPositionAndLookClient.m in Sources */,
 				C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */,
 				C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */,
+				C900184918A0469B00EBD8DA /* TCPPlayerPositionClient.m in Sources */,
+				C900184418A0469B00EBD8DA /* TCPJoinGame.m in Sources */,
 				C9B1001818991C5500AB8DB8 /* UDPAddPlayer.m in Sources */,
 				C9EFB614189A74C500078CB1 /* Chunk.m in Sources */,
+				C9001812189FF2E900EBD8DA /* TCPPacket.m in Sources */,
+				C9AA13B618A12368000D383A /* OFString+DataUsingEncoding.m in Sources */,
 				C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */,
 				C9EFB60A189A70E900078CB1 /* Player.m in Sources */,
 				C9B1001418991C5500AB8DB8 /* UDPChunkRequest.m in Sources */,
@@ -631,9 +804,15 @@
 				C9EFB620189A8EC200078CB1 /* DirtBlock.m in Sources */,
 				C96556781897F38100D67C15 /* OFDataArray+FloatReader.m in Sources */,
 				C96556621897EF3200D67C15 /* RaknetUnconnectedPing.m in Sources */,
+				C900180B189FBAA000EBD8DA /* TCPClientConnection.m in Sources */,
+				C900184D18A0469B00EBD8DA /* TCPPing.m in Sources */,
+				C900181D18A0337A00EBD8DA /* TCPPlayDelegate.m in Sources */,
 				C9EFB615189A74C500078CB1 /* ChunkColumn.m in Sources */,
 				C965563D1897EB0800D67C15 /* RaknetHandler.m in Sources */,
 				C9B1001518991C5500AB8DB8 /* UDPChunkData.m in Sources */,
+				C900184618A0469B00EBD8DA /* TCPSpawnPosition.m in Sources */,
+				C900180E189FD22200EBD8DA /* TCPPacketHandler.m in Sources */,
+				C900184218A0469B00EBD8DA /* TCPLoginStart.m in Sources */,
 				C9B1001018991C5500AB8DB8 /* UDPStartGame.m in Sources */,
 				C96556601897EF3200D67C15 /* RaknetPacket.m in Sources */,
 				C918649E1895C97F00E78048 /* RandomGenerator.m in Sources */,
@@ -643,6 +822,7 @@
 				C9B1000E18991C5500AB8DB8 /* UDPPing.m in Sources */,
 				C9B1001618991C5500AB8DB8 /* UDPReadyPacket.m in Sources */,
 				C96556661897EF3200D67C15 /* RaknetIncompatibleProtocol.m in Sources */,
+				C900181C18A0337A00EBD8DA /* TCPLoginHandler.m in Sources */,
 				C96556791897F38100D67C15 /* OFDataArray+RaknetMagic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,6 +834,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ObjFW-gbnufvuyjtibmocwzoucwpndzelw/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -669,6 +853,10 @@
 					"$(inherited)",
 					/usr/local/lib,
 				);
+				OTHER_CFLAGS = (
+					"-fconstant-string-class=OFConstantString",
+					"-fno-constant-cfstrings",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -677,6 +865,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ObjFW-gbnufvuyjtibmocwzoucwpndzelw/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
@@ -687,6 +879,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/lib,
+				);
+				OTHER_CFLAGS = (
+					"-fconstant-string-class=OFConstantString",
+					"-fno-constant-cfstrings",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
