@@ -12,9 +12,11 @@
 #import "ConfigManager.h"
 #import "WorldManager.h"
 #import "RaknetHandler.h"
+#import "TCPClientConnection.h"
 
 #import "RaknetPacket.h"
 #import "UDPPacket.h"
+#import "TCPPacket.h"
 
 static MinecraftServer *sharedInstance;
 
@@ -41,6 +43,7 @@ static MinecraftServer *sharedInstance;
     
     [RaknetPacket setup];
     [UDPPacket setup];
+    [TCPPacket setup];
     
     @try {
         tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];
@@ -112,6 +115,8 @@ static MinecraftServer *sharedInstance;
         LogError(@"Exception on accepting tcp socket: %@", exception);
         return YES;
     }
+    
+    [[TCPClientConnection alloc] initWithSocket:[acceptedSocket retain]];
     
     return YES;
 }
