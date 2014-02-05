@@ -23,7 +23,8 @@
     OFUDPSocket *udpServerSocketIPv6;
     void *udpServerSocketIPv6Buffer;
     OFMutableArray *activeUDPConnections;
-    RaknetHandler  *raknetHandler;
+    RaknetHandler  *raknetHandlerIPv4;
+    RaknetHandler  *raknetHandlerIPv6;
     
     WorldManager *worldManager;
 }

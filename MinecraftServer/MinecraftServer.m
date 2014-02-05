@@ -64,11 +64,10 @@ static MinecraftServer *sharedInstance;
         [OFApplication terminateWithStatus:EXIT_FAILURE];
     }
     
-    raknetHandler = [[RaknetHandler alloc] init];
-    
     @try {
         udpServerSocketIPv4 = [[OFUDPSocket alloc] init];
         [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
+        raknetHandlerIPv4 = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv4];
         udpServerSocketIPv4Buffer = malloc(UDP_MAX_PACKET_SIZE);
         [udpServerSocketIPv4 asyncReceiveIntoBuffer:udpServerSocketIPv4Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
     }
@@ -78,7 +77,8 @@ static MinecraftServer *sharedInstance;
     }
     @try {
         udpServerSocketIPv6 = [[OFUDPSocket alloc] init];
-        [udpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].udpIPv4Port];
+        [udpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].udpIPv6Port];
+        raknetHandlerIPv6 = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv6];
         udpServerSocketIPv6Buffer = malloc(UDP_MAX_PACKET_SIZE);
         [udpServerSocketIPv6 asyncReceiveIntoBuffer:udpServerSocketIPv6Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
     }
@@ -90,7 +90,7 @@ static MinecraftServer *sharedInstance;
     LogInfo(@"ObjectCraft Server started");
 }
 
-- (BOOL)recieveViaUDPSocket:(OFUDPSocket *)socket data:(void *)buffer withSize:(size_t)length from:(of_udp_socket_address_t *)peer error:(OFException *)exception {
+- (BOOL)recieveViaUDPSocket:(OFUDPSocket *)socket data:(void *)buffer withSize:(size_t)length from:(of_udp_socket_address_t)peer error:(OFException *)exception {
     if (exception) {
         LogError(@"Exception on reading from udp socket: %@", exception);
         return YES;
@@ -99,7 +99,11 @@ static MinecraftServer *sharedInstance;
     OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
     [data addItems:buffer count:length];
     
-    [raknetHandler didRecieveData:data fromPeer:peer];
+    if (socket == udpServerSocketIPv4)
+        [raknetHandlerIPv4 didRecieveData:data fromPeer:peer];
+    else
+        [raknetHandlerIPv6 didRecieveData:data fromPeer:peer];
+    
     return YES;
 }
 
