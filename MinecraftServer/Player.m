@@ -17,7 +17,7 @@
 #import "Chunk.h"
 #import <string.h>
 
-int playerCount;
+static int playerCount = 0;
 
 @implementation Player
 
