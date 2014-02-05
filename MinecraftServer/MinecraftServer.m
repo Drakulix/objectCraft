@@ -125,6 +125,8 @@ static MinecraftServer *sharedInstance;
     
     LogInfo(@"Shutting down");
     
+    [worldManager shutdown];
+    
     [tcpServerSocketIPv4 close];
     [tcpServerSocketIPv6 close];
     
