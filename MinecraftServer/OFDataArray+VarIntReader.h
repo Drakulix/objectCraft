@@ -23,7 +23,6 @@
 @end
 
 @interface AsyncVarIntReader : OFObject {
-    int8_t buffer;
     BOOL sign;
     id target;
     SEL selector;
