@@ -44,8 +44,6 @@
         
         self.chunkManager = [[ChunkManager alloc] initWithGenerator:generator];
         self.entityManager = [[EntityManager alloc] initWithWorld:self];
-        
-        timer = [OFTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(tick) repeats:YES];
     }
     return self;
 }

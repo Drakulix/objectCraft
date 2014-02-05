@@ -9,11 +9,13 @@
 #import <ObjFW/ObjFW.h>
 @class World;
 
-@interface WorldManager : OFObject {
+@interface WorldManager : OFThread {
+    BOOL running;
     OFMutableDictionary *dimensions;
 }
 
 + (WorldManager *)defaultManager;
 - (World *)worldForDimension:(int8_t)dimension;
+- (void)shutdown;
 
 @end

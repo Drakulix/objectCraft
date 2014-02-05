@@ -13,7 +13,6 @@
 
 @interface World : OFObject {
     WorldGenerator *generator;
-    OFTimer *timer;
 }
 
 @property (atomic) uint64_t ageInTicks;
@@ -23,6 +22,7 @@
 @property (nonatomic, retain) ChunkManager *chunkManager;
 
 - (instancetype)initWithGenerator:(OFString *)generator forDimension:(int8_t)dimension;
+- (void)tick;
 - (void)saveWorld;
 
 @end
