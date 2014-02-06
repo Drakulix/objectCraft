@@ -53,7 +53,7 @@
         
         //and now(!) CHUNKS
         
-        chunkPacket = [[TCPInitMapChunks alloc] initForDimension:player.dimension];
+        chunkPacket = [[TCPInitMapChunks alloc] initForTcpDimension:player.tcpDimension];
         for (int x = player.chunkPosX-4; x<=player.chunkPosX+4; x++) {
             for (int z = player.chunkPosZ-4; z<=player.chunkPosZ+4; z++) {
                 [chunkPacket addChunkColumn:[player loadChunkColumnAtX:x AtZ:z]];
@@ -122,7 +122,8 @@
     if ([packet isKindOfClass:[TCPPlayerPositionClient class]]) {
         TCPPlayerPositionClient *posPacket = (TCPPlayerPositionClient *)packet;
         player.X = posPacket.X;
-        player.feetY = posPacket.Y;
+        player.feetY = posPacket.feetY;
+        player.headY = posPacket.headY;
         player.Z = posPacket.Z;
         player.OnGround = posPacket.OnGround;
         LogVerbose(@"Client Position: %@", posPacket);
