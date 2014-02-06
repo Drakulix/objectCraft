@@ -14,13 +14,16 @@
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];
-    if (self) {
-        _X = player.X;
-        _Y = player.Y;
-        _Z = player.Z;
-        _Yaw = player.Yaw;
-        _Pitch = player.Pitch;
-        _OnGround = player.OnGround;
+    @try {
+        self.X = player.X;
+        self.Y = player.Y;
+        self.Z = player.Z;
+        self.Yaw = player.Yaw;
+        self.Pitch = player.Pitch;
+        self.OnGround = player.OnGround;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -30,15 +33,13 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
-    
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendDouble:self.X];
     [packetData appendDouble:self.Y];
     [packetData appendDouble:self.Z];
     [packetData appendFloat:self.Yaw];
     [packetData appendFloat:self.Pitch];
     [packetData appendBoolTcp:self.OnGround];
-    
     return packetData;
 }
 

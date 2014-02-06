@@ -11,9 +11,9 @@
 
 @interface TCPHandshake : TCPClientPacket
 
-@property (readonly) uint64_t protocolVersion;
-@property (readonly, retain) OFString *serverAddress;
-@property (readonly) uint16_t serverPort;
-@property (readonly) uint64_t nextState;
+@property (nonatomic) uint64_t protocolVersion;
+@property (nonatomic, retain) OFString *serverAddress;
+@property (nonatomic) uint16_t serverPort;
+@property (nonatomic) uint64_t nextState;
 
 @end

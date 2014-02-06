@@ -13,8 +13,11 @@
 
 - (instancetype)initWithDictionary:(OFDictionary *)dictionary {
     self = [super init];
-    if (self) {
+    @try {
         self.json = dictionary;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -28,7 +31,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendStringTcp:[self.json JSONRepresentation]];
     return packetData;
 }

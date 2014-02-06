@@ -11,9 +11,9 @@
 
 @interface TCPCustomPayload : TCPServerPacket
 
-@property (retain) OFString *channel;
-@property int16_t length;
-@property (retain) OFDataArray *payload;
+@property (nonatomic, retain) OFString *channel;
+@property (nonatomic) int16_t length;
+@property (nonatomic, retain) OFDataArray *payload;
 
 - (instancetype)initWithChannel:(OFString *)channel payload:(OFDataArray *)data;
 

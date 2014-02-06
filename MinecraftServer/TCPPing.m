@@ -22,7 +22,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     int r = rand();
     [packetData appendInt:r];
     return packetData;

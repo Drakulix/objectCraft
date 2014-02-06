@@ -10,5 +10,5 @@
 #import "TCPClientPacket.h"
 
 @interface TCPLoginStart : TCPClientPacket
-@property (readonly, retain) OFString *username;
+@property (nonatomic, retain) OFString *username;
 @end

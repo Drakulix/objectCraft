@@ -12,6 +12,6 @@
 
 - (instancetype)initWithTime:(int64_t)time;
 
-@property int64_t time;
+@property (nonatomic) int64_t time;
 
 @end

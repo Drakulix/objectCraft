@@ -13,9 +13,12 @@
 
 - (instancetype)initWithAge:(int64_t)age andDayTime:(int64_t)time {
     self = [super init];
-    if (self) {
+    @try {
         self.ageOfWorld = age;
         self.timeOfDay = time;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -25,11 +28,9 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
-    
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendLong:self.ageOfWorld];
     [packetData appendLong:self.timeOfDay];
-    
     return packetData;
 }
 

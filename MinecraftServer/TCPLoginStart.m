@@ -13,8 +13,11 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        _username = [data readStringTcp];
+    @try {
+        self.username = [data readStringTcp];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

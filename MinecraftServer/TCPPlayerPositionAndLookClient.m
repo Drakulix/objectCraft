@@ -14,14 +14,17 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        _X = [data readDouble];
-        _FeetY = [data readDouble];
-        _HeadY = [data readDouble];
-        _Z = [data readDouble];
-        _Yaw = [data readFloat];
-        _Pitch = [data readFloat];
-        _OnGround = [data readBoolTcp];
+    @try {
+        self.X = [data readDouble];
+        self.FeetY = [data readDouble];
+        self.HeadY = [data readDouble];
+        self.Z = [data readDouble];
+        self.Yaw = [data readFloat];
+        self.Pitch = [data readFloat];
+        self.OnGround = [data readBoolTcp];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

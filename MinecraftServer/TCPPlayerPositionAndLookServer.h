@@ -11,14 +11,14 @@
 
 @interface TCPPlayerPositionAndLookServer : TCPServerPacket
 
-@property (readonly) double X;
-@property (readonly) double Y;
-@property (readonly) double Z;
+@property (nonatomic) double X;
+@property (nonatomic) double Y;
+@property (nonatomic) double Z;
 
-@property (readonly) float Yaw;
-@property (readonly) float Pitch;
+@property (nonatomic) float Yaw;
+@property (nonatomic) float Pitch;
 
-@property (readonly) BOOL OnGround;
+@property (nonatomic) BOOL OnGround;
 
 - (instancetype)initWithPlayer:(Player *)player;
 

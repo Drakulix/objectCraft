@@ -13,10 +13,13 @@
 
 - (instancetype)initWithX:(int32_t)x withY:(int32_t)y withZ:(int32_t)z {
     self = [super init];
-    if (self) {
+    @try {
         self.X = x;
         self.Y = y;
         self.Z = z;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -26,7 +29,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendInt:self.X];
     [packetData appendInt:self.Y];
     [packetData appendInt:self.Z];

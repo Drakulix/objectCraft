@@ -13,8 +13,11 @@
 
 - (instancetype)initWithTime:(int64_t)time {
     self = [super init];
-    if (self) {
+    @try {
         self.time = time;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -28,7 +31,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendLong:self.time];
     return packetData;
 }

@@ -13,9 +13,12 @@
 
 - (instancetype)initWithUUID:(OFString *)uuid Username:(OFString *)username {
     self = [super init];
-    if (self) {
+    @try {
         self.uuid = uuid;
         self.username = username;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -29,7 +32,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendStringTcp:self.uuid];
     [packetData appendStringTcp:self.username];
     return packetData;

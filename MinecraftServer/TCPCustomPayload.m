@@ -14,10 +14,13 @@
 
 - (instancetype)initWithChannel:(OFString *)channel payload:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.channel = channel;
         self.length = [data count];
         self.payload = data;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -27,7 +30,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendStringTcp:self.channel];
     [packetData appendShort:self.length];
     [packetData addItems:[self.payload firstItem] count:[self.payload count]];

@@ -10,8 +10,8 @@
 
 @interface TCPTimeUpdate : TCPServerPacket
 
-@property int64_t ageOfWorld;
-@property int64_t timeOfDay;
+@property (nonatomic) int64_t ageOfWorld;
+@property (nonatomic) int64_t timeOfDay;
 
 - (instancetype)initWithAge:(int64_t)age andDayTime:(int64_t)time;
 

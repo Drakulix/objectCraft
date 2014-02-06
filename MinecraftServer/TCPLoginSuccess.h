@@ -11,8 +11,8 @@
 
 @interface TCPLoginSuccess : TCPServerPacket
 
-@property (retain) OFString *uuid;
-@property (retain) OFString *username;
+@property (nonatomic, retain) OFString *uuid;
+@property (nonatomic, retain) OFString *username;
 
 - (instancetype)initWithUUID:(OFString *)uuid Username:(OFString *)username;
 

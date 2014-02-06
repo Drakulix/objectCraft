@@ -12,12 +12,12 @@
 
 @interface TCPPlayerAbilities : TCPServerPacket
 
-@property BOOL canBeDamaged;
-@property BOOL canFly;
-@property BOOL isFlying;
-@property BOOL isCreativeMode;
-@property float flyingSpeed;
-@property float walkingSpeed;
+@property (nonatomic) BOOL canBeDamaged;
+@property (nonatomic) BOOL canFly;
+@property (nonatomic) BOOL isFlying;
+@property (nonatomic) BOOL isCreativeMode;
+@property (nonatomic) float flyingSpeed;
+@property (nonatomic) float walkingSpeed;
 
 - (instancetype)initWithPlayer:(Player *)player;
 

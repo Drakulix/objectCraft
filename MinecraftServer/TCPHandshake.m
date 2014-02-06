@@ -15,11 +15,14 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        _protocolVersion = [data readVarInt];
-        _serverAddress = [data readStringTcp];
-        _serverPort = [data readShort];
-        _nextState = [data readVarInt];
+    @try {
+        self.protocolVersion = [data readVarInt];
+        self.serverAddress = [data readStringTcp];
+        self.serverPort = [data readShort];
+        self.nextState = [data readVarInt];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

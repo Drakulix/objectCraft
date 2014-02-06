@@ -14,7 +14,7 @@
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];
-    if (self) {
+    @try {
         self.canBeDamaged = player.canBeDamaged;
         self.canFly = player.canFly;
         self.isFlying = player.canFly;
@@ -22,6 +22,9 @@
         
         self.walkingSpeed = player.walkingSpeed;
         self.flyingSpeed = player.flyingSpeed;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -31,7 +34,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray array];
     int8_t flags = 0;
     if (self.canBeDamaged)
         flags |= 1 << 0;

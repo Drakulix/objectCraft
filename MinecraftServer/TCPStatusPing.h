@@ -10,6 +10,6 @@
 
 @interface TCPStatusPing : TCPClientPacket
 
-@property (readonly) int64_t time;
+@property (nonatomic) int64_t time;
 
 @end

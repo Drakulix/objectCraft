@@ -13,8 +13,11 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        _time = [data readLong];
+    @try {
+        self.time = [data readLong];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

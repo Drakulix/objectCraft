@@ -13,12 +13,12 @@
 
 @interface TCPJoinGame : TCPServerPacket
 
-@property int32_t entityId;
-@property uint8_t gamemode;
-@property int8_t dimension;
-@property uint8_t difficulty;
-@property uint8_t maxPlayers;
-@property (retain) OFString *levelType;
+@property (nonatomic) int32_t entityId;
+@property (nonatomic) uint8_t gamemode;
+@property (nonatomic) int8_t dimension;
+@property (nonatomic) uint8_t difficulty;
+@property (nonatomic) uint8_t maxPlayers;
+@property (nonatomic, retain) OFString *levelType;
 
 - (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)gamemode isHardcore:(BOOL)hardcore forDifficulty:(uint8_t)difficulty forMaxPlayers:(uint8_t)maxPlayers forLevelType:(OFString *)levelType;
 

@@ -10,14 +10,14 @@
 
 @interface TCPPlayerPositionAndLookClient : TCPClientPacket
 
-@property (readonly) double X;
-@property (readonly) double FeetY;
-@property (readonly) double HeadY;
-@property (readonly) double Z;
+@property (nonatomic) double X;
+@property (nonatomic) double FeetY;
+@property (nonatomic) double HeadY;
+@property (nonatomic) double Z;
 
-@property (readonly) float Yaw;
-@property (readonly) float Pitch;
+@property (nonatomic) float Yaw;
+@property (nonatomic) float Pitch;
 
-@property (readonly) BOOL OnGround;
+@property (nonatomic) BOOL OnGround;
 
 @end

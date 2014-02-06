@@ -10,7 +10,7 @@
 
 @interface TCPStatusResponse : TCPServerPacket
 
-@property (retain) OFDictionary *json;
+@property (nonatomic, retain) OFDictionary *json;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

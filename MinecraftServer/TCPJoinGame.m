@@ -14,13 +14,16 @@
 
 - (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)gamemode isHardcore:(BOOL)hardcore forDifficulty:(uint8_t)difficulty forMaxPlayers:(uint8_t)maxPlayers forLevelType:(OFString *)levelType {
     self = [super init];
-    if (self) {
+    @try {
         self.entityId = player.entityId;
         self.gamemode = gamemode;
         self.gamemode |= hardcore << 3;
         self.difficulty = difficulty;
         self.maxPlayers = maxPlayers;
         self.levelType = levelType;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -30,7 +33,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendInt:self.entityId];
     [packetData appendUnsignedByte:self.gamemode];
     [packetData appendByte:self.dimension];
