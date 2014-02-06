@@ -28,62 +28,60 @@ static ConfigManager *sharedInstance;
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        
+    
+    @try {
+            
         @try {
-            
-            @try {
-                @autoreleasepool {
-                    settings = [[[OFString stringWithContentsOfFile:@"config.json"] JSONValue] mutableCopy];
-                }
-            }
-            @catch (OFInvalidJSONException *exception) {
-                settings = nil;
-            }
             @autoreleasepool {
-                if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
-                    settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
-                        @"tcpIPv4Enabled", [OFNumber numberWithBool:YES],
-                        @"tcpIPv6Enabled", [OFNumber numberWithBool:YES],
-                        @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
-                        @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
-                        @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
-                        @"udpIPv4Enabled", [OFNumber numberWithBool:YES],
-                        @"udpIPv6Enabled", [OFNumber numberWithBool:YES],
-                        @"udpIPv4Port", [OFNumber numberWithInt16:19132],
-                        @"udpIPv6Port", [OFNumber numberWithInt16:19132],
-                        @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
-                        @"serverBrowserMessage", @"ObjectCraft Server",
-                        @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:YES],
-                        @"loginWelcomeMessage", @"Welcome to our ObjectCraft Server! Have fun ;)",
-                        @"defaultGamemode", @"SURVIVAL",
-                        @"isHardcore", [OFNumber numberWithBool:NO],
-                        @"dimensions", [OFDictionary dictionaryWithKeysAndObjects:
-                                        [OFNumber numberWithInt8:-1], @"NetherGenerator",
-                                        [OFNumber numberWithInt8:0], @"OverworldGenerator",
-                                        [OFNumber numberWithInt8:1], @"EndGenerator",
-                                        nil],
-                        @"defaultSpawnDimension", [OFNumber numberWithInt8:0],
-                        @"defaultSpawnPoint", [OFArray arrayWithObjects:
-                                               [OFNumber numberWithInt32:0],
-                                               [OFNumber numberWithInt32:0],
-                                               nil],
-                        @"maxPlayers", [OFNumber numberWithInt32:64],
-                        @"seed", [OFNumber numberWithInt32:[[RandomGenerator globalGenerator] nextRandomInt32]],
-                        @"difficulty", @"NORMAL",
-                        @"udpServerId", [OFNumber numberWithInt64:0],
-                     nil];
-                    [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
-                }
+                settings = [[[OFString stringWithContentsOfFile:@"config.json"] JSONValue] mutableCopy];
             }
-            
         }
-        @catch (OFException *exception) {
-            self = nil;
+        @catch (OFInvalidJSONException *exception) {
+            settings = nil;
+        }
+        @autoreleasepool {
+            if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
+                settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
+                    @"tcpIPv4Enabled", [OFNumber numberWithBool:YES],
+                    @"tcpIPv6Enabled", [OFNumber numberWithBool:YES],
+                    @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
+                    @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
+                    @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
+                    @"udpIPv4Enabled", [OFNumber numberWithBool:YES],
+                    @"udpIPv6Enabled", [OFNumber numberWithBool:YES],
+                    @"udpIPv4Port", [OFNumber numberWithInt16:19132],
+                    @"udpIPv6Port", [OFNumber numberWithInt16:19132],
+                    @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
+                    @"serverBrowserMessage", @"ObjectCraft Server",
+                    @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:YES],
+                    @"loginWelcomeMessage", @"Welcome to our ObjectCraft Server! Have fun ;)",
+                    @"defaultGamemode", @"SURVIVAL",
+                    @"isHardcore", [OFNumber numberWithBool:NO],
+                    @"dimensions", [OFDictionary dictionaryWithKeysAndObjects:
+                                    [OFNumber numberWithInt8:-1], @"NetherGenerator",
+                                    [OFNumber numberWithInt8:0], @"OverworldGenerator",
+                                    [OFNumber numberWithInt8:1], @"EndGenerator",
+                                    nil],
+                    @"defaultSpawnDimension", [OFNumber numberWithInt8:0],
+                    @"defaultSpawnPoint", [OFArray arrayWithObjects:
+                                           [OFNumber numberWithInt32:0],
+                                           [OFNumber numberWithInt32:0],
+                                           nil],
+                    @"maxPlayers", [OFNumber numberWithInt32:64],
+                    @"seed", [OFNumber numberWithInt32:[[RandomGenerator globalGenerator] nextRandomInt32]],
+                    @"difficulty", @"NORMAL",
+                    @"udpServerId", [OFNumber numberWithInt64:0],
+                 nil];
+                [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+            }
         }
         
-        sharedInstance = self;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
+
+    sharedInstance = self;
     return self;
 }
 
