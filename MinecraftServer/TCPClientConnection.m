@@ -41,8 +41,13 @@ static OFMutableArray *activeTCPConnections;
     [packetHandler.delegate clientDisconnected];
     [socket cancelAsyncRequests];
     [socket close];
-    [socket release];
     [server tcpClientDisconnected:self];
+}
+
+- (void)dealloc {
+    [packetHandler release];
+    [socket release];
+    [super dealloc];
 }
 
 - (void)changeDelegate:(id<TCPPacketDelegate>)delegate {
@@ -86,9 +91,12 @@ static OFMutableArray *activeTCPConnections;
         return NO;
     }
     
-    OFDataArray *data = [OFDataArray dataArrayWithItemSize:1 capacity:size];
-    [data addItems:buffer count:size];
-    [packetHandler recievedPacket:data];
+    @autoreleasepool {
+        OFDataArray *data = [OFDataArray dataArrayWithItemSize:1 capacity:size];
+        [data addItems:buffer count:size];
+        [packetHandler recievedPacket:data];
+    }
+    
     free(buffer);
     [socket asyncReadVarIntForTarget:self selector:@selector(readFrom:varInt:error:)];
     
