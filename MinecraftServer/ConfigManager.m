@@ -85,6 +85,11 @@ static ConfigManager *sharedInstance;
     return self;
 }
 
+- (void)dealloc {
+    [settings release];
+    [super dealloc];
+}
+
 //Technical Server Settings
 - (BOOL)tcpIPv4Enabled {
     return [[settings objectForKey:@"tcpIPv4Enabled"] boolValue];
