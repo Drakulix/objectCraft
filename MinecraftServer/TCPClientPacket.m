@@ -28,14 +28,16 @@ static OFArray *packetListClient;
 }
 
 + (void)addPacketClass:(Class)class withState:(int)state forId:(uint8_t)pId {
-    if ([class isSubclassOfClass:[TCPClientPacket class]])
-        [[packetListClient objectAtIndex:state] setObject:[class description] forKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]];
+    if ([class isSubclassOfClass:[TCPClientPacket class]]) {
+        @autoreleasepool {
+            [[packetListClient objectAtIndex:state] setObject:[class description] forKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]];
+        }
+    }
 }
 
 + (TCPClientPacket *)clientPacketWithState:(int)state ID:(uint64_t)pId data:(OFDataArray *)data {
     @try {
-        LogDebug(@"%@", packetListClient);
-        return (TCPClientPacket *)[[objc_getClass([[[packetListClient objectAtIndex:state] objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+        return [(TCPClientPacket *)[[objc_getClass([[[packetListClient objectAtIndex:state] objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data] autorelease];
     }
     @catch (OFException *exception) {
         return nil;

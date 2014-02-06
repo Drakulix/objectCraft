@@ -11,7 +11,6 @@
 @interface TCPPacket : OFObject
 
 + (void)setup;
-- (instancetype)initWithData:(OFDataArray *)data;
 
 + (int)state;
 + (uint64_t)packetId;

@@ -11,5 +11,6 @@
 @interface TCPClientPacket : TCPPacket
 
 + (TCPClientPacket *)clientPacketWithState:(int)state ID:(uint64_t)pID data:(OFDataArray *)data;
+- (instancetype)initWithData:(OFDataArray *)data;
 
 @end
