@@ -49,7 +49,7 @@ static void udp_release(void *value)
 
 - (instancetype)initWithSocket:(OFUDPSocket *)_socket {
     self = [super init];
-    if (self) {
+    @try {
         of_map_table_functions_t udp_socket_func;
         udp_socket_func.equal = udp_socket_address_equal;
         udp_socket_func.hash = udp_socket_address_hash;
@@ -64,8 +64,19 @@ static void udp_release(void *value)
         
         openConnections = [[OFMapTable alloc] initWithKeyFunctions:udp_socket_func valueFunctions:udp_connection_func capacity:[ConfigManager defaultManager].maxPlayers];
         socket = _socket;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    [openConnections release];
+    [socket cancelAsyncRequests];
+    [socket close];
+    [socket release];
+    [super dealloc];
 }
 
 - (void)didRecieveData:(OFDataArray *)data fromPeer:(of_udp_socket_address_t)address {
@@ -80,7 +91,9 @@ static void udp_release(void *value)
     if ([packet isKindOfClass:[RaknetConnectedPing class]]) { //includes UnconnectedPing
         
         
-        [self sendRaknetPacket:[[RaknetAdvertise alloc] initWithPingId:((RaknetConnectedPing *)packet).pingId withIndetifier:[OFString stringWithFormat:(OFConstantString *)@"MCCPP;MINECON;%@", [ConfigManager defaultManager].serverBrowserMessage]] To:address];
+        @autoreleasepool {
+            [self sendRaknetPacket:[[[RaknetAdvertise alloc] initWithPingId:((RaknetConnectedPing *)packet).pingId withIndetifier:[OFString stringWithFormat:(OFConstantString *)@"MCCPP;MINECON;%@", [ConfigManager defaultManager].serverBrowserMessage]] autorelease] To:address];
+        }
         
         
     } else if ([packet isKindOfClass:[RaknetConnectionRequest class]]) {
@@ -88,17 +101,24 @@ static void udp_release(void *value)
         
         if (((RaknetConnectionRequest *)packet).protocolVersion != 5) {
             
-            [self sendRaknetPacket:[[RaknetIncompatibleProtocol alloc] init] To:address];
-        
+            @autoreleasepool {
+                [self sendRaknetPacket:[[[RaknetIncompatibleProtocol alloc] init] autorelease] To:address];
+            }
+                
         } else {
+            
+            //to-do, if max players reached, kick client
             
             UDPClientConnection *connection = [openConnections valueForKey:&address];
             if (connection == nil) {
                 connection = [[UDPClientConnection alloc] initWithPeer:address raknetHandler:self andMtuSize:((RaknetConnectionRequest *)packet).mtuSize];
                 [openConnections setValue:connection forKey:&address];
+                [connection release];
             }
             
-            [self sendRaknetPacket:[[RaknetConnectionResponse alloc] initWithMtuSize:((RaknetConnectionRequest *)packet).mtuSize] To:address];
+            @autoreleasepool {
+                [self sendRaknetPacket:[[[RaknetConnectionResponse alloc] initWithMtuSize:((RaknetConnectionRequest *)packet).mtuSize] autorelease] To:address];
+            }
         }
         
         
@@ -108,14 +128,18 @@ static void udp_release(void *value)
         uint16_t port = 0;
         [OFUDPSocket getHost:NULL andPort:&port forAddress:&address];
         
-        [self sendRaknetPacket:[[RaknetConnectionResponse2 alloc] initWithMtuSize:((RaknetConnectionRequest2 *)packet).mtuSize andClientPort:port] To:address];
+        @autoreleasepool {
+            [self sendRaknetPacket:[[[RaknetConnectionResponse2 alloc] initWithMtuSize:((RaknetConnectionRequest2 *)packet).mtuSize andClientPort:port] autorelease] To:address];
+        }
         
         
     } else if ([packet isKindOfClass:[RaknetCustomPacket class]]) {
         
         
-        [self sendRaknetPacket:[[RaknetACK alloc] initWithPacketNumber:((RaknetCustomPacket *)packet).packetNumber] To:address];
-        
+        @autoreleasepool {
+            [self sendRaknetPacket:[[[RaknetACK alloc] initWithPacketNumber:((RaknetCustomPacket *)packet).packetNumber] autorelease] To:address];
+        }
+            
         UDPClientConnection *connection = [openConnections valueForKey:&address];
         for (RaknetMinecraftPacket *mcPacket in ((RaknetCustomPacket *)packet).packets) {
             [connection recievedMinecraftPacket:mcPacket];

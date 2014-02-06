@@ -59,7 +59,7 @@ static OFMutableDictionary *packetList;
 
 + (RaknetPacket *)packetWithId:(uint8_t)pId data:(OFDataArray *)data {
     @try {
-        return (RaknetPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+        return [(RaknetPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data] autorelease];
     }
     @catch (OFException *exception) {
         return nil;
@@ -71,11 +71,11 @@ static OFMutableDictionary *packetList;
 }
 
 + (uint8_t)packetId {
-    @throw [OFException exception];// [OFException exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketID must be overriden and called via subclass" userInfo:nil];
+    @throw [OFNotImplementedException exception];// [OFException exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketID must be overriden and called via subclass" userInfo:nil];
 }
 
 - (OFDataArray *)packetData {
-    @throw [OFException exception];//exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketData must be overriden and called via subclass" userInfo:nil];
+    @throw [OFNotImplementedException exception];//exceptionWithName:@"Raw RaknetPacket call" reason:@"PacketData must be overriden and called via subclass" userInfo:nil];
 }
 
 

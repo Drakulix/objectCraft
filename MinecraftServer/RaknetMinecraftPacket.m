@@ -48,10 +48,11 @@
         //minecraftPacket.dataLength -= 10;
     }
     
-    minecraftPacket.packet = [[OFDataArray alloc] initWithItemSize:1 capacity:minecraftPacket.dataLength];
+    minecraftPacket.packet = [OFDataArray dataArrayWithItemSize:1 capacity:minecraftPacket.dataLength];
     [minecraftPacket.packet addItems:[data firstItem] count:minecraftPacket.dataLength];
     [data removeItemsInRange:of_range(0, minecraftPacket.dataLength)];
-    return minecraftPacket;
+    
+    return [minecraftPacket autorelease];
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {

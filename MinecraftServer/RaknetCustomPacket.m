@@ -46,7 +46,7 @@
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     if (self) {
-        self.packets = [[OFMutableArray alloc] init];
+        self.packets = [[[OFMutableArray alloc] init] autorelease];
         
         packetNumber = [data readReverseUInt24];
         
