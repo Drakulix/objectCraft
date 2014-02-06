@@ -11,13 +11,13 @@
 @interface TCPPlayerPositionAndLookClient : TCPClientPacket
 
 @property (readonly) double X;
-@property (readonly) double Y;
+@property (readonly) double FeetY;
+@property (readonly) double HeadY;
 @property (readonly) double Z;
 
 @property (readonly) float Yaw;
 @property (readonly) float Pitch;
 
-@property (readonly) double Stance;
 @property (readonly) BOOL OnGround;
 
 @end

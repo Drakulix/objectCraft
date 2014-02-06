@@ -16,8 +16,8 @@
     self = [super init];
     if (self) {
         _X = [data readDouble];
-        _Stance = [data readDouble];
-        _Y = [data readDouble];
+        _FeetY = [data readDouble];
+        _HeadY = [data readDouble];
         _Z = [data readDouble];
         _Yaw = [data readFloat];
         _Pitch = [data readFloat];
