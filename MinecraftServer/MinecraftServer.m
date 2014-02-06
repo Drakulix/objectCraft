@@ -18,22 +18,7 @@
 #import "UDPPacket.h"
 #import "TCPPacket.h"
 
-static MinecraftServer *sharedInstance;
-
 @implementation MinecraftServer
-
-+ (MinecraftServer *)sharedInstance {
-    return sharedInstance;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        sharedInstance = self;
-        
-    }
-    return self;
-}
 
 - (void)applicationDidFinishLaunching {
     
