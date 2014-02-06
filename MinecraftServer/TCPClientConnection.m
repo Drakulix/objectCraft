@@ -60,8 +60,12 @@ static OFMutableArray *activeTCPConnections;
 - (void)readFrom:(OFStream *)stream varInt:(uint64_t)varInt error:(OFException *)exception {
     
     if (exception) {
-        //TO-DO if not-connected exception
-        LogError(@"Error reading from Socket: %@", socket);
+        if ([exception isKindOfClass:[OFNotConnectedException class]]) {
+            LogInfo(@"Client Disconnected: %@", [socket remoteAddress]);
+        } else {
+            LogError(@"Error reading from Socket: %@", socket);
+        }
+        [self disconnectClient];
         return;
     }
     
@@ -73,8 +77,12 @@ static OFMutableArray *activeTCPConnections;
 - (BOOL)readFrom:(OFStream *)stream packet:(void *)buffer withSize:(size_t)size error:(OFException *)exception {
     
     if (exception) {
-        //TO-DO if not-connected exception
-        LogError(@"Error reading from Socket: %@", socket);
+        if ([exception isKindOfClass:[OFNotConnectedException class]]) {
+            LogInfo(@"Client Disconnected: %@", [socket remoteAddress]);
+        } else {
+            LogError(@"Error reading from Socket: %@", socket);
+        }
+        [self disconnectClient];
         return NO;
     }
     
