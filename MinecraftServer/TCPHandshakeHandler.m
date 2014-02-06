@@ -17,8 +17,12 @@
 
 - (instancetype)initWithClientConnection:(TCPClientConnection *)client {
     self = [super init];
-    if (self) {
-        connectionDelegate = client;
+    @try {
+        connectionDelegate = [client retain];
+    }
+    @catch (id e) {
+        [self release]
+        @throw e;
     }
     return self;
 }
@@ -28,12 +32,16 @@
     
     if (((TCPHandshake *)packet).nextState == 1) {
         
-        [connectionDelegate changeDelegate:[[[TCPStatusHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
+        @autoreleasepool {
+            [connectionDelegate changeDelegate:[[[TCPStatusHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
+        }
     
     } else if (((TCPHandshake *)packet).nextState == 2) {
         
-        [connectionDelegate changeDelegate:[[[TCPLoginHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
-    
+        @autoreleasepool {
+            [connectionDelegate changeDelegate:[[[TCPLoginHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
+        }
+            
     } else {
         
         LogError(@"Unknown Handshake State Value '%llu', kicking Client", ((TCPHandshake *)packet).nextState);
@@ -44,6 +52,11 @@
 
 - (void)clientDisconnected {
     
+}
+
+- (void)dealloc {
+    [connectionDelegate release];
+    [super dealloc];
 }
 
 - (int)state {

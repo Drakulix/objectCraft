@@ -20,31 +20,33 @@
 
 - (instancetype)initWithClientConnection:(TCPClientConnection *)client {
     self = [super init];
-    if (self) {
-        connectionDelegate = client;
-    }
+    connectionDelegate = [client retain];
     return self;
 }
 
 - (void)recievedPacket:(TCPPacket *)packet {
     LogVerbose(@"Got Status Packet: %@", packet);
     if ([packet isMemberOfClass:[TCPStatusRequest class]]) {
-        OFDictionary *infos = [OFDictionary dictionaryWithKeysAndObjects:
-                               @"version", [OFDictionary dictionaryWithKeysAndObjects:
-                                            @"name", @"1.7.4",
-                                            @"protocol", [OFNumber numberWithInt:4]
-                                            , nil],
-                               @"players", [OFDictionary dictionaryWithKeysAndObjects:
-                                            @"max", [OFNumber numberWithInt:[ConfigManager defaultManager].maxPlayers],
-                                            @"online", [OFNumber numberWithInt32:[Player playerCount]]
-                                            , nil],
-                               @"description", [OFDictionary dictionaryWithKeysAndObjects:
-                                                @"text", [ConfigManager defaultManager].serverBrowserMessage
-                                            , nil]
-                               , nil];
-        [connectionDelegate sendPacket:[[TCPStatusResponse alloc] initWithDictionary:infos]];
+        @autoreleasepool {
+            OFDictionary *infos = [OFDictionary dictionaryWithKeysAndObjects:
+                                   @"version", [OFDictionary dictionaryWithKeysAndObjects:
+                                                @"name", @"1.7.4",
+                                                @"protocol", [OFNumber numberWithInt:4]
+                                                , nil],
+                                   @"players", [OFDictionary dictionaryWithKeysAndObjects:
+                                                @"max", [OFNumber numberWithInt:[ConfigManager defaultManager].maxPlayers],
+                                                @"online", [OFNumber numberWithInt32:[Player playerCount]]
+                                                , nil],
+                                   @"description", [OFDictionary dictionaryWithKeysAndObjects:
+                                                    @"text", [ConfigManager defaultManager].serverBrowserMessage
+                                                    , nil]
+                                   , nil];
+            [connectionDelegate sendPacket:[[[TCPStatusResponse alloc] initWithDictionary:infos] autorelease]];
+        }
     } else if ([packet isMemberOfClass:[TCPStatusPing class]]) {
-        [connectionDelegate sendPacket:[[TCPStatusPong alloc] initWithTime:((TCPStatusPing *)packet).time]];
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPStatusPong alloc] initWithTime:((TCPStatusPing *)packet).time] autorelease]];
+        }
     }
 }
 
@@ -56,5 +58,9 @@
     return 1;
 }
 
+- (void)dealloc {
+    [connectionDelegate release];
+    [super dealloc];
+}
 
 @end

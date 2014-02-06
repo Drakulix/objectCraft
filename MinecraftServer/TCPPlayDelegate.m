@@ -31,31 +31,39 @@
 
 - (instancetype)initWithClientConnection:(TCPClientConnection *)client withPlayer:(Player *)_player {
     self = [super init];
-    if (self) {
-        connectionDelegate = client;
-        player = _player;
-        
+    
+    connectionDelegate = [client retain];
+    player = [_player retain];
+    
+    @try {
+       
         ConfigManager *config = [ConfigManager defaultManager];
-        [connectionDelegate sendPacket:[[TCPJoinGame alloc] initWithPlayer:player
-                                                           forGamemode:config.defaultGamemode
-                                                            isHardcore:config.isHardcore
-                                                         forDifficulty:config.difficulty
-                                                         forMaxPlayers:config.maxPlayers
-                                                          forLevelType:@"default"]];
-        [connectionDelegate sendPacket:[[TCPCustomPayload alloc] initWithChannel:@"MC|Brand" payload:[@"ObjectCraft" dataUsingEncoding:OF_STRING_ENCODING_UTF_8]]];
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPJoinGame alloc] initWithPlayer:player
+                                                                   forGamemode:config.defaultGamemode
+                                                                    isHardcore:config.isHardcore
+                                                                 forDifficulty:config.difficulty
+                                                                 forMaxPlayers:config.maxPlayers
+                                                                  forLevelType:@"default"] autorelease]];
+        }
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPCustomPayload alloc] initWithChannel:@"MC|Brand" payload:[@"ObjectCraft" dataUsingEncoding:OF_STRING_ENCODING_UTF_8]] autorelease]];
+        }
         
         //and now(!) CHUNKS
-        TCPInitMapChunks *chunkPacket = [[TCPInitMapChunks alloc] initForDimension:player.dimension];
-        for (int x = player.chunkPosX-4; x<=player.chunkPosX+4; x++) {
-            for (int z = player.chunkPosZ-4; z<=player.chunkPosZ+4; z++) {
-                [chunkPacket addChunkColumn:[player loadChunkColumnAtX:x AtZ:z]];
+        
+        @autoreleasepool {
+            TCPInitMapChunks *chunkPacket = [[[TCPInitMapChunks alloc] initForDimension:player.dimension] autorelease];
+            for (int x = player.chunkPosX-4; x<=player.chunkPosX+4; x++) {
+                for (int z = player.chunkPosZ-4; z<=player.chunkPosZ+4; z++) {
+                    [chunkPacket addChunkColumn:[player loadChunkColumnAtX:x AtZ:z]];
+                }
             }
+            [connectionDelegate sendPacket:chunkPacket];
         }
-        [connectionDelegate sendPacket:chunkPacket];
         
         player.Yaw = 0.0f;
         player.Pitch = 0.0f;
-        player.Stance = 0.1;
         player.OnGround = YES;
         
         //Overwrite for testing
@@ -63,14 +71,24 @@
         player.canFly = YES;
         player.isFlying = YES;
         
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPSpawnPosition alloc] initWithX:[player blockPosX] withY:[player blockPosY] withZ:[player blockPosZ]] autorelease]];
+        }
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPPlayerAbilities alloc] initWithPlayer:player] autorelease]];
+        }
         
-        [connectionDelegate sendPacket:[[TCPSpawnPosition alloc] initWithX:[player blockPosX] withY:[player blockPosY] withZ:[player blockPosZ]]];
-        [connectionDelegate sendPacket:[[TCPPlayerAbilities alloc] initWithPlayer:player]];
         //To-Do's
         //BlockItemSwitch
         //Scoreboard
-        [connectionDelegate sendPacket:[[TCPTimeUpdate alloc] initWithAge:5 andDayTime:6000]];
-        [connectionDelegate sendPacket:[[TCPPlayerPositionAndLookServer alloc] initWithPlayer:player]];
+        
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPTimeUpdate alloc] initWithAge:5 andDayTime:6000] autorelease]];
+        }
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPPlayerPositionAndLookServer alloc] initWithPlayer:player] autorelease]];
+        }
+        
         //Weather (if needed)
         //Chat 'Player Spawned'
         
@@ -79,18 +97,24 @@
         //Inventory (window packet)
         
     }
+    @catch (id e) {
+        [connectionDelegate release];
+        [player release];
+        [self release];
+        @throw e;
+    }
+
     return self;
 }
 
 - (void)recievedPacket:(TCPPacket *)packet {
     if ([packet isKindOfClass:[TCPPlayerPositionAndLookClient class]]) {
         TCPPlayerPositionAndLookClient *posPacket = (TCPPlayerPositionAndLookClient *)packet;
-        player.X = 0.0;
-        player.Y = player.Y;
-        if (player.Y < 65.0)
-            player.Y = 65.0;
-        player.Z = 0.0;
-        player.OnGround = true;
+        player.X = posPacket.X;
+        player.feetY = posPacket.FeetY;
+        player.headY = posPacket.HeadY;
+        player.Z = posPacket.Z;
+        player.OnGround = posPacket.OnGround;
         player.Yaw = posPacket.Yaw;
         player.Pitch = posPacket.Pitch;
         LogVerbose(@"Client Position: %@", posPacket);
@@ -98,7 +122,7 @@
     if ([packet isKindOfClass:[TCPPlayerPositionClient class]]) {
         TCPPlayerPositionClient *posPacket = (TCPPlayerPositionClient *)packet;
         player.X = posPacket.X;
-        player.Y = posPacket.Y;
+        player.feetY = posPacket.Y;
         player.Z = posPacket.Z;
         player.OnGround = posPacket.OnGround;
         LogVerbose(@"Client Position: %@", posPacket);
@@ -106,11 +130,17 @@
 }
 
 - (void)clientDisconnected {
-    
+    [player despawn];
+    [player release];
 }
 
 - (int)state {
     return 3;
+}
+
+- (void)dealloc {
+    [connectionDelegate release];
+    [super dealloc];
 }
 
 @end

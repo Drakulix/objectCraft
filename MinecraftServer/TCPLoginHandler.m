@@ -19,9 +19,7 @@
 
 - (instancetype)initWithClientConnection:(TCPClientConnection *)client {
     self = [super init];
-    if (self) {
-        connectionDelegate = client;
-    }
+    connectionDelegate = [client retain];
     return self;
 }
 
@@ -30,10 +28,13 @@
         
         LogInfo(@"'%@' connected", ((TCPLoginStart *)packet).username);
         
-        TCPLoginSuccess *loginSuccess = [[TCPLoginSuccess alloc] initWithUUID:@"-" Username:((TCPLoginStart *)packet).username];
-        [connectionDelegate sendPacket:loginSuccess];
+        @autoreleasepool {
+            [connectionDelegate sendPacket:[[[TCPLoginSuccess alloc] initWithUUID:@"-" Username:((TCPLoginStart *)packet).username] autorelease]];
+        }
         
-        [connectionDelegate changeDelegate:[[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[[Player alloc] initSpawnPlayerWithUsername:((TCPLoginStart *)packet).username]] autorelease]];
+        @autoreleasepool {
+            [connectionDelegate changeDelegate:[[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[[[Player alloc] initSpawnPlayerWithUsername:((TCPLoginStart *)packet).username] autorelease]] autorelease]];
+        }
         
     }
 }
@@ -46,5 +47,9 @@
     return 2;
 }
 
+- (void)dealloc {
+    [connectionDelegate release];
+    [super dealloc];
+}
 
 @end
