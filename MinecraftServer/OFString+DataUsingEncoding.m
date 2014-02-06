@@ -14,7 +14,7 @@
     size_t len = [self cStringLengthWithEncoding:encoding];
     const char *str = [self cStringWithEncoding:encoding];
     
-    OFDataArray *data = [[OFDataArray alloc] initWithCapacity:len];
+    OFDataArray *data = [OFDataArray dataArrayWithCapacity:len];
     [data addItems:str count:len];
     return data;
 }

@@ -20,7 +20,7 @@
         return nil;
     }
     
-    OFDataArray *compressed = [[OFDataArray alloc] initWithCapacity:compLen];
+    OFDataArray *compressed = [OFDataArray dataArrayWithCapacity:compLen];
     [compressed addItems:buffer count:compLen];
     free(buffer);
     return compressed;

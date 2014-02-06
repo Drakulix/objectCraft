@@ -82,6 +82,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
     if (exception) {
         bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
         func(target, selector, socket, 0, exception);
+        [self autorelease];
         return NO;
     }
     
