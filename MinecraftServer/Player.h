@@ -20,7 +20,8 @@
     OFMapTable *lastAgeRequests;
 }
 
-@property (atomic) double stance;
+@property (atomic) double headY;
+@property (atomic) double feedY;
 @property (atomic) BOOL isCreativeMode;
 
 - (id)initSpawnPlayerWithUsername:(OFString *)username;

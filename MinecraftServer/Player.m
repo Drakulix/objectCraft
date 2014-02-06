@@ -20,6 +20,7 @@
 static int playerCount = 0;
 
 @implementation Player
+@dynamic Y;
 
 - (instancetype)initSpawnPlayerWithUsername:(NSString *)username {
     self = (Player *)[[[WorldManager defaultManager] worldForDimension:[ConfigManager defaultManager].spawnDimension].entityManager addEntityOfClass:[Player class]];
@@ -39,7 +40,7 @@ static int playerCount = 0;
         
         //To-Do get default SpawnPoint, when no save exists - get top most Y for default spawn point
         self.X = 0.0;
-        self.Y = 64.0;
+        self.Y = 65.0;
         self.Z = 0.0;
         
         loadedChunks = [[OFMutableSet alloc] init];
@@ -73,6 +74,15 @@ static int playerCount = 0;
 }
 - (int32_t)chunkPosZ {
     return [self blockPosZ]/16;
+}
+
+- (void)setY:(double)Y {
+    self.feedY = Y;
+    self.headY = Y+1.62;
+}
+
+- (double)Y {
+    return self.feedY;
 }
 
 - (void)dealloc {
