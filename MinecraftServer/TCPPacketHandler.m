@@ -28,7 +28,9 @@
     uint64_t packetId = [data readVarInt];
     LogDebug(@"Got Packet with ID: %02x", packetId);
     
-    [self.delegate recievedPacket:[TCPClientPacket clientPacketWithState:[self.delegate state] ID:packetId data:data]];
+    @autoreleasepool {
+        [self.delegate recievedPacket:[TCPClientPacket clientPacketWithState:[self.delegate state] ID:packetId data:data]];
+    }
 }
 
 @end
