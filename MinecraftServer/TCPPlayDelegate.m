@@ -35,6 +35,7 @@
     connectionDelegate = [client retain];
     player = [_player retain];
     
+    TCPInitMapChunks *chunkPacket = nil;
     @try {
        
         ConfigManager *config = [ConfigManager defaultManager];
@@ -52,15 +53,15 @@
         
         //and now(!) CHUNKS
         
-        @autoreleasepool {
-            TCPInitMapChunks *chunkPacket = [[[TCPInitMapChunks alloc] initForDimension:player.dimension] autorelease];
-            for (int x = player.chunkPosX-4; x<=player.chunkPosX+4; x++) {
-                for (int z = player.chunkPosZ-4; z<=player.chunkPosZ+4; z++) {
-                    [chunkPacket addChunkColumn:[player loadChunkColumnAtX:x AtZ:z]];
-                }
+        chunkPacket = [[TCPInitMapChunks alloc] initForDimension:player.dimension];
+        for (int x = player.chunkPosX-4; x<=player.chunkPosX+4; x++) {
+            for (int z = player.chunkPosZ-4; z<=player.chunkPosZ+4; z++) {
+                [chunkPacket addChunkColumn:[player loadChunkColumnAtX:x AtZ:z]];
             }
-            [connectionDelegate sendPacket:chunkPacket];
         }
+        [connectionDelegate sendPacket:chunkPacket];
+        [chunkPacket release];
+        chunkPacket = nil;
         
         player.Yaw = 0.0f;
         player.Pitch = 0.0f;
@@ -98,8 +99,7 @@
         
     }
     @catch (id e) {
-        [connectionDelegate release];
-        [player release];
+        [chunkPacket release];
         [self release];
         @throw e;
     }
@@ -131,7 +131,6 @@
 
 - (void)clientDisconnected {
     [player despawn];
-    [player release];
 }
 
 - (int)state {
@@ -140,6 +139,7 @@
 
 - (void)dealloc {
     [connectionDelegate release];
+    [player release];
     [super dealloc];
 }
 

@@ -19,7 +19,13 @@
 
 - (instancetype)initWithClientConnection:(TCPClientConnection *)client {
     self = [super init];
-    connectionDelegate = [client retain];
+    @try {
+        connectionDelegate = [client retain];
+    }
+    @catch (id e) {
+        [self release]
+        @throw e;
+    }
     return self;
 }
 
