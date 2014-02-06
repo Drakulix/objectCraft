@@ -116,24 +116,39 @@ static MinecraftServer *sharedInstance;
         return YES;
     }
     
-    [[TCPClientConnection alloc] initWithSocket:[acceptedSocket retain]];
+    @autoreleasepool {
+        [activeTCPConnections addObject:[[[TCPClientConnection alloc] initWithSocket:acceptedSocket] autorelease]];
+    }
     
     return YES;
+}
+
+- (void)tcpClientDisconnected:(TCPClientConnection *)tcpClientConnection {
+    [activeTCPConnections removeObject:tcpClientConnection];
 }
 
 - (void)applicationWillTerminate {
     
     LogInfo(@"Shutting down");
     
+    for (TCPClientConnection *connection in activeTCPConnections) {
+        [connection disconnectClient];
+    }
+    [activeTCPConnections release];
+    
     [worldManager shutdown];
     
     [tcpServerSocketIPv4 close];
+    [tcpServerSocketIPv4 release];
     [tcpServerSocketIPv6 close];
+    [tcpServerSocketIPv6 release];
     
     [udpServerSocketIPv4 cancelAsyncRequests];
     [udpServerSocketIPv6 cancelAsyncRequests];
     [udpServerSocketIPv4 close];
     [udpServerSocketIPv6 close];
+    [udpServerSocketIPv4 release];
+    [udpServerSocketIPv6 release];
     free(udpServerSocketIPv4Buffer);
     free(udpServerSocketIPv6Buffer);
 }
