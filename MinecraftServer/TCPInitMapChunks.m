@@ -78,9 +78,9 @@
                 Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
                 if (!chunk.isEmpty) {
                     chunkCounter++;
-                    for (int y = 0; y<[chunkColumn.chunks count]; y++) {
-                        for (int z = 0; z<[chunkColumn.chunks count]; z++) {
-                            for (int x = 0; x<[chunkColumn.chunks count]; x++) {
+                    for (int y = 0; y<16; y++) {
+                        for (int z = 0; z<16; z++) {
+                            for (int x = 0; x<16; x++) {
                                 [chunkColumnsCompressedData appendUnsignedByte:[[chunk blockAtX:x Y:y Z:z] tcpBlockId]];
                             }
                         }
@@ -91,9 +91,9 @@
             for (int j = 0; j<[chunkColumn.chunks count]; j++) {
                 Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
                 if (!chunk.isEmpty) {
-                    for (int y = 0; y<[chunkColumn.chunks count]; y++) {
-                        for (int z = 0; z<[chunkColumn.chunks count]; z++) {
-                            for (int x = 0; x<[chunkColumn.chunks count]; x+=2) {
+                    for (int y = 0; y<16; y++) {
+                        for (int z = 0; z<16; z++) {
+                            for (int x = 0; x<16; x+=2) {
                                 Nibbler nibb;
                                 nibb.nibbles.first = [[chunk blockAtX:x Y:y Z:z] tcpMetadata];
                                 nibb.nibbles.second = [[chunk blockAtX:x+1 Y:y Z:z] tcpMetadata];
@@ -107,9 +107,9 @@
             for (int j = 0; j<[chunkColumn.chunks count]; j++) {
                 Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
                 if (!chunk.isEmpty) {
-                    for (int y = 0; y<[chunkColumn.chunks count]; y++) {
-                        for (int z = 0; z<[chunkColumn.chunks count]; z++) {
-                            for (int x = 0; x<[chunkColumn.chunks count]; x+=2) {
+                    for (int y = 0; y<16; y++) {
+                        for (int z = 0; z<16; z++) {
+                            for (int x = 0; x<16; x+=2) {
                                 Nibbler nibb;
                                 nibb.nibbles.first = [[chunk blockAtX:x Y:y Z:z] tcpLightEmit];
                                 nibb.nibbles.second = [[chunk blockAtX:x+1 Y:y Z:z] tcpLightEmit];
@@ -124,9 +124,9 @@
                 for (int j = 0; j<[chunkColumn.chunks count]; j++) {
                     Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
                     if (!chunk.isEmpty) {
-                        for (int y = 0; y<[chunkColumn.chunks count]; y++) {
-                            for (int z = 0; z<[chunkColumn.chunks count]; z++) {
-                                for (int x = 0; x<[chunkColumn.chunks count]; x+=2) {
+                        for (int y = 0; y<16; y++) {
+                            for (int z = 0; z<16; z++) {
+                                for (int x = 0; x<16; x+=2) {
                                     Nibbler nibb;
                                     nibb.nibbles.first = [[chunk blockAtX:x Y:y Z:z] tcpSkyLight];
                                     nibb.nibbles.second = [[chunk blockAtX:x+1 Y:y Z:z] tcpSkyLight];
@@ -159,8 +159,8 @@
             for (int j = 0; j<[chunkColumn.chunks count]; j++) {
                 Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
                 if (!chunk.isEmpty) {
-                    for (int z = 0; z<[chunkColumn.chunks count]; z++) {
-                        for (int x = 0; x<[chunkColumn.chunks count]; x+=4) {
+                    for (int z = 0; z<16; z++) {
+                        for (int x = 0; x<16; x+=4) {
                             BitArray bits;
                             bits.bits.bit1 = 0;
                             bits.bits.bit2 = 0;
