@@ -57,33 +57,36 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        
+    @try {
         self.isReliable = NO;
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initReliableWithData:(OFDataArray *)data count:(uint24_t)_count {
     self = [super init];
-    if (self) {
-        
+    @try {
         self.isReliable = YES;
         count = _count;
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
     self = [super init];
-    if (self) {
-        
+    @try {
         self.isReliable = YES;
         count = _count;
         
@@ -94,12 +97,15 @@
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     //TO-DO add real bit writing, but we just use reliable and split packets for now anyway
     

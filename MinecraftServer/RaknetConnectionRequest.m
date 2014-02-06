@@ -15,12 +15,16 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         if (![data checkMagic]) {
+            [self release];
             return nil;
         }
         self.protocolVersion = [data readByte];
         self.mtuSize = [data count];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

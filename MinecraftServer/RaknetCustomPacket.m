@@ -37,15 +37,18 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
+    @try {
         self.packets = [[OFMutableArray alloc] init];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.packets = [[[OFMutableArray alloc] init] autorelease];
         
         packetNumber = [data readReverseUInt24];
@@ -58,9 +61,19 @@
         @catch (OFException *exception) {
             return nil;
         }
-        
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    if (timer) {
+        [timer invalidate];
+        [timer release];
+    }
+    [self.packets release];
 }
 
 + (uint8_t)packetId {
@@ -68,7 +81,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *data = [[OFDataArray alloc] init];
+    OFDataArray *data = [OFDataArray dataArray];
     [data appendReverseUInt24:packetNumber];
     
     for (RaknetMinecraftPacket *packet in self.packets) {
@@ -98,6 +111,7 @@
 
 - (void)resend {
     [timer invalidate];
+    [timer release];
     timer = nil;
     
     if (![handler wasPacketAckd:packetNumber.i]) {

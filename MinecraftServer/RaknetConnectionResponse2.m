@@ -16,11 +16,14 @@
 
 - (instancetype)initWithMtuSize:(int16_t)mtuSize andClientPort:(int16_t)port {
     self = [super init];
-    if (self) {
+    @try {
         self.serverId = [ConfigManager defaultManager].udpServerId;
         self.mtuSize = mtuSize;
         self.clientUDPPort = port;
         self.serverSecurity = 0;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -30,14 +33,12 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
-    
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendMagic];
     [packetData appendLong:self.serverId];
     [packetData appendShort:self.clientUDPPort];
     [packetData appendShort:self.mtuSize];
     [packetData appendByte:self.serverSecurity];
-    
     return packetData;
 }
 

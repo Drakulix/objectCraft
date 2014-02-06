@@ -15,14 +15,19 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
-        if (![data checkMagic])
+    @try {
+        if (![data checkMagic]) {
+            [self release];
             return nil;
+        }
         self.clientSecurity = [data readByte];
         self.cookie = [data readInt];
         self.serverUDPPort = [data readShort];
         self.mtuSize = [data readShort];
         self.clientId = [data readLong];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -32,7 +37,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendMagic];
     [packetData appendByte:self.clientSecurity];
     [packetData appendInt:self.cookie];

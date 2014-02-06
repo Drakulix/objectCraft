@@ -16,23 +16,30 @@
 
 - (instancetype)initWithMtuSize:(int16_t)mtuSize {
     self = [super init];
-    if (self) {
+    @try {
         self.serverId = [ConfigManager defaultManager].udpServerId;
         self.serverSecurity = 0;
         self.mtuSize = mtuSize;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         if (![data checkMagic]) {
+            [self release];
             return nil;
         }
         self.serverId = [data readLong];
         self.serverSecurity = [data readByte];
         self.mtuSize = [data readShort];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -42,7 +49,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendMagic];
     [packetData appendLong:self.serverId];

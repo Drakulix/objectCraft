@@ -18,23 +18,29 @@
 
 - (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(OFString *)string {
     self = [super init];
-    if (self) {
+    @try {
         self.pingId = pingId;
         self.serverId = [ConfigManager defaultManager].udpServerId;
         self.identifier = string;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.pingId = [data readLong];
         self.serverId = [data readLong];
         if(![data checkMagic]) {
             return nil;
         }
         self.identifier = [data readStringUdp];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -44,7 +50,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendLong:self.pingId];
     [packetData appendLong:self.serverId];

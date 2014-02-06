@@ -15,10 +15,14 @@
 
 - (instancetype)initWithPacketNumber:(uint32_t)_packetNumber {
     self = [super init];
-    if (self) {
+    @try {
         self.unknown = 1;
         packetNumber.i = _packetNumber;
         self.hasAdditionalPacketNumber = NO;
+        
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -41,15 +45,13 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
-    
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendShort:self.unknown];
     [packetData appendBoolUdp:self.hasAdditionalPacketNumber];
     [packetData appendUInt24:packetNumber];
     if (self.hasAdditionalPacketNumber) {
         [packetData appendUInt24:additionalPacketNumber];
     }
-    
     return packetData;
 }
 

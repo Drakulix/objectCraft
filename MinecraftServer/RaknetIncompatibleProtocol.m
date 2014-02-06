@@ -16,21 +16,28 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
+    @try {
         self.protocolVersion = 5;
         self.serverId = [ConfigManager defaultManager].udpServerId;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (id)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.protocolVersion = [data readByte];
         if (![data checkMagic]) {
+            [self release];
             return nil;
         }
         self.serverId = [data readLong];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -40,7 +47,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendByte:self.protocolVersion];
     [packetData appendMagic];

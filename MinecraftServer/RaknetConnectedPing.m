@@ -15,11 +15,15 @@
 
 - (instancetype)initWithData:(OFDataArray *)data; {
     self = [super init];
-    if (self) {
+    @try {
         self.pingId = [data readLong];
         if (![data checkMagic]) {
+            [self release];
             return nil;
         }
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -29,7 +33,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *data = [[OFDataArray alloc] init];
+    OFDataArray *data = [OFDataArray dataArray];
     [data appendLong:self.pingId];
     [data appendMagic];
     return data;
