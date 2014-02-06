@@ -51,9 +51,9 @@
 
 - (instancetype)initWithPeer:(of_udp_socket_address_t)_peer raknetHandler:(RaknetHandler *)_raknetHandler andMtuSize:(uint64_t)mtu {
     self = [super init];
-    if (self) {
+    @try {
         peer = _peer;
-        raknetHandler = _raknetHandler;
+        raknetHandler = [_raknetHandler retain];
         queuedCustomPackets = [[OFMutableDictionary alloc] init];
         queuedMinecraftPackets = [[OFMutableArray alloc] init];
         mtuSize = mtu;
@@ -61,8 +61,19 @@
         customPacketId.i = 0;
         splitId = 0;
         LogInfo(@"Pocket Edition Connection Established");
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    //to-do send disconnect packet
+    [pingTimer release];
+    [raknetHandler release];
+    [queuedMinecraftPackets release];
+    [queuedCustomPackets release];
 }
 
 - (void)recievedMinecraftPacket:(RaknetMinecraftPacket *)data {
@@ -81,7 +92,9 @@
     if ([packet isKindOfClass:[UDPPing class]]) {
    
         
-        [self sendPacket:[[UDPPong alloc] initWithClientTime:((UDPPing *)packet).clientTime]];
+        @autoreleasepool {
+            [self sendPacket:[[[UDPPong alloc] initWithClientTime:((UDPPing *)packet).clientTime] autorelease]];
+        }
         
         
     } else if ([packet isKindOfClass:[UDPClientConnect class]]) {
@@ -89,16 +102,26 @@
         
         uint16_t port = 0;
         [OFUDPSocket getHost:NULL andPort:&port forAddress:&peer];
-        [self sendPacket:[[UDPServerHandshake alloc] initWithPort:port sessionId:((UDPClientConnect *)packet).sessionId serverSessionId:0x0000000004440ba9]]; //hardcoded session2? we should test that
+        
+        @autoreleasepool {
+            [self sendPacket:[[[UDPServerHandshake alloc] initWithPort:port sessionId:((UDPClientConnect *)packet).sessionId serverSessionId:0x0000000004440ba9] autorelease]];
+            //hardcoded session2? we should test that value
+        }
+            
         clientId = ((UDPClientConnect *)packet).clientId;
         
         
     } else if ([packet isKindOfClass:[UDPClientHandshake class]]) {
         
         
-        [self sendPacket:[[UDPPing alloc] init]];
+        @autoreleasepool {
+            [self sendPacket:[[[UDPPing alloc] init] autorelease]];
+        }
+        
         [self flushPackets];
-        pingTimer = [OFTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendPing) repeats:YES];
+        
+        if (!pingTimer)
+            pingTimer = [OFTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendPing) repeats:YES];
         
         
     } else if ([packet isKindOfClass:[UDPLogin class]]) {
@@ -107,7 +130,9 @@
         //TO-DO
         //Implement Invalid Protocol
         
-        [self sendPacket:[[UDPLoginStatus alloc] initWithStatus:0]];
+        @autoreleasepool {
+            [self sendPacket:[[[UDPLoginStatus alloc] initWithStatus:0] autorelease]];
+        }
         
         if (!player) {
             
@@ -116,8 +141,11 @@
             player.clientId = clientId;
         
             [self flushPackets];
-            [self sendPacket:[[UDPStartGame alloc] initWithPlayer:player]];
-            [self sendPacket:[[UDPSetTime alloc] initWithDaytime:24000]];
+            
+            @autoreleasepool {
+                [self sendPacket:[[[UDPStartGame alloc] initWithPlayer:player] autorelease]];
+                [self sendPacket:[[[UDPSetTime alloc] initWithDaytime:24000] autorelease]];
+            }
             
         }
         
@@ -132,12 +160,15 @@
         }
         
         if (((UDPReadyPacket *)packet).status == 2) { //Spawn Time!
-            [self sendPacket:[[UDPSpawnPosition alloc] initWithPlayer:player]];
-            [self sendPacket:[[UDPSetHealth alloc] initWithHealth:1]];
+            @autoreleasepool {
+                [self sendPacket:[[[UDPSpawnPosition alloc] initWithPlayer:player] autorelease]];
+                [self sendPacket:[[[UDPSetHealth alloc] initWithHealth:1] autorelease]];
+            }
         }
         
         
     } else if ([packet isKindOfClass:[UDPChunkRequest class]]) {
+        
         
         //TO-DO ChunkData packets are complex and splitted packets, so they are pretty unreliable
         // If the initial sending fails our server still assumes, the chunk has not changed -> chunk error on devices
@@ -151,9 +182,13 @@
                 bitMask |= 1 << y;
             }
         }
+        
         LogInfo(@"bitmask: "binarypattern, binary(bitMask));
         ChunkColumn *column = [player loadChunkColumnAtX:((UDPChunkRequest *)packet).X AtZ:((UDPChunkRequest *)packet).Z];
-        [self sendPacket:[[UDPChunkData alloc] initForChunkColumn:column andBitMask:bitMask]];
+        @autoreleasepool {
+            [self sendPacket:[[[UDPChunkData alloc] initForChunkColumn:column andBitMask:bitMask] autorelease]];
+        }
+        
         
     }
     
@@ -163,28 +198,22 @@
 
 - (void)ackdCustomPacket:(uint32_t)_customPacketId {
     
-    @synchronized (queuedCustomPackets) {
-        LogVerbose(@"Ackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
-        [queuedCustomPackets removeObjectForKey:[OFNumber numberWithUInt32:_customPacketId]];
-    }
+    LogVerbose(@"Ackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
+    [queuedCustomPackets removeObjectForKey:[OFNumber numberWithUInt32:_customPacketId]];
     
 }
 
 
 - (void)nackdCustomPacket:(uint32_t)_customPacketId {
 
-    @synchronized (queuedCustomPackets) {
-        LogVerbose(@"Nackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
-        [[queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] resend];
-    }
+    LogVerbose(@"Nackd: %@", [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]]);
+    [[queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] resend];
     
 }
 
 
 - (BOOL)wasPacketAckd:(uint32_t)_customPacketId {
-    @synchronized(queuedCustomPackets) {
-        return [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] == nil;
-    }
+    return [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] == nil;
 }
 
 
@@ -198,9 +227,11 @@
         return;
     }
     
-    RaknetMinecraftPacket *mcPacket = [[RaknetMinecraftPacket alloc] initReliableWithData:[packet rawPacketData] count:pePacketCount];
+    
+    RaknetMinecraftPacket *mcPacket = [[RaknetMinecraftPacket alloc] initReliableWithData:[packet rawPacketData] count:pePacketCount]];
     pePacketCount.i++;
     [queuedMinecraftPackets addObject:mcPacket];
+    [mcPacket release];
     
 }
 
@@ -231,6 +262,7 @@
     customPacketId.i++;
     [packet.packets addObjectsFromArray:minecraftPackets];
     [self sendRaknetPacket:packet];
+    [packet release];
     
 }
 
@@ -251,6 +283,9 @@
         [raknetPacket.packets addObject:mcPacket];
         
         [self sendRaknetPacket:raknetPacket];
+        
+        [raknetPacket release];
+        [mcPacket release];
     }
     splitId++;
     
@@ -265,7 +300,9 @@
 }
 
 - (void)sendPing {
-    [self sendPacket:[[UDPPing alloc] init]];
+    @autoreleasepool {
+        [self sendPacket:[[[UDPPing alloc] init] autorelease]];
+    }
     [self flushPackets];
 }
 
@@ -279,8 +316,11 @@
 
 - (void)clientDisconnected {
     LogInfo(@"'%@' disconnected", [player username]);
+    //to-do send disconnect
+    [self flushPackets];
     [pingTimer invalidate];
     [player despawn];
+    [player release];
 }
 
 @end
