@@ -28,11 +28,11 @@
     
     if (((TCPHandshake *)packet).nextState == 1) {
         
-        [connectionDelegate changeDelegate:[[TCPStatusHandler alloc] initWithClientConnection:connectionDelegate]];
+        [connectionDelegate changeDelegate:[[[TCPStatusHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
     
     } else if (((TCPHandshake *)packet).nextState == 2) {
         
-        [connectionDelegate changeDelegate:[[TCPLoginHandler alloc] initWithClientConnection:connectionDelegate]];
+        [connectionDelegate changeDelegate:[[[TCPLoginHandler alloc] initWithClientConnection:connectionDelegate] autorelease]];
     
     } else {
         

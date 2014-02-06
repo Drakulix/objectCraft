@@ -15,8 +15,11 @@
 
 -(instancetype)initWithDelegate:(id<TCPPacketDelegate>)delegate {
     self = [super init];
-    if (self) {
+    @try {
         self.delegate = delegate;
+    } @catch (id e) {
+        [self release];
+        return;
     }
     return self;
 }

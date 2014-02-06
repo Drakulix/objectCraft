@@ -33,7 +33,7 @@
         TCPLoginSuccess *loginSuccess = [[TCPLoginSuccess alloc] initWithUUID:@"-" Username:((TCPLoginStart *)packet).username];
         [connectionDelegate sendPacket:loginSuccess];
         
-        [connectionDelegate changeDelegate:[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[[Player alloc] initSpawnPlayerWithUsername:((TCPLoginStart *)packet).username]]];
+        [connectionDelegate changeDelegate:[[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[[Player alloc] initSpawnPlayerWithUsername:((TCPLoginStart *)packet).username]] autorelease]];
         
     }
 }
