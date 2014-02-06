@@ -16,12 +16,17 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
+    
         self.username = [data readStringUdp];
         self.protocol1 = [data readInt];
         self.protocol2 = [data readInt];
         self.clientId = [data readInt];
         self.realmsData = [data readStringUdp];
+    
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -31,7 +36,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendStringUdp:self.username];
     [packetData appendInt:self.protocol1];

@@ -19,21 +19,25 @@
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];
-    if (self) {
+    @try {
         self.seed = [ConfigManager defaultManager].seed;
         self.generator = 0;
         self.gamemode = 1;//[ConfigManager sharedInstance].gamemode;
+                          //To-Do remove that testing overwrite
         self.entityId = player.entityId;
         self.X = (float)player.X;
         self.Y = (float)player.Y-64.0;
         self.Z = (float)player.Z;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.seed = [data readInt];
         self.generator = [data readInt];
         self.gamemode = [data readInt];
@@ -41,6 +45,9 @@
         self.X = [data readFloat];
         self.Y = [data readFloat];
         self.Z = [data readFloat];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -50,7 +57,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.seed];
     [packetData appendInt:self.generator];

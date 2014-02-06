@@ -14,16 +14,22 @@
 
 - (instancetype)initWithHealth:(int8_t)health {
     self = [super init];
-    if (self) {
+    @try {
         self.health = health;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.health = [data readByte];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -33,7 +39,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendByte:self.health];
     return packetData;
 }

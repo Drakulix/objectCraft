@@ -19,7 +19,7 @@
 
 - (id)initWithPlayer:(Player *)player {
     self = [super init];
-    if (self) {
+    @try {
         self.clientID = [player clientId];
         self.username = [player username];
         self.entityId = [player entityId];
@@ -30,15 +30,18 @@
         self.Pitch = player.Pitch;
         self.unknown = 0;
         self.unknown2 = 0;
-        self.metadata = [[OFDataArray alloc] init];
+        self.metadata = [OFDataArray dataArray];
         [self.metadata appendByte:0x00];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (id)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.clientID = [data readLong];
         self.username = [data readStringUdp];
         self.entityId = [data readInt];
@@ -51,6 +54,9 @@
         
         self.unknown = [data readShort];
         self.unknown2 = [data readShort];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -60,7 +66,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendLong:self.clientID];
     [packetData appendStringUdp:self.username];
     [packetData appendInt:self.entityId];

@@ -16,17 +16,23 @@
 
 - (instancetype)initForChunkColumn:(ChunkColumn *)column andBitMask:(uint8_t)bitmask {
     self = [super init];
-    if (self) {
+    @try {
         self.column = column;
         self.bitMask = bitmask;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         //no reading right now
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -36,7 +42,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.column.X];
     [packetData appendInt:self.column.Z];

@@ -14,11 +14,13 @@
 
 - (instancetype)initWithPort:(uint16_t)port sessionId:(int64_t)session serverSessionId:(int64_t)session2 {
     self = [super init];
-    if (self) {
+    @try {
+        
         self.cookie = 0x043f57fe;
         self.security = 0xcd;
         self.port = port;
-        OFDataArray *data = [[OFDataArray alloc] init];
+        
+        OFDataArray *data = [OFDataArray dataArray];
         uint24_t len;
         len.i = 4;
         [data appendUInt24:len];
@@ -28,21 +30,28 @@
             [data appendInt:0xffffffff];
         }
         self.dataArray = data;
+        
         self.timeStamp = 0x0000;
         self.session = session;
         self.session2 = session2;
+        
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
+    
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
+        
         self.cookie = [data readInt];
         self.security = [data readByte];
         self.port = [data readShort];
         
-        OFDataArray *dataArrayTmp = [[OFDataArray alloc] initWithCapacity:sizeof(int8_t)*3+sizeof(int32_t)];
+        OFDataArray *dataArrayTmp = [OFDataArray dataArrayWithCapacity:sizeof(int8_t)*3+sizeof(int32_t)];
         for (int i = 0; i<10; i++) {
             [dataArrayTmp appendUInt24:[data readUInt24]];
             [dataArrayTmp appendInt:[data readInt]];
@@ -52,6 +61,10 @@
         self.timeStamp = [data readShort];
         self.session = [data readLong];
         self.session2 = [data readLong];
+    
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -61,7 +74,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.cookie];
     [packetData appendByte:self.security];

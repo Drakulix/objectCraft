@@ -15,20 +15,26 @@
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];
-    if (self) {
+    @try {
         self.X = [player blockPosX];
         self.Z = [player blockPosZ];
         self.Y = (int8_t)[player blockPosY]-64;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.X = [data readInt];
         self.Z = [data readInt];
         self.Y = [data readByte];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -38,7 +44,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.X];
     [packetData appendInt:self.Z];

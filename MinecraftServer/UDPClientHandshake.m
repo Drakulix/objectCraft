@@ -14,18 +14,19 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
+        
         self.cookie = [data readInt];
         self.security = [data readByte];
         
         self.port = [data readShort];
         
         uint8_t dataLen = [data readByte];
-        self.dataArray0 = [[OFDataArray alloc] initWithCapacity:dataLen];
+        self.dataArray0 = [OFDataArray dataArrayWithCapacity:dataLen];
         [self.dataArray0 addItems:[data firstItem] count:dataLen];
         [data removeItemsInRange:of_range(0, dataLen)];
         
-        OFDataArray *dataArrayTmp = [[OFDataArray alloc] init];
+        OFDataArray *dataArrayTmp = [OFDataArray dataArray];
         for (int i = 0; i<9; i++) {
             uint24_t len = [data readUInt24];
             [dataArrayTmp appendUInt24:len];
@@ -37,6 +38,10 @@
         self.timeStamp = [data readShort];
         self.session2 = [data readLong];
         self.session = [data readLong];
+        
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -46,7 +51,8 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
+    
     [packetData appendInt:self.cookie];
     [packetData appendByte:self.security];
     [packetData appendShort:self.port];

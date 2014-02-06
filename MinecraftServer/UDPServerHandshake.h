@@ -16,10 +16,10 @@
 @property (nonatomic) uint16_t port;
 
 @property (nonatomic, retain) OFDataArray *dataArray;
-@property int16_t timeStamp;
+@property (nonatomic) int16_t timeStamp;
 
-@property int64_t session;
-@property int64_t session2;
+@property (nonatomic) int64_t session;
+@property (nonatomic) int64_t session2;
 
 - (instancetype)initWithPort:(uint16_t)port sessionId:(int64_t)session serverSessionId:(int64_t)session2;
 

@@ -14,16 +14,22 @@
 
 - (instancetype)initWithDaytime:(int32_t)time {
     self = [super init];
-    if (self) {
+    @try {
         self.time = time;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.time = [data readInt];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -33,7 +39,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.time];
     

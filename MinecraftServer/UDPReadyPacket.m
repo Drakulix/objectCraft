@@ -14,16 +14,22 @@
 
 - (instancetype)initWithStatus:(int8_t)status {
     self = [super init];
-    if (self) {
+    @try {
         self.status = status;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.status = [data readByte];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -33,7 +39,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendByte:self.status];
     return packetData;
 }

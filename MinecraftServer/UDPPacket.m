@@ -64,7 +64,7 @@ static OFMutableDictionary *packetList;
 
 + (UDPPacket *)packetWithId:(uint8_t)pId data:(OFDataArray *)data {
     @try {
-        return (UDPPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data];
+        return [(UDPPacket *)[[objc_getClass([[packetList objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data] autorelease];
     }
     @catch (OFException *exception) {
         return nil;

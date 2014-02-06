@@ -14,18 +14,24 @@
 
 - (instancetype)initForX:(int32_t)x Z:(int32_t)z {
     self = [super init];
-    if (self) {
+    @try {
         self.X = x;
         self.Z = z;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.X = [data readInt];
         self.Z = [data readInt];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -35,7 +41,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendInt:self.X];
     [packetData appendInt:self.Z];

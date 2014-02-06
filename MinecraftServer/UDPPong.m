@@ -16,7 +16,7 @@
 
 - (instancetype)initWithClientTime:(int64_t)clientTime {
     self = [super init];
-    if (self) {
+    @try {
         self.clientTime = clientTime;
         
         struct timeval time;
@@ -28,15 +28,21 @@
         microtime += time.tv_usec/1000.0f;
 
         self.serverTime = abs(microtime*1000);
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.clientTime = [data readLong];
         self.serverTime = [data readLong];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -46,7 +52,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendLong:self.clientTime];
     [packetData appendLong:self.serverTime];
     return packetData;

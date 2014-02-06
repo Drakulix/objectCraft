@@ -17,27 +17,32 @@
 
 - (id)initWithEntity:(MovingEntity *)entity {
     self = [super init];
-    if (self) {
+    @try {
         self.entityId = [entity entityId];
         self.X = (float)entity.X;
         self.Y = (float)entity.Y;
         self.Z = (float)entity.Z;
         self.Yaw = entity.Yaw;
         self.Pitch = entity.Pitch;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (id)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.entityId = [data readInt];
-        
         self.X = [data readFloat];
         self.Y = [data readFloat];
         self.Z = [data readFloat];
         self.Yaw = [data readFloat];
         self.Pitch = [data readFloat];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -47,7 +52,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendInt:self.entityId];
     [packetData appendFloat:self.X];
     [packetData appendFloat:self.Y];

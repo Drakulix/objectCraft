@@ -17,8 +17,11 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super initWithData:data];
-    if (self) {
+    @try {
         //self.unknown = [[[data subdataWithRange:NSMakeRange([data length]-sizeof(float), sizeof(float))] mutableCopy] readFloat];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

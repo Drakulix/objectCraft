@@ -14,10 +14,13 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.clientId = [data readLong];
         self.sessionId = [data readLong];
         self.unknown = [data readByte];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -27,7 +30,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendLong:self.clientId];
     [packetData appendLong:self.sessionId];
     [packetData appendByte:self.unknown];

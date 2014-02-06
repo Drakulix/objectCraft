@@ -16,7 +16,7 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
+    @try {
         struct timeval time;
         gettimeofday(&time, NULL);
         
@@ -26,14 +26,20 @@
         microtime += time.tv_usec/1000.0f;
         
         self.clientTime = abs(microtime*1000);
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.clientTime = [data readLong];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
@@ -43,7 +49,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [[OFDataArray alloc] init];
+    OFDataArray *packetData = [OFDataArray dataArray];
     
     [packetData appendLong:self.clientTime];
     

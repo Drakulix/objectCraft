@@ -19,7 +19,7 @@
 }
 
 - (OFDataArray *)packetData {
-    return [[OFDataArray alloc] initWithCapacity:0];
+    return [OFDataArray dataArrayWithCapacity:0];
 }
 
 @end
