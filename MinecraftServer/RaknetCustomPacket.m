@@ -87,7 +87,7 @@
     
     for (RaknetMinecraftPacket *packet in self.packets) {
         OFDataArray *packetData = [packet packetData];
-        [data addItems:[packetData firstItem] count:[packetData count]];
+        [data addItems:[packetData items] count:[packetData count]];
     }
     
     return data;

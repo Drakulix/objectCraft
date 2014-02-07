@@ -33,7 +33,7 @@
     OFDataArray *packetData = [OFDataArray dataArray];
     [packetData appendStringTcp:self.channel];
     [packetData appendShort:self.length];
-    [packetData addItems:[self.payload firstItem] count:[self.payload count]];
+    [packetData addItems:[self.payload items] count:[self.payload count]];
     return packetData;
 }
 

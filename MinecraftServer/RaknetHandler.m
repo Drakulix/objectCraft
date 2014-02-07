@@ -173,7 +173,7 @@ static void udp_release(void *value)
     LogDebug(@"Sending Raknet Packet: %@", packet);
     LogVerbose(@"%@", [packet rawPacketData]);
     OFDataArray *data = [packet rawPacketData];
-    [socket sendBuffer:[data firstItem] length:[data count] receiver:&peer];
+    [socket sendBuffer:[data items] length:[data count] receiver:&peer];
     
 }
 

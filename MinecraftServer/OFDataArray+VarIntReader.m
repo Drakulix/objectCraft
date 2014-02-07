@@ -35,14 +35,14 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 
 - (uint64_t)readVarInt {
     int varLength;
-    uint64_t var = decode_unsigned_varint([self firstItem], &varLength);
+    uint64_t var = decode_unsigned_varint([self items], &varLength);
     [self removeItemsInRange:of_range(0, varLength)];
     return var;
 }
 
 - (int64_t)readSignedVarInt {
     int varLength;
-    int64_t var = decode_signed_varint([self firstItem], &varLength);
+    int64_t var = decode_signed_varint([self items], &varLength);
     [self removeItemsInRange:of_range(0, varLength)];
     return var;
 }
@@ -94,12 +94,12 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
         return YES;
     } else {
         if (sign) {
-            int64_t varInt = decode_signed_varint([varData firstItem], NULL);
+            int64_t varInt = decode_signed_varint([varData items], NULL);
             bool (*func)(id, SEL, OFStream *, int64_t, OFException*) = (bool(*)(id, SEL, OFStream*, int64_t, OFException*)) [target methodForSelector:selector];
             func(target, selector, socket, varInt, nil);
         }
         if (!sign) {
-            uint64_t varInt = decode_unsigned_varint([varData firstItem], NULL);
+            uint64_t varInt = decode_unsigned_varint([varData items], NULL);
             bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
             func(target, selector, socket, varInt, nil);
         }

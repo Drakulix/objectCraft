@@ -80,7 +80,7 @@
     [packetData appendByte:self.security];
     [packetData appendShort:self.port];
     
-    [packetData addItems:[self.dataArray firstItem] count:[self.dataArray count]];
+    [packetData addItems:[self.dataArray items] count:[self.dataArray count]];
     [packetData appendShort:self.timeStamp];
     
     [packetData appendLong:self.session];

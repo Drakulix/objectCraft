@@ -49,7 +49,7 @@
     }
     
     minecraftPacket.packet = [OFDataArray dataArrayWithItemSize:1 capacity:minecraftPacket.dataLength];
-    [minecraftPacket.packet addItems:[data firstItem] count:minecraftPacket.dataLength];
+    [minecraftPacket.packet addItems:[data items] count:minecraftPacket.dataLength];
     [data removeItemsInRange:of_range(0, minecraftPacket.dataLength)];
     
     return [minecraftPacket autorelease];
@@ -123,7 +123,7 @@
         [packetData appendShort:self.splitId];
         [packetData appendInt:self.splitIndex];
     }
-    [packetData addItems:[self.packet firstItem] count:[self.packet count]];
+    [packetData addItems:[self.packet items] count:[self.packet count]];
     
     return packetData;
 }

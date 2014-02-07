@@ -11,7 +11,7 @@
 @implementation OFDataArray (IntReader)
 
 - (int32_t)readInt {
-    int32_t integer = OF_BSWAP32_IF_LE(*(int32_t *)[self firstItem]);
+    int32_t integer = OF_BSWAP32_IF_LE(*(int32_t *)[self items]);
     [self removeItemsInRange:of_range(0, sizeof(int32_t))];
     return integer;
 }
@@ -65,31 +65,31 @@
 }
 
 - (int16_t)readShort {
-    int16_t shortInt = OF_BSWAP16_IF_LE(*(int16_t *)[self firstItem]);
+    int16_t shortInt = OF_BSWAP16_IF_LE(*(int16_t *)[self items]);
     [self removeItemsInRange:of_range(0, sizeof(int16_t))];
     return shortInt;
 }
 
 - (int8_t)readByte {
-    int8_t shortInt = *(int8_t *)[self firstItem];
+    int8_t shortInt = *(int8_t *)[self items];
     [self removeItemsInRange:of_range(0, sizeof(int8_t))];
     return shortInt;
 }
 
 - (BOOL)readBoolTcp {
-    int8_t shortInt = *(int8_t *)[self firstItem];
+    int8_t shortInt = *(int8_t *)[self items];
     [self removeItemsInRange:of_range(0, sizeof(int8_t))];
     return (shortInt == 0x01);
 }
 
 - (BOOL)readBoolUdp {
-    int8_t shortInt = *(int8_t *)[self firstItem];
+    int8_t shortInt = *(int8_t *)[self items];
     [self removeItemsInRange:of_range(0, sizeof(int8_t))];
     return (shortInt == 0x00);
 }
 
 - (int64_t)readLong {
-    int64_t longInt = OF_BSWAP64_IF_LE(*(int64_t *)[self firstItem]);
+    int64_t longInt = OF_BSWAP64_IF_LE(*(int64_t *)[self items]);
     [self removeItemsInRange:of_range(0, sizeof(int64_t))];
     return longInt;
 }

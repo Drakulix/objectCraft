@@ -23,14 +23,14 @@
         
         uint8_t dataLen = [data readByte];
         self.dataArray0 = [OFDataArray dataArrayWithCapacity:dataLen];
-        [self.dataArray0 addItems:[data firstItem] count:dataLen];
+        [self.dataArray0 addItems:[data items] count:dataLen];
         [data removeItemsInRange:of_range(0, dataLen)];
         
         OFDataArray *dataArrayTmp = [OFDataArray dataArray];
         for (int i = 0; i<9; i++) {
             uint24_t len = [data readUInt24];
             [dataArrayTmp appendUInt24:len];
-            [dataArrayTmp addItems:[data firstItem] count:len.i];
+            [dataArrayTmp addItems:[data items] count:len.i];
             [data removeItemsInRange:of_range(0, len.i)];
         }
         self.dataArray = dataArrayTmp;
@@ -58,8 +58,8 @@
     [packetData appendShort:self.port];
     
     [packetData appendByte:[self.dataArray0 count]];
-    [packetData addItems:[self.dataArray0 firstItem] count:[self.dataArray0 count]];
-    [packetData addItems:[self.dataArray firstItem] count:[self.dataArray count]];
+    [packetData addItems:[self.dataArray0 items] count:[self.dataArray0 count]];
+    [packetData addItems:[self.dataArray items] count:[self.dataArray count]];
     
     [packetData appendShort:self.timeStamp];
     [packetData appendLong:self.session2];

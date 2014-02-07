@@ -16,9 +16,9 @@
     uint64_t varLength = [self readVarInt];
     
     OFDataArray *rawString = [[OFDataArray alloc] initWithItemSize:1 capacity:varLength];
-    [rawString addItems:[self firstItem] count:varLength];
+    [rawString addItems:[self items] count:varLength];
     [rawString addItem:"\0"];
-    const void *bytes = [rawString firstItem];
+    const void *bytes = [rawString items];
     OFString *string = [OFString stringWithUTF8String:bytes];
     
     [self removeItemsInRange:of_range(0, varLength)];
@@ -29,7 +29,7 @@
     int16_t stringLength = [self readShort];
     OFString *string = @"";
     if (stringLength > 0) {
-        const char* rawAsciiString = [self firstItem];
+        const char* rawAsciiString = [self items];
         string = [OFString stringWithCString:rawAsciiString encoding:OF_STRING_ENCODING_ASCII];
         [self removeItemsInRange:of_range(0, stringLength)];
     }

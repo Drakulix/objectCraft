@@ -177,8 +177,8 @@
         OFDataArray *zippedChunkColumnData = [chunkColumnsCompressedData zlibDeflate];
         [packetData appendInt:(int32_t)[zippedChunkColumnData count]];
         [packetData appendBoolTcp:self.skyLightSend];
-        [packetData addItems:[zippedChunkColumnData firstItem] count:[zippedChunkColumnData count]];
-        [packetData addItems:[chunkColumnsData firstItem] count:[chunkColumnsData count]];
+        [packetData addItems:[zippedChunkColumnData items] count:[zippedChunkColumnData count]];
+        [packetData addItems:[chunkColumnsData items] count:[chunkColumnsData count]];
         return packetData;
     }
     

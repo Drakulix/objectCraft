@@ -13,7 +13,7 @@
 @implementation OFDataArray (FloatReader)
 
 - (float)readFloat {
-    float floatVal = OF_BSWAP_FLOAT_IF_LE(*(float *)[self firstItem]);
+    float floatVal = OF_BSWAP_FLOAT_IF_LE(*(float *)[self items]);
     [self removeItemsInRange:of_range(0, sizeof(float))];
     return floatVal;
     
@@ -24,7 +24,7 @@
 }
 
 - (double)readDouble {
-    double doubleVal = OF_BSWAP_DOUBLE_IF_LE(*(double *)[self firstItem]);
+    double doubleVal = OF_BSWAP_DOUBLE_IF_LE(*(double *)[self items]);
     [self removeItemsInRange:of_range(0, sizeof(double))];
     return doubleVal;
     

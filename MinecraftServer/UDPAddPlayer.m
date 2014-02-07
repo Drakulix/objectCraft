@@ -77,7 +77,7 @@
     [packetData appendFloat:self.Pitch];
     [packetData appendShort:self.unknown];
     [packetData appendShort:self.unknown2];
-    [packetData addItems:[self.metadata firstItem] count:[self.metadata count]];
+    [packetData addItems:[self.metadata items] count:[self.metadata count]];
     return packetData;
 }
 
