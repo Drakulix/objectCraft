@@ -11,7 +11,7 @@
 
 int main(int argc, char * argv[])
 {
-    OFAutoreleasePool *pool = [[OFAutoreleasePool alloc] init];
-    return of_application_main(&argc, &argv, [MinecraftServer class]);
-    [pool drain];
+    @autoreleasepool {
+        return of_application_main(&argc, &argv, [MinecraftServer class]);
+    }
 }
