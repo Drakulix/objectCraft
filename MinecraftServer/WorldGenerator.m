@@ -14,12 +14,20 @@
 
 - (instancetype)initWithSeed:(uint64_t)seed {
     self = [super init];
-    if (self) {
+    @try {
         random = [[RandomGenerator alloc] init];
         random.seed = seed;
-        tcpDimension = 0;
+        self.tcpDimension = 0;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    [random release];
+    [super dealloc];
 }
 
 - (uint64_t)generatorState {
@@ -27,7 +35,7 @@
 }
 
 - (Chunk *)generatedChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z {
-    return nil; //should be overriden
+    @throw [[OFNotImplementedException alloc] init];
 }
 
 @end

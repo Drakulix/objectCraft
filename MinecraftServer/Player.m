@@ -23,8 +23,10 @@ static int playerCount = 0;
 @dynamic Y;
 
 - (instancetype)initSpawnPlayerWithUsername:(NSString *)username {
+    
     self = (Player *)[[[WorldManager defaultManager] worldForDimension:[ConfigManager defaultManager].spawnDimension].entityManager addEntityOfClass:[Player class]];
-    if (self) {
+    @try {
+    
         self.username = username;
         self.canBeDamaged = YES;
         self.canFly = NO;
@@ -44,8 +46,8 @@ static int playerCount = 0;
         self.Z = 0.0;
         
         loadedChunks = [[OFMutableSet alloc] init];
-        world = [[WorldManager defaultManager] worldForDimension:self.dimension];
-        worldChunkManager = world.chunkManager;
+        world = [[[WorldManager defaultManager] worldForDimension:self.dimension] retain];
+        worldChunkManager = [world.chunkManager retain];
         
         of_map_table_functions_t chunkFunctions;
         chunkFunctions.retain = chunk_retain;
@@ -59,9 +61,13 @@ static int playerCount = 0;
         uint64Functions.hash = uint64_hash;
         uint64Functions.equal = uint64_equal;
         
-        lastAgeRequests = [[OFMapTable alloc] initWithKeyFunctions:chunkFunctions valueFunctions:uint64Functions];
+        lastAgeRequests = [[[OFMapTable alloc] initWithKeyFunctions:chunkFunctions valueFunctions:uint64Functions] retain];
 
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
+    
     return self;
 }
 
@@ -77,16 +83,20 @@ static int playerCount = 0;
 }
 
 - (void)setY:(double)Y {
-    self.feedY = Y;
+    self.feetY = Y;
     self.headY = Y+1.62;
 }
 
 - (double)Y {
-    return self.feedY;
+    return self.feetY;
 }
 
 - (void)dealloc {
     playerCount--;
+    [loadedChunks release];
+    [world release];
+    [worldChunkManager release];
+    [lastAgeRequests release];
     [super dealloc];
 }
 
@@ -127,7 +137,7 @@ static int playerCount = 0;
         uint64_t age = chunk.ageInTicks;
         [lastAgeRequests setValue:&age forKey:chunk];
     }
-    return column;
+    return [column autorelease];
 }
 
 - (void)unloadChunk:(Chunk *)chunk {

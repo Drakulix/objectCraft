@@ -21,7 +21,7 @@
 }
 
 @property (atomic) double headY;
-@property (atomic) double feedY;
+@property (atomic) double feetY;
 @property (atomic) BOOL isCreativeMode;
 
 - (id)initSpawnPlayerWithUsername:(OFString *)username;

@@ -102,7 +102,7 @@
     }
     
     @autoreleasepool {
-        [activeTCPConnections addObject:[[[TCPClientConnection alloc] initWithSocket:acceptedSocket] autorelease]];
+        [activeTCPConnections addObject:[[[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self] autorelease]];
     }
     
     return YES;

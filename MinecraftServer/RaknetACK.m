@@ -29,13 +29,16 @@
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
-    if (self) {
+    @try {
         self.unknown = [data readShort];
         self.hasAdditionalPacketNumber = [data readBoolUdp];
         packetNumber = [data readUInt24];
         if (self.hasAdditionalPacketNumber) {
             additionalPacketNumber = [data readUInt24];
         }
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

@@ -36,7 +36,7 @@ uint32_t vector_hash (void *vec) {
 
 - (instancetype)initWithGenerator:(WorldGenerator *)_generator {
     self = [super init];
-    if (self) {
+    @try {
         of_map_table_functions_t vectorFunctions;
         vectorFunctions.retain = vector_retain;
         vectorFunctions.release = vector_release;
@@ -50,9 +50,18 @@ uint32_t vector_hash (void *vec) {
         chunkFunctions.equal = chunk_equal;
         
         loadedChunks = [[OFMapTable alloc] initWithKeyFunctions:vectorFunctions valueFunctions:chunkFunctions];
-        generator = _generator;
+        generator = [_generator retain];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    [loadedChunks release];
+    [generator release];
+    [super dealloc];
 }
 
 - (ChunkColumn *)getChunkColumnAtX:(int32_t)x AtZ:(int32_t)z {
@@ -62,7 +71,7 @@ uint32_t vector_hash (void *vec) {
     for (int y = 0; y < 16; y++) {
         [column.chunks addObject:[self getChunkAtX:x AtY:y AtZ:z]];
     }
-    return column;
+    return [column autorelease];
 }
 
 - (Chunk *)getChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z {
@@ -74,7 +83,7 @@ uint32_t vector_hash (void *vec) {
     //To-Do load from save
     
     
-    //if loading fails -> generate
+    //if loading fails -> generate (and save again)
     Chunk *chunk = [generator generatedChunkAtX:x AtY:y AtZ:z];
     chunk.position = chunkPos;
     [loadedChunks setValue:chunk forKey:&chunkPos];

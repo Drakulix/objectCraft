@@ -24,7 +24,7 @@
         connectionDelegate = [client retain];
     }
     @catch (id e) {
-        [self release]
+        [self release];
         @throw e;
     }
     return self;

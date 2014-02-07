@@ -13,8 +13,11 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        _chunks = [[OFMutableArray alloc] init];
+    @try {
+        self.chunks = [[OFMutableArray alloc] init];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

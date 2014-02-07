@@ -20,8 +20,8 @@
 
 - (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)_dimension {
     self = [super init];
-    if (self) {
-        dimension = _dimension;
+    @try {
+        self.dimension = _dimension;
         
         self.ageInTicks = 0; //TO-DO read current age from conf file
         
@@ -39,13 +39,22 @@
         } else {
             generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[ConfigManager defaultManager].seed];
         }
+        self.tcpDimension = generator.tcpDimension;
         
         //To-do load default spawn chunks
         
         self.chunkManager = [[ChunkManager alloc] initWithGenerator:generator];
         self.entityManager = [[EntityManager alloc] initWithWorld:self];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    [generator release];
+    [super dealloc];
 }
 
 - (void)tick {

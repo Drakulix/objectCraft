@@ -19,7 +19,7 @@
         self.delegate = delegate;
     } @catch (id e) {
         [self release];
-        return;
+        @throw e;
     }
     return self;
 }

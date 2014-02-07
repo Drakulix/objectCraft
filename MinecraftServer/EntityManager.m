@@ -13,21 +13,30 @@
 
 - (instancetype)initWithWorld:(World *)_world {
     self = [super init];
-    if (self) {
+    @try {
         entityList = [[OFMutableArray alloc] init];
-        world = _world;
+        world = [_world retain];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
 
+- (void)dealloc {
+    [world release];
+    [entityList release];
+    [super dealloc];
+}
 
 - (Entity *)addEntityOfClass:(Class)class {
     @synchronized (entityList) {
         Entity *entity = [[class alloc] init];
+        
         size_t firstNullIndex = [entityList indexOfObjectIdenticalTo:[OFNull null]];
         if (firstNullIndex != OF_NOT_FOUND) {
-            [entityList replaceObjectAtIndex:firstNullIndex withObject:entity];
             entity.entityId = firstNullIndex;
+            [entityList replaceObjectAtIndex:firstNullIndex withObject:entity];
         } else {
             entity.entityId = [entityList count];
             [entityList addObject:entity];

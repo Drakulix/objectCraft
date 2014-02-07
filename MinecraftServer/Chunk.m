@@ -15,13 +15,21 @@
 
 - (id)initWithBlocks:(OFMutableArray *)array {
     self = [super init];
-    if (self) {
-        blocks = array;
+    @try {
+        blocks = [array retain];
         _isEmpty = NO;
         ageInTicks = 0;
         [self updateIsEmpty];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
+}
+
+- (void)dealloc {
+    [blocks release];
+    [super dealloc];
 }
 
 - (Block *)blockAtX:(int16_t)x Y:(int16_t)y Z:(int16_t)z {

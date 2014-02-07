@@ -13,8 +13,11 @@
 
 - (instancetype)initWithSeed:(uint64_t)seed {
     self = [super initWithSeed:seed];
-    if (self) {
+    @try {
         tcpDimension = 1;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

@@ -15,10 +15,13 @@ static RandomGenerator *randomGenerator;
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
+    @try {
         struct timeval t1;
         gettimeofday(&t1, NULL);
         self.seed = t1.tv_usec * t1.tv_sec;
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

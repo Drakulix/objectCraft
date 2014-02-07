@@ -11,7 +11,7 @@
 
 @interface ChunkColumn : OFObject
 
-@property (retain, readonly) OFMutableArray *chunks;
+@property (retain) OFMutableArray *chunks;
 @property int32_t X;
 @property int32_t Z;
 

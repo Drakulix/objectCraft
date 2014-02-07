@@ -74,6 +74,7 @@
         [timer release];
     }
     [self.packets release];
+    [super dealloc];
 }
 
 + (uint8_t)packetId {

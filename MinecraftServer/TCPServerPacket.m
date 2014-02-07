@@ -9,8 +9,6 @@
 #import "TCPServerPacket.h"
 #import "OFDataArray+VarIntWriter.h"
 
-static OFArray *packetListServer;
-
 @implementation TCPServerPacket
 
 - (OFDataArray *)packetData {

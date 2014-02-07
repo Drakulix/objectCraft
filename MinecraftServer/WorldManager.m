@@ -25,12 +25,16 @@ static WorldManager *sharedInstance;
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
+    @try {
         dimensions = [[OFMutableDictionary alloc] init];
         [self start];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }
+
 
 - (id)main {
     
@@ -74,6 +78,7 @@ static WorldManager *sharedInstance;
     for (int i = 0; i < [dimensions count]; i++) {
         [[dimensions objectForKey:[keys objectAtIndex:i]] shutdown];
     }
+    [dimensions release];
     [super dealloc];
 }
 

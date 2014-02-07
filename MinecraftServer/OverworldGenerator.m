@@ -20,9 +20,9 @@
     
     OFMutableArray *blocks = [[OFMutableArray alloc] init];
     for (int8_t x = 0; x<16; x++) {
-        OFMutableArray *yArray = [[OFMutableArray alloc] init];
+        OFMutableArray *yArray = [[[OFMutableArray alloc] init] autorelease];
         for (int8_t y = 0; y<16; y++) {
-            OFMutableArray *zArray = [[OFMutableArray alloc] init];
+            OFMutableArray *zArray = [[[OFMutableArray alloc] init] autorelease];
             for (int8_t z = 0; z<16; z++) {
                 if (y+(height*16) < 64) {
                     [zArray addObject:[[DirtBlock alloc] init]];
@@ -35,7 +35,7 @@
         [blocks addObject:yArray];
     }
     
-    Chunk *chunk = [[Chunk alloc] initWithBlocks:blocks];
+    Chunk *chunk = [[Chunk alloc] initWithBlocks:[blocks autorelease]];
     vector position = { x, height, z };
     chunk.position = position;
     return chunk;

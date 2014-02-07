@@ -74,6 +74,7 @@
     [raknetHandler release];
     [queuedMinecraftPackets release];
     [queuedCustomPackets release];
+    [super dealloc];
 }
 
 - (void)recievedMinecraftPacket:(RaknetMinecraftPacket *)data {
@@ -228,7 +229,7 @@
     }
     
     
-    RaknetMinecraftPacket *mcPacket = [[RaknetMinecraftPacket alloc] initReliableWithData:[packet rawPacketData] count:pePacketCount]];
+    RaknetMinecraftPacket *mcPacket = [[RaknetMinecraftPacket alloc] initReliableWithData:[packet rawPacketData] count:pePacketCount];
     pePacketCount.i++;
     [queuedMinecraftPackets addObject:mcPacket];
     [mcPacket release];

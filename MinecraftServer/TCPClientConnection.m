@@ -13,17 +13,17 @@
 #import "TCPHandshakeHandler.h"
 #import "OFDataArray+VarIntReader.h"
 #import "MinecraftServer.h"
-static OFMutableArray *activeTCPConnections;
 
 @implementation TCPClientConnection
 
-- (instancetype)initWithSocket:(OFTCPSocket *)_socket {
+- (instancetype)initWithSocket:(OFTCPSocket *)_socket fromMinecraftServer:(MinecraftServer *)_server {
     self = [super init];
     
     @try {
         @autoreleasepool {
             packetHandler = [[TCPPacketHandler alloc] initWithDelegate:[[[TCPHandshakeHandler alloc] initWithClientConnection:self] autorelease]];
         }
+        server = _server;
         socket = [_socket retain];
         [socket setWriteBufferEnabled:NO];
         [socket asyncReadVarIntForTarget:self selector:@selector(readFrom:varInt:error:)];

@@ -65,7 +65,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 
 - (instancetype)initWithSocket:(OFTCPSocket *)tcpSocket signed:(BOOL)_sign forTarget:(id)_target andSelector:(SEL)_selector {
     self = [super init];
-    if (self) {
+    @try {
         sign = _sign;
         target = _target;
         selector = _selector;
@@ -73,6 +73,9 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
         socket = tcpSocket;
         void *buffer = malloc(sizeof(int8_t));
         [tcpSocket asyncReadIntoBuffer:buffer exactLength:sizeof(int8_t) target:self selector:@selector(readFrom:buffer:ofSize:error:)];
+    } @catch (id e) {
+        [self release];
+        @throw e;
     }
     return self;
 }

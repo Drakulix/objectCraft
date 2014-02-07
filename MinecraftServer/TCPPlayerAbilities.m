@@ -34,7 +34,7 @@
 }
 
 - (OFDataArray *)packetData {
-    OFDataArray *packetData = [OFDataArray array];
+    OFDataArray *packetData = [OFDataArray dataArray];
     int8_t flags = 0;
     if (self.canBeDamaged)
         flags |= 1 << 0;

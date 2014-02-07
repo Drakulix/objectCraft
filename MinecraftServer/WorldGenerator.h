@@ -14,7 +14,7 @@
     RandomGenerator *random;
 }
 
-@property (nonatomic, readonly) int8_t tcpDimension;
+@property (nonatomic) int8_t tcpDimension;
 
 - (instancetype)initWithSeed:(uint64_t)seed;
 - (uint64_t)generatorState;
