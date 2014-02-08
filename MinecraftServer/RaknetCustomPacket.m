@@ -69,10 +69,8 @@
 }
 
 - (void)dealloc {
-    if (timer) {
-        [timer invalidate];
-        [timer release];
-    }
+    //do not release the timer here,
+    //it will get released on the next fire
     [self.packets release];
     [super dealloc];
 }
