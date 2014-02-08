@@ -338,7 +338,7 @@ void connection_release(void *value)
 
 uint32_t connection_hash(void *value)
 {
-    return [(id)value hash];
+    return [(UDPClientConnect *)value hash];
 }
 
 bool connection_equal(void *value1, void *value2)
