@@ -36,7 +36,7 @@ static ConfigManager *sharedInstance;
                 settings = [[[OFString stringWithContentsOfFile:@"config.json"] JSONValue] mutableCopy];
             }
         }
-        @catch (OFInvalidJSONException *exception) {
+        @catch (OFException *exception) {
             settings = nil;
         }
         @autoreleasepool {
