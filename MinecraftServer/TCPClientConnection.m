@@ -65,10 +65,10 @@
 - (void)readFrom:(OFStream *)stream varInt:(uint64_t)varInt error:(OFException *)exception {
     
     if (exception) {
-        if ([exception isKindOfClass:[OFNotConnectedException class]]) {
-            LogInfo(@"Client Disconnected: %@", [socket remoteAddress]);
-        } else {
-            LogError(@"Error reading from Socket: %@", socket);
+        if (exception) {
+            LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
+            [self disconnectClient];
+            return;
         }
         [self disconnectClient];
         return;
@@ -82,11 +82,7 @@
 - (BOOL)readFrom:(OFStream *)stream packet:(void *)buffer withSize:(size_t)size error:(OFException *)exception {
     
     if (exception) {
-        if ([exception isKindOfClass:[OFNotConnectedException class]]) {
-            LogInfo(@"Client Disconnected: %@", [socket remoteAddress]);
-        } else {
-            LogError(@"Error reading from Socket: %@", socket);
-        }
+        LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
         [self disconnectClient];
         return NO;
     }
@@ -98,6 +94,7 @@
     }
     
     free(buffer);
+    
     [socket asyncReadVarIntForTarget:self selector:@selector(readFrom:varInt:error:)];
     
     return NO;
