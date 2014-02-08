@@ -42,8 +42,9 @@
 
 - (OFDataArray *)packetData {
     
+    OFDataArray *packetData = [[OFDataArray alloc] init];
+    
     @autoreleasepool {
-        OFDataArray *packetData = [OFDataArray dataArray];
         [packetData appendShort:[chunkColumns count]];
         
         OFDataArray *chunkColumnsData = [[OFDataArray alloc] init];
@@ -179,9 +180,9 @@
         [packetData appendBoolTcp:self.skyLightSend];
         [packetData addItems:[zippedChunkColumnData items] count:[zippedChunkColumnData count]];
         [packetData addItems:[chunkColumnsData items] count:[chunkColumnsData count]];
-        return packetData;
     }
     
+    return [packetData autorelease];
 }
 
 @end

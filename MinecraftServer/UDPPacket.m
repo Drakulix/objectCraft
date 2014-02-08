@@ -85,10 +85,10 @@ static OFMutableDictionary *packetList;
 
 
 - (OFDataArray *)rawPacketData {
-    OFDataArray *packetData = [self packetData];
+    OFDataArray *packetData = [[self packetData] retain];
     uint8_t packetId = [[self class] packetId];
     [packetData insertItem:&packetId atIndex:0];
-    return packetData;
+    return [packetData autorelease];
 }
 
 - (OFString *)description {

@@ -16,11 +16,13 @@
 }
 
 - (OFDataArray *)rawPacketData {
-    OFDataArray *packetData = [self packetData];
+    OFDataArray *packetData = [[self packetData] retain];
+    
     uint64_t packetId = [[self class] packetId];
     [packetData prependVarInt:packetId];
     [packetData prependVarInt:[packetData count]];
-    return packetData;
+    
+    return [packetData autorelease];
 }
 
 + (int)state {
