@@ -7,11 +7,12 @@
 //
 
 #import <ObjFW/ObjFW.h>
+#import <dispatch/dispatch.h>
 @class World;
 
-@interface WorldManager : OFThread {
-    BOOL running;
+@interface WorldManager : OFObject {
     OFMutableDictionary *dimensions;
+    dispatch_source_t timer;
 }
 
 + (WorldManager *)defaultManager;

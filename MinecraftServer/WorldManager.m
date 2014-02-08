@@ -27,7 +27,27 @@ static WorldManager *sharedInstance;
     self = [super init];
     @try {
         dimensions = [[OFMutableDictionary alloc] init];
-        [self start];
+        
+        OFDictionary *configuration = [ConfigManager defaultManager].dimensions;
+        OFArray *keys = [configuration allKeys];
+        for (int i = 0; i < [keys count]; i++) {
+            World *world = [[World alloc] initWithGenerator:[configuration objectForKey:[keys objectAtIndex:i]] forDimension:(int8_t)[[keys objectAtIndex:i] int8Value]];
+            [dimensions setObject:world forKey:[keys objectAtIndex:i]];
+        }
+        
+        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,
+                                                         0, 0, dispatch_queue_create(NULL, DISPATCH_QUEUE_CONCURRENT));
+        if (timer)
+        {
+            dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 50ull * NSEC_PER_MSEC, 25ull * NSEC_PER_MSEC);
+            dispatch_source_set_event_handler(timer, ^{
+                for (World *world in [dimensions allObjects]) {
+                    [world tick];
+                }
+            });
+            dispatch_resume(timer);
+        }
+        
     } @catch (id e) {
         [self release];
         @throw e;
@@ -35,38 +55,12 @@ static WorldManager *sharedInstance;
     return self;
 }
 
-
-- (id)main {
-    
-    OFDictionary *configuration = [ConfigManager defaultManager].dimensions;
-    OFArray *keys = [configuration allKeys];
-    for (int i = 0; i < [keys count]; i++) {
-        World *world = [[World alloc] initWithGenerator:[configuration objectForKey:[keys objectAtIndex:i]] forDimension:(int8_t)[[keys objectAtIndex:i] int8Value]];
-        [dimensions setObject:world forKey:[keys objectAtIndex:i]];
-    }
-    
-    OFArray *worlds = [dimensions allObjects];
-    running = YES;
-    
-    while (running) {
-        OFDate *date = [[OFDate date] dateByAddingTimeInterval:0.05];
-        for (World *world in worlds) {
-            [world tick];
-        }
-        if ([date timeIntervalSinceNow] > 0)
-            [OFThread sleepUntilDate:date];
-    }
-    
-    return nil;
-}
-
 - (void)shutdown {
-    running = NO;
+    
+    dispatch_source_cancel(timer);
     for (World *world in [dimensions allObjects]) {
         [world saveWorld];
     }
-    if ([OFThread currentThread] != self)
-        [self join];
 }
 
 - (World *)worldForDimension:(int8_t)dimension {
@@ -74,6 +68,8 @@ static WorldManager *sharedInstance;
 }
 
 - (void)dealloc {
+    if (timer)
+        dispatch_release(timer);
     OFArray *keys = [dimensions allKeys];
     for (int i = 0; i < [dimensions count]; i++) {
         [[dimensions objectForKey:[keys objectAtIndex:i]] shutdown];
