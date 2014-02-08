@@ -12,7 +12,6 @@
 #import "DirtBlock.h"
 
 @implementation OverworldGenerator
-@synthesize tcpDimension;
 
 - (Chunk *)generatedChunkAtX:(int32_t)x AtY:(int32_t)height AtZ:(int32_t)z {
     

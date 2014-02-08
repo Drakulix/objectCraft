@@ -17,7 +17,7 @@
 
 @property (atomic) uint64_t ageInTicks;
 @property (nonatomic) int8_t dimension;
-@property (nonatomic) int8_t tcpDimension;
+@property (nonatomic, readonly) int8_t tcpDimension;
 @property (nonatomic, retain) EntityManager *entityManager;
 @property (nonatomic, retain) ChunkManager *chunkManager;
 

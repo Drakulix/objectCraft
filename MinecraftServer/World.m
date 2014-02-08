@@ -39,7 +39,8 @@
         } else {
             generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[ConfigManager defaultManager].seed];
         }
-        self.tcpDimension = generator.tcpDimension;
+        if (generator == nil)
+            @throw [OFException exception];
         
         //To-do load default spawn chunks
         

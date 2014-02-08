@@ -9,12 +9,11 @@
 #import "EndGenerator.h"
 
 @implementation EndGenerator
-@synthesize tcpDimension;
 
 - (instancetype)initWithSeed:(uint64_t)seed {
     self = [super initWithSeed:seed];
     @try {
-        tcpDimension = 1;
+        self.tcpDimension = 1;
     } @catch (id e) {
         [self release];
         @throw e;
