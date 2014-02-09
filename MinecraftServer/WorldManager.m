@@ -35,8 +35,7 @@ static WorldManager *sharedInstance;
             [dimensions setObject:world forKey:[keys objectAtIndex:i]];
         }
         
-        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,
-                                                         0, 0, dispatch_queue_create(NULL, DISPATCH_QUEUE_CONCURRENT));
+        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_queue_create(NULL, NULL));
         if (timer)
         {
             dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 50ull * NSEC_PER_MSEC, 25ull * NSEC_PER_MSEC);
