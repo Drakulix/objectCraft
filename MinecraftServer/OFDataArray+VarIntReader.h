@@ -15,10 +15,15 @@
 
 @end
 
-@interface OFTCPSocket (VarIntReader)
+typedef bool (^VarIntBlock)(OFStream*, uint64_t, OFException*);
+
+@interface OFStream (VarIntReader)
 
 - (void)asyncReadVarIntForTarget:(id)target selector:(SEL)selector;
+- (void)asyncReadVarIntWithBlock:(VarIntBlock)handler;
+
 - (void)asyncReadSignedVarIntForTarget:(id)target selector:(SEL)selector;
+- (void)asyncReadSignedVarIntWithBlock:(VarIntBlock)handler;
 
 @end
 
@@ -27,9 +32,12 @@
     id target;
     SEL selector;
     OFDataArray *varData;
-    OFTCPSocket *socket;
+    OFStream *stream;
+    VarIntBlock block;
+    void *buffer;
 }
 
-- (instancetype)initWithSocket:(OFTCPSocket *)tcpSocket signed:(BOOL)sign forTarget:(id)target andSelector:(SEL)selector;
+- (instancetype)initWithStream:(OFStream *)stream signed:(BOOL)sign forTarget:(id)target andSelector:(SEL)selector;
+- (instancetype)initWithStream:(OFStream *)stream signed:(BOOL)sign withBlock:(VarIntBlock)handler;
 
 @end

@@ -13,6 +13,7 @@
 #import "TCPHandshakeHandler.h"
 #import "OFDataArray+VarIntReader.h"
 #import "MinecraftServer.h"
+#import <dispatch/dispatch.h>
 
 @implementation TCPClientConnection
 
@@ -26,8 +27,43 @@
         server = _server;
         socket = [_socket retain];
         [socket setWriteBufferEnabled:NO];
-        [socket asyncReadVarIntForTarget:self selector:@selector(readFrom:varInt:error:)];
         
+        packetReadCallback = [^bool(OFStream *stream, void *buffer, size_t length, OFException *exception) {
+            
+            if (exception) {
+                LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
+                [server tcpClientDisconnected:self];
+                return NO;
+            }
+            
+            @autoreleasepool {
+                OFDataArray *data = [OFDataArray dataArrayWithItemSize:1 capacity:length];
+                [data addItems:buffer count:length];
+                [packetHandler recievedPacket:data];
+            }
+            
+            free(buffer);
+            
+            [self readPacketId];
+            
+            return NO;
+            
+        } copy];
+        
+        varIntReadCallback = [^bool(OFStream *stream, uint64_t varInt, OFException *exception) {
+            
+            if (exception) {
+                LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
+                [server tcpClientDisconnected:self];
+                return YES;
+            }
+            
+            void *buffer = malloc(varInt);
+            [socket asyncReadIntoBuffer:buffer exactLength:varInt block:packetReadCallback];
+            return NO;
+        } copy];
+        
+        [self readPacketId];
     } @catch (id e) {
         [self release];
         @throw e;
@@ -36,15 +72,20 @@
     return self;
 }
 
+- (void)readPacketId {
+    [socket asyncReadVarIntWithBlock:varIntReadCallback];
+}
 
 - (void)disconnectClient {
-    [packetHandler.delegate clientDisconnected];
     [socket cancelAsyncRequests];
     [socket close];
     [server tcpClientDisconnected:self];
 }
 
 - (void)dealloc {
+    [packetHandler.delegate clientDisconnected];
+    [varIntReadCallback release];
+    [packetReadCallback release];
     [packetHandler release];
     [socket release];
     [super dealloc];
@@ -59,45 +100,6 @@
     LogDebug(@"sending Packet: %@", packet);
     LogVerbose(@"%@", [packet rawPacketData]);
     [socket writeDataArray:[packet rawPacketData]];
-}
-
-
-- (void)readFrom:(OFStream *)stream varInt:(uint64_t)varInt error:(OFException *)exception {
-    
-    if (exception) {
-        if (exception) {
-            LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
-            [self disconnectClient];
-            return;
-        }
-        [self disconnectClient];
-        return;
-    }
-    
-    void *buffer = malloc(varInt);
-    [socket asyncReadIntoBuffer:buffer exactLength:varInt target:self selector:@selector(readFrom:packet:withSize:error:)];
-    
-}
-
-- (BOOL)readFrom:(OFStream *)stream packet:(void *)buffer withSize:(size_t)size error:(OFException *)exception {
-    
-    if (exception) {
-        LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
-        [self disconnectClient];
-        return NO;
-    }
-    
-    @autoreleasepool {
-        OFDataArray *data = [OFDataArray dataArrayWithItemSize:1 capacity:size];
-        [data addItems:buffer count:size];
-        [packetHandler recievedPacket:data];
-    }
-    
-    free(buffer);
-    
-    [socket asyncReadVarIntForTarget:self selector:@selector(readFrom:varInt:error:)];
-    
-    return NO;
 }
 
 @end

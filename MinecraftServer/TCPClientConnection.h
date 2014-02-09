@@ -8,13 +8,19 @@
 
 #import <ObjFW/ObjFW.h>
 #import "TCPPacketHandler.h"
+#import "OFDataArray+VarIntReader.h"
 @class TCPServerPacket;
 @class MinecraftServer;
+
+typedef bool (^PacketReadBlock)(OFStream*, void *, size_t, OFException*);
 
 @interface TCPClientConnection : OFObject {
     OFTCPSocket *socket;
     TCPPacketHandler *packetHandler;
     MinecraftServer *server;
+    
+    VarIntBlock varIntReadCallback;
+    PacketReadBlock packetReadCallback;
 }
 
 - (instancetype)initWithSocket:(OFTCPSocket *)socket fromMinecraftServer:(MinecraftServer *)server;

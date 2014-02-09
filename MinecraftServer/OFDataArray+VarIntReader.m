@@ -49,30 +49,70 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 
 @end
 
-@implementation OFTCPSocket (VarIntReader)
+@implementation OFStream (VarIntReader)
 
 - (void)asyncReadVarIntForTarget:(id)target selector:(SEL)selector {
-    [[AsyncVarIntReader alloc] initWithSocket:self signed:NO forTarget:target andSelector:selector];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:NO forTarget:target andSelector:selector];
 }
 
 - (void)asyncReadSignedVarIntForTarget:(id)target selector:(SEL)selector {
-    [[AsyncVarIntReader alloc] initWithSocket:self signed:YES forTarget:target andSelector:selector];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:YES forTarget:target andSelector:selector];
+}
+
+
+- (void)asyncReadVarIntWithBlock:(VarIntBlock)handler {
+    [[AsyncVarIntReader alloc] initWithStream:self signed:NO withBlock:handler];
+}
+
+- (void)asyncReadSignedVarIntWithBlock:(VarIntBlock)handler {
+    [[AsyncVarIntReader alloc] initWithStream:self signed:YES withBlock:handler];
 }
 
 @end
 
 @implementation AsyncVarIntReader
 
-- (instancetype)initWithSocket:(OFTCPSocket *)tcpSocket signed:(BOOL)_sign forTarget:(id)_target andSelector:(SEL)_selector {
+- (instancetype)initWithStream:(OFStream *)_stream signed:(BOOL)_sign withBlock:(VarIntBlock)handler {
     self = [super init];
     @try {
         sign = _sign;
-        target = _target;
-        selector = _selector;
         varData = [[OFDataArray alloc] initWithItemSize:sizeof(int8_t)];
-        socket = tcpSocket;
-        void *buffer = malloc(sizeof(int8_t));
-        [tcpSocket asyncReadIntoBuffer:buffer exactLength:sizeof(int8_t) target:self selector:@selector(readFrom:buffer:ofSize:error:)];
+        stream = [_stream retain];
+        block = [handler copy];
+        buffer = malloc(sizeof(int8_t));
+        [stream asyncReadIntoBuffer:buffer exactLength:sizeof(int8_t) block:^bool(OFStream *__stream, void *_buffer, size_t length, OFException *exception) {
+            
+            if (exception) {
+                if (block(__stream, 0, exception)) {
+                    [varData removeAllItems];
+                    return YES;
+                } else {
+                    [self autorelease];
+                    return NO;
+                }
+            }
+            
+            [varData addItem:_buffer];
+            if (((*(uint8_t *)_buffer) & 0x80) != 0) {
+                return YES;
+            } else {
+                bool result;
+                if (sign) {
+                    int64_t varInt = decode_signed_varint([varData items], NULL);
+                    result = block(__stream, varInt, nil);
+                }
+                if (!sign) {
+                    uint64_t varInt = decode_unsigned_varint([varData items], NULL);
+                    result = block(__stream, varInt, nil);
+                }
+                if (result) {
+                    [varData removeAllItems];
+                } else {
+                    [self autorelease];
+                }
+                return result;
+            }
+        }];
     } @catch (id e) {
         [self release];
         @throw e;
@@ -80,33 +120,69 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
     return self;
 }
 
-- (BOOL)readFrom:(OFStream *)stream buffer:(void *)buffer ofSize:(size_t)size error:(OFException *)exception {
+- (instancetype)initWithStream:(OFStream *)_stream signed:(BOOL)_sign forTarget:(id)_target andSelector:(SEL)_selector {
+    self = [super init];
+    @try {
+        sign = _sign;
+        target = [_target retain];
+        selector = _selector;
+        varData = [[OFDataArray alloc] initWithItemSize:sizeof(int8_t)];
+        stream = [_stream retain];
+        buffer = malloc(sizeof(int8_t));
+        [stream asyncReadIntoBuffer:buffer exactLength:sizeof(int8_t) target:self selector:@selector(readFrom:buffer:ofSize:error:)];
+    } @catch (id e) {
+        [self release];
+        @throw e;
+    }
+    return self;
+}
+
+- (BOOL)readFrom:(OFStream *)_stream buffer:(void *)_buffer ofSize:(size_t)size error:(OFException *)exception {
     
     if (exception) {
         bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
-        func(target, selector, socket, 0, exception);
-        [self autorelease];
-        return NO;
+        if (func(target, selector, _stream, 0, exception)) {
+            [varData removeAllItems];
+            return YES;
+        } else {
+            [self autorelease];
+            return NO;
+        }
     }
     
-    [varData addItem:buffer];
-    if (((*(uint8_t *)buffer) & 0x80) != 0) {
+    [varData addItem:_buffer];
+    if (((*(uint8_t *)_buffer) & 0x80) != 0) {
         return YES;
     } else {
+        bool result;
         if (sign) {
             int64_t varInt = decode_signed_varint([varData items], NULL);
             bool (*func)(id, SEL, OFStream *, int64_t, OFException*) = (bool(*)(id, SEL, OFStream*, int64_t, OFException*)) [target methodForSelector:selector];
-            func(target, selector, socket, varInt, nil);
+            result = func(target, selector, _stream, varInt, nil);
         }
         if (!sign) {
             uint64_t varInt = decode_unsigned_varint([varData items], NULL);
             bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
-            func(target, selector, socket, varInt, nil);
+            result = func(target, selector, _stream, varInt, nil);
         }
-        [self autorelease];
-        free(buffer);
-        return NO;
+        
+        if (result) {
+            [varData removeAllItems];
+        } else {
+            [self autorelease];
+        }
+        return result;
     }
+}
+
+- (void)dealloc {
+    if (target)
+        [target release];
+    if (block)
+        [block release];
+    free(buffer);
+    [stream release];
+    [super dealloc];
 }
 
 @end
