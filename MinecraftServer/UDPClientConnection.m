@@ -321,7 +321,6 @@
     [self flushPackets];
     [pingTimer invalidate];
     [player despawn];
-    [player release];
 }
 
 @end

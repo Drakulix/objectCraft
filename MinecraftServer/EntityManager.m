@@ -41,6 +41,7 @@
             entity.entityId = [entityList count];
             [entityList addObject:entity];
         }
+        [entity release];
         
         entity.dimension = world.dimension;
         entity.tcpDimension = world.tcpDimension;

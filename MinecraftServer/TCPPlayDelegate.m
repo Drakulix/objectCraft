@@ -33,7 +33,7 @@
     self = [super init];
     
     connectionDelegate = [client retain];
-    player = [_player retain];
+    player = _player;
     
     TCPInitMapChunks *chunkPacket = nil;
     @try {
@@ -140,7 +140,6 @@
 
 - (void)dealloc {
     [connectionDelegate release];
-    [player release];
     [super dealloc];
 }
 
