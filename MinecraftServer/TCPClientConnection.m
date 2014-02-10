@@ -25,7 +25,7 @@
             packetHandler = [[TCPPacketHandler alloc] initWithDelegate:[[[TCPHandshakeHandler alloc] initWithClientConnection:self] autorelease]];
         }
         server = _server;
-        socket = [_socket retain];
+        socket = _socket;
         [socket setWriteBufferEnabled:NO];
         
         packetReadCallback = [^bool(OFStream *stream, void *buffer, size_t length, OFException *exception) {
@@ -93,7 +93,6 @@
 
 - (void)dealloc {
     [packetHandler release];
-    //[socket release];
     [super dealloc];
 }
 
