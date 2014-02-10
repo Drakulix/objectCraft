@@ -101,9 +101,9 @@
         return YES;
     }
     
-    @autoreleasepool {
-        [activeTCPConnections addObject:[[[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self] autorelease]];
-    }
+    TCPClientConnection *conn = [[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self];
+    [activeTCPConnections addObject:conn];
+    [conn release];
     
     return YES;
 }
