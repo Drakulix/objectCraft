@@ -138,7 +138,7 @@
         if (!player) {
             
             LogInfo(@"'%@' connected!", ((UDPLogin *)packet).username);
-            player = [[Player alloc] initSpawnPlayerWithUsername:((UDPLogin *)packet).username];
+            player = [Player spawnPlayerWithUsername:((UDPLogin *)packet).username];
             player.clientId = clientId;
         
             [self flushPackets];

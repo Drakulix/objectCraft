@@ -39,7 +39,7 @@
         }
         
         @autoreleasepool {
-            [connectionDelegate changeDelegate:[[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[[Player alloc] initSpawnPlayerWithUsername:((TCPLoginStart *)packet).username]] autorelease]];
+            [connectionDelegate changeDelegate:[[[TCPPlayDelegate alloc] initWithClientConnection:connectionDelegate withPlayer:[Player spawnPlayerWithUsername:((TCPLoginStart *)packet).username]] autorelease]];
         }
         
     }

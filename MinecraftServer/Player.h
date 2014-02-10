@@ -24,7 +24,7 @@
 @property (atomic) double feetY;
 @property (atomic) BOOL isCreativeMode;
 
-- (id)initSpawnPlayerWithUsername:(OFString *)username;
++ (Player *)spawnPlayerWithUsername:(OFString *)username;
 
 - (int32_t)chunkPosX;
 - (int32_t)chunkPosY;

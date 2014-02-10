@@ -22,12 +22,18 @@ static int playerCount = 0;
 @implementation Player
 @dynamic Y;
 
-- (instancetype)initSpawnPlayerWithUsername:(NSString *)username {
++ (Player *)spawnPlayerWithUsername:(NSString *)username {
     
-    self = (Player *)[[[WorldManager defaultManager] worldForDimension:[ConfigManager defaultManager].spawnDimension].entityManager addEntityOfClass:[Player class]];
+    Player *player = (Player *)[[[WorldManager defaultManager] worldForDimension:[ConfigManager defaultManager].spawnDimension].entityManager addEntityOfClass:[Player class]];
+    player.username = username;
+    return player;
+    
+}
+
+- (instancetype)init {
+    
     @try {
     
-        self.username = username;
         self.canBeDamaged = YES;
         self.canFly = NO;
         self.isFlying = NO;
