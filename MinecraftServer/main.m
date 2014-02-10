@@ -9,9 +9,4 @@
 #import <ObjFW/ObjFW.h>
 #import "MinecraftServer.h"
 
-int main(int argc, char * argv[])
-{
-    @autoreleasepool {
-        return of_application_main(&argc, &argv, [MinecraftServer class]);
-    }
-}
+OF_APPLICATION_DELEGATE([MinecraftServer class]);
