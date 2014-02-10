@@ -16,7 +16,7 @@
 }
 
 @property (nonatomic) int16_t unknown;
-@property (nonatomic) BOOL hasAdditionalPacketNumber;
+@property (nonatomic) bool hasAdditionalPacketNumber;
 @property (nonatomic) uint32_t packetNumber;
 @property (nonatomic) uint32_t additionalPacketNumber;
 

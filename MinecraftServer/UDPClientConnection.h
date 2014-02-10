@@ -37,7 +37,7 @@
 - (void)recievedMinecraftPacket:(RaknetMinecraftPacket *)data;
 - (void)ackdCustomPacket:(uint32_t)customPacketId;
 - (void)nackdCustomPacket:(uint32_t)customPacketId;
-- (BOOL)wasPacketAckd:(uint32_t)customPacketId;
+- (bool)wasPacketAckd:(uint32_t)customPacketId;
 
 - (uint24_t)nextCustomPacketId;
 - (void)sendRaknetPacket:(RaknetCustomPacket *)packet;

@@ -24,13 +24,13 @@ typedef struct {
 @property (atomic) int64_t ageInTicks;
 
 - (id)initWithBlocks:(OFMutableArray *)array;
-- (BOOL)isEmpty;
+- (bool)isEmpty;
 - (Block *)blockAtX:(int16_t)x Y:(int16_t)y Z:(int16_t)z;
 
 - (int16_t)load;
 - (int16_t)unload;
 
-@property (readonly) BOOL isEmpty;
+@property (readonly) bool isEmpty;
 
 @end
 

@@ -18,7 +18,7 @@
 - (uint24_t)readReverseUInt24;
 - (int16_t)readShort;
 - (int8_t)readByte;
-- (BOOL)readBoolTcp;
-- (BOOL)readBoolUdp;
+- (bool)readBoolTcp;
+- (bool)readBoolUdp;
 
 @end

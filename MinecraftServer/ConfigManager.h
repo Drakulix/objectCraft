@@ -18,22 +18,22 @@
 
 //Technical Server Settings
 //TCP
-@property (nonatomic) BOOL tcpIPv4Enabled;
+@property (nonatomic) bool tcpIPv4Enabled;
 @property (nonatomic) int16_t tcpIPv4Port;
 
-@property (nonatomic) BOOL tcpIPv6Enabled;
+@property (nonatomic) bool tcpIPv6Enabled;
 @property (nonatomic) int16_t tcpIPv6Port;
 
-@property (nonatomic) BOOL tcpLanWorldBroadcastEnabled;
+@property (nonatomic) bool tcpLanWorldBroadcastEnabled;
 
 //UDP
-@property (nonatomic) BOOL udpIPv4Enabled;
+@property (nonatomic) bool udpIPv4Enabled;
 @property (nonatomic) int16_t udpIPv4Port;
 
-@property (nonatomic) BOOL udpIPv6Enabled;
+@property (nonatomic) bool udpIPv6Enabled;
 @property (nonatomic) int16_t udpIPv6Port;
 
-@property (nonatomic) BOOL udpLanWorldBroadcastEnabled;
+@property (nonatomic) bool udpLanWorldBroadcastEnabled;
 
 @property (nonatomic) int64_t udpServerId; //unique Id for every Minecraft PE install,
                                //never use your own, you will probably not be able to connect
@@ -43,14 +43,14 @@
 //Game Related Server Settings
 @property (nonatomic, retain) OFString *serverBrowserMessage;
 
-@property (nonatomic) BOOL loginWelcomeMessageEnabled;
+@property (nonatomic) bool loginWelcomeMessageEnabled;
 @property (nonatomic, retain) OFString *loginWelcomeMessage;
 
 
 
 //Game Mode
 @property (nonatomic) uint8_t defaultGamemode;
-@property (nonatomic) BOOL isHardcore;
+@property (nonatomic) bool isHardcore;
 
 
 //World Settings

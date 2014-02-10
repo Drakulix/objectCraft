@@ -42,21 +42,21 @@ static ConfigManager *sharedInstance;
         @autoreleasepool {
             if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
                 settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
-                    @"tcpIPv4Enabled", [OFNumber numberWithBool:YES],
-                    @"tcpIPv6Enabled", [OFNumber numberWithBool:YES],
+                    @"tcpIPv4Enabled", [OFNumber numberWithBool:false],
+                    @"tcpIPv6Enabled", [OFNumber numberWithBool:false],
                     @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
                     @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
-                    @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
-                    @"udpIPv4Enabled", [OFNumber numberWithBool:YES],
-                    @"udpIPv6Enabled", [OFNumber numberWithBool:YES],
+                    @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
+                    @"udpIPv4Enabled", [OFNumber numberWithBool:false],
+                    @"udpIPv6Enabled", [OFNumber numberWithBool:false],
                     @"udpIPv4Port", [OFNumber numberWithInt16:19132],
                     @"udpIPv6Port", [OFNumber numberWithInt16:19132],
-                    @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:YES],
+                    @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
                     @"serverBrowserMessage", @"ObjectCraft Server",
-                    @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:YES],
+                    @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:false],
                     @"loginWelcomeMessage", @"Welcome to our ObjectCraft Server! Have fun ;)",
                     @"defaultGamemode", @"SURVIVAL",
-                    @"isHardcore", [OFNumber numberWithBool:NO],
+                    @"isHardcore", [OFNumber numberWithBool:false],
                     @"dimensions", [OFDictionary dictionaryWithKeysAndObjects:
                                     [OFNumber numberWithInt8:-1], @"NetherGenerator",
                                     [OFNumber numberWithInt8:0], @"OverworldGenerator",
@@ -72,7 +72,7 @@ static ConfigManager *sharedInstance;
                     @"difficulty", @"NORMAL",
                     @"udpServerId", [OFNumber numberWithInt64:0],
                  nil];
-                [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+                [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
             }
         }
         
@@ -91,13 +91,13 @@ static ConfigManager *sharedInstance;
 }
 
 //Technical Server Settings
-- (BOOL)tcpIPv4Enabled {
+- (bool)tcpIPv4Enabled {
     return [[settings objectForKey:@"tcpIPv4Enabled"] boolValue];
 }
-- (void)setTcpIPv4Enabled:(BOOL)tcpIPv4Enabled {
+- (void)setTcpIPv4Enabled:(bool)tcpIPv4Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpIPv4Enabled] forKey:@"tcpIPv4Enabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -107,17 +107,17 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv4Port:(int16_t)tcpIPv4Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:tcpIPv4Port] forKey:@"tcpIPv4Port"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)tcpIPv6Enabled {
+- (bool)tcpIPv6Enabled {
     return [[settings objectForKey:@"tcpIPv6Enabled"] boolValue];
 }
-- (void)setTcpIPv6Enabled:(BOOL)tcpIPv6Enabled {
+- (void)setTcpIPv6Enabled:(bool)tcpIPv6Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpIPv6Enabled] forKey:@"tcpIPv6Enabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -127,27 +127,27 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv6Port:(int16_t)tcpIPv6Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:tcpIPv6Port] forKey:@"tcpIPv6Port"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)tcpLanWorldBroadcastEnabled {
+- (bool)tcpLanWorldBroadcastEnabled {
     return [[settings objectForKey:@"tcpLanBroadcastEnabled"] boolValue];
 }
-- (void)setTcpLanWorldBroadcastEnabled:(BOOL)tcpLanWorldBroadcastEnabled {
+- (void)setTcpLanWorldBroadcastEnabled:(bool)tcpLanWorldBroadcastEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpLanWorldBroadcastEnabled] forKey:@"tcpLanWorldBroadcastEnabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)udpIPv4Enabled {
+- (bool)udpIPv4Enabled {
     return [[settings objectForKey:@"udpIPv4Enabled"] boolValue];
 }
-- (void)setUdpIPv4Enabled:(BOOL)udpIPv4Enabled {
+- (void)setUdpIPv4Enabled:(bool)udpIPv4Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpIPv4Enabled] forKey:@"udpIPv4Enabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -157,17 +157,17 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv4Port:(int16_t)udpIPv4Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:udpIPv4Port] forKey:@"udpIPv4Port"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)udpIPv6Enabled {
+- (bool)udpIPv6Enabled {
     return [[settings objectForKey:@"udpIPv6Enabled"] boolValue];
 }
-- (void)setUdpIPv6Enabled:(BOOL)udpIPv6Enabled {
+- (void)setUdpIPv6Enabled:(bool)udpIPv6Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpIPv6Enabled] forKey:@"udpIPv6Enabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -177,17 +177,17 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv6Port:(int16_t)udpIPv6Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:udpIPv6Port] forKey:@"udpIPv6Port"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)udpLanWorldBroadcastEnabled {
+- (bool)udpLanWorldBroadcastEnabled {
     return [[settings objectForKey:@"udpLanBroadcastEnabled"] boolValue];
 }
-- (void)setUdpLanWorldBroadcastEnabled:(BOOL)udpLanWorldBroadcastEnabled {
+- (void)setUdpLanWorldBroadcastEnabled:(bool)udpLanWorldBroadcastEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpLanWorldBroadcastEnabled] forKey:@"udpLanWorldBroadcastEnabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -199,7 +199,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpServerId:(int64_t)udpServerId {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt64:udpServerId] forKey:@"udpServerId"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -210,17 +210,17 @@ static ConfigManager *sharedInstance;
 - (void)setServerBrowserMessage:(OFString *)serverBrowserMessage {
     @autoreleasepool {
         [settings setObject:serverBrowserMessage forKey:@"serverBrowserMessage"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (BOOL)loginWelcomeMessageEnabled {
+- (bool)loginWelcomeMessageEnabled {
     return [[settings objectForKey:@"loginWelcomeMessageEnabled"] boolValue];
 }
-- (void)setLoginWelcomeMessageEnabled:(BOOL)loginWelcomeMessageEnabled {
+- (void)setLoginWelcomeMessageEnabled:(bool)loginWelcomeMessageEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:loginWelcomeMessageEnabled] forKey:@"loginWelcomeMessageEnabled"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -230,7 +230,7 @@ static ConfigManager *sharedInstance;
 - (void)setLoginWelcomeMessage:(OFString *)loginWelcomeMessage {
     @autoreleasepool {
         [settings setObject:loginWelcomeMessage forKey:@"loginWelcomeMessage"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -264,15 +264,18 @@ static ConfigManager *sharedInstance;
             [settings setObject:@"ADVENTURE" forKey:@"defaultGamemode"];
             break;
     }
+    @autoreleasepool {
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+    }
 }
 
-- (BOOL)isHardcore {
+- (bool)isHardcore {
     return [[settings objectForKey:@"isHardcore"] boolValue];
 }
-- (void)setIsHardcore:(BOOL)isHardcore {
+- (void)setIsHardcore:(bool)isHardcore {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:isHardcore] forKey:@"isHardcore"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -283,7 +286,7 @@ static ConfigManager *sharedInstance;
 - (void)setSpawnDimension:(int8_t)spawnDimension {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt8:spawnDimension] forKey:@"spawnDimension"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -293,7 +296,7 @@ static ConfigManager *sharedInstance;
 - (void)setDimensions:(OFDictionary *)dimensions {
     @autoreleasepool {
         [settings setObject:dimensions forKey:@"dimensions"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 - (void)addDimension:(int8_t)dimensionNum withGenerator:(WorldGenerator *)generator {
@@ -302,7 +305,7 @@ static ConfigManager *sharedInstance;
         [dict setObject:[[generator class] description] forKey:[OFNumber numberWithInt8:dimensionNum]];
         [settings setObject:dict forKey:@"dimensions"];
         [dict release];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 - (void)removeDimension:(int8_t)dimensionNum {
@@ -311,7 +314,7 @@ static ConfigManager *sharedInstance;
         [dict removeObjectForKey:[OFNumber numberWithInt8:dimensionNum]];
         [settings setObject:dict forKey:@"dimensions"];
         [dict release];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -323,7 +326,7 @@ static ConfigManager *sharedInstance;
 - (void)setSeed:(int32_t)seed {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt32:seed] forKey:@"seed"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -333,7 +336,7 @@ static ConfigManager *sharedInstance;
 - (void)setMaxPlayers:(int32_t)maxPlayers {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt32:maxPlayers] forKey:@"maxPlayers"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
     
@@ -343,7 +346,7 @@ static ConfigManager *sharedInstance;
 - (void)setDefaultSpawnPoint:(of_point_t)defaultSpawnPoint {
     @autoreleasepool {
         [settings setObject:[OFArray arrayWithObjects:[OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.x)], [OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.y)], nil] forKey:@"defaultSpawnPoint"];
-        [[settings JSONRepresentation] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -382,6 +385,9 @@ static ConfigManager *sharedInstance;
         case 3:
             [settings setObject:@"HARD" forKey:@"difficulty"];
             break;
+    }
+    @autoreleasepool {
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 

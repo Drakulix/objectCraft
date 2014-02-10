@@ -16,7 +16,7 @@
     self = [super init];
     @try {
         blocks = [array retain];
-        _isEmpty = NO;
+        _isEmpty = false;
         self.ageInTicks = 0;
         loadCount = 0;
         [self updateIsEmpty];
@@ -40,17 +40,17 @@
     _isEmpty = [self updateIsEmptyHelper];
 }
 
-- (BOOL)updateIsEmptyHelper {
+- (bool)updateIsEmptyHelper {
     for (int x = 0; x<16; x++) {
         for (int y = 0; y<16; y++) {
             for (int z = 0; z<16; z++) {
                 if ([blocks[x][y][z] tcpBlockId] != 0) {
-                    return NO;
+                    return true;
                 }
             }
         }
     }
-    return YES;
+    return false;
 }
 
 

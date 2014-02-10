@@ -13,7 +13,7 @@
     OFMutableArray *chunkColumns;
 }
 
-@property (nonatomic) BOOL skyLightSend;
+@property (nonatomic) bool skyLightSend;
 
 - (instancetype)initForTcpDimension:(int8_t)dimension;
 - (void)addChunkColumn:(ChunkColumn *)chunk;

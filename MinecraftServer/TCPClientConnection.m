@@ -26,14 +26,14 @@
         }
         server = _server;
         socket = _socket;
-        [socket setWriteBufferEnabled:NO];
+        [socket setWriteBufferEnabled:false];
         
         packetReadCallback = [^bool(OFStream *stream, void *buffer, size_t length, OFException *exception) {
             
             if (exception) {
                 LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
                 [self clientDisconnected];
-                return NO;
+                return false;
             }
             
             @autoreleasepool {
@@ -46,7 +46,7 @@
             
             [self readPacketId];
             
-            return NO;
+            return false;
             
         } copy];
         
@@ -55,12 +55,12 @@
             if (exception) {
                 LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
                 [self clientDisconnected];
-                return YES;
+                return true;
             }
             
             void *buffer = malloc(varInt);
             [socket asyncReadIntoBuffer:buffer exactLength:varInt block:packetReadCallback];
-            return NO;
+            return false;
             
         } copy];
         

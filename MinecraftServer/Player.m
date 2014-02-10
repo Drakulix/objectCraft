@@ -34,10 +34,10 @@ static int playerCount = 0;
     
     @try {
     
-        self.canBeDamaged = YES;
-        self.canFly = NO;
-        self.isFlying = NO;
-        self.isCreativeMode = YES;
+        self.canBeDamaged = true;
+        self.canFly = false;
+        self.isFlying = false;
+        self.isCreativeMode = true;
         self.walkingSpeed = 0.1f;
         self.flyingSpeed = 0.2f;
         self.clientId = self.entityId;
@@ -119,18 +119,18 @@ static int playerCount = 0;
     return playerCount;
 }
 
-- (BOOL)isChunkDirtyAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z { //Do chunk needs update
+- (bool)isChunkDirtyAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z { //Do chunk needs update
     Chunk *chunk = [worldChunkManager getChunkAtX:x AtY:y AtZ:z];
     if ([loadedChunks containsObject:chunk] && chunk.ageInTicks <= *(uint64_t *)[lastAgeRequests valueForKey:chunk]) {
-        return NO;
+        return false;
     }
-    return YES;
+    return true;
 }
-- (BOOL)isChunkDirty:(Chunk *)chunk {
+- (bool)isChunkDirty:(Chunk *)chunk {
     if ([loadedChunks containsObject:chunk] && chunk.ageInTicks <= *(uint64_t *)[lastAgeRequests valueForKey:chunk]) {
-        return NO;
+        return false;
     }
-    return YES;
+    return true;
 }
 
 - (Chunk *)loadChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z {

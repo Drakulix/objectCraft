@@ -15,6 +15,6 @@
 @property (nonatomic) double headY;
 @property (nonatomic) double Z;
 
-@property (nonatomic) BOOL OnGround;
+@property (nonatomic) bool OnGround;
 
 @end

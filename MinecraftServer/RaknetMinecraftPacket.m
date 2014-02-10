@@ -58,7 +58,7 @@
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];
     @try {
-        self.isReliable = NO;
+        self.isReliable = false;
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
@@ -72,7 +72,7 @@
 - (instancetype)initReliableWithData:(OFDataArray *)data count:(uint24_t)_count {
     self = [super init];
     @try {
-        self.isReliable = YES;
+        self.isReliable = true;
         count = _count;
         
         self.dataLength = ((uint16_t)[data count]);
@@ -87,10 +87,10 @@
 - (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
     self = [super init];
     @try {
-        self.isReliable = YES;
+        self.isReliable = true;
         count = _count;
         
-        self.isSplit = YES;
+        self.isSplit = true;
         self.splitCount = splitCount;
         self.splitId = splitId;
         self.splitIndex = splitIndex;

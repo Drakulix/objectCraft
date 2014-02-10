@@ -22,7 +22,7 @@
 
 @property (atomic) double headY;
 @property (atomic) double feetY;
-@property (atomic) BOOL isCreativeMode;
+@property (atomic) bool isCreativeMode;
 
 + (Player *)spawnPlayerWithUsername:(OFString *)username;
 
@@ -35,8 +35,8 @@
 
 + (int)playerCount;
 
-- (BOOL)isChunkDirtyAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z;
-- (BOOL)isChunkDirty:(Chunk *)chunk;
+- (bool)isChunkDirtyAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z;
+- (bool)isChunkDirty:(Chunk *)chunk;
 - (Chunk *)loadChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z;
 - (ChunkColumn *)loadChunkColumnAtX:(int32_t)x AtZ:(int32_t)z;
 - (void)unloadChunk:(Chunk *)chunk;

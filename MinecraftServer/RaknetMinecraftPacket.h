@@ -19,14 +19,14 @@
 
 @property (nonatomic) uint16_t dataLength;
 
-@property (nonatomic) BOOL isReliable;
+@property (nonatomic) bool isReliable;
 @property (nonatomic) uint32_t count;
 
-@property (nonatomic) BOOL isOrdered;
+@property (nonatomic) bool isOrdered;
 @property (nonatomic) uint32_t orderId;
 @property (nonatomic) uint8_t orderChannel;
 
-@property (nonatomic) BOOL isSplit;
+@property (nonatomic) bool isSplit;
 @property (nonatomic) int32_t splitCount;
 @property (nonatomic) int16_t splitId;
 @property (nonatomic) int32_t splitIndex;

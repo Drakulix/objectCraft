@@ -10,7 +10,7 @@
 
 @interface OFDataArray (RaknetMagic)
 
-- (BOOL)checkMagic;
+- (bool)checkMagic;
 - (void)appendMagic;
 
 @end

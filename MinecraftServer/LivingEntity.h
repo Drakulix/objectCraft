@@ -10,7 +10,7 @@
 
 @interface LivingEntity : MovingEntity
 
-@property (atomic) BOOL canBeDamaged;
+@property (atomic) bool canBeDamaged;
 @property (atomic) int16_t health;
 
 @end

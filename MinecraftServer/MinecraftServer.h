@@ -13,7 +13,7 @@
 #define UDP_MAX_PACKET_SIZE 1504 //MAX MTU is 1447. 1504 bytes should never be too small
 
 @interface MinecraftServer : OFObject<OFApplicationDelegate> {
-    BOOL running;
+    bool running;
     
     OFTCPSocket *tcpServerSocketIPv4;
     OFTCPSocket *tcpServerSocketIPv6;

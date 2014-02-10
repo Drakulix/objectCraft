@@ -52,27 +52,27 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 @implementation OFStream (VarIntReader)
 
 - (void)asyncReadVarIntForTarget:(id)target selector:(SEL)selector {
-    [[AsyncVarIntReader alloc] initWithStream:self signed:NO forTarget:target andSelector:selector];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:false forTarget:target andSelector:selector];
 }
 
 - (void)asyncReadSignedVarIntForTarget:(id)target selector:(SEL)selector {
-    [[AsyncVarIntReader alloc] initWithStream:self signed:YES forTarget:target andSelector:selector];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:true forTarget:target andSelector:selector];
 }
 
 
 - (void)asyncReadVarIntWithBlock:(VarIntBlock)handler {
-    [[AsyncVarIntReader alloc] initWithStream:self signed:NO withBlock:handler];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:false withBlock:handler];
 }
 
 - (void)asyncReadSignedVarIntWithBlock:(VarIntBlock)handler {
-    [[AsyncVarIntReader alloc] initWithStream:self signed:YES withBlock:handler];
+    [[AsyncVarIntReader alloc] initWithStream:self signed:true withBlock:handler];
 }
 
 @end
 
 @implementation AsyncVarIntReader
 
-- (instancetype)initWithStream:(OFStream *)_stream signed:(BOOL)_sign withBlock:(VarIntBlock)handler {
+- (instancetype)initWithStream:(OFStream *)_stream signed:(bool)_sign withBlock:(VarIntBlock)handler {
     self = [super init];
     @try {
         sign = _sign;
@@ -85,7 +85,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
             if (exception) {
                 if (block(__stream, 0, exception)) {
                     [varData removeAllItems];
-                    return YES;
+                    return true;
                 } else {
                     [self autorelease];
                     return NO;
@@ -94,7 +94,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
             
             [varData addItem:_buffer];
             if (((*(uint8_t *)_buffer) & 0x80) != 0) {
-                return YES;
+                return true;
             } else {
                 bool result;
                 if (sign) {
@@ -120,7 +120,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
     return self;
 }
 
-- (instancetype)initWithStream:(OFStream *)_stream signed:(BOOL)_sign forTarget:(id)_target andSelector:(SEL)_selector {
+- (instancetype)initWithStream:(OFStream *)_stream signed:(bool)_sign forTarget:(id)_target andSelector:(SEL)_selector {
     self = [super init];
     @try {
         sign = _sign;
@@ -137,13 +137,13 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
     return self;
 }
 
-- (BOOL)readFrom:(OFStream *)_stream buffer:(void *)_buffer ofSize:(size_t)size error:(OFException *)exception {
+- (bool)readFrom:(OFStream *)_stream buffer:(void *)_buffer ofSize:(size_t)size error:(OFException *)exception {
     
     if (exception) {
         bool (*func)(id, SEL, OFStream *, uint64_t, OFException*) = (bool(*)(id, SEL, OFStream*, uint64_t, OFException*)) [target methodForSelector:selector];
         if (func(target, selector, _stream, 0, exception)) {
             [varData removeAllItems];
-            return YES;
+            return true;
         } else {
             [self autorelease];
             return NO;
@@ -152,7 +152,7 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
     
     [varData addItem:_buffer];
     if (((*(uint8_t *)_buffer) & 0x80) != 0) {
-        return YES;
+        return true;
     } else {
         bool result;
         if (sign) {

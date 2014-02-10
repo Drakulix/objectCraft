@@ -18,7 +18,7 @@
     @try {
         self.unknown = 1;
         packetNumber.i = _packetNumber;
-        self.hasAdditionalPacketNumber = NO;
+        self.hasAdditionalPacketNumber = false;
         
     } @catch (id e) {
         [self release];

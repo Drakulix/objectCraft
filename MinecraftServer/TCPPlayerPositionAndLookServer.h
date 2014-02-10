@@ -18,7 +18,7 @@
 @property (nonatomic) float Yaw;
 @property (nonatomic) float Pitch;
 
-@property (nonatomic) BOOL OnGround;
+@property (nonatomic) bool OnGround;
 
 - (instancetype)initWithPlayer:(Player *)player;
 

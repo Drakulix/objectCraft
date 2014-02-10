@@ -105,7 +105,7 @@
 
 - (void)dispatchNewTransmissionVia:(UDPClientConnection *)_handler {
     handler = _handler;
-    timer = [OFTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(resend) repeats:NO];
+    timer = [OFTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(resend) repeats:false];
 }
 
 - (void)resend {

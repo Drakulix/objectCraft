@@ -28,7 +28,7 @@ typedef bool (^VarIntBlock)(OFStream*, uint64_t, OFException*);
 @end
 
 @interface AsyncVarIntReader : OFObject {
-    BOOL sign;
+    bool sign;
     id target;
     SEL selector;
     OFDataArray *varData;
@@ -37,7 +37,7 @@ typedef bool (^VarIntBlock)(OFStream*, uint64_t, OFException*);
     void *buffer;
 }
 
-- (instancetype)initWithStream:(OFStream *)stream signed:(BOOL)sign forTarget:(id)target andSelector:(SEL)selector;
-- (instancetype)initWithStream:(OFStream *)stream signed:(BOOL)sign withBlock:(VarIntBlock)handler;
+- (instancetype)initWithStream:(OFStream *)stream signed:(bool)sign forTarget:(id)target andSelector:(SEL)selector;
+- (instancetype)initWithStream:(OFStream *)stream signed:(bool)sign withBlock:(VarIntBlock)handler;
 
 @end

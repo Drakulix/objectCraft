@@ -122,7 +122,7 @@
         [self flushPackets];
         
         if (!pingTimer)
-            pingTimer = [OFTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendPing) repeats:YES];
+            pingTimer = [OFTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendPing) repeats:true];
         
         
     } else if ([packet isKindOfClass:[UDPLogin class]]) {
@@ -213,7 +213,7 @@
 }
 
 
-- (BOOL)wasPacketAckd:(uint32_t)_customPacketId {
+- (bool)wasPacketAckd:(uint32_t)_customPacketId {
     return [queuedCustomPackets objectForKey:[OFNumber numberWithUInt32:_customPacketId]] == nil;
 }
 

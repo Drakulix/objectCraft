@@ -39,7 +39,7 @@ typedef union {
 - (void)appendByte:(int8_t)byte;
 - (void)appendNibbler:(Nibbler)nibb;
 - (void)appendBitArray:(BitArray)bits;
-- (void)appendBoolTcp:(BOOL)boolean;
-- (void)appendBoolUdp:(BOOL)boolean;
+- (void)appendBoolTcp:(bool)boolean;
+- (void)appendBoolUdp:(bool)boolean;
 
 @end

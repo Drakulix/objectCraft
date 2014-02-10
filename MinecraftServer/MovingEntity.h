@@ -10,10 +10,10 @@
 
 @interface MovingEntity : Entity
 
-@property (atomic) BOOL OnGround;
+@property (atomic) bool OnGround;
 
-@property (atomic) BOOL canFly;
-@property (atomic) BOOL isFlying;
+@property (atomic) bool canFly;
+@property (atomic) bool isFlying;
 
 @property (atomic) float flyingSpeed;
 @property (atomic) float walkingSpeed;

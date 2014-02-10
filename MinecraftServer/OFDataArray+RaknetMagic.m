@@ -15,14 +15,14 @@
 const int64_t magic1 = 0x00ffff00fefefefe;
 const int64_t magic2 = 0xfdfdfdfd12345678;
 
-- (BOOL)checkMagic {
+- (bool)checkMagic {
     if ([self readLong] != magic1) {
-        return NO;
+        return false;
     }
     if ([self readLong] != magic2) {
-        return NO;
+        return false;
     }
-    return YES;
+    return true;
 }
 
 - (void)appendMagic {

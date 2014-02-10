@@ -78,10 +78,10 @@
     LogInfo(@"ObjectCraft Server started");
 }
 
-- (BOOL)recieveViaUDPSocket:(OFUDPSocket *)socket data:(void *)buffer withSize:(size_t)length from:(of_udp_socket_address_t)peer error:(OFException *)exception {
+- (bool)recieveViaUDPSocket:(OFUDPSocket *)socket data:(void *)buffer withSize:(size_t)length from:(of_udp_socket_address_t)peer error:(OFException *)exception {
     if (exception) {
         LogError(@"Exception on reading from udp socket: %@", exception);
-        return YES;
+        return true;
     }
     
     OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
@@ -92,20 +92,20 @@
     else
         [raknetHandlerIPv6 didRecieveData:data fromPeer:peer];
     
-    return YES;
+    return true;
 }
 
-- (BOOL)acceptFrom:(OFTCPSocket *)socket On:(OFTCPSocket *)acceptedSocket withException:(OFException *)exception {
+- (bool)acceptFrom:(OFTCPSocket *)socket On:(OFTCPSocket *)acceptedSocket withException:(OFException *)exception {
     if (exception) {
         LogError(@"Exception on accepting tcp socket: %@", exception);
-        return YES;
+        return true;
     }
     
     TCPClientConnection *conn = [[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self];
     [activeTCPConnections addObject:conn];
     [conn release];
     
-    return YES;
+    return true;
 }
 
 - (void)tcpClientDisconnected:(TCPClientConnection *)tcpClientConnection {

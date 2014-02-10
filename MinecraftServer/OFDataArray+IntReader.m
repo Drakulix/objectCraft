@@ -76,13 +76,13 @@
     return shortInt;
 }
 
-- (BOOL)readBoolTcp {
+- (bool)readBoolTcp {
     int8_t shortInt = *(int8_t *)[self items];
     [self removeItemsInRange:of_range(0, sizeof(int8_t))];
     return (shortInt == 0x01);
 }
 
-- (BOOL)readBoolUdp {
+- (bool)readBoolUdp {
     int8_t shortInt = *(int8_t *)[self items];
     [self removeItemsInRange:of_range(0, sizeof(int8_t))];
     return (shortInt == 0x00);

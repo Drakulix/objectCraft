@@ -69,7 +69,7 @@
     [self addItems:&byte count:sizeof(int8_t)];
 }
 
-- (void)appendBoolTcp:(BOOL)boolean {
+- (void)appendBoolTcp:(bool)boolean {
     int8_t value;
     if (boolean) {
         value = 0x01;
@@ -79,7 +79,7 @@
     [self appendByte:value];
 }
 
-- (void)appendBoolUdp:(BOOL)boolean {
+- (void)appendBoolUdp:(bool)boolean {
     int8_t value;
     if (!boolean) {
         value = 0x01;

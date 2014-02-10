@@ -12,7 +12,7 @@
 
 @implementation TCPJoinGame
 
-- (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)gamemode isHardcore:(BOOL)hardcore forDifficulty:(uint8_t)difficulty forMaxPlayers:(uint8_t)maxPlayers forLevelType:(OFString *)levelType {
+- (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)gamemode isHardcore:(bool)hardcore forDifficulty:(uint8_t)difficulty forMaxPlayers:(uint8_t)maxPlayers forLevelType:(OFString *)levelType {
     self = [super init];
     @try {
         self.entityId = player.entityId;

@@ -65,12 +65,12 @@
         
         player.Yaw = 0.0f;
         player.Pitch = 0.0f;
-        player.OnGround = YES;
+        player.OnGround = true;
         
         //Overwrite for testing
-        player.isCreativeMode = YES;
-        player.canFly = YES;
-        player.isFlying = YES;
+        player.isCreativeMode = true;
+        player.canFly = true;
+        player.isFlying = true;
         
         @autoreleasepool {
             [connectionDelegate sendPacket:[[[TCPSpawnPosition alloc] initWithX:[player blockPosX] withY:[player blockPosY] withZ:[player blockPosZ]] autorelease]];
