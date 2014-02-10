@@ -19,6 +19,7 @@
 - (instancetype)initWithGenerator:(WorldGenerator *)generator;
 - (ChunkColumn *)getChunkColumnAtX:(int32_t)x AtZ:(int32_t)z;
 - (Chunk *)getChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z;
+- (void)unloadChunk:(Chunk *)chunk;
 
 @end
 

@@ -34,10 +34,11 @@
         [blocks addObject:yArray];
     }
     
-    Chunk *chunk = [[Chunk alloc] initWithBlocks:[blocks autorelease]];
+    Chunk *chunk = [[Chunk alloc] initWithBlocks:blocks];
+    [blocks release];
     vector position = { x, height, z };
     chunk.position = position;
-    return chunk;
+    return [chunk autorelease];
 }
 
 @end

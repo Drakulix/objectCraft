@@ -91,12 +91,21 @@ static int playerCount = 0;
     return self.feetY;
 }
 
+- (void)despawn {
+    for (Chunk *chunk in loadedChunks) {
+        if ([chunk unload] == 0) {
+            [worldChunkManager unloadChunk:chunk];
+        }
+    }
+    [super despawn];
+}
+
 - (void)dealloc {
     playerCount--;
     [loadedChunks release];
+    [lastAgeRequests release];
     [world release];
     [worldChunkManager release];
-    [lastAgeRequests release];
     [super dealloc];
 }
 
@@ -123,6 +132,7 @@ static int playerCount = 0;
     [loadedChunks addObject:loadedChunk];
     uint64_t age = loadedChunk.ageInTicks;
     [lastAgeRequests setValue:&age forKey:loadedChunk];
+    [loadedChunk load];
     return loadedChunk;
 }
 
@@ -133,9 +143,11 @@ static int playerCount = 0;
     for (int i = 0; i < 16; i++) {
         Chunk *chunk = [worldChunkManager getChunkAtX:x AtY:i AtZ:z];
         [column.chunks addObject:chunk];
+        [chunk release];
         [loadedChunks addObject:chunk];
         uint64_t age = chunk.ageInTicks;
         [lastAgeRequests setValue:&age forKey:chunk];
+        [chunk load];
     }
     return [column autorelease];
 }
@@ -143,17 +155,26 @@ static int playerCount = 0;
 - (void)unloadChunk:(Chunk *)chunk {
     [lastAgeRequests removeValueForKey:chunk];
     [loadedChunks removeObject:chunk];
+    if ([chunk unload] == 0) {
+        [worldChunkManager unloadChunk:chunk];
+    }
 }
 - (void)unloadChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z {
-    Chunk *loadedChunk = [worldChunkManager getChunkAtX:x AtY:y AtZ:z]; //no real overhead, object should still be available in the global cache
+    Chunk *loadedChunk = [worldChunkManager getChunkAtX:x AtY:y AtZ:z]; //no real overhead, object should still be available in the global cache, we have loaded it
     [lastAgeRequests removeValueForKey:loadedChunk];
     [loadedChunks removeObject:loadedChunk];
+    if ([loadedChunk unload] == 0) {
+        [worldChunkManager unloadChunk:loadedChunk];
+    }
 }
 
 - (void)unloadChunkColumn:(ChunkColumn *)chunkColumn {
     for (Chunk *chunk in chunkColumn.chunks) {
         [lastAgeRequests removeValueForKey:chunk];
         [loadedChunks removeObject:chunk];
+        if ([chunk unload] == 0) {
+            [worldChunkManager unloadChunk:chunk];
+        }
     }
 }
 - (void)unloadChunkColumnAtX:(int32_t)x AtZ:(int32_t)z {
@@ -161,6 +182,9 @@ static int playerCount = 0;
         Chunk *chunk = [worldChunkManager getChunkAtX:x AtY:i AtZ:z];
         [lastAgeRequests removeValueForKey:chunk];
         [loadedChunks removeObject:chunk];
+        if ([chunk unload] == 0) {
+            [worldChunkManager unloadChunk:chunk];
+        }
     }
 }
 

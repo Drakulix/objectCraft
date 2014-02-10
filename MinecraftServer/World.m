@@ -16,12 +16,11 @@
 
 @implementation World
 @dynamic tcpDimension;
-@synthesize dimension;
 
-- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)_dimension {
+- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)dimension {
     self = [super init];
     @try {
-        self.dimension = _dimension;
+        self.dimension = dimension;
         
         self.ageInTicks = 0; //TO-DO read current age from conf file
         
@@ -70,7 +69,7 @@
 }
 
 - (void)saveWorld {
-    OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:(OFConstantString *)@"worlds/%d/world.conf", dimension] mode:@"wb"];
+    OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:(OFConstantString *)@"worlds/%d/world.conf", self.dimension] mode:@"wb"];
     [seedFile writeBigEndianInt64:[ConfigManager defaultManager].seed];
     [seedFile writeBigEndianInt64:[generator generatorState]];
     [seedFile close];

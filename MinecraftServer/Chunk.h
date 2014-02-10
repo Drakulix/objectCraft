@@ -17,6 +17,7 @@ typedef struct {
 
 @interface Chunk : OFObject {
     OFMutableArray *blocks;
+    int16_t loadCount;
 }
 
 @property (nonatomic) vector position;
@@ -25,6 +26,9 @@ typedef struct {
 - (id)initWithBlocks:(OFMutableArray *)array;
 - (BOOL)isEmpty;
 - (Block *)blockAtX:(int16_t)x Y:(int16_t)y Z:(int16_t)z;
+
+- (int16_t)load;
+- (int16_t)unload;
 
 @property (readonly) BOOL isEmpty;
 

@@ -90,4 +90,9 @@ uint32_t vector_hash (void *vec) {
     return chunk;
 }
 
+- (void)unloadChunk:(Chunk *)chunk {
+    vector chunkPos = chunk.position;
+    [loadedChunks removeValueForKey:&chunkPos];
+}
+
 @end

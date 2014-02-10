@@ -12,14 +12,12 @@
 
 static DirtBlock *sharedInstance = nil;
 
-- (id)init {
-    if (!sharedInstance)
-        sharedInstance = [[DirtBlock alloc] initSilent];
++ (id)alloc {
+    
+    if (!sharedInstance) {
+        sharedInstance = [super alloc];
+    }
     return sharedInstance;
-}
-
-- (instancetype)initSilent {
-    return [super init];
 }
 
 - (uint8_t)tcpBlockId {

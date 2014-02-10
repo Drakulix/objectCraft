@@ -12,14 +12,12 @@
 
 static AirBlock *sharedInstance = nil;
 
-- (id)init {
-    if (!sharedInstance)
-        sharedInstance = [[AirBlock alloc] initSilent];
++ (id)alloc {
+    
+    if (!sharedInstance) {
+        sharedInstance = [super alloc];
+    }
     return sharedInstance;
-}
-
-- (instancetype)initSilent {
-    return [super init];
 }
 
 - (uint8_t)tcpSkyLight {

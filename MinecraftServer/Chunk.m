@@ -11,14 +11,14 @@
 #import "Block.h"
 
 @implementation Chunk
-@synthesize ageInTicks;
 
 - (id)initWithBlocks:(OFMutableArray *)array {
     self = [super init];
     @try {
         blocks = [array retain];
         _isEmpty = NO;
-        ageInTicks = 0;
+        self.ageInTicks = 0;
+        loadCount = 0;
         [self updateIsEmpty];
     } @catch (id e) {
         [self release];
@@ -53,7 +53,15 @@
     return YES;
 }
 
-/*- (uint32_t)hash {
+
+- (int16_t)load {
+    return ++loadCount;
+}
+- (int16_t)unload {
+    return --loadCount;
+}
+
+- (uint32_t)hash {
     return chunk_hash(self);
 }
 
@@ -61,7 +69,7 @@
     if ([object isKindOfClass:[Chunk class]])
         return chunk_equal(self, object);
     return false;
-}*/
+}
 
 
 void *chunk_retain(void *value) {
