@@ -12,14 +12,19 @@
 @implementation ChunkColumn
 
 - (instancetype)init {
-    self = [super init];
-    @try {
-        self.chunks = [[OFMutableArray alloc] init];
-    } @catch (id e) {
-        [self release];
-        @throw e;
-    }
-    return self;
+    return [super init];
+}
+
+- (void)setChunk:(Chunk *)chunk atIndex:(int)index {
+    chunks[index] = chunk;
+}
+
+- (Chunk *)chunkAtIndex:(int)index {
+    return chunks[index];
+}
+
+- (int)chunkCount {
+    return 16;
 }
 
 @end

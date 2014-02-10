@@ -56,7 +56,7 @@
                 
                 if (self.bitMask == 0xff) {
                     
-                    Chunk *chunk = [self.column.chunks objectAtIndex:yColumn];
+                    Chunk *chunk = [self.column chunkAtIndex:yColumn];
                     
                     //block ids
                     for (int x = 0; x<16; x++) {

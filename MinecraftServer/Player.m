@@ -148,8 +148,7 @@ static int playerCount = 0;
     column.Z = z;
     for (int i = 0; i < 16; i++) {
         Chunk *chunk = [worldChunkManager getChunkAtX:x AtY:i AtZ:z];
-        [column.chunks addObject:chunk];
-        [chunk release];
+        [column setChunk:chunk atIndex:i];
         [loadedChunks addObject:chunk];
         uint64_t age = chunk.ageInTicks;
         [lastAgeRequests setValue:&age forKey:chunk];
@@ -175,7 +174,8 @@ static int playerCount = 0;
 }
 
 - (void)unloadChunkColumn:(ChunkColumn *)chunkColumn {
-    for (Chunk *chunk in chunkColumn.chunks) {
+    for (int i = 0; i<[chunkColumn chunkCount]; i++) {
+        Chunk *chunk = [chunkColumn chunkAtIndex:i];
         [lastAgeRequests removeValueForKey:chunk];
         [loadedChunks removeObject:chunk];
         if ([chunk unload] == 0) {

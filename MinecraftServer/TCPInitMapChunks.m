@@ -60,8 +60,8 @@
             [chunkColumnsData appendInt:chunkColumn.Z];
             
             int16_t primaryBitMask = 0;
-            for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                if (!((Chunk *)[chunkColumn.chunks objectAtIndex:j]).isEmpty) {
+            for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                if (!((Chunk *)[chunkColumn chunkAtIndex:j]).isEmpty) {
                     primaryBitMask |= 1 << j;
                 }
             }
@@ -75,8 +75,8 @@
             [chunkColumnsData appendShort:primaryBitMask];
             [chunkColumnsData appendShort:addBitMask];
             
-            for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
+            for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                Chunk *chunk = (Chunk *)[chunkColumn chunkAtIndex:j];
                 if (!chunk.isEmpty) {
                     chunkCounter++;
                     for (int y = 0; y<16; y++) {
@@ -89,8 +89,8 @@
                 }
             }
             
-            for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
+            for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                Chunk *chunk = (Chunk *)[chunkColumn chunkAtIndex:j];
                 if (!chunk.isEmpty) {
                     for (int y = 0; y<16; y++) {
                         for (int z = 0; z<16; z++) {
@@ -105,8 +105,8 @@
                 }
             }
             
-            for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
+            for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                Chunk *chunk = (Chunk *)[chunkColumn chunkAtIndex:j];
                 if (!chunk.isEmpty) {
                     for (int y = 0; y<16; y++) {
                         for (int z = 0; z<16; z++) {
@@ -122,8 +122,8 @@
             }
             
             if (self.skyLightSend) {
-                for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                    Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
+                for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                    Chunk *chunk = (Chunk *)[chunkColumn chunkAtIndex:j];
                     if (!chunk.isEmpty) {
                         for (int y = 0; y<16; y++) {
                             for (int z = 0; z<16; z++) {
@@ -157,8 +157,8 @@
              }*/
             
             //TO-DO: Implement Biomes
-            for (int j = 0; j<[chunkColumn.chunks count]; j++) {
-                Chunk *chunk = (Chunk *)[chunkColumn.chunks objectAtIndex:j];
+            for (int j = 0; j<[chunkColumn chunkCount]; j++) {
+                Chunk *chunk = (Chunk *)[chunkColumn chunkAtIndex:j];
                 if (!chunk.isEmpty) {
                     for (int z = 0; z<16; z++) {
                         for (int x = 0; x<16; x+=4) {

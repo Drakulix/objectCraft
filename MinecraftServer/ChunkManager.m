@@ -64,16 +64,6 @@ uint32_t vector_hash (void *vec) {
     [super dealloc];
 }
 
-- (ChunkColumn *)getChunkColumnAtX:(int32_t)x AtZ:(int32_t)z {
-    ChunkColumn *column = [[ChunkColumn alloc] init];
-    column.X = x;
-    column.Z = z;
-    for (int y = 0; y < 16; y++) {
-        [column.chunks addObject:[self getChunkAtX:x AtY:y AtZ:z]];
-    }
-    return [column autorelease];
-}
-
 - (Chunk *)getChunkAtX:(int32_t)x AtY:(int32_t)y AtZ:(int32_t)z {
     vector chunkPos = {x, y, z};
     
