@@ -32,7 +32,7 @@
             
             if (exception) {
                 LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
-                [server tcpClientDisconnected:self];
+                [self clientDisconnected];
                 return NO;
             }
             
@@ -54,13 +54,14 @@
             
             if (exception) {
                 LogError(@"Error reading from tcp Socket: %@ with Exception: %@", socket, exception);
-                [server tcpClientDisconnected:self];
+                [self clientDisconnected];
                 return YES;
             }
             
             void *buffer = malloc(varInt);
             [socket asyncReadIntoBuffer:buffer exactLength:varInt block:packetReadCallback];
             return NO;
+            
         } copy];
         
         [self readPacketId];
@@ -79,15 +80,20 @@
 - (void)disconnectClient {
     [socket cancelAsyncRequests];
     [socket close];
+    [self clientDisconnected];
+}
+
+- (void)clientDisconnected {
+    [packetHandler.delegate clientDisconnected];
+    packetHandler.delegate = nil;
+    [varIntReadCallback release];
+    [packetReadCallback release];
     [server tcpClientDisconnected:self];
 }
 
 - (void)dealloc {
-    [packetHandler.delegate clientDisconnected];
-    [varIntReadCallback release];
-    [packetReadCallback release];
     [packetHandler release];
-    [socket release];
+    //[socket release];
     [super dealloc];
 }
 
