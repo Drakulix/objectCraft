@@ -58,9 +58,9 @@ static ConfigManager *sharedInstance;
                     @"defaultGamemode", @"SURVIVAL",
                     @"isHardcore", [OFNumber numberWithBool:false],
                     @"dimensions", [OFDictionary dictionaryWithKeysAndObjects:
-                                    [OFNumber numberWithInt8:-1], @"NetherGenerator",
-                                    [OFNumber numberWithInt8:0], @"OverworldGenerator",
-                                    [OFNumber numberWithInt8:1], @"EndGenerator",
+                                    @"-1", @"NetherGenerator",
+                                    @"0", @"OverworldGenerator",
+                                    @"1", @"EndGenerator",
                                     nil],
                     @"defaultSpawnDimension", [OFNumber numberWithInt8:0],
                     @"defaultSpawnPoint", [OFArray arrayWithObjects:
@@ -291,12 +291,33 @@ static ConfigManager *sharedInstance;
 }
 
 - (OFDictionary *)dimensions {
-    return [settings objectForKey:@"dimensions"];
+    
+    OFMutableDictionary *dimensions = [[OFMutableDictionary alloc] init];
+    
+    OFArray *keys = [[settings objectForKey:@"dimensions"] allKeys];
+    for (int i = 0; i<[keys count]; i++) {
+        [dimensions setObject:[[settings objectForKey:@"dimensions"] objectForKey:[keys objectAtIndex:i]] forKey:[OFNumber numberWithInt8:[((OFString *)[keys objectAtIndex:i]) decimalValue]]];
+    }
+    
+    return [dimensions autorelease];
+    
 }
-- (void)setDimensions:(OFDictionary *)dimensions {
+- (void)setDimensions:(OFDictionary *)_dimensions {
+    
     @autoreleasepool {
+    
+        OFMutableDictionary *dimensions = [[OFMutableDictionary alloc] init];
+        
+        OFArray *keys = [_dimensions allKeys];
+        for (int i = 0; i<[keys count]; i++) {
+            [dimensions setObject:[_dimensions objectForKey:[keys objectAtIndex:i]] forKey:[OFString stringWithFormat:@"%d", [[keys objectAtIndex:i] int8Value]]];
+        }
+        
         [settings setObject:dimensions forKey:@"dimensions"];
+        [dimensions release];
+             
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+    
     }
 }
 - (void)addDimension:(int8_t)dimensionNum withGenerator:(WorldGenerator *)generator {
