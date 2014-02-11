@@ -186,7 +186,6 @@
 		C92CD1C4189689FB00E009B3 /* OverworldGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverworldGenerator.m; sourceTree = "<group>"; };
 		C92CD1C618968A0400E009B3 /* EndGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndGenerator.h; sourceTree = "<group>"; };
 		C92CD1C718968A0400E009B3 /* EndGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGenerator.m; sourceTree = "<group>"; };
-		C93F7A8018A4E0C20017FB75 /* libdispatch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdispatch.dylib; path = usr/lib/system/libdispatch.dylib; sourceTree = SDKROOT; };
 		C957995B189072A000B4CB37 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C95799681890795000B4CB37 /* MinecraftServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinecraftServer.h; sourceTree = "<group>"; };
 		C95799691890795000B4CB37 /* MinecraftServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinecraftServer.m; sourceTree = "<group>"; };
@@ -398,7 +397,6 @@
 			isa = PBXGroup;
 			children = (
 				C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */,
-				C93F7A8018A4E0C20017FB75 /* libdispatch.dylib */,
 				C9AA13B718A12494000D383A /* libz.dylib */,
 				C918648B1895C53200E78048 /* MinecraftServer */,
 			);
