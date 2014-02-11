@@ -59,7 +59,7 @@
 }
 
 - (OFString *)description {
-    return [OFString stringWithFormat:(OFConstantString *)@"%@:\n %@", [super description], [TCPPacket autoDescribe:self classType:[self class]]];
+    return [OFString stringWithFormat:@"%@:\n %@", [super description], [TCPPacket autoDescribe:self classType:[self class]]];
 }
 
 // Finds all properties of an object, and prints each one out as part of a string describing the class.
@@ -84,33 +84,33 @@
                 const char *attr = property_getAttributes(property);
                 switch (attr[1]) {
                     case '@':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 'i':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 'c':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 'l':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 's':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 'f':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     case 'd':
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
                         break;
                     default:
-                        [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = 'Not printable'\n", propNameString]];
+                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
                         break;
                 }
             }
             @catch (OFException *exception) {
-                [propPrint appendString:[OFString stringWithFormat:(OFConstantString *)@"\t%@ = 'Not printable'\n", propNameString]];
+                [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
             }
         }
     }
