@@ -53,13 +53,19 @@
 	while (inflate(&strm, Z_FINISH) != Z_STREAM_END)
 	{
 		// inflate should return Z_STREAM_END on the first call
-		buffer = realloc(buffer, (bufferSize *= 1.5));
+		void *newBuffer = realloc(buffer, (bufferSize *= 1.5));
+        if (newBuffer == NULL) {
+            free(buffer);
+            @throw [[OFAllocFailedException alloc] init];
+        }
+        buffer = newBuffer;
 		strm.next_out = buffer + strm.total_out;
 		strm.avail_out = (uint)(bufferSize - strm.total_out);
 	}
 	
 	OFDataArray *decompressed = [OFDataArray dataArrayWithCapacity:strm.total_out];
     [decompressed addItems:buffer count:strm.total_out];
+    free(buffer);
     
 	inflateEnd(&strm);
 	
