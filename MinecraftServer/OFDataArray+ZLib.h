@@ -10,6 +10,7 @@
 
 @interface OFDataArray (ZLib)
 
+- (OFDataArray *)zlibInflate;
 - (OFDataArray *)zlibDeflate;
 
 @end
