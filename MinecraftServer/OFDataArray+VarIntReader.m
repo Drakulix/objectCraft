@@ -51,6 +51,38 @@ int64_t decode_signed_varint( const uint8_t *const data, int *decoded_bytes )
 
 @implementation OFStream (VarIntReader)
 
+- (int64_t)readSignedVarInt {
+    int varLen;
+    return [self readSignedVarIntInLength:&varLen];
+}
+
+- (uint64_t)readUnsignedVarInt {
+    int varLen;
+    return [self readUnsignedVarIntInLength:&varLen];
+}
+
+- (int64_t)readSignedVarIntInLength:(int *)len {
+    if (len == NULL)
+        @throw [OFInvalidArgumentException exception];
+    void *data = malloc(10);
+    size_t readLen = [self readIntoBuffer:data length:10];
+    int64_t var = decode_signed_varint(data, len);
+    [self unreadFromBuffer:data length:readLen-(*len)];
+    free(data);
+    return var;
+}
+
+- (uint64_t)readUnsignedVarIntInLength:(int *)len {
+    if (len == NULL)
+        @throw [OFInvalidArgumentException exception];
+    void *data = malloc(10);
+    size_t readLen = [self readIntoBuffer:data length:10];
+    uint64_t var = decode_unsigned_varint(data, len);
+    [self unreadFromBuffer:data length:readLen-(*len)];
+    free(data);
+    return var;
+}
+
 - (void)asyncReadVarIntForTarget:(id)target selector:(SEL)selector {
     [[AsyncVarIntReader alloc] initWithStream:self signed:false forTarget:target andSelector:selector];
 }

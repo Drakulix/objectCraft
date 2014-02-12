@@ -25,6 +25,11 @@ typedef bool (^VarIntBlock)(OFStream*, uint64_t, OFException*);
 - (void)asyncReadSignedVarIntForTarget:(id)target selector:(SEL)selector;
 - (void)asyncReadSignedVarIntWithBlock:(VarIntBlock)handler;
 
+- (int64_t)readSignedVarInt;
+- (uint64_t)readUnsignedVarInt;
+- (int64_t)readSignedVarIntInLength:(int *)len;
+- (uint64_t)readUnsignedVarIntInLength:(int *)len;
+
 @end
 
 @interface AsyncVarIntReader : OFObject {
