@@ -40,7 +40,7 @@ make
 Which should result in an 'objectCraft' executable.
 
 #####Compiling on Windows
-#Compiling on Windows is currently broken as ObjFW does not compile using wclang right now(!)
+#######Compiling on Windows is currently broken as ObjFW does not compile using wclang right now(!)
 
 Compiling for Windows will be possible via MingW64 + wclang on any unix system (compiling on windows is currently not tested and supported, but may work if you get clang to work without using gcc as linker).
 As long as both are setup correctly building should be as easy as:
