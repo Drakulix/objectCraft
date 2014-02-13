@@ -8,24 +8,42 @@ It is not useable in the current state for **ANY** end-user.
 The goal is to provide a full featured Minecraft Server written in Objective-C that conforms to both the Minecraft-PC Network Protocol and the Minecraft-PE (Pocket Edition) Protocol. Differences like non existing blocks, or different dimensions will get simulated for the other system as good as possible or substituted with other existing features (like sending different existing blockIds for non-existent blocks of the other protocol). No features shall be unaccessible from one client type. They might be just more complicated to use.
 
 ###Dependencies
-The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems. ObjectCraft requires a Objective-C-2.0-compatible compiler otherwise every supported system by ObjFW should work just fine, please report if you are having issues building this project on any platform (see tutorial below).
-Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are not allowed as they are a non-standard C-language extension and currently only supported by clang compilers. The new Literals introduced with clang are also not allowed in code.
+The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems.
+
+ObjectCraft requires forwarding to be supported by ObjFW on your system and clang as compiler (recommend at-least version 3.4, older versions are not supported).
+It also requires a libdispatch implementation available on your system (no matter if kernel-based or userland) as well as zlib.
+
+Tested systems are MacOS and Ubuntu-Linux at the time, Windows should follow once wclang errors are sorted out.
+iOS and Android-compatibility will be provided at a later stage, when the server is more optimized.
+
+Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are allowed and used for libdispatch, which is the reason for the clang requirement.
+The new Literals introduced with clang are supported with most clang installations, but each developer is ask not to use it in production code for maximum compatibility.
+Auto-Synthesizing of Properties is also not allowed. Each property needs to be synthesized or for a custmo(-runtime)-implementation marked with @dynamic.
+
+Short overview - Dependencies:
+* clang (>= 3.4)
+* ObjFW (compiled using clang with block-support)
+* libdispatch
+* zlib
+
+Short overview - Rules for contributing:
+* no new literals ( @(1), array[2], @{}, @[] )
+* no auto-sythesized properties ( either do @synthesize or @dynamic )
 
 ###Building
 
 ####Install ObjFW
-You need to have an install of the ObjFW library. Currently the most recent version (0.7.1) does not include all features needed by this project (especially the OFUDPSocket), so you need to check out the lastest tarball from the git repository.
+You need to have an install of the ObjFW library, building with clang is required for using the Block API's. Currently the most recent version (0.7.1) does not include all features needed by this project (especially the OFUDPSocket), so you need to check out the lastest tarball from the git repository.
 
 For building from git you need autotools installed, then do:
 ```
-./autogen.sh
+bash autogen.sh
 ./configure
 make
 make install
 ```
 
-You may install it to another path by providing the --prefix parameter to the configure script and provide the library and include paths for objfw later when compiling the server (see below).
-
+'objfw-config' (comes with an install of ObjFW) needs to be available at your path to automatically figure our needed flags and libraries, so the last 'make install' is required to get a usable objectCraft executable.
 Support for compiling against a statically linked ObjFW library will follow later.
 
 ####Compiling ObjectCraft
@@ -33,33 +51,30 @@ If you check out the latest release via git (currently the only way until someth
 
 Compiling then should work via:
 ```
-./autogen.sh
+bash autogen.sh
 ./configure
 make
 ```
 
 Which should result in an 'objectCraft' executable.
 
-If you installed ObjFW to non-standard paths (paths not in your $PATH variable) you can give them manually to the configure script with these flags:
---with-objfw-lib-path=
---with-objfw-include-path=
+#####Compiling on Windows
+#######Compiling on Windows is currently broken as ObjFW does not compile using wclang right now(!)
 
-An example for mac users, that often install third-party stuff to /usr/local/:
+Compiling for Windows will be possible via MingW64 + wclang on any unix system (compiling on windows is currently not tested and supported, but may work if you get clang to work without using gcc as linker).
+As long as both are setup correctly building should be as easy as:
+
+64-Bit:
 ```
-./autogen.sh
-./configure --with-objfw-lib-path=/usr/local/lib --with-objfw-include-path=/usr/local/include
+bash autogen.sh
+CC=w64-clang CXX=w64-clang++ OBJC=w64-clang OBJCXX=w64-clang++ ./configure --host=x86_64-w64-mingw32
 make
 ```
 
-#####Compiling on Windows
-Compiling for Windows is possible via MingW, but not as straight forward.
-You should check out the ObjFW README-WINDOWS file, which describes how to set up a ObjFW-compatible build environment with MingW. Builds are currently limited to 32-Bit, as ObjFW uses dwarf2-exceptions.
-
-When you did set up your environment correctly and builded and installed ObjFW correctly, building should work in the MingW MSYS Shell via:
+32-Bit:
 ```
-export OBJC=gcc-dw2
-./autogen.sh
-./configure
+bash autogen.sh
+CC=w32-clang CXX=w32-clang++ OBJC=w32-clang OBJCXX=w32-clang++ ./configure --host=i686-w64-mingw32
 make
 ```
 
