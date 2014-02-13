@@ -10,6 +10,7 @@
 #import "RandomGenerator.h"
 
 @implementation WorldGenerator
+@synthesize tcpDimension;
 
 - (instancetype)initWithSeed:(uint64_t)seed {
     self = [super init];

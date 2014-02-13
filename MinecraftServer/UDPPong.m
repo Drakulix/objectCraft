@@ -13,11 +13,12 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPPong
+@synthesize clientTime, serverTime;
 
-- (instancetype)initWithClientTime:(int64_t)clientTime {
+- (instancetype)initWithClientTime:(int64_t)_clientTime {
     self = [super init];
     @try {
-        self.clientTime = clientTime;
+        self.clientTime = _clientTime;
         
         struct timeval time;
         gettimeofday(&time, NULL);

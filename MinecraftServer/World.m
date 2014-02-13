@@ -14,15 +14,15 @@
 #import "ChunkManager.h"
 #import "FileManager.h"
 #import "AdvancedFile.h"
-#import <objc/runtime.h>
 
 @implementation World
 @dynamic tcpDimension;
+@synthesize ageInTicks, dimension, entityManager, chunkManager;
 
-- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)dimension {
+- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)_dimension {
     self = [super init];
     @try {
-        self.dimension = dimension;
+        self.dimension = _dimension;
         
         self.ageInTicks = 0; //TO-DO read current age from conf file
         

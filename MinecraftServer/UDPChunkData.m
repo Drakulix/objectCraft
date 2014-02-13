@@ -13,11 +13,12 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPChunkData
+@synthesize column, bitMask;
 
-- (instancetype)initForChunkColumn:(ChunkColumn *)column andBitMask:(uint8_t)bitmask {
+- (instancetype)initForChunkColumn:(ChunkColumn *)_column andBitMask:(uint8_t)bitmask {
     self = [super init];
     @try {
-        self.column = column;
+        self.column = _column;
         self.bitMask = bitmask;
     } @catch (id e) {
         [self release];

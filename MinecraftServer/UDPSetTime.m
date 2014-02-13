@@ -11,11 +11,12 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPSetTime
+@synthesize time;
 
-- (instancetype)initWithDaytime:(int32_t)time {
+- (instancetype)initWithDaytime:(int32_t)_time {
     self = [super init];
     @try {
-        self.time = time;
+        self.time = _time;
     } @catch (id e) {
         [self release];
         @throw e;

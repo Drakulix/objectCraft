@@ -21,6 +21,7 @@ static int playerCount = 0;
 
 @implementation Player
 @dynamic Y;
+@synthesize headY, feetY, isCreativeMode, clientId, username;
 
 + (Player *)spawnPlayerWithUsername:(NSString *)username {
     

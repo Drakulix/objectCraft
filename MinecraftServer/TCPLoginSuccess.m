@@ -10,12 +10,13 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation TCPLoginSuccess
+@synthesize uuid, username;
 
-- (instancetype)initWithUUID:(OFString *)uuid Username:(OFString *)username {
+- (instancetype)initWithUUID:(OFString *)_uuid Username:(OFString *)_username {
     self = [super init];
     @try {
-        self.uuid = uuid;
-        self.username = username;
+        self.uuid = _uuid;
+        self.username = _username;
     } @catch (id e) {
         [self release];
         @throw e;

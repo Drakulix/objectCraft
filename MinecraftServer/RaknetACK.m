@@ -12,6 +12,7 @@
 
 @implementation RaknetACK
 @dynamic packetNumber, additionalPacketNumber;
+@synthesize unknown, hasAdditionalPacketNumber;
 
 - (instancetype)initWithPacketNumber:(uint32_t)_packetNumber {
     self = [super init];

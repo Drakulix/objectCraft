@@ -22,15 +22,14 @@ typedef struct {
 
 @property (nonatomic) vector position;
 @property (atomic) int64_t ageInTicks;
+@property bool isEmpty;
 
 - (id)initWithBlocks:(OFMutableArray *)array;
-- (bool)isEmpty;
 - (Block *)blockAtX:(int16_t)x Y:(int16_t)y Z:(int16_t)z;
 
 - (int16_t)load;
 - (int16_t)unload;
 
-@property (readonly) bool isEmpty;
 
 @end
 

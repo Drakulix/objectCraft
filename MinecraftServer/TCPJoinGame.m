@@ -11,16 +11,17 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation TCPJoinGame
+@synthesize entityId, gamemode, dimension, difficulty, maxPlayers, levelType;
 
-- (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)gamemode isHardcore:(bool)hardcore forDifficulty:(uint8_t)difficulty forMaxPlayers:(uint8_t)maxPlayers forLevelType:(OFString *)levelType {
+- (instancetype)initWithPlayer:(Player *)player forGamemode:(uint8_t)_gamemode isHardcore:(bool)hardcore forDifficulty:(uint8_t)_difficulty forMaxPlayers:(uint8_t)_maxPlayers forLevelType:(OFString *)_levelType {
     self = [super init];
     @try {
         self.entityId = player.entityId;
-        self.gamemode = gamemode;
+        self.gamemode = _gamemode;
         self.gamemode |= hardcore << 3;
-        self.difficulty = difficulty;
-        self.maxPlayers = maxPlayers;
-        self.levelType = levelType;
+        self.difficulty = _difficulty;
+        self.maxPlayers = _maxPlayers;
+        self.levelType = _levelType;
     } @catch (id e) {
         [self release];
         @throw e;

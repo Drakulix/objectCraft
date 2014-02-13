@@ -12,6 +12,7 @@
 #import "Player.h"
 
 @implementation UDPSpawnPosition
+@synthesize X, Y, Z;
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];

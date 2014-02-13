@@ -13,7 +13,7 @@
 
 @implementation ConfigManager
 @dynamic tcpIPv4Enabled, tcpIPv4Port, tcpIPv6Enabled, tcpIPv6Port, tcpLanWorldBroadcastEnabled;
-@dynamic udpIPv4Enabled, udpIPv4Port, udpIPv6Enabled, udpIPv6Port, udpLanWorldBroadcastEnabled;
+@dynamic udpIPv4Enabled, udpIPv4Port, udpIPv6Enabled, udpIPv6Port, udpLanWorldBroadcastEnabled, udpServerId;
 @dynamic serverBrowserMessage, loginWelcomeMessageEnabled, loginWelcomeMessage;
 @dynamic defaultGamemode, isHardcore;
 @dynamic spawnDimension, dimensions;

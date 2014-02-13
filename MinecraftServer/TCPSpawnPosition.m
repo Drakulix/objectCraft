@@ -10,6 +10,7 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation TCPSpawnPosition
+@synthesize X, Y, Z;
 
 - (instancetype)initWithX:(int32_t)x withY:(int32_t)y withZ:(int32_t)z {
     self = [super init];

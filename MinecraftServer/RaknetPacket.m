@@ -7,7 +7,6 @@
 //
 
 #import "RaknetPacket.h"
-#import <objc/runtime.h>
 #import <string.h>
 
 @implementation RaknetPacket
@@ -84,77 +83,6 @@ static OFMutableDictionary *packetList;
     uint8_t packetId = [[self class] packetId];
     [packetData insertItem:&packetId atIndex:0];
     return [packetData autorelease];
-}
-
-
-- (OFString *)description {
-    return [OFString stringWithFormat:@"%@:\n %@", [super description], [RaknetPacket autoDescribe:self classType:[self class]]];
-}
-                  
-// Finds all properties of an object, and prints each one out as part of a string describing the class.
-+ (OFString *) autoDescribe:(id)instance classType:(Class)classType
-{
-    unsigned int count;
-    objc_property_t *propList = class_copyPropertyList(classType, &count);
-    OFMutableString *propPrint = [OFMutableString string];
-    
-    for ( int i = 0; i < count; i++ )
-    {
-        objc_property_t property = propList[i];
-        
-        const char *propName = property_getName(property);
-        OFString *propNameString = [OFString stringWithCString:propName encoding:OF_STRING_ENCODING_ASCII];//stringWithCString:propName encoding:NSASCIIStringEncoding];
-        
-        if(propName)
-        {
-            @try {
-                SEL sel = sel_registerName(propName);
-                
-                const char *attr = property_getAttributes(property);
-                switch (attr[1]) {
-                    case '@':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'i':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'c':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'l':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 's':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'f':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'd':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    default:
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
-                        break;
-                }
-            }
-            @catch (OFException *exception) {
-                [propPrint appendString:[OFString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
-            }
-        }
-    }
-    free(propList);
-    
-    
-    // Now see if we need to map any superclasses as well.
-    Class superClass = class_getSuperclass( classType );
-    if ( superClass != nil && ! [superClass isEqual:[OFObject class]] )
-    {
-        OFString *superString = [self autoDescribe:instance classType:superClass];
-        [propPrint appendString:superString];
-    }
-    
-    return propPrint;
 }
 
 @end

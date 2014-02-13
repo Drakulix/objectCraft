@@ -13,6 +13,7 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPPing
+@synthesize clientTime;
 
 - (instancetype)init {
     self = [super init];

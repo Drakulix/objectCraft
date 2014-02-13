@@ -10,6 +10,7 @@
 #import "OFDataArray+StringReader.h"
 
 @implementation TCPLoginStart
+@synthesize username;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

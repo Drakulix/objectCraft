@@ -11,11 +11,12 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPSetHealth
+@synthesize health;
 
-- (instancetype)initWithHealth:(int8_t)health {
+- (instancetype)initWithHealth:(int8_t)_health {
     self = [super init];
     @try {
-        self.health = health;
+        self.health = _health;
     } @catch (id e) {
         [self release];
         @throw e;

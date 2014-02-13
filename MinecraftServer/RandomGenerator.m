@@ -11,6 +11,7 @@
 const uint64_t customRandMax = 32767;
 
 @implementation RandomGenerator
+@synthesize seed;
 static RandomGenerator *randomGenerator;
 
 - (instancetype)init {

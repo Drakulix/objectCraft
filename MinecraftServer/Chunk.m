@@ -11,12 +11,13 @@
 #import "Block.h"
 
 @implementation Chunk
+@synthesize position, ageInTicks, isEmpty;
 
 - (id)initWithBlocks:(OFMutableArray *)array {
     self = [super init];
     @try {
         blocks = [array retain];
-        _isEmpty = false;
+        self.isEmpty = false;
         self.ageInTicks = 0;
         loadCount = 0;
         [self updateIsEmpty];
@@ -37,7 +38,7 @@
 }
 
 - (void)updateIsEmpty {
-    _isEmpty = [self updateIsEmptyHelper];
+    self.isEmpty = [self updateIsEmptyHelper];
 }
 
 - (bool)updateIsEmptyHelper {

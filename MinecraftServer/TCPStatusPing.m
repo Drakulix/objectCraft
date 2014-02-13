@@ -10,6 +10,7 @@
 #import "OFDataArray+IntReader.h"
 
 @implementation TCPStatusPing
+@synthesize time;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

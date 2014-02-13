@@ -14,6 +14,7 @@
 
 @implementation RaknetCustomPacket
 @dynamic packetNumber;
+@synthesize packets;
 
 + (void)setup {
     [super setup];

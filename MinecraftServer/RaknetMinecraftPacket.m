@@ -8,13 +8,13 @@
 
 #import "RaknetMinecraftPacket.h"
 #import "RaknetHandler.h"
-#import <objc/runtime.h>
 
 #import "OFDataArray+IntReader.h"
 #import "OFDataArray+IntWriter.h"
 
 @implementation RaknetMinecraftPacket
 @dynamic count, orderId;
+@synthesize dataLength, isReliable, isOrdered, isSplit, orderChannel, splitId, splitCount, splitIndex;
 
 + (RaknetMinecraftPacket *)readPacketFromData:(OFDataArray *)data {
     RaknetMinecraftPacket *minecraftPacket = [[RaknetMinecraftPacket alloc] init];
@@ -84,16 +84,16 @@
     return self;
 }
 
-- (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
+- (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)_splitCount splitId:(int16_t)_splitId splitIndex:(int32_t)_splitIndex {
     self = [super init];
     @try {
         self.isReliable = true;
         count = _count;
         
         self.isSplit = true;
-        self.splitCount = splitCount;
-        self.splitId = splitId;
-        self.splitIndex = splitIndex;
+        self.splitCount = _splitCount;
+        self.splitId = _splitId;
+        self.splitIndex = _splitIndex;
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;
@@ -126,76 +126,6 @@
     [packetData addItems:[self.packet items] count:[self.packet count]];
     
     return packetData;
-}
-
-- (OFString *)description {
-    return [OFString stringWithFormat:@"%@: %@", [super description], [RaknetMinecraftPacket autoDescribe:self classType:[self class]]];
-}
-
-// Finds all properties of an object, and prints each one out as part of a string describing the class.
-+ (OFString *) autoDescribe:(id)instance classType:(Class)classType
-{
-    unsigned int count;
-    objc_property_t *propList = class_copyPropertyList(classType, &count);
-    OFMutableString *propPrint = [OFMutableString string];
-    
-    for ( int i = 0; i < count; i++ )
-    {
-        objc_property_t property = propList[i];
-        
-        const char *propName = property_getName(property);
-        OFString *propNameString =[OFString stringWithCString:propName encoding:OF_STRING_ENCODING_ASCII];
-        
-        if(propName && ![propNameString isEqual:@"packet"])
-        {
-            @try {
-                SEL sel = sel_registerName(propName);
-                
-                const char *attr = property_getAttributes(property);
-                switch (attr[1]) {
-                    case '@':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%@'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'i':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'c':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%02x'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'l':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%li'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 's':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%i'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'f':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    case 'd':
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = '%f'\n", propNameString, objc_msgSend(instance, sel)]];
-                        break;
-                    default:
-                        [propPrint appendString:[OFString stringWithFormat:@"\t%@ = 'Not printable'\n", propNameString]];
-                        break;
-                }
-            }
-            @catch (OFException *exception) {
-                [propPrint appendString:[NSString stringWithFormat:@"\t%@='Not printable'\n", propNameString]];
-            }
-        }
-    }
-    free(propList);
-    
-    
-    // Now see if we need to map any superclasses as well.
-    Class superClass = class_getSuperclass( classType );
-    if ( superClass != nil && ! [superClass isEqual:[OFObject class]] )
-    {
-        NSString *superString = [self autoDescribe:instance classType:superClass];
-        [propPrint appendString:superString];
-    }
-    
-    return propPrint;
 }
 
 - (uint32_t)count {
