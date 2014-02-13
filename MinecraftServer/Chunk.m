@@ -45,12 +45,12 @@
         for (int y = 0; y<16; y++) {
             for (int z = 0; z<16; z++) {
                 if ([blocks[x][y][z] tcpBlockId] != 0) {
-                    return true;
+                    return false;
                 }
             }
         }
     }
-    return false;
+    return true;
 }
 
 
