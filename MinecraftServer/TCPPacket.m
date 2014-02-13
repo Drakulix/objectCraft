@@ -29,7 +29,7 @@
             
             for (int i = 0; i<numClasses; i++) {
                 Class class = classes[i];
-                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[RaknetPacket class]]) {
+                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[TCPPacket class]]) {
                     [class setup];
                 }
             }
