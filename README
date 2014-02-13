@@ -8,8 +8,27 @@ It is not useable in the current state for **ANY** end-user.
 The goal is to provide a full featured Minecraft Server written in Objective-C that conforms to both the Minecraft-PC Network Protocol and the Minecraft-PE (Pocket Edition) Protocol. Differences like non existing blocks, or different dimensions will get simulated for the other system as good as possible or substituted with other existing features (like sending different existing blockIds for non-existent blocks of the other protocol). No features shall be unaccessible from one client type. They might be just more complicated to use.
 
 ###Dependencies
-The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems. ObjectCraft requires forwarding to be supported by ObjFW on your system and clang as compiler (recommend at-least version 3.4, older versions are not supported). It also requires a libdispatch implementation available on your system (no matter if kernel-based or userland) as well as zlib. Tested systems are MacOS and Ubuntu-Linux at the time, Windows should follow once wclang errors are sorted out. iOS and Android-compatibility will be provided at a later stage, when the server is more optimized.
-Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are allowed and used for libdispatch, which is the reason for the clang requirement. The new Literals introduced with clang are supported with most clang installations, but each developer is ask not to use it in production code for maximum compatibility. Auto-Synthesizing of Properties is also not allowed. Each property needs to be synthesized or for a custmo(-runtime)-implementation marked with @dynamic.
+The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems.
+
+ObjectCraft requires forwarding to be supported by ObjFW on your system and clang as compiler (recommend at-least version 3.4, older versions are not supported).
+It also requires a libdispatch implementation available on your system (no matter if kernel-based or userland) as well as zlib.
+
+Tested systems are MacOS and Ubuntu-Linux at the time, Windows should follow once wclang errors are sorted out.
+iOS and Android-compatibility will be provided at a later stage, when the server is more optimized.
+
+Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are allowed and used for libdispatch, which is the reason for the clang requirement.
+The new Literals introduced with clang are supported with most clang installations, but each developer is ask not to use it in production code for maximum compatibility.
+Auto-Synthesizing of Properties is also not allowed. Each property needs to be synthesized or for a custmo(-runtime)-implementation marked with @dynamic.
+
+Short overview - Dependencies:
+* clang (>= 3.4)
+* ObjFW (compiled using clang with block-support)
+* libdispatch
+* zlib
+
+Short overview - Rules for contributing:
+* no new literals ( @(1), array[2], @{}, @[] )
+* no auto-sythesized properties ( either do @synthesize or @dynamic )
 
 ###Building
 
