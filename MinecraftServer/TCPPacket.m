@@ -29,13 +29,8 @@
             
             for (int i = 0; i<numClasses; i++) {
                 Class class = classes[i];
-                while (class != nil) {
-                    if (strcmp(class_getName(class_getSuperclass(class)), "TCPPacket") == 0) {
-                        [classes[i] methodForSelector:@selector(setup)](classes[i], @selector(setup));
-                        break;
-                    } else {
-                        class = class_getSuperclass(class);
-                    }
+                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[RaknetPacket class]]) {
+                    [class setup];
                 }
             }
             
