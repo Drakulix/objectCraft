@@ -9,6 +9,7 @@
 #import "ConfigManager.h"
 #import "RandomGenerator.h"
 #import "WorldGenerator.h"
+#import "FileManager.h"
 
 @implementation ConfigManager
 @dynamic tcpIPv4Enabled, tcpIPv4Port, tcpIPv6Enabled, tcpIPv6Port, tcpLanWorldBroadcastEnabled;
@@ -33,7 +34,7 @@ static ConfigManager *sharedInstance;
             
         @try {
             @autoreleasepool {
-                settings = [[[OFString stringWithContentsOfFile:@"config.json"] JSONValue] mutableCopy];
+                settings = [[[OFString stringWithContentsOfFile:[[FileManager defaultManager] globalConfigFilePath]] JSONValue] mutableCopy];
             }
         }
         @catch (OFException *exception) {
@@ -72,7 +73,7 @@ static ConfigManager *sharedInstance;
                     @"difficulty", @"NORMAL",
                     @"udpServerId", [OFNumber numberWithInt64:0],
                  nil];
-                [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+                [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
             }
         }
         
@@ -97,7 +98,7 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv4Enabled:(bool)tcpIPv4Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpIPv4Enabled] forKey:@"tcpIPv4Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -107,7 +108,7 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv4Port:(int16_t)tcpIPv4Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:tcpIPv4Port] forKey:@"tcpIPv4Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -117,7 +118,7 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv6Enabled:(bool)tcpIPv6Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpIPv6Enabled] forKey:@"tcpIPv6Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -127,7 +128,7 @@ static ConfigManager *sharedInstance;
 - (void)setTcpIPv6Port:(int16_t)tcpIPv6Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:tcpIPv6Port] forKey:@"tcpIPv6Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -137,7 +138,7 @@ static ConfigManager *sharedInstance;
 - (void)setTcpLanWorldBroadcastEnabled:(bool)tcpLanWorldBroadcastEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpLanWorldBroadcastEnabled] forKey:@"tcpLanWorldBroadcastEnabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -147,7 +148,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv4Enabled:(bool)udpIPv4Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpIPv4Enabled] forKey:@"udpIPv4Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -157,7 +158,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv4Port:(int16_t)udpIPv4Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:udpIPv4Port] forKey:@"udpIPv4Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -167,7 +168,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv6Enabled:(bool)udpIPv6Enabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpIPv6Enabled] forKey:@"udpIPv6Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -177,7 +178,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpIPv6Port:(int16_t)udpIPv6Port {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt16:udpIPv6Port] forKey:@"udpIPv6Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -187,7 +188,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpLanWorldBroadcastEnabled:(bool)udpLanWorldBroadcastEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:udpLanWorldBroadcastEnabled] forKey:@"udpLanWorldBroadcastEnabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -199,7 +200,7 @@ static ConfigManager *sharedInstance;
 - (void)setUdpServerId:(int64_t)udpServerId {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt64:udpServerId] forKey:@"udpServerId"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -210,7 +211,7 @@ static ConfigManager *sharedInstance;
 - (void)setServerBrowserMessage:(OFString *)serverBrowserMessage {
     @autoreleasepool {
         [settings setObject:serverBrowserMessage forKey:@"serverBrowserMessage"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -220,7 +221,7 @@ static ConfigManager *sharedInstance;
 - (void)setLoginWelcomeMessageEnabled:(bool)loginWelcomeMessageEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:loginWelcomeMessageEnabled] forKey:@"loginWelcomeMessageEnabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -230,7 +231,7 @@ static ConfigManager *sharedInstance;
 - (void)setLoginWelcomeMessage:(OFString *)loginWelcomeMessage {
     @autoreleasepool {
         [settings setObject:loginWelcomeMessage forKey:@"loginWelcomeMessage"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -265,7 +266,7 @@ static ConfigManager *sharedInstance;
             break;
     }
     @autoreleasepool {
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -275,7 +276,7 @@ static ConfigManager *sharedInstance;
 - (void)setIsHardcore:(bool)isHardcore {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:isHardcore] forKey:@"isHardcore"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -286,7 +287,7 @@ static ConfigManager *sharedInstance;
 - (void)setSpawnDimension:(int8_t)spawnDimension {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt8:spawnDimension] forKey:@"spawnDimension"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -316,7 +317,7 @@ static ConfigManager *sharedInstance;
         [settings setObject:dimensions forKey:@"dimensions"];
         [dimensions release];
              
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     
     }
 }
@@ -326,7 +327,7 @@ static ConfigManager *sharedInstance;
         [dict setObject:[[generator class] description] forKey:[OFNumber numberWithInt8:dimensionNum]];
         [settings setObject:dict forKey:@"dimensions"];
         [dict release];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 - (void)removeDimension:(int8_t)dimensionNum {
@@ -335,7 +336,7 @@ static ConfigManager *sharedInstance;
         [dict removeObjectForKey:[OFNumber numberWithInt8:dimensionNum]];
         [settings setObject:dict forKey:@"dimensions"];
         [dict release];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -347,7 +348,7 @@ static ConfigManager *sharedInstance;
 - (void)setSeed:(int32_t)seed {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt32:seed] forKey:@"seed"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -357,7 +358,7 @@ static ConfigManager *sharedInstance;
 - (void)setMaxPlayers:(int32_t)maxPlayers {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithInt32:maxPlayers] forKey:@"maxPlayers"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
     
@@ -367,7 +368,7 @@ static ConfigManager *sharedInstance;
 - (void)setDefaultSpawnPoint:(of_point_t)defaultSpawnPoint {
     @autoreleasepool {
         [settings setObject:[OFArray arrayWithObjects:[OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.x)], [OFNumber numberWithInt32:((int32_t)defaultSpawnPoint.y)], nil] forKey:@"defaultSpawnPoint"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
@@ -408,7 +409,7 @@ static ConfigManager *sharedInstance;
             break;
     }
     @autoreleasepool {
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:@"config.json" encoding:OF_STRING_ENCODING_UTF_8];
+        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 

@@ -91,6 +91,8 @@
 		C9B1001918991C5500AB8DB8 /* UDPMoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000218991C5500AB8DB8 /* UDPMoveEntity.m */; };
 		C9B1001A18991C5500AB8DB8 /* UDPMoveEntity_PosRot.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000418991C5500AB8DB8 /* UDPMoveEntity_PosRot.m */; };
 		C9B1001B18991C5500AB8DB8 /* UDPMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B1000618991C5500AB8DB8 /* UDPMovePlayer.m */; };
+		C9B9A73E18AC410B00C36963 /* AdvancedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B9A73B18AC410B00C36963 /* AdvancedFile.m */; };
+		C9B9A73F18AC410B00C36963 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B9A73D18AC410B00C36963 /* FileManager.m */; };
 		C9EFB607189A70E900078CB1 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB5FE189A70E900078CB1 /* Entity.m */; };
 		C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB600189A70E900078CB1 /* MovingEntity.m */; };
 		C9EFB609189A70E900078CB1 /* LivingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EFB602189A70E900078CB1 /* LivingEntity.m */; };
@@ -286,6 +288,10 @@
 		C9B868561891423B0049B299 /* ConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigManager.m; sourceTree = "<group>"; };
 		C9B8685B1891D98C0049B299 /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomGenerator.h; sourceTree = "<group>"; };
 		C9B8685C1891D98C0049B299 /* RandomGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomGenerator.m; sourceTree = "<group>"; };
+		C9B9A73A18AC410B00C36963 /* AdvancedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedFile.h; sourceTree = "<group>"; };
+		C9B9A73B18AC410B00C36963 /* AdvancedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedFile.m; sourceTree = "<group>"; };
+		C9B9A73C18AC410B00C36963 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		C9B9A73D18AC410B00C36963 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		C9E9D005189BA91A0043F279 /* libobjfw.7.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjfw.7.0.dylib; path = /usr/local/lib/libobjfw.7.0.dylib; sourceTree = "<absolute>"; };
 		C9E9D007189BABA20043F279 /* autogen.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = autogen.sh; sourceTree = "<group>"; };
 		C9E9D008189BB2360043F279 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
@@ -437,6 +443,10 @@
 				C9B868561891423B0049B299 /* ConfigManager.m */,
 				C9B8685B1891D98C0049B299 /* RandomGenerator.h */,
 				C9B8685C1891D98C0049B299 /* RandomGenerator.m */,
+				C9B9A73C18AC410B00C36963 /* FileManager.h */,
+				C9B9A73D18AC410B00C36963 /* FileManager.m */,
+				C9B9A73A18AC410B00C36963 /* AdvancedFile.h */,
+				C9B9A73B18AC410B00C36963 /* AdvancedFile.m */,
 				C92CD1B918967E5100E009B3 /* World */,
 				C957996B18907B9200B4CB37 /* TCPNetwork */,
 				C965563A1897E60700D67C15 /* UDPNetwork */,
@@ -739,6 +749,7 @@
 				C9B1000D18991C5500AB8DB8 /* UDPLoginStatus.m in Sources */,
 				C900184C18A0469B00EBD8DA /* TCPTimeUpdate.m in Sources */,
 				C92CD1C2189689ED00E009B3 /* NetherGenerator.m in Sources */,
+				C9B9A73F18AC410B00C36963 /* FileManager.m in Sources */,
 				C92CD1BC18967E5B00E009B3 /* World.m in Sources */,
 				C900184B18A0469B00EBD8DA /* TCPPlayerPositionAndLookServer.m in Sources */,
 				C96556641897EF3200D67C15 /* RaknetConnectionRequest.m in Sources */,
@@ -798,6 +809,7 @@
 				C9001812189FF2E900EBD8DA /* TCPPacket.m in Sources */,
 				C9AA13B618A12368000D383A /* OFString+DataUsingEncoding.m in Sources */,
 				C96556681897EF3200D67C15 /* RaknetConnectionResponse2.m in Sources */,
+				C9B9A73E18AC410B00C36963 /* AdvancedFile.m in Sources */,
 				C9EFB60A189A70E900078CB1 /* Player.m in Sources */,
 				C9B1001418991C5500AB8DB8 /* UDPChunkRequest.m in Sources */,
 				C9EFB608189A70E900078CB1 /* MovingEntity.m in Sources */,

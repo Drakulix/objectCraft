@@ -12,6 +12,8 @@
 #import "WorldGenerator.h"
 #import "EntityManager.h"
 #import "ChunkManager.h"
+#import "FileManager.h"
+#import "AdvancedFile.h"
 #import <objc/runtime.h>
 
 @implementation World
@@ -26,8 +28,8 @@
         
         //TO-DO World based seeds (optional, use global seed if not set)
         
-        if ([OFFile fileExistsAtPath:[OFString stringWithFormat:@"worlds/%d/world.conf", self.dimension]]) {
-            OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", self.dimension] mode:@"rb"];
+        if ([AdvancedFile fileExistsAtPath:[[FileManager defaultManager] worldConfigFilePathForDimension:self.dimension]]) {
+            AdvancedFile *seedFile = [AdvancedFile fileWithPath:[[FileManager defaultManager] worldConfigFilePathForDimension:self.dimension] mode:@"rb"];
             if ([seedFile readBigEndianInt64] != [ConfigManager defaultManager].seed ) {
                 LogWarn(@"Global Seed has changed! World might get ugly chunk borders! Old world seed: %d, new seed: %d", [seedFile readBigEndianInt64], [ConfigManager defaultManager].seed);
                 generator = (WorldGenerator *)[[(objc_getClass([_generator UTF8String])) alloc] initWithSeed:[[ConfigManager defaultManager] seed]];
@@ -69,7 +71,7 @@
 }
 
 - (void)saveWorld {
-    OFFile *seedFile = [OFFile fileWithPath:[OFString stringWithFormat:@"worlds/%d/world.conf", self.dimension] mode:@"wb"];
+    AdvancedFile *seedFile = [AdvancedFile fileWithPath:[[FileManager defaultManager] worldConfigFilePathForDimension:self.dimension] mode:@"wb"];
     [seedFile writeBigEndianInt64:[ConfigManager defaultManager].seed];
     [seedFile writeBigEndianInt64:[generator generatorState]];
     [seedFile close];
