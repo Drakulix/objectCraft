@@ -34,7 +34,7 @@
 }
 
 - (Block *)blockAtX:(int16_t)x Y:(int16_t)y Z:(int16_t)z {
-    return blocks[x][y][z];
+    return [[[blocks objectAtIndex:x] objectAtIndex:y] objectAtIndex:z];
 }
 
 - (void)updateIsEmpty {
@@ -45,7 +45,7 @@
     for (int x = 0; x<16; x++) {
         for (int y = 0; y<16; y++) {
             for (int z = 0; z<16; z++) {
-                if ([blocks[x][y][z] tcpBlockId] != 0) {
+                if ([[[[blocks objectAtIndex:x] objectAtIndex:y] objectAtIndex:z] tcpBlockId] != 0) {
                     return false;
                 }
             }
