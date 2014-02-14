@@ -31,47 +31,25 @@
     [TCPClientPacket setup];
     
     @try {
-        tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpIPv4Port];
-        [tcpServerSocketIPv4 listen];
-        [tcpServerSocketIPv4 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
+        tcpServerSocket = [[OFTCPSocket alloc] init];
+        [tcpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpIPv4Port];
+        [tcpServerSocket listen];
+        [tcpServerSocket asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
     }
     @catch (OFException *exception) {
-        LogError(@"Exception on creating TCP IPv4 socket: %@", exception);
+        LogError(@"Exception on creating TCP socket: %@", exception);
         [OFApplication terminateWithStatus:EXIT_FAILURE];
     }
     
     @try {
-        tcpServerSocketIPv6 = [[OFTCPSocket alloc] init];
-        [tcpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].tcpIPv6Port];
-        [tcpServerSocketIPv6 listen];
-        [tcpServerSocketIPv6 asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
+        udpServerSocket = [[OFUDPSocket alloc] init];
+        [udpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
+        raknetHandler = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv4];
+        udpServerSocketBuffer = malloc(UDP_MAX_PACKET_SIZE);
+        [udpServerSocket asyncReceiveIntoBuffer:udpServerSocketIPv4Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
     }
     @catch (OFException *exception) {
-        LogError(@"Exception on creating TCP IPv6 socket: %@", exception);
-        [OFApplication terminateWithStatus:EXIT_FAILURE];
-    }
-    
-    @try {
-        udpServerSocketIPv4 = [[OFUDPSocket alloc] init];
-        [udpServerSocketIPv4 bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
-        raknetHandlerIPv4 = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv4];
-        udpServerSocketIPv4Buffer = malloc(UDP_MAX_PACKET_SIZE);
-        [udpServerSocketIPv4 asyncReceiveIntoBuffer:udpServerSocketIPv4Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
-    }
-    @catch (OFException *exception) {
-        LogError(@"Exception on creating UDP IPv4 socket: %@", exception);
-        [OFApplication terminateWithStatus:EXIT_FAILURE];
-    }
-    @try {
-        udpServerSocketIPv6 = [[OFUDPSocket alloc] init];
-        [udpServerSocketIPv6 bindToHost:@"::" port:[ConfigManager defaultManager].udpIPv6Port];
-        raknetHandlerIPv6 = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv6];
-        udpServerSocketIPv6Buffer = malloc(UDP_MAX_PACKET_SIZE);
-        [udpServerSocketIPv6 asyncReceiveIntoBuffer:udpServerSocketIPv6Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
-    }
-    @catch (OFException *exception) {
-        LogError(@"Exception on creating UDP IPv6 socket: %@", exception);
+        LogError(@"Exception on creating UDP socket: %@", exception);
         [OFApplication terminateWithStatus:EXIT_FAILURE];
     }
     
@@ -87,11 +65,7 @@
     OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
     [data addItems:buffer count:length];
     
-    if (socket == udpServerSocketIPv4)
-        [raknetHandlerIPv4 didRecieveData:data fromPeer:peer];
-    else
-        [raknetHandlerIPv6 didRecieveData:data fromPeer:peer];
-    
+    [raknetHandler didRecieveData:data fromPeer:peer];
     return true;
 }
 
@@ -123,19 +97,13 @@
     
     [worldManager shutdown];
     
-    [tcpServerSocketIPv4 close];
-    [tcpServerSocketIPv4 release];
-    [tcpServerSocketIPv6 close];
-    [tcpServerSocketIPv6 release];
+    [tcpServerSocket close];
+    [tcpServerSocket release];
     
-    [udpServerSocketIPv4 cancelAsyncRequests];
-    [udpServerSocketIPv6 cancelAsyncRequests];
-    [udpServerSocketIPv4 close];
-    [udpServerSocketIPv6 close];
-    [udpServerSocketIPv4 release];
-    [udpServerSocketIPv6 release];
-    free(udpServerSocketIPv4Buffer);
-    free(udpServerSocketIPv6Buffer);
+    [udpServerSocket cancelAsyncRequests];
+    [udpServerSocket close];
+    [udpServerSocket release];
+    free(udpServerSocketBuffer);
 }
 
 @end

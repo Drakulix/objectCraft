@@ -18,20 +18,14 @@
 
 //Technical Server Settings
 //TCP
-@property (nonatomic) bool tcpIPv4Enabled;
-@property (nonatomic) int16_t tcpIPv4Port;
-
-@property (nonatomic) bool tcpIPv6Enabled;
-@property (nonatomic) int16_t tcpIPv6Port;
+@property (nonatomic) bool tcpEnabled;
+@property (nonatomic) int16_t tcpPort;
 
 @property (nonatomic) bool tcpLanWorldBroadcastEnabled;
 
 //UDP
-@property (nonatomic) bool udpIPv4Enabled;
-@property (nonatomic) int16_t udpIPv4Port;
-
-@property (nonatomic) bool udpIPv6Enabled;
-@property (nonatomic) int16_t udpIPv6Port;
+@property (nonatomic) bool udpEnabled;
+@property (nonatomic) int16_t udpPort;
 
 @property (nonatomic) bool udpLanWorldBroadcastEnabled;
 

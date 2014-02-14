@@ -12,8 +12,8 @@
 #import "FileManager.h"
 
 @implementation ConfigManager
-@dynamic tcpIPv4Enabled, tcpIPv4Port, tcpIPv6Enabled, tcpIPv6Port, tcpLanWorldBroadcastEnabled;
-@dynamic udpIPv4Enabled, udpIPv4Port, udpIPv6Enabled, udpIPv6Port, udpLanWorldBroadcastEnabled, udpServerId;
+@dynamic tcpEnabled, tcpPort, tcpLanWorldBroadcastEnabled;
+@dynamic udpEnabled, udpPort, udpLanWorldBroadcastEnabled, udpServerId;
 @dynamic serverBrowserMessage, loginWelcomeMessageEnabled, loginWelcomeMessage;
 @dynamic defaultGamemode, isHardcore;
 @dynamic spawnDimension, dimensions;
@@ -43,15 +43,11 @@ static ConfigManager *sharedInstance;
         @autoreleasepool {
             if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
                 settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
-                    @"tcpIPv4Enabled", [OFNumber numberWithBool:false],
-                    @"tcpIPv6Enabled", [OFNumber numberWithBool:false],
-                    @"tcpIPv4Port", [OFNumber numberWithInt16:25565],
-                    @"tcpIPv6Port", [OFNumber numberWithInt16:25565],
+                    @"tcpEnabled", [OFNumber numberWithBool:false],
+                    @"tcpPort", [OFNumber numberWithInt16:25565],
                     @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
-                    @"udpIPv4Enabled", [OFNumber numberWithBool:false],
-                    @"udpIPv6Enabled", [OFNumber numberWithBool:false],
-                    @"udpIPv4Port", [OFNumber numberWithInt16:19132],
-                    @"udpIPv6Port", [OFNumber numberWithInt16:19132],
+                    @"udpEnabled", [OFNumber numberWithBool:false],
+                    @"udpPort", [OFNumber numberWithInt16:19132],
                     @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
                     @"serverBrowserMessage", @"ObjectCraft Server",
                     @"loginWelcomeMessageEnabled", [OFNumber numberWithBool:false],
@@ -92,42 +88,22 @@ static ConfigManager *sharedInstance;
 }
 
 //Technical Server Settings
-- (bool)tcpIPv4Enabled {
-    return [[settings objectForKey:@"tcpIPv4Enabled"] boolValue];
+- (bool)tcpEnabled {
+    return [[settings objectForKey:@"tcpEnabled"] boolValue];
 }
-- (void)setTcpIPv4Enabled:(bool)tcpIPv4Enabled {
+- (void)setTcpEnabled:(bool)tcpIPv4Enabled {
     @autoreleasepool {
-        [settings setObject:[OFNumber numberWithBool:tcpIPv4Enabled] forKey:@"tcpIPv4Enabled"];
+        [settings setObject:[OFNumber numberWithBool:tcpEnabled] forKey:@"tcpEnabled"];
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (int16_t)tcpIPv4Port {
-    return [[settings objectForKey:@"tcpIPv4Port"] int16Value];
+- (int16_t)tcpPort {
+    return [[settings objectForKey:@"tcpPort"] int16Value];
 }
-- (void)setTcpIPv4Port:(int16_t)tcpIPv4Port {
+- (void)setTcpPort:(int16_t)tcpPort {
     @autoreleasepool {
-        [settings setObject:[OFNumber numberWithInt16:tcpIPv4Port] forKey:@"tcpIPv4Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
-    }
-}
-
-- (bool)tcpIPv6Enabled {
-    return [[settings objectForKey:@"tcpIPv6Enabled"] boolValue];
-}
-- (void)setTcpIPv6Enabled:(bool)tcpIPv6Enabled {
-    @autoreleasepool {
-        [settings setObject:[OFNumber numberWithBool:tcpIPv6Enabled] forKey:@"tcpIPv6Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
-    }
-}
-
-- (int16_t)tcpIPv6Port {
-    return [[settings objectForKey:@"tcpIPv6Port"] int16Value];
-}
-- (void)setTcpIPv6Port:(int16_t)tcpIPv6Port {
-    @autoreleasepool {
-        [settings setObject:[OFNumber numberWithInt16:tcpIPv6Port] forKey:@"tcpIPv6Port"];
+        [settings setObject:[OFNumber numberWithInt16:tcpPort] forKey:@"tcpPort"];
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
@@ -142,46 +118,25 @@ static ConfigManager *sharedInstance;
     }
 }
 
-- (bool)udpIPv4Enabled {
-    return [[settings objectForKey:@"udpIPv4Enabled"] boolValue];
+- (bool)udpEnabled {
+    return [[settings objectForKey:@"udpEnabled"] boolValue];
 }
-- (void)setUdpIPv4Enabled:(bool)udpIPv4Enabled {
+- (void)setUdpEnabled:(bool)udpEnabled {
     @autoreleasepool {
-        [settings setObject:[OFNumber numberWithBool:udpIPv4Enabled] forKey:@"udpIPv4Enabled"];
+        [settings setObject:[OFNumber numberWithBool:udpEnabled] forKey:@"udpEnabled"];
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
 
-- (int16_t)udpIPv4Port {
-    return [[settings objectForKey:@"udpIPv4Port"] int16Value];
+- (int16_t)udpPort {
+    return [[settings objectForKey:@"udpPort"] int16Value];
 }
-- (void)setUdpIPv4Port:(int16_t)udpIPv4Port {
+- (void)setUdpPort:(int16_t)udpPort {
     @autoreleasepool {
-        [settings setObject:[OFNumber numberWithInt16:udpIPv4Port] forKey:@"udpIPv4Port"];
+        [settings setObject:[OFNumber numberWithInt16:udpPort] forKey:@"udpPort"];
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
     }
 }
-
-- (bool)udpIPv6Enabled {
-    return [[settings objectForKey:@"udpIPv6Enabled"] boolValue];
-}
-- (void)setUdpIPv6Enabled:(bool)udpIPv6Enabled {
-    @autoreleasepool {
-        [settings setObject:[OFNumber numberWithBool:udpIPv6Enabled] forKey:@"udpIPv6Enabled"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
-    }
-}
-
-- (int16_t)udpIPv6Port {
-    return [[settings objectForKey:@"udpIPv6Port"] int16Value];
-}
-- (void)setUdpIPv6Port:(int16_t)udpIPv6Port {
-    @autoreleasepool {
-        [settings setObject:[OFNumber numberWithInt16:udpIPv6Port] forKey:@"udpIPv6Port"];
-        [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];
-    }
-}
-
 - (bool)udpLanWorldBroadcastEnabled {
     return [[settings objectForKey:@"udpLanBroadcastEnabled"] boolValue];
 }

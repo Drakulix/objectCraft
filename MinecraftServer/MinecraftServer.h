@@ -15,17 +15,14 @@
 @interface MinecraftServer : OFObject<OFApplicationDelegate> {
     bool running;
     
-    OFTCPSocket *tcpServerSocketIPv4;
-    OFTCPSocket *tcpServerSocketIPv6;
+    OFTCPSocket *tcpServerSocket;
     OFMutableArray *activeTCPConnections;
     
-    OFUDPSocket *udpServerSocketIPv4;
-    void *udpServerSocketIPv4Buffer;
-    OFUDPSocket *udpServerSocketIPv6;
-    void *udpServerSocketIPv6Buffer;
+    OFUDPSocket *udpServerSocket;
+    void *udpServerSocketBuffer;
+    
     OFMutableArray *activeUDPConnections;
-    RaknetHandler  *raknetHandlerIPv4;
-    RaknetHandler  *raknetHandlerIPv6;
+    RaknetHandler  *raknetHandler;
     
     WorldManager *worldManager;
 }
