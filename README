@@ -17,8 +17,6 @@ Tested systems are MacOS and Ubuntu-Linux at the time, Windows should follow onc
 iOS and Android-compatibility will be provided at a later stage, when the server is more optimized.
 
 Objective-C 2.0 features used are Fast-Iteration and Properties. Blocks are allowed and used for libdispatch, which is the reason for the clang requirement.
-The new Literals introduced with clang are supported with most clang installations, but each developer is ask not to use it in production code for maximum compatibility.
-Auto-Synthesizing of Properties is also not allowed. Each property needs to be synthesized or for a custmo(-runtime)-implementation marked with @dynamic.
 
 Short overview - Dependencies:
 * clang (>= 3.4)
@@ -26,9 +24,6 @@ Short overview - Dependencies:
 * libdispatch
 * zlib
 
-Short overview - Rules for contributing:
-* no new literals ( @(1), array[2], @{}, @[] )
-* no auto-sythesized properties ( either do @synthesize or @dynamic )
 
 ###Building
 
