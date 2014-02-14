@@ -12,7 +12,6 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectionRequest2
-@synthesize clientSecurity, cookie, serverUDPPort, mtuSize, clientId;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

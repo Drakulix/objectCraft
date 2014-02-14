@@ -12,7 +12,6 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectedPing
-@synthesize pingId;
 
 - (instancetype)initWithData:(OFDataArray *)data; {
     self = [super init];

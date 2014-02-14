@@ -16,7 +16,7 @@
 
 #import "RaknetPacket.h"
 #import "UDPPacket.h"
-#import "TCPPacket.h"
+#import "TCPClientPacket.h"
 
 @implementation MinecraftServer
 
@@ -28,7 +28,7 @@
     
     [RaknetPacket setup];
     [UDPPacket setup];
-    [TCPPacket setup];
+    [TCPClientPacket setup];
     
     @try {
         tcpServerSocketIPv4 = [[OFTCPSocket alloc] init];

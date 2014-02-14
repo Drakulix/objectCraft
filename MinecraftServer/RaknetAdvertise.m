@@ -15,12 +15,11 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetAdvertise
-@synthesize pingId, serverId, identifier;
 
-- (instancetype)initWithPingId:(int64_t)_pingId withIndetifier:(OFString *)string {
+- (instancetype)initWithPingId:(int64_t)pingId withIndetifier:(OFString *)string {
     self = [super init];
     @try {
-        self.pingId = _pingId;
+        self.pingId = pingId;
         self.serverId = [ConfigManager defaultManager].udpServerId;
         self.identifier = string;
     } @catch (id e) {

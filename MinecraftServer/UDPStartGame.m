@@ -16,7 +16,6 @@
 #import "OFDataArray+FloatWriter.h"
 
 @implementation UDPStartGame
-@synthesize seed, generator, gamemode, entityId, X, Y, Z;
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];

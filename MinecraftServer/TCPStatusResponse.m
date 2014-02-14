@@ -10,7 +10,6 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation TCPStatusResponse
-@synthesize json;
 
 - (instancetype)initWithDictionary:(OFDictionary *)dictionary {
     self = [super init];

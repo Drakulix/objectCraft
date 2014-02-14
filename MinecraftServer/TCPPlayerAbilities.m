@@ -11,7 +11,6 @@
 #import "OFDataArray+FloatWriter.h"
 
 @implementation TCPPlayerAbilities
-@synthesize canBeDamaged, canFly, isFlying, isCreativeMode, flyingSpeed, walkingSpeed;
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];

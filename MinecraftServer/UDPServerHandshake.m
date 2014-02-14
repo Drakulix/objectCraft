@@ -11,15 +11,14 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPServerHandshake
-@synthesize cookie, security, port, dataArray, timeStamp, session, session2;
 
-- (instancetype)initWithPort:(uint16_t)_port sessionId:(int64_t)_session serverSessionId:(int64_t)_session2 {
+- (instancetype)initWithPort:(uint16_t)port sessionId:(int64_t)session serverSessionId:(int64_t)session2 {
     self = [super init];
     @try {
         
         self.cookie = 0x043f57fe;
         self.security = 0xcd;
-        self.port = _port;
+        self.port = port;
         
         OFDataArray *data = [OFDataArray dataArray];
         uint24_t len;
@@ -33,8 +32,8 @@
         self.dataArray = data;
         
         self.timeStamp = 0x0000;
-        self.session = _session;
-        self.session2 = _session2;
+        self.session = session;
+        self.session2 = session2;
         
     } @catch (id e) {
         [self release];

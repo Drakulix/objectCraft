@@ -10,7 +10,6 @@
 #import "Player.h"
 
 @implementation UDPMovePlayer
-@synthesize unknown;
 
 - (instancetype)initWithPlayer:(Player *)player {
     return [super initWithEntity:player];

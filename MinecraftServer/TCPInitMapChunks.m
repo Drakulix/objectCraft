@@ -14,7 +14,6 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation TCPInitMapChunks
-@synthesize skyLightSend;
 
 - (instancetype)initForTcpDimension:(int8_t)dimension {
     self = [super init];

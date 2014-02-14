@@ -16,7 +16,6 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation UDPAddPlayer
-@synthesize clientID, username, entityId, X, Y, Z, Yaw, Pitch, unknown, unknown2, metadata;
 
 - (id)initWithPlayer:(Player *)player {
     self = [super init];

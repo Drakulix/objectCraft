@@ -14,7 +14,6 @@
 
 @implementation RaknetMinecraftPacket
 @dynamic count, orderId;
-@synthesize dataLength, isReliable, isOrdered, isSplit, orderChannel, splitId, splitCount, splitIndex;
 
 + (RaknetMinecraftPacket *)readPacketFromData:(OFDataArray *)data {
     RaknetMinecraftPacket *minecraftPacket = [[RaknetMinecraftPacket alloc] init];
@@ -84,16 +83,16 @@
     return self;
 }
 
-- (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)_splitCount splitId:(int16_t)_splitId splitIndex:(int32_t)_splitIndex {
+- (instancetype)initSplitPacketWithData:(OFDataArray *)data count:(uint24_t)_count splitCount:(int32_t)splitCount splitId:(int16_t)splitId splitIndex:(int32_t)splitIndex {
     self = [super init];
     @try {
         self.isReliable = true;
         count = _count;
         
         self.isSplit = true;
-        self.splitCount = _splitCount;
-        self.splitId = _splitId;
-        self.splitIndex = _splitIndex;
+        self.splitCount = splitCount;
+        self.splitId = splitId;
+        self.splitIndex = splitIndex;
         
         self.dataLength = ((uint16_t)[data count]);
         self.packet = data;

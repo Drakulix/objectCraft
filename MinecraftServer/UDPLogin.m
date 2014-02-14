@@ -13,7 +13,6 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation UDPLogin
-@synthesize username, protocol1, protocol2, clientId, realmsData;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

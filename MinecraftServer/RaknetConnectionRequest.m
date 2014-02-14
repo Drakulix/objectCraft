@@ -12,7 +12,6 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectionRequest
-@synthesize protocolVersion, mtuSize;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

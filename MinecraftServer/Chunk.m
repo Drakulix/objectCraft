@@ -11,7 +11,6 @@
 #import "Block.h"
 
 @implementation Chunk
-@synthesize position, ageInTicks, isEmpty;
 
 - (id)initWithBlocks:(OFMutableArray *)array {
     self = [super init];

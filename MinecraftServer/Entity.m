@@ -12,7 +12,6 @@
 #import "EntityManager.h"
 
 @implementation Entity
-@synthesize entityId, dimension, tcpDimension, X, Y, Z, Yaw, Pitch;
 
 - (int32_t)blockPosX {
     return (int32_t)round(self.X);

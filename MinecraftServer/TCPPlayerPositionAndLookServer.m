@@ -11,7 +11,6 @@
 #import "OFDataArray+FloatWriter.h"
 
 @implementation TCPPlayerPositionAndLookServer
-@synthesize X, Y, Z, Yaw, Pitch, OnGround;
 
 - (instancetype)initWithPlayer:(Player *)player {
     self = [super init];

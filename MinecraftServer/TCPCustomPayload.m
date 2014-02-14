@@ -11,12 +11,11 @@
 #import "OFDataArray+StringWriter.h"
 
 @implementation TCPCustomPayload
-@synthesize channel, length, payload;
 
-- (instancetype)initWithChannel:(OFString *)_channel payload:(OFDataArray *)data {
+- (instancetype)initWithChannel:(OFString *)channel payload:(OFDataArray *)data {
     self = [super init];
     @try {
-        self.channel = _channel;
+        self.channel = channel;
         self.length = [data count];
         self.payload = data;
     } @catch (id e) {

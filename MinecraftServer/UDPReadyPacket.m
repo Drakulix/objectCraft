@@ -11,12 +11,11 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPReadyPacket
-@synthesize status;
 
-- (instancetype)initWithStatus:(int8_t)_status {
+- (instancetype)initWithStatus:(int8_t)status {
     self = [super init];
     @try {
-        self.status = _status;
+        self.status = status;
     } @catch (id e) {
         [self release];
         @throw e;

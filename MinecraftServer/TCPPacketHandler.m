@@ -12,12 +12,11 @@
 #import "TCPClientPacket.h"
 
 @implementation TCPPacketHandler
-@synthesize delegate;
 
--(instancetype)initWithDelegate:(id<TCPPacketDelegate>)_delegate {
+-(instancetype)initWithDelegate:(id<TCPPacketDelegate>)delegate {
     self = [super init];
     @try {
-        self.delegate = _delegate;
+        self.delegate = delegate;
     } @catch (id e) {
         [self release];
         @throw e;

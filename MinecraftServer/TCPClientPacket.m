@@ -8,30 +8,52 @@
 
 #import "log.h"
 #import "TCPClientPacket.h"
+#import <string.h>
 
 static OFArray *packetListClient;
 
 @implementation TCPClientPacket
 
 + (void)setup {
-    if (self != [TCPClientPacket class]) {
+    if (self == [TCPClientPacket class]) {
         
-        if (!packetListClient)
-            packetListClient = [[OFArray alloc] initWithObjects:[[OFMutableDictionary alloc] init], [[OFMutableDictionary alloc] init], [[OFMutableDictionary alloc] init], [[OFMutableDictionary alloc] init], nil];
+        packetListClient = [[OFArray alloc] initWithObjects:[[[OFMutableDictionary alloc] init] autorelease], [[[OFMutableDictionary alloc] init] autorelease], [[[OFMutableDictionary alloc] init] autorelease], [[[OFMutableDictionary alloc] init] autorelease], nil];
         
+        int numClasses;
+        Class * classes = NULL;
+        
+        classes = NULL;
+        numClasses = objc_getClassList(NULL, 0);
+        
+        if (numClasses > 0 )
+        {
+            classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+            numClasses = objc_getClassList(classes, numClasses);
+            
+            for (int i = 0; i<numClasses; i++) {
+                Class class = classes[i];
+                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[TCPClientPacket class]]) {
+                    [class setup];
+                }
+            }
+            
+            free(classes);
+        }
+        
+    } else {
+    
         @try {
             [TCPClientPacket addPacketClass:self withState:[self state] forId:[self packetId]];
         }
         @catch (OFException *exception) {}
-        
+
     }
+
 }
 
 + (void)addPacketClass:(Class)class withState:(int)state forId:(uint8_t)pId {
-    if ([class isSubclassOfClass:[TCPClientPacket class]]) {
-        @autoreleasepool {
-            [[packetListClient objectAtIndex:state] setObject:[class description] forKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]];
-        }
+    @autoreleasepool {
+        [[packetListClient objectAtIndex:state] setObject:[class description] forKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]];
     }
 }
 

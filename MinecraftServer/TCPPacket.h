@@ -10,8 +10,6 @@
 
 @interface TCPPacket : OFObject
 
-+ (void)setup;
-
 + (int)state;
 + (uint64_t)packetId;
 

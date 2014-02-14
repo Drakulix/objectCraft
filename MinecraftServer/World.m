@@ -17,12 +17,11 @@
 
 @implementation World
 @dynamic tcpDimension;
-@synthesize ageInTicks, dimension, entityManager, chunkManager;
 
-- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)_dimension {
+- (instancetype)initWithGenerator:(OFString *)_generator forDimension:(int8_t)dimension {
     self = [super init];
     @try {
-        self.dimension = _dimension;
+        self.dimension = dimension;
         
         self.ageInTicks = 0; //TO-DO read current age from conf file
         

@@ -12,7 +12,6 @@
 #import "OFDataArray+StringReader.h"
 
 @implementation TCPHandshake
-@synthesize protocolVersion, serverAddress, serverPort, nextState;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

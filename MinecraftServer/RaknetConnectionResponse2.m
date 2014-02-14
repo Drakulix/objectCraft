@@ -13,13 +13,12 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetConnectionResponse2
-@synthesize serverSecurity, mtuSize, clientUDPPort, serverId;
 
-- (instancetype)initWithMtuSize:(int16_t)_mtuSize andClientPort:(int16_t)port {
+- (instancetype)initWithMtuSize:(int16_t)mtuSize andClientPort:(int16_t)port {
     self = [super init];
     @try {
         self.serverId = [ConfigManager defaultManager].udpServerId;
-        self.mtuSize = _mtuSize;
+        self.mtuSize = mtuSize;
         self.clientUDPPort = port;
         self.serverSecurity = 0;
     } @catch (id e) {

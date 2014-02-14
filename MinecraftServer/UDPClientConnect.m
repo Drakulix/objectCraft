@@ -11,7 +11,6 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPClientConnect
-@synthesize clientId, sessionId, unknown;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

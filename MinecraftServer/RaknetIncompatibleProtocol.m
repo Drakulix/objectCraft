@@ -13,7 +13,6 @@
 #import "OFDataArray+RaknetMagic.h"
 
 @implementation RaknetIncompatibleProtocol
-@synthesize protocolVersion, serverId;
 
 - (id)init {
     self = [super init];

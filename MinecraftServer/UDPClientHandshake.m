@@ -11,7 +11,6 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPClientHandshake
-@synthesize cookie, security, port, dataArray, dataArray0, timeStamp, session, session2;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

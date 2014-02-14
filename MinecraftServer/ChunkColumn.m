@@ -10,7 +10,6 @@
 #import "Chunk.h"
 
 @implementation ChunkColumn
-@synthesize X, Z;
 
 - (instancetype)init {
     return [super init];

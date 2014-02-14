@@ -10,12 +10,11 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation TCPStatusPong
-@synthesize time;
 
-- (instancetype)initWithTime:(int64_t)_time {
+- (instancetype)initWithTime:(int64_t)time {
     self = [super init];
     @try {
-        self.time = _time;
+        self.time = time;
     } @catch (id e) {
         [self release];
         @throw e;

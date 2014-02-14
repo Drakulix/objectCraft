@@ -14,7 +14,6 @@
 #import "OFDataArray+FloatWriter.h"
 
 @implementation UDPMoveEntity
-@synthesize entityId, X, Y, Z, Yaw, Pitch;
 
 - (id)initWithEntity:(MovingEntity *)entity {
     self = [super init];

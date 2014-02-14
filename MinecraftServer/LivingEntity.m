@@ -9,5 +9,5 @@
 #import "LivingEntity.h"
 
 @implementation LivingEntity
-@synthesize canBeDamaged, health;
+
 @end

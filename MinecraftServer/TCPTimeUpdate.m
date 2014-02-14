@@ -10,7 +10,6 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation TCPTimeUpdate
-@synthesize ageOfWorld, timeOfDay;
 
 - (instancetype)initWithAge:(int64_t)age andDayTime:(int64_t)time {
     self = [super init];

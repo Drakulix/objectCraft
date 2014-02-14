@@ -11,7 +11,6 @@
 #import "OFDataArray+FloatReader.h"
 
 @implementation TCPPlayerPositionClient
-@synthesize X, feetY, headY, Z, OnGround;
 
 - (instancetype)initWithData:(OFDataArray *)data {
     self = [super init];

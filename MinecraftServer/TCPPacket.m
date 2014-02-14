@@ -9,36 +9,8 @@
 #import "TCPPacket.h"
 #import "TCPClientPacket.h"
 #import "TCPServerPacket.h"
-#import <string.h>
 
 @implementation TCPPacket
-
-+ (void)setup {
-    if (self == [TCPPacket class]) {
-        
-        int numClasses;
-        Class * classes = NULL;
-        
-        classes = NULL;
-        numClasses = objc_getClassList(NULL, 0);
-        
-        if (numClasses > 0 )
-        {
-            classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
-            numClasses = objc_getClassList(classes, numClasses);
-            
-            for (int i = 0; i<numClasses; i++) {
-                Class class = classes[i];
-                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[TCPPacket class]]) {
-                    [class setup];
-                }
-            }
-            
-            free(classes);
-        }
-        
-    }
-}
 
 - (instancetype)initWithData:(OFDataArray *)data {
     return [super init];

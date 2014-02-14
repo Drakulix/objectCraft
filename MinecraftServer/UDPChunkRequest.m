@@ -11,7 +11,6 @@
 #import "OFDataArray+IntWriter.h"
 
 @implementation UDPChunkRequest
-@synthesize X, Z;
 
 - (instancetype)initForX:(int32_t)x Z:(int32_t)z {
     self = [super init];

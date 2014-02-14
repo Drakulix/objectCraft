@@ -10,9 +10,9 @@
 #import <sys/time.h>
 const uint64_t customRandMax = 32767;
 
-@implementation RandomGenerator
-@synthesize seed;
 static RandomGenerator *randomGenerator;
+
+@implementation RandomGenerator
 
 - (instancetype)init {
     self = [super init];

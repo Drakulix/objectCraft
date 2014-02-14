@@ -9,5 +9,5 @@
 #import "MovingEntity.h"
 
 @implementation MovingEntity
-@synthesize OnGround, canFly, isFlying, flyingSpeed, walkingSpeed;
+
 @end
