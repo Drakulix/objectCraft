@@ -443,10 +443,7 @@
 				C9B868561891423B0049B299 /* ConfigManager.m */,
 				C9B8685B1891D98C0049B299 /* RandomGenerator.h */,
 				C9B8685C1891D98C0049B299 /* RandomGenerator.m */,
-				C9B9A73C18AC410B00C36963 /* FileManager.h */,
-				C9B9A73D18AC410B00C36963 /* FileManager.m */,
-				C9B9A73A18AC410B00C36963 /* AdvancedFile.h */,
-				C9B9A73B18AC410B00C36963 /* AdvancedFile.m */,
+				C970475318B3BCCB00327C73 /* File Handling */,
 				C92CD1B918967E5100E009B3 /* World */,
 				C957996B18907B9200B4CB37 /* TCPNetwork */,
 				C965563A1897E60700D67C15 /* UDPNetwork */,
@@ -535,6 +532,17 @@
 				C965565F1897EF3200D67C15 /* RaknetMinecraftPacket.m */,
 			);
 			name = RaknetPacket;
+			sourceTree = "<group>";
+		};
+		C970475318B3BCCB00327C73 /* File Handling */ = {
+			isa = PBXGroup;
+			children = (
+				C9B9A73C18AC410B00C36963 /* FileManager.h */,
+				C9B9A73D18AC410B00C36963 /* FileManager.m */,
+				C9B9A73A18AC410B00C36963 /* AdvancedFile.h */,
+				C9B9A73B18AC410B00C36963 /* AdvancedFile.m */,
+			);
+			name = "File Handling";
 			sourceTree = "<group>";
 		};
 		C977BF8E1898661D00FD9B38 /* DataReader */ = {
