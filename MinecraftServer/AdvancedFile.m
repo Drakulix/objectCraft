@@ -20,7 +20,6 @@ static AdvancedFile *lastFile = nil;
 + (void)initialize {
     currentCount = 0;
     maxFileCount = sysconf(_SC_OPEN_MAX);
-    of_log(@"max files = %d", maxFileCount);
 }
 
 + (AdvancedFile *)fileWithPath:(OFString *)path mode:(OFString *)mode {
