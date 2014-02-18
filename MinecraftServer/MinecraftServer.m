@@ -34,7 +34,21 @@
         tcpServerSocket = [[OFTCPSocket alloc] init];
         [tcpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpIPv4Port];
         [tcpServerSocket listen];
-        [tcpServerSocket asyncAcceptWithTarget:self selector:@selector(acceptFrom:On:withException:)];
+        
+        [tcpServerSocket asyncAcceptWithBlock:^bool(OFTCPSocket *socket, OFTCPSocket *acceptedSocket, OFException *exception) {
+
+            if (exception) {
+                LogError(@"Exception on accepting tcp socket: %@", exception);
+                return true;
+            }
+            
+            TCPClientConnection *conn = [[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self];
+            [activeTCPConnections addObject:conn];
+            [conn release];
+            
+            return true;
+        
+        }];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating TCP socket: %@", exception);
@@ -46,7 +60,21 @@
         [udpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
         raknetHandler = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv4];
         udpServerSocketBuffer = malloc(UDP_MAX_PACKET_SIZE);
-        [udpServerSocket asyncReceiveIntoBuffer:udpServerSocketIPv4Buffer length:UDP_MAX_PACKET_SIZE target:self selector:@selector(recieveViaUDPSocket:data:withSize:from:error:)];
+        
+        [udpServerSocket asyncReceiveIntoBuffer:udpServerSocketBuffer length:UDP_MAX_PACKET_SIZE block:^bool(OFUDPSocket *socket, void *buffer, size_t length, of_udp_socket_address_t sender, OFException *exception) {
+            
+            if (exception) {
+                LogError(@"Exception on reading from udp socket: %@", exception);
+                return true;
+            }
+            
+            OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
+            [data addItems:buffer count:length];
+            
+            [raknetHandler didRecieveData:data fromPeer:peer];
+            return true;
+        
+        }];
     }
     @catch (OFException *exception) {
         LogError(@"Exception on creating UDP socket: %@", exception);
@@ -54,32 +82,6 @@
     }
     
     LogInfo(@"ObjectCraft Server started");
-}
-
-- (bool)recieveViaUDPSocket:(OFUDPSocket *)socket data:(void *)buffer withSize:(size_t)length from:(of_udp_socket_address_t)peer error:(OFException *)exception {
-    if (exception) {
-        LogError(@"Exception on reading from udp socket: %@", exception);
-        return true;
-    }
-    
-    OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
-    [data addItems:buffer count:length];
-    
-    [raknetHandler didRecieveData:data fromPeer:peer];
-    return true;
-}
-
-- (bool)acceptFrom:(OFTCPSocket *)socket On:(OFTCPSocket *)acceptedSocket withException:(OFException *)exception {
-    if (exception) {
-        LogError(@"Exception on accepting tcp socket: %@", exception);
-        return true;
-    }
-    
-    TCPClientConnection *conn = [[TCPClientConnection alloc] initWithSocket:acceptedSocket fromMinecraftServer:self];
-    [activeTCPConnections addObject:conn];
-    [conn release];
-    
-    return true;
 }
 
 - (void)tcpClientDisconnected:(TCPClientConnection *)tcpClientConnection {
