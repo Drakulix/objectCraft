@@ -30,7 +30,8 @@ static OFMutableDictionary *packetList;
             
             for (int i = 0; i<numClasses; i++) {
                 Class class = classes[i];
-                if (strcmp(class_getName(class), "Object") != 0 && [class isKindOfClass:[RaknetPacket class]]) {
+                if (strncmp(class_getName(class), "NS", sizeof("NS")-1) != 0 && strncmp(class_getName(class), "_", sizeof("_")-1) != 0 &&
+                    strcmp(class_getName(class), "Object") != 0 && class != [RaknetPacket class] && [class isSubclassOfClass:[RaknetPacket class]]) {
                     [class setup];
                 }
             }
