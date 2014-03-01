@@ -878,6 +878,7 @@
 				OTHER_CFLAGS = (
 					"-fconstant-string-class=OFConstantString",
 					"-fno-constant-cfstrings",
+					"-fblocks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -907,6 +908,7 @@
 				OTHER_CFLAGS = (
 					"-fconstant-string-class=OFConstantString",
 					"-fno-constant-cfstrings",
+					"-fblocks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
