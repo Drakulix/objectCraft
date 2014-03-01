@@ -25,9 +25,11 @@
         self.gamemode = 1;//[ConfigManager sharedInstance].gamemode;
                           //To-Do remove that testing overwrite
         self.entityId = player.entityId;
-        self.X = (float)player.X;
-        self.Y = (float)player.Y-64.0;
-        self.Z = (float)player.Z;
+        
+        self.X = (float)player.X+0.5f;
+        self.Y = (float)player.Y;
+        self.Z = (float)player.Z+0.5f;
+        
     } @catch (id e) {
         [self release];
         @throw e;

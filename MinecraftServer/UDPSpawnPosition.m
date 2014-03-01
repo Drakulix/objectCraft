@@ -18,7 +18,7 @@
     @try {
         self.X = [player blockPosX];
         self.Z = [player blockPosZ];
-        self.Y = (int8_t)[player blockPosY]-64;
+        self.Y = (int8_t)[player blockPosY];
     } @catch (id e) {
         [self release];
         @throw e;
@@ -40,7 +40,7 @@
 }
 
 + (uint8_t)packetId {
-    return 0xab;
+    return 0xaa;
 }
 
 - (OFDataArray *)packetData {
