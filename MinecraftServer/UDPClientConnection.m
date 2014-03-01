@@ -163,7 +163,7 @@
         if (((UDPReadyPacket *)packet).status == 2) { //Spawn Time!
             @autoreleasepool {
                 [self sendPacket:[[[UDPSpawnPosition alloc] initWithPlayer:player] autorelease]];
-                [self sendPacket:[[[UDPSetHealth alloc] initWithHealth:1] autorelease]];
+                [self sendPacket:[[[UDPSetHealth alloc] initWithHealth:10] autorelease]];
             }
         }
         

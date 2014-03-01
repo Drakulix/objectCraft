@@ -35,7 +35,7 @@
 }
 
 + (uint8_t)packetId {
-    return 0xaa;
+    return 0xa9;
 }
 
 - (OFDataArray *)packetData {
