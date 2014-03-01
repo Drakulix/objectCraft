@@ -43,10 +43,10 @@ static ConfigManager *sharedInstance;
         @autoreleasepool {
             if (!settings || ![settings isKindOfClass:[OFDictionary class]]) {
                 settings = [[OFMutableDictionary alloc] initWithKeysAndObjects:
-                    @"tcpEnabled", [OFNumber numberWithBool:false],
+                    @"tcpEnabled", [OFNumber numberWithBool:true],
                     @"tcpPort", [OFNumber numberWithInt16:25565],
                     @"tcpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
-                    @"udpEnabled", [OFNumber numberWithBool:false],
+                    @"udpEnabled", [OFNumber numberWithBool:true],
                     @"udpPort", [OFNumber numberWithInt16:19132],
                     @"udpLanWorldBroadcastEnabled", [OFNumber numberWithBool:false],
                     @"serverBrowserMessage", @"ObjectCraft Server",
@@ -91,7 +91,7 @@ static ConfigManager *sharedInstance;
 - (bool)tcpEnabled {
     return [[settings objectForKey:@"tcpEnabled"] boolValue];
 }
-- (void)setTcpEnabled:(bool)tcpIPv4Enabled {
+- (void)setTcpEnabled:(bool)tcpEnabled {
     @autoreleasepool {
         [settings setObject:[OFNumber numberWithBool:tcpEnabled] forKey:@"tcpEnabled"];
         [[settings JSONRepresentationWithOptions:OF_JSON_REPRESENTATION_PRETTY] writeToFile:[[FileManager defaultManager] globalConfigFilePath] encoding:OF_STRING_ENCODING_UTF_8];

@@ -32,7 +32,7 @@
     
     @try {
         tcpServerSocket = [[OFTCPSocket alloc] init];
-        [tcpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpIPv4Port];
+        [tcpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].tcpPort];
         [tcpServerSocket listen];
         
         [tcpServerSocket asyncAcceptWithBlock:^bool(OFTCPSocket *socket, OFTCPSocket *acceptedSocket, OFException *exception) {
@@ -57,8 +57,8 @@
     
     @try {
         udpServerSocket = [[OFUDPSocket alloc] init];
-        [udpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpIPv4Port];
-        raknetHandler = [[RaknetHandler alloc] initWithSocket:udpServerSocketIPv4];
+        [udpServerSocket bindToHost:@"0.0.0.0" port:[ConfigManager defaultManager].udpPort];
+        raknetHandler = [[RaknetHandler alloc] initWithSocket:udpServerSocket];
         udpServerSocketBuffer = malloc(UDP_MAX_PACKET_SIZE);
         
         [udpServerSocket asyncReceiveIntoBuffer:udpServerSocketBuffer length:UDP_MAX_PACKET_SIZE block:^bool(OFUDPSocket *socket, void *buffer, size_t length, of_udp_socket_address_t sender, OFException *exception) {
@@ -71,7 +71,7 @@
             OFDataArray *data = [[OFDataArray alloc] initWithCapacity:length];
             [data addItems:buffer count:length];
             
-            [raknetHandler didRecieveData:data fromPeer:peer];
+            [raknetHandler didRecieveData:data fromPeer:sender];
             return true;
         
         }];
