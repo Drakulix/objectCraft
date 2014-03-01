@@ -16,7 +16,6 @@
     uint24_t packetNumber;
     
     //dispatch stuff
-    OFTimer *timer;
     UDPClientConnection *handler;
 }
 

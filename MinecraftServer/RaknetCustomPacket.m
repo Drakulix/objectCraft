@@ -11,6 +11,7 @@
 #import "UDPClientConnection.h"
 #import "OFDataArray+IntReader.h"
 #import "OFDataArray+IntWriter.m"
+#import <dispatch/dispatch.h>
 
 @implementation RaknetCustomPacket
 @dynamic packetNumber;
@@ -105,14 +106,14 @@
 
 - (void)dispatchNewTransmissionVia:(UDPClientConnection *)_handler {
     handler = _handler;
-    timer = [OFTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(resend) repeats:false];
+    double delayInSeconds = 3.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self resend];
+    });
 }
 
 - (void)resend {
-    [timer invalidate];
-    [timer release];
-    timer = nil;
-    
     if (![handler wasPacketAckd:packetNumber.i]) {
         LogDebug(@"Packet lost: %@", self);
         [handler sendRaknetPacket:self];
