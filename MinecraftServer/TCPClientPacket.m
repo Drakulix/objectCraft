@@ -60,7 +60,10 @@ static OFArray *packetListClient;
 
 + (TCPClientPacket *)clientPacketWithState:(int)state ID:(uint64_t)pId data:(OFDataArray *)data {
     @try {
-        return [(TCPClientPacket *)[[objc_getClass([[[packetListClient objectAtIndex:state] objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]] UTF8String]) alloc] initWithData:data] autorelease];
+        OFString *className = [[packetListClient objectAtIndex:state] objectForKey:[OFString stringWithFormat:(OFConstantString *)@"%02x", pId]];
+        if (className && ![className isEqual:@""])
+            return [(TCPClientPacket *)[[objc_getClass([className UTF8String]) alloc] initWithData:data] autorelease];
+        return nil;
     }
     @catch (OFException *exception) {
         return nil;
