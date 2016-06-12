@@ -1,1 +1,2 @@
-script: build.sh
+language: objective-c
+xcode_project: MinecraftServer.xcodeproj
