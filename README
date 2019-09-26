@@ -1,4 +1,4 @@
-**Deprecated**: I have had the time to finish/advance this implementation. It is currently a very rough proof-of-concept, that was working at some point with a pocket-version and java-version of minecraft.
+**Deprecated**: I never had the time to finish/advance this implementation. It is currently a very rough proof-of-concept, that was working at some point with a pocket-version and java-version of minecraft.
 Players of both clients were able to connect and see a generated flat map. Any player-, item-, or world-interaction is completely missing.
 
 # ObjectCraft Minecraft Server
