@@ -1,13 +1,16 @@
-#ObjectCraft Minecraft Server
+**Deprecated**: I have had the time to finish/advance this implementation. It is currently a very rough proof-of-concept, that was working at some point with a pocket-version and java-version of minecraft.
+Players of both clients were able to connect and see a generated flat map. Any player-, item-, or world-interaction is completely missing.
 
-###Status
+# ObjectCraft Minecraft Server
+
+### Status
 The Project is in it’s very early stages, I mainly added it to my public github repositories to let other people work on this project with me.
 It is not useable in the current state for **ANY** end-user.
 
-###Goal
+### Goal
 The goal is to provide a full featured Minecraft Server written in Objective-C that conforms to both the Minecraft-PC Network Protocol and the Minecraft-PE (Pocket Edition) Protocol. Differences like non existing blocks, or different dimensions will get simulated for the other system as good as possible or substituted with other existing features (like sending different existing blockIds for non-existent blocks of the other protocol). No features shall be unaccessible from one client type. They might be just more complicated to use.
 
-###Dependencies
+### Dependencies
 The Project is build upon the excellent ObjFW ( http://github.com/Midar/objfw ), that is compatible with most POSIX-compatible systems.
 
 ObjectCraft requires forwarding to be supported by ObjFW on your system and clang as compiler (recommend at-least version 3.4, older versions are not supported).
@@ -25,9 +28,9 @@ Short overview - Dependencies:
 * zlib
 
 
-###Building
+### Building
 
-####Install ObjFW
+#### Install ObjFW
 You need to have an install of the ObjFW library, building with clang is required for using the Block API's. Currently the most recent version (0.7.1) does not include all features needed by this project (especially the OFUDPSocket), so you need to check out the lastest tarball from the git repository.
 
 For building from git you need autotools installed, then do:
@@ -41,7 +44,7 @@ make install
 'objfw-config' (comes with an install of ObjFW) needs to be available at your path to automatically figure our needed flags and libraries, so the last 'make install' is required to get a usable objectCraft executable.
 Support for compiling against a statically linked ObjFW library will follow later.
 
-####Compiling ObjectCraft
+#### Compiling ObjectCraft
 If you check out the latest release via git (currently the only way until something usable can be build), you need to have autotools installed.
 
 Compiling then should work via:
@@ -53,8 +56,8 @@ make
 
 Which should result in an 'objectCraft' executable.
 
-#####Compiling on Windows
-#######Compiling on Windows is currently broken as ObjFW does not compile using wclang right now(!)
+##### Compiling on Windows
+####### Compiling on Windows is currently broken as ObjFW does not compile using wclang right now(!)
 
 Compiling for Windows will be possible via MingW64 + wclang on any unix system (compiling on windows is currently not tested and supported, but may work if you get clang to work without using gcc as linker).
 As long as both are setup correctly building should be as easy as:
@@ -73,7 +76,7 @@ CC=w32-clang CXX=w32-clang++ OBJC=w32-clang OBJCXX=w32-clang++ ./configure --hos
 make
 ```
 
-####XCode Support
+#### XCode Support
 Lets face it, most Objective-C developers are mac users, including me. Thats why this project contains a useable Xcode Project file, that allows building through the Xcode build system as well as with autotools from the IDE. When building with autotools, currently all build are done with --enable-debug flag. To get a performant build, please build manually, like described above.
 
 If you make changes to the Xcode Project that involve adding or removing source code files, please do not forget to update the Makefile.am and run autogen.sh (Xcode does not do that for you). In general when committing to this repository always make sure the gnu build system still works.
